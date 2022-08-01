@@ -1,0 +1,149 @@
+@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+
+$font-family: 'Inter';
+
+:host {
+    height: 250px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    user-select: none;
+    cursor: pointer;
+
+    .illustration {
+        height: 60px;
+        border-radius: 15px 15px 0 0;
+        background-color: #F2F2F2;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+    }
+
+    .data {
+        padding: 15px;
+        width: 100%;
+        height: calc(100% - 40px);
+        position: absolute;
+        bottom: 0;
+        box-sizing: border-box;
+        border-radius: 15px;
+        background-color: #FFFFFF;
+        font-family: $font-family;
+
+        .top {
+            display: flex;
+
+            .challenge-name {
+                font-weight: 600;
+                font-size: 1em;
+                color: #252526;
+            }
+    
+            .security {
+                margin-left: auto;
+                width: 50px;
+                height: 20px;
+                border-radius: 15px;
+                position: relative;
+                top: 0;
+                right: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #F2F2F2;
+    
+                svg {
+                    margin-right: 8px;
+                    width: 12px;
+                    height: 12px;
+                    display: inline-block;
+                    fill: #808080;
+                }
+    
+                .author-avatar {
+                    width: 12px;
+                    height: 12px;
+                    display: inline-block;
+                    border-radius: 50%;
+                    background-color: #318CE7;
+                }
+            }
+        }
+
+        .challenge-description {
+            margin: 5px 0 0 0;
+            overflow: hidden;
+            word-wrap: break-word;
+            text-overflow: ellipsis;
+            font-size: .8em;
+            color: #252526;
+        }
+
+        .specs {
+            margin-top: 15px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            > div {
+                width: fit-content;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 3px;
+                font-size: .85em;
+
+                .value {
+                    color: #252526;
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #808080;
+                }
+            }
+
+            > div:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+
+        .challenge-tags {
+            margin: 10px 0 0 0;
+            padding: 0;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style-type: none;
+
+            .tag {
+                padding: 3px 10px;
+                min-width: 30px;
+                height: fit-content;
+                border: 1px solid #318CE7;
+                border-radius: 15px;
+                background-color: rgba(#318CE7, .0);
+                text-align: center;
+                font-size: .8em;
+                color: #318CE7;
+                cursor: pointer;
+            }
+        }
+
+        .bottom {
+            display: flex;
+            font-size: .8em;
+            color: #808080;
+        }
+    }
+}

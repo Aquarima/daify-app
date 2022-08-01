@@ -1,0 +1,117 @@
+@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+
+$font-family: 'Inter';
+
+:host {
+    margin-top: auto;
+    padding: 60px 60px 25px 60px;
+    background-color: #252526;
+    font-family: $font-family;
+
+    .footer-head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+
+        .app-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+
+            .logo {
+                width: 80px;
+            }
+
+            .tagline {
+                margin: 0;
+                font-size: 1.1em;
+                color: #FFFFFF;
+            }
+        }
+
+        .socials {
+            height: fit-content;
+
+            h3 {
+                margin: 0 0 20px 0;
+                font-size: 1em;
+                color: #FFFFFF;
+            }
+
+            .links {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 20px;
+                list-style-type: none;
+                                
+                svg {
+                    width: 28px;
+                    height: 28px;
+                    fill: #BEBEBE;
+                }
+            }
+        }
+    }
+    
+    .footer-foot {
+        margin: 25px 0 0 0;
+        padding: 25px 25px 0 25px;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        border-top: 1px solid #BEBEBE;
+
+        .copyright {
+            margin: 0;
+            font-size: 0.9em;
+            color: #BEBEBE;
+        }
+        
+        .privacy-and-terms {
+            margin: 0;
+            padding: 0;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            list-style-type: none;
+
+            li {
+                padding: 0;
+                width: fit-content;
+            }
+
+            li a {
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                font-size: 1em;
+                color: #BEBEBE;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .footer-head {
+        flex-direction: column;
+        align-items: center;
+
+        .app-info {
+            align-items: center;
+        }
+
+        .socials h3 {
+            text-align: center;
+        }
+    }
+    
+    .footer-foot {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+}
