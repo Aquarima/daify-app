@@ -98,6 +98,8 @@ $font-family: 'Inter';
 
             .item-list {
                 margin-bottom: 60px;
+                padding: 0 60px 0 60px;
+                box-sizing: border-box;
                 width: 100%;
                 height: fit-content;
                 display: grid;
