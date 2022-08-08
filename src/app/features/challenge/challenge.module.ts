@@ -6,16 +6,22 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyListComponent } from './pages/my-list/my-list.component';
+import { OverviewComponent } from './components/overview/overview.component';
 
 @NgModule({
   declarations: [
     ExploreComponent,
     CardComponent,
-    SearchComponent
+    SearchComponent,
+    MyListComponent,
+    OverviewComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     ChallengeRoutingModule,
     LayoutModule,
   ]
