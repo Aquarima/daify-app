@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -8,25 +8,22 @@ import { CookieService } from 'ngx-cookie';
 })
 export class LangsComponent implements OnInit {
 
-  constructor(private cookies: CookieService) { }
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
 
-  ngOnInit(): void { }
+  constructor(private elementRef: ElementRef, private cookies: CookieService) { }
 
-  hideOverlay() {
-    const langsNode = document.querySelector('app-langs');
-    if (!langsNode) return;
-    langsNode.classList.remove('langs-overlay-visible');
+  ngOnInit(): void {
+    this.elementRef.nativeElement.closest('body').style.overflow = 'hidden';
   }
 
-  enableScrollBar() {
-    const body = document.querySelector('body');
-    if (body) {
-      body.style.overflow = 'auto';
-    }
-  }
-
-  defineAppLang(lang: string) {
+  updateCurrentLang(lang: string) {
     this.cookies.put('lang', lang);
     window.location.reload();
+  }
+
+  @HostListener('document:keyup.escape')
+  onClose() {
+    this.elementRef.nativeElement.closest('body').style.overflow = 'auto';
+    this.closeEvent.emit();
   }
 }

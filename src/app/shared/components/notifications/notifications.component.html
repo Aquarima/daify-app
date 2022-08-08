@@ -1,11 +1,12 @@
-<div class="content-box">
+<div class="backdrop" (click)="onClose()"></div>
+<div class="popup">
     <div class="head">
         <div>
             <h1>Inbox</h1>
             <div class="right-box">
                 <button class="mark-all-btn">Mark all as read</button>
-                <button class="close-overlay-btn" (click)="hideOverlay()">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                <button class="close-overlay-btn" (click)="onClose()">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5l-10-10zm0-10l-10 10"></path>
                     </svg>
                 </button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-notifications',
@@ -7,20 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationsComponent implements OnInit {
 
+  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
-  ngOnInit(): void {
-    const ntfsNode = document.querySelector('app-notifications');
-    if (!ntfsNode) return;
-    ntfsNode.addEventListener('click', (event) => {
-      if (!(<HTMLElement> event.target).classList.contains('notifications-overlay-visible')) return;
-      this.hideOverlay();
-    });
-  }
+  ngOnInit(): void { }
 
-  hideOverlay() {
-    const ntfsNode = document.querySelector('app-notifications');
-    if (!ntfsNode) return;
-    ntfsNode.classList.remove('notifications-overlay-visible');
+  @HostListener('document:keyup.escape')
+  onClose() {
+    this.closeEvent.emit();
   }
 }
