@@ -1,23 +1,26 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
 
-$font-family: 'Inter';
+$font-family: 'Sora';
 
 :host {
     position: relative;
 
     .search-bar {
         padding: 0 16px 0 8px;
-        width: fit-content;
-        width: 300px;
+        width: 350px;
         min-width: 150px;
-        height: 38px;
+        height: 45px;
         position: relative;
         z-index: 91;
         display: flex;
         align-items: center;
         box-sizing: border-box;
-        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-        border-radius: 25px;
+        border-radius: 24px;
+        background-color: #FFF;
+
+        &:focus-within {
+            border-color: #574AE2;
+        }
 
         .search-btn {
             padding: 0;
@@ -30,7 +33,7 @@ $font-family: 'Inter';
                 width: 28px;
                 height: 28px;
                 box-sizing: border-box;
-                fill: #808080;
+                fill: #ADAFCA;
             }
         }
 
@@ -43,7 +46,7 @@ $font-family: 'Inter';
             outline: none;
             font-size: 1em;
             font-family: $font-family;
-            color: #252526;
+            color: #ADAFCA;
 
             &:focus + .search-bar + .advanced-search {
                 display: flex;
@@ -56,16 +59,16 @@ $font-family: 'Inter';
         width: 350px;
         height: fit-content;
         position: absolute;
-        top: calc(100% + 5px);
+        top: calc(100% + 16px);
         left: 50%;
         transform: translate(-50%, 0);
         z-index: 91;
         display: flex;
         flex-direction: column;
         row-gap: 8px;
-        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-        border-radius: 8px;
-        background-color: #FFFFFF;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-radius: 16px;
+        background-color: #FFF;
 
         .section {
             width: 100%;
@@ -76,14 +79,16 @@ $font-family: 'Inter';
                 font-weight: 500;
                 font-size: 0.7em;
                 font-family: $font-family;
-                color: #808080;
+                color: #7D7E9E;
             }
 
             .history-empty {
                 margin: 0 0 16px 16px;
                 display: flex;
+                font-weight: 500;
                 font-size: 0.9em;
                 font-family: $font-family;
+                color: #3E3F5E;
             }
 
             .search-item {
@@ -99,7 +104,7 @@ $font-family: 'Inter';
                     background-color: #F5F5F5;
 
                     .tag {
-                        background-color: #FFFFFF;
+                        background-color: #FFF;
                     }
                 }
 
@@ -109,6 +114,7 @@ $font-family: 'Inter';
                     text-overflow: ellipsis;
                     font-size: 0.9em;
                     font-family: $font-family;
+                    color: #252526;
                 }
 
                 .remove {
@@ -125,6 +131,36 @@ $font-family: 'Inter';
                         fill: #252526;
                         stroke: #252526;
                     }
+                }
+            }
+
+            .tag-add {
+                margin: 0 0 16px 16px;
+                padding: 0 8px;
+                height: 35px;
+                width: 90%;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                box-sizing: border-box;
+                border: 1px solid #E6E6EF;
+                border-radius: 16px;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #ADAFCA;
+                }
+
+                input[type=text] {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    background: none;
+                    outline: none;
+                    font-size: .9em;
+                    font-family: $font-family;
+                    color: #ADAFCA;
                 }
             }
 
@@ -147,7 +183,7 @@ $font-family: 'Inter';
                     align-items: center;
                     gap: 5px;
                     border-radius: 3px;
-                    background-color: #F2F2F2;
+                    background-color: #E6E6EF;
                     text-align: center;
                     font-weight: 500;
                     font-size: .8em;
@@ -166,39 +202,10 @@ $font-family: 'Inter';
                         svg {
                             width: 12px;
                             height: 12px;
-                            fill: #252526;
+                            fill: #FFF;
                             stroke: #252526;
                         }
                     }
-                }
-            }
-
-            .tag-add {
-                margin: 0 0 16px 16px;
-                padding: 0 8px;
-                height: 35px;
-                width: 90%;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                box-sizing: border-box;
-                border: 1px solid #E2E2E2;
-                background-color: #F5F5F5;
-
-                svg {
-                    width: 20px;
-                    height: 20px;
-                    fill: #808080;
-                }
-
-                input[type=text] {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    background: none;
-                    outline: none;
-                    font-size: .8em;
-                    font-family: $font-family;
                 }
             }
         }
@@ -212,4 +219,4 @@ $font-family: 'Inter';
     bottom: 0;
     left: 0;
     right: 0;
-  }
+}

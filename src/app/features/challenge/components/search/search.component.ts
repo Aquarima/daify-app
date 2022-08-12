@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'challenge-search',
+  selector: 'app-challenge-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })

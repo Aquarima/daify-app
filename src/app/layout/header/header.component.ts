@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewContainerRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
-import { LangsComponent, NotificationsComponent } from 'src/app/shared/components';
+import { NotificationsComponent } from 'src/app/shared/components';
 
 @Component({
   selector: 'app-header',
@@ -30,17 +30,15 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  onDisplayLangs() {
-    const componentRef = this.viewContainerRef.createComponent(LangsComponent);
-    componentRef.instance.closeEvent.subscribe(() => {
-      this.viewContainerRef.clear();
-    });
-  }
-
   onDisplayNotifications() {
     const componentRef = this.viewContainerRef.createComponent(NotificationsComponent);
     componentRef.instance.closeEvent.subscribe(() => {
       this.viewContainerRef.clear();
     });
+  }
+
+  setGlobalLanguage(language: string) {
+    this.cookies.put('lang', language);
+    window.location.reload();
   }
 }

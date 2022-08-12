@@ -1,117 +1,54 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
 
-$font-family: 'Inter';
+$font-family: 'Sora';
 
 :host {
-    margin-top: auto;
-    padding: 60px 60px 25px 60px;
-    background-color: #252526;
-    font-family: $font-family;
+    padding: 32px 0;
+    background-color: #FFF;
 
-    .footer-head {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 50px;
+    .main-content {
 
-        .app-info {
+        .social-items {
             display: flex;
-            flex-direction: column;
-            gap: 25px;
+            justify-content: center;
+            gap: 32px;
 
-            .logo {
-                width: 80px;
-            }
+            svg {
+                width: 24px;
+                height: 24px;
+                fill: #3E3F5E;
 
-            .tagline {
-                margin: 0;
-                font-size: 1.1em;
-                color: #FFFFFF;
-            }
-        }
-
-        .socials {
-            height: fit-content;
-
-            h3 {
-                margin: 0 0 20px 0;
-                font-size: 1em;
-                color: #FFFFFF;
-            }
-
-            .links {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                gap: 20px;
-                list-style-type: none;
-                                
-                svg {
-                    width: 28px;
-                    height: 28px;
-                    fill: #BEBEBE;
+                &:hover {
+                    fill: #574AE2;
                 }
             }
         }
     }
-    
-    .footer-foot {
-        margin: 25px 0 0 0;
-        padding: 25px 25px 0 25px;
+
+    .lower-content {
+        margin: 32px auto 0 auto;
+        padding-top: 16px;
+        width: 80%;
         display: flex;
         justify-content: space-between;
-        box-sizing: border-box;
-        border-top: 1px solid #BEBEBE;
+        border-top: 1px solid #E6E6EF;
+        font-weight: 500;
+        font-family: $font-family;
+        color: #3E3F5E;
 
-        .copyright {
-            margin: 0;
-            font-size: 0.9em;
-            color: #BEBEBE;
-        }
-        
-        .privacy-and-terms {
-            margin: 0;
-            padding: 0;
-            height: fit-content;
+        ul {
             display: flex;
-            align-items: center;
-            gap: 25px;
+            gap: 16px;
             list-style-type: none;
 
-            li {
-                padding: 0;
-                width: fit-content;
-            }
-
-            li a {
-                display: block;
-                text-align: center;
+            a { 
                 text-decoration: none;
-                font-size: 1em;
-                color: #BEBEBE;
+                color: #3E3F5E;
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    .footer-head {
-        flex-direction: column;
-        align-items: center;
-
-        .app-info {
-            align-items: center;
-        }
-
-        .socials h3 {
-            text-align: center;
-        }
-    }
-    
-    .footer-foot {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
     }
 }

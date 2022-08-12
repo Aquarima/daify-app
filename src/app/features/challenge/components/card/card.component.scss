@@ -1,149 +1,111 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
 
-$font-family: 'Inter';
+$font-family: 'Sora';
 
 :host {
-    height: 250px;
-    position: relative;
+    height: 500px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
-    border-radius: 15px;
-    background-color: #FFFFFF;
-    user-select: none;
+    row-gap: 16px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    border-radius: 8px;
+    background-color: #FFF;
+    transition: transform ease .5s;
     cursor: pointer;
 
-    .illustration {
-        height: 60px;
-        border-radius: 15px 15px 0 0;
-        background-color: #F2F2F2;
+    &:hover {
+        transform: translate(0, -8px);
+    }
 
-        img {
+    .challenge-cover {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: flex-end;
+        border-radius: 8px 8px 0 0;
+        background-size: cover;
+        background-color: #E6E6EF;
+
+        div {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px 15px 0 0;
+            height: 16px;
+            border-radius: 8px 8px 0 0;
+            background-color: #FFF;
         }
     }
 
-    .data {
-        padding: 15px;
-        width: 100%;
-        height: calc(100% - 40px);
-        position: absolute;
-        bottom: 0;
-        box-sizing: border-box;
-        border-radius: 15px;
-        background-color: #FFFFFF;
+    .challenge-name {
+        margin: 0;
+        padding: 0 16px;
+        text-align: center;
+        font-weight: 600;
         font-family: $font-family;
+        color: #3E3F5E;
+    }
 
-        .top {
-            display: flex;
+    .challenge-description {
+        margin: 0;
+        padding: 0 16px;
+        text-align: center;
+        font-size: .9em;
+        font-family: $font-family;
+        color: #ADAFCA;
+    }
 
-            .challenge-name {
-                font-weight: 600;
-                font-size: 1em;
-                color: #252526;
-            }
-    
-            .security {
-                margin-left: auto;
-                width: 50px;
-                height: 20px;
-                border-radius: 15px;
-                position: relative;
-                top: 0;
-                right: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #F2F2F2;
-    
-                svg {
-                    margin-right: 8px;
-                    width: 12px;
-                    height: 12px;
-                    display: inline-block;
-                    fill: #808080;
-                }
-    
-                .author-avatar {
-                    width: 12px;
-                    height: 12px;
-                    display: inline-block;
-                    border-radius: 50%;
-                    background-color: #318CE7;
-                }
-            }
-        }
+    .challenge-stats {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
 
-        .challenge-description {
-            margin: 5px 0 0 0;
+        > div {
+            max-width: 100px;
             overflow: hidden;
-            word-wrap: break-word;
             text-overflow: ellipsis;
-            font-size: .8em;
-            color: #252526;
-        }
+            text-align: center;
+            font-weight: 600;
+            font-family: $font-family;
 
-        .specs {
-            margin-top: 15px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-
-            > div {
-                width: fit-content;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 3px;
-                font-size: .85em;
-
-                .value {
-                    color: #252526;
-                }
-
-                svg {
-                    width: 20px;
-                    height: 20px;
-                    fill: #808080;
-                }
+            .value {
+                margin: 0 0 4px 0;
+                font-size: .9em;
+                color: #3E3F5E;
             }
 
-            > div:not(:last-child) {
-                margin-right: 8px;
-            }
-        }
-
-        .challenge-tags {
-            margin: 10px 0 0 0;
-            padding: 0;
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            list-style-type: none;
-
-            .tag {
-                padding: 3px 10px;
-                min-width: 30px;
-                height: fit-content;
-                border: 1px solid #318CE7;
-                border-radius: 15px;
-                background-color: rgba(#318CE7, .0);
-                text-align: center;
+            .name {
+                margin: 0;
                 font-size: .8em;
-                color: #318CE7;
-                cursor: pointer;
+                color: #ADAFCA;
             }
         }
+    }
 
-        .bottom {
+    .challenge-tags {
+        margin: 0 16px;
+        padding: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        list-style-type: none;
+    
+        .item {
+            padding: 4px 10px;
+            min-width: 30px;
+            height: fit-content;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border-radius: 3px;
+            background-color: #F46197;
+            text-align: center;
+            font-weight: 500;
             font-size: .8em;
-            color: #808080;
+            font-family: $font-family;
+            color: #FFF;
         }
     }
 }

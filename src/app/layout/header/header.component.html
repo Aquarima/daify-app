@@ -1,10 +1,10 @@
 <a class="app-name" [routerLink]="['/']">Daify</a>
 <ul class="navbar">
     <li class="item">
-        <a class="item-link" href="">HOME</a>
+        <a class="item-link" href="">Home</a>
     </li>
     <li class="item unfoldable-item">
-        <span href="">CHALLENGES</span>
+        <span href="">Challenges</span>
         <div class="dropdown-wrapper">
             <div class="dropdown">
                 <div class="dropdown-item">
@@ -34,14 +34,27 @@
                         </div>
                     </a>
                 </div>
+                <div class="dropdown-item">
+                    <a href="">
+                        <div class="dropdown-item-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                <path d="M6 30H4V2h24l-5.8 9l5.8 9H6Zm0-12h18.33l-4.53-7l4.53-7H6Z"></path>
+                            </svg>
+                        </div>
+                        <div class="dropdown-item-info">
+                            <span class="name">Quests</span>
+                            <p class="description">All available quests waiting for you to complete</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </li>
     <li class="item">
-        <a class="item-link"href="">BOOSTS</a>
+        <a class="item-link" href="">What's new?</a>
     </li>
     <li class="item unfoldable-item">
-        <span href="">OUR APP</span>
+        <span href="">Our App</span>
         <div class="dropdown-wrapper">
             <div class="dropdown">
                 <div class="dropdown-item">
@@ -103,29 +116,17 @@
     </li>
 </ul>
 <div class="end">
-    <div class="langs" (click)="onDisplayLangs()">
+    <div class="langs">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path>
         </svg>
-        <span> ({{currentLang}}) </span>
-    </div>
-    <!--<div class="auth-ways">
-        <a href="" class="to-login">Login</a>
-        <a href="" class="to-signup">Join us</a>
-    </div>-->
-    <div class="user-box">
-        <div>
-            <button class="notifications-btn" (click)="onDisplayNotifications()">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                    <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29c-.63.63-.19 1.71.7 1.71h13.17c.89 0 1.34-1.08.71-1.71L18 16z"></path>
-                </svg>
-            </button>
-            <a href="">
-                <div class="fast-info">
-                    <img src="/assets/user_avatar.svg" alt="User Avatar" class="avatar">
-                    <span class="username">John Doe</span>
-                </div>
-            </a>
+        <span class="lang-current"> ({{currentLang}}) </span>
+        <div class="wrapper">
+            <ul class="list">
+                <li (click)="setGlobalLanguage('en')">English</li>
+                <li (click)="setGlobalLanguage('es')">Español</li>
+                <li (click)="setGlobalLanguage('fr')">Français</li>
+            </ul>
         </div>
     </div>
 </div>

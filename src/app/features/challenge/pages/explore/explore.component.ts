@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-const colors = {"a": "red", "b": "blue", "e": "green"};
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { OverviewComponent } from '../../components/overview/overview.component';
 
 @Component({
   selector: 'app-explore',
@@ -9,7 +8,14 @@ const colors = {"a": "red", "b": "blue", "e": "green"};
 })
 export class ExploreComponent implements OnInit {
 
-  constructor() { }
+  constructor(public viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void { }
+
+  onItemSelected() {
+    const componentRef = this.viewContainerRef.createComponent(OverviewComponent);
+    componentRef.instance.closeEvent.subscribe(() => {
+      this.viewContainerRef.clear();
+    });
+  }
 }

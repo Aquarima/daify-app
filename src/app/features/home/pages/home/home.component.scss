@@ -1,20 +1,15 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
+@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
 
-$font-family: 'Inter';
+$font-family: 'Sora';
 
 :host {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #F8F8FB;
 }
 
 .main-content {
     width: 100%;
     height: 100%;
-    
-    .head-content {
-        width: 100%;
-        height: 60vh;
-        background-color: #FAFAFA;
-    }
 }
