@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
 import { FeaturesModule } from './features/features.module';
 import { CookieModule } from 'ngx-cookie';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CookieModule } from 'ngx-cookie';
     HttpClientModule,
     RouterModule,
     CookieModule.withOptions(),
+    ReactiveFormsModule,
     CoreModule,
     FeaturesModule,
     LayoutModule,
