@@ -1,5 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Search } from 'src/app/core/models';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-challenge-search',
@@ -8,90 +11,64 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('backdrop') backdrop: ElementRef | undefined;
-  @ViewChild('advancedSearch') advancedSearch: ElementRef | undefined;
-  @ViewChild('search') searchInput: ElementRef | undefined;
-  @ViewChild('addTagBox') addTagBox: ElementRef | undefined;
+  @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
+
+  @ViewChild('backdrop') backdropNode: ElementRef | undefined;
+  @ViewChild('search_history') searchHistoryNode: ElementRef | undefined;
+  @ViewChild('name') searchInputNode: ElementRef | undefined;
+
+  searchForm = new FormGroup({
+    'name': new FormControl('')
+  })
+
+  history = this.searchService.fetchHistory();
   
-  history: string[] = this.getHistory();
-  searchInputValue: string = '';
-  tagInputValue: string = '';
-  tags: string[] = [];
+  constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) { }
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['search']) {
-        this.searchInputValue = params['search'];
-      }
+      let searchQuery = '';
+      if (params['search_query']) searchQuery = params['search_query'] 
+      else this.setQueryParams({'search_query': null });
+      this.searchForm.controls['name'].setValue(searchQuery)
+      this.searchEvent.emit(this.getSearch());
+      this.history = this.searchService.fetchHistory();
     })
   }
 
-  ngAfterViewInit(): void {
-    this.searchInput?.nativeElement.addEventListener("focus", () => {
-      this.advancedSearch?.nativeElement.classList.remove('hidden');
-      this.backdrop?.nativeElement.classList.remove('hidden');
+  ngAfterViewInit() {
+    this.searchInputNode?.nativeElement.addEventListener('focus', () => {
+      this.searchHistoryNode?.nativeElement.classList.remove('hidden');
+      this.backdropNode?.nativeElement.classList.remove('hidden');
     });
-    this.backdrop?.nativeElement.addEventListener('click', () => {
-      this.advancedSearch?.nativeElement.classList.add('hidden');
-      this.backdrop?.nativeElement.classList.add('hidden');
+    this.backdropNode?.nativeElement.addEventListener('click', () => {
+      this.searchHistoryNode?.nativeElement.classList.add('hidden');
+      this.backdropNode?.nativeElement.classList.add('hidden');
     });
   }
 
-  getHistory(): string[] {
-    let json = localStorage.getItem('history');
-    return (json) ? this.history = JSON.parse(json) : this.history = [];
+  onSearch(name?: string) {
+    this.searchHistoryNode?.nativeElement.classList.add('hidden');
+    this.searchInputNode?.nativeElement.blur();
+    const value = (name) ? name : this.getSearch().name; 
+    this.setQueryParams({'search_query': (value) ? value : null });
   }
 
-  addHistorySearch(search: string) {
-    const history: string[] = this.getHistory();
-    if (history.includes(search)) return;
-    if (history.length >= 4) history.pop();
-    history.unshift(search);
-    localStorage.setItem('history', JSON.stringify(history));
-    this.history = history;
+  deleteSearch(name: string) {
+    this.history = this.searchService.deleteSearch(`${name}`);
   }
 
-  removeHistorySearch(search: string) {
-    const history: string[] = this.getHistory();
-    for (let i = 0; i < history.length; i++) {
-      if (history[i] === search) {
-        history.splice(i, 1);
-        localStorage.setItem('history', JSON.stringify(history));
-        this.history = history;
-        return;
-      }
-    }
+  getSearch(): Search {
+    return {
+      name: `${this.searchForm.value.name}`
+    };
   }
 
-  onSearch(value: string) {
-    this.advancedSearch?.nativeElement.classList.add('hidden');
-    if (value.trim() === '') return;
-    this.searchInput?.nativeElement.blur();
-    this.addHistorySearch(value);
+  setQueryParams(params: any) {
     this.router.navigate([], { 
       relativeTo: this.route, 
-      queryParams: { search: value },
-      queryParamsHandling: 'merge', 
+      queryParams: params,
+      queryParamsHandling: 'merge',
     });
-  }
-
-  onTagAdd(value: string) {
-    this.tagInputValue = '';
-    if (this.tags.includes(value) || value.trim().length < 2) return;
-    this.tags.push(value);
-    if (this.tags.length >= 3) {
-      this.addTagBox?.nativeElement.classList.add('hidden');
-    }
-  }
-
-  onTagRemove(tagToRemove: string) {
-    for (let i = 0; i < this.tags.length; i++) {
-      if (tagToRemove === this.tags[i]) {
-        this.tags.splice(i, 1);
-      }
-    }
-    this.addTagBox?.nativeElement.classList.remove('hidden');
   }
 }
