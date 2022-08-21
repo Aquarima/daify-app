@@ -1,10 +1,8 @@
-<div class="challenge-cover">
+<div class="challenge-cover" [ngStyle]="{'background-image': 'url('+ challenge?.coverUrl +')'}">
     <div></div>
 </div>
-<p class="challenge-name">My Challenge</p>
-<p class="challenge-description">
-    Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit dolorem dolor porro quisquam diam...
-</p>
+<p class="challenge-name">{{challenge?.name || "Unknown"}}</p>
+<p class="challenge-description">{{challenge?.description || "No description provided"}}</p>
 <div class="challenge-stats">
     <div>
         <p class="value">4d</p>
