@@ -13,13 +13,17 @@ $font-family: 'Sora';
             justify-content: center;
             gap: 32px;
 
-            svg {
-                width: 24px;
-                height: 24px;
-                fill: #3E3F5E;
+            a {
+                transition: transform ease .3s;
 
                 &:hover {
-                    fill: #574AE2;
+                    transform: translate(0, -3px);
+                }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    fill: #3E3F5E;
                 }
             }
         }
