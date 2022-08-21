@@ -7,29 +7,10 @@
                 <h1>Explore</h1>
                 <p class="about">Browse challenges created by the community</p>
             </div>
-            <app-challenge-search></app-challenge-search> 
+            <app-challenge-search (searchEvent)="search($event)"></app-challenge-search>
         </div>
         <div class="item-list">
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
-            <app-challenge-card (click)="onItemSelected()"></app-challenge-card>
+            <app-challenge-card [challenge]="challenge" *ngFor="let challenge of challenges$ | async" (click)="onItemSelected()"></app-challenge-card>
         </div>
     </div>
 </main>
