@@ -1,0 +1,54 @@
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F8FB;
+    user-select: none;
+
+    h1 {
+        margin: 0 0 24px 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 2.2em;
+        color: #574AE2;
+    }
+    
+    > p {
+        margin: 0 0 40px 0;
+        line-height: 32px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.2em;
+        color: #7D7E9E;
+    }
+
+    .time-left {
+        margin-bottom: 24px;
+        display: flex;
+        gap: 32px;
+
+        .case {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border-radius: 16px;
+            font-weight: 600;
+
+            .value {
+                font-size: 1.8em;
+                color: #F46197;
+            }
+
+            .unit {
+                margin: 0;
+                color: #3E3F5E;
+            }
+        }
+    }
+}

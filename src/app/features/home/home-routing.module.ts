@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages';
+import { MaintenanceGuard } from 'src/app/core/guards';
+import { HomeComponent, MaintenanceComponent } from './pages';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent }
+  {path: '', component: HomeComponent}, 
+  /*loadChildren: () => import('./home.module').then(m => m.HomeModule), canLoad: [MaintenanceGuard] }*/
+  {path: 'info', component: MaintenanceComponent },
 ];
 
 @NgModule({
