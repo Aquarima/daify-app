@@ -17,11 +17,11 @@
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="input-box">
                 <label for="username">Email</label>
-                <input class="form-control invalid" #text_input type="text" name="username" formControlName="username">
+                <input class="form-control" #text_input type="text" name="username" formControlName="username">
             </div>
             <div class="input-box">
                 <label for="password">Password</label>
-                <input class="form-control invalid" #text_input type="password" name="password" formControlName="password">
+                <input class="form-control" #text_input type="password" name="password" formControlName="password">
             </div>
             <div class="rempass">
                 <label for="remember-me">

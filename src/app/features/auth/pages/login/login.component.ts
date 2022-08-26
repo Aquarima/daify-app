@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       const inputElement = input.nativeElement;
       const parentNode = inputElement.parentNode;
       inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
+      inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
       inputElement.addEventListener('focusout', () => {
         if (inputElement.value === '') parentNode.classList.remove('active');
       });
