@@ -5,32 +5,11 @@
         <div class="top">
             <div class="details">
                 <h1>My List</h1>
-                <p class="about">Browse all your joined or created challenges</p>
+                <p class="about">Browse challenges you joined or created</p>
             </div>
-            <app-challenge-search></app-challenge-search> 
         </div>
-        <div class="item-list">
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-            <app-challenge-card></app-challenge-card>
-        </div>
+        <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
+        <app-challenge-store [challenges$]="challenges$" [displayMode]="displayMode"></app-challenge-store>
     </div>
 </main>
 <app-footer></app-footer>

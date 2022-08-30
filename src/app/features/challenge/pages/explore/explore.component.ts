@@ -2,8 +2,6 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
-import { SearchService } from 'src/app/core/services/search.service';
-import { OverviewComponent } from '../../components/overview/overview.component';
 
 @Component({
   selector: 'app-explore',
@@ -12,7 +10,8 @@ import { OverviewComponent } from '../../components/overview/overview.component'
 })
 export class ExploreComponent implements OnInit {
 
-  public challenges$: Observable<Challenge[]> | undefined
+  challenges$: Observable<Challenge[]> | undefined
+  displayMode: string = 'grid';
 
   constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
 
@@ -25,7 +24,11 @@ export class ExploreComponent implements OnInit {
     });*/
   }
 
-  search(search: Search) {
+  onDisplayModeSelected(mode: any) {
+    this.displayMode = mode;
+  }
+
+  onSearch(search: Search) {
     if (!search.name) {
       this.challenges$ = this.challengeService.getChallenges();
       return;

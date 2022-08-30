@@ -7,11 +7,9 @@
                 <h1>Explore</h1>
                 <p class="about">Browse challenges created by the community</p>
             </div>
-            <app-challenge-search (searchEvent)="search($event)"></app-challenge-search>
         </div>
-        <div class="item-list">
-            <app-challenge-card [challenge]="challenge" *ngFor="let challenge of challenges$ | async" (click)="onItemSelected()"></app-challenge-card>
-        </div>
+        <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
+        <app-challenge-store [challenges$]="challenges$" [displayMode]="displayMode"></app-challenge-store>
     </div>
 </main>
 <app-footer></app-footer>
