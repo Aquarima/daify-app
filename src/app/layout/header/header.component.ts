@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewContainerRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { NotificationsComponent } from 'src/app/shared/components';
 
 @Component({
@@ -12,7 +13,11 @@ export class HeaderComponent implements OnInit {
 
   currentLang = '';
   
-  constructor(private elementRef: ElementRef, private viewContainerRef: ViewContainerRef, private cookies: CookieService) { }
+  constructor(private elementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef, 
+    private cookies: CookieService, 
+    public authService: AuthService) 
+  { }
 
   ngOnInit(): void {
     const lang = this.cookies.get('lang');

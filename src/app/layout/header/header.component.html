@@ -129,4 +129,8 @@
             </ul>
         </div>
     </div>
+    <div class="auth-ways" *ngIf="!authService.isAuthenticated()">
+        <a class="login" [routerLink]="['/auth/login']">Login</a>
+        <a class="signup">Join us - it's free</a>
+    </div>
 </div>

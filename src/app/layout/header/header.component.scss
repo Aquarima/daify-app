@@ -127,7 +127,7 @@ $font-family: 'Sora';
                         text-decoration: none;
 
                         &:hover {
-                            background-color: rgb(87, 74, 226, 0.05);
+                            background-color: #F8F8F8;
                         }
 
                         a {
@@ -148,7 +148,8 @@ $font-family: 'Sora';
                                 svg {
                                     width: 28px;
                                     height: 28px;
-                                    fill: #7D7E9E;
+                                    fill: #3E3F5E;
+                                    //fill: #7D7E9E;
                                 }
                             }
     
@@ -184,6 +185,7 @@ $font-family: 'Sora';
         font-weight: 700;
         font-size: .8em;
         font-family: $font-family;
+        color: #3E3F5E;
         cursor: pointer;
 
         .lang-current {
@@ -227,9 +229,9 @@ $font-family: 'Sora';
                     font-size: 1.1em;
                     color: #3E3F5E;
     
-                    &:hover {
+                    /*&:hover {
                         color: #F46197;
-                    }
+                    }*/
 
                     &:hover::before {
                         display: inline-block;
@@ -242,7 +244,7 @@ $font-family: 'Sora';
                         position: relative;
                         display: none;
                         content: '';
-                        border-color: #F46197 transparent transparent;
+                        border-color: #3E3F5E transparent transparent;
                         border-style: solid;
                         border-width: 6px 6px 0;
                         border-radius: 8px;
@@ -259,16 +261,34 @@ $font-family: 'Sora';
         column-gap: 8px;
 
         a {
-            width: 120px;
-            height: 33px;
+            padding: 0 16px;
+            height: 36px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid #3E3F5E;
+            border-radius: 8px;
             background-color: #FFF;
             font-weight: 500;
+            font-size: .9em;
             font-family: $font-family;
-            color: #3E3F5E;
+            color: #FFF;
+            cursor: pointer;
+        }
+
+        .login {
+            background-color: #50D8D7;
+
+            &:hover {
+                background-color: #43D5D4;
+            }
+        }
+
+        .signup {
+            background-color: #F6AE2D;
+
+            &:hover {
+                background-color: #F5A81F;
+            }
         }
     }
 
