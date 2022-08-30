@@ -1,25 +1,31 @@
-<div class="challenge-cover" [ngStyle]="{'background-image': 'url('+ challenge?.coverUrl +')'}">
+<div class="challenge-preview-cover" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}">
     <div></div>
 </div>
-<p class="challenge-name">{{challenge?.name || "Unknown"}}</p>
-<p class="challenge-description">{{challenge?.description || "No description provided"}}</p>
+<div class="challenge-author">
+    <img class="avatar" src="https://i.pinimg.com/564x/cc/54/cd/cc54cdd7e22d63ab4704abf68b1bde81.jpg" alt="">
+    <span class="username">{{challenge.author.username}}</span>
+</div>
+<div class="presentation">
+    <p class="challenge-name">{{challenge.name || "Unknown"}}</p>
+    <p class="challenge-description">{{challenge.description || "No description provided"}}</p>
+</div>
 <div class="challenge-stats">
     <div>
-        <p class="value">4d</p>
+        <p class="value">{{getDuration()}}</p>
         <p class="name">Duration</p>
     </div>
     <div>
-        <p class="value">25/50</p>
+        <p class="value">25/{{challenge.config.capacity}}</p>
         <p class="name">Members</p>
     </div>
     <div>
-        <p class="value">1</p>
+        <p class="value">{{challenge.config.groupSize}}</p>
         <p class="name">Groups</p>
     </div>
-    <div>
-        <p class="value">1 Sept. 2022</p>
+    <!--<div>
+        <p class="value">{{challenge.config.startDate | date:'MMM d, y, HH:mm'}}</p>
         <p class="name">Start</p>
-    </div>
+    </div>-->
 </div>
 <ul class="challenge-tags" #tag_list>
     <li class="item">Development</li>
