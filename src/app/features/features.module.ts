@@ -4,17 +4,19 @@ import { HomeModule } from './home/home.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [ ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    CoreModule,
   ],
   exports: [ 
     HomeModule,
     AuthModule,
     ChallengeModule,
-  ]
+  ],
 })
 export class FeaturesModule { }

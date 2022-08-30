@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { StoreComponent } from './components/store/store.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CoreModule } from 'src/app/core/core.module';
     SearchComponent,
     MyListComponent,
     OverviewComponent,
+    StoreComponent,
   ],
   imports: [
     CommonModule,

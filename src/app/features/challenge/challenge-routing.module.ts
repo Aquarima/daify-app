@@ -4,7 +4,7 @@ import { AuthGuard } from 'src/app/core/guards';
 import { ExploreComponent, MyListComponent } from './pages';
 
 const routes: Routes = [
-  { path: 'challenge/explore', component: ExploreComponent},
+  { path: 'challenge/explore', component: ExploreComponent, canActivate: [AuthGuard] },
   { path: 'challenge/mylist', component: MyListComponent, canActivate: [AuthGuard] },
 ];
 
