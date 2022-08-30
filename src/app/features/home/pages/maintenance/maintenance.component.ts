@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-maintenance',
@@ -22,11 +22,6 @@ export class MaintenanceComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.updateCountdown(); // To avoid delay in rendering
     this.startCountdown();
-  }
-
-  @HostListener('contextmenu')
-  preventContextMenu() {
-    return false;
   }
 
   startCountdown() {
