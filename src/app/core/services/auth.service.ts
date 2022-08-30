@@ -5,33 +5,50 @@ import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
 
+const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  redirectUrl: string | undefined;
+  redirectUrl: string = '/';
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private router: Router, private http: HttpClient, private cookies: CookieService) { }
 
   isAuthenticated(): boolean {
-    return this.cookies.get('token') !== undefined;
+
+    if (this.getToken() && new Date(this.cookies.get('expires') || '') > new Date()) {
+      return true;
+    }
+
+    return false;
   }
 
   login(email: string, password: string) {
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
     this.http.post(`${env.apiUrl}/auth/login`, { email: email, password: password }, { headers: headers, observe: 'response' })
       .subscribe({
-        next: (res) => {
-          this.cookies.put('token', res.headers.get('Authorization') || undefined);
+        next: (res: any) => {
+          this.cookies.put('access_token', res.headers.get('Authorization') || undefined);
+          this.cookies.put('expires', res.body.expires);
+          this.cookies.put('refresh_token', res.body.refresh_token);
           this.loginError.next(false);
           this.doRedirect();
         },
-        error: (err) => this.loginError.next(true)
+        error: () => this.loginError.next(true)
       });
+  }
+
+  logout() {
+    this.cookies.remove('access_token');
+    this.cookies.remove('expires');
+    this.cookies.remove('refresh_token');
+  }
+
+  getToken() {
+    return this.cookies.get('access_token') || undefined;
   }
 
   doRedirect() {
