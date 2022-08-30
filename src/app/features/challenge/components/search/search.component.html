@@ -1,25 +1,47 @@
 <form class="search-form" [formGroup]="searchForm">
-    <div class="search-bar">
-        <input id="search" class="search" type="text" placeholder="Search" autocomplete="off" maxlength="18" #name formControlName="name"> <!--(keyup.enter)="onSearch()-->
+    <div class="input-box">
+        <label for="search">Search</label>
+        <input id="search" class="form-control" type="text" autocomplete="off" maxlength="18" #name formControlName="name">
         <button class="search-btn" type="submit" (click)="onSearch()">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                 <path d="m18.9 20.3l-5.6-5.6q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l5.625 5.625q.275.275.275.675t-.3.7q-.275.275-.7.275q-.425 0-.7-.275ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"></path>
             </svg>
         </button>
-    </div>
-    <div class="search-history hidden" #search_history>
-        <div class="section">
-            <span class="name">RECENT SEARCHES</span>
-            <span class="history-empty" *ngIf="history.length === 0">No history found</span>
-            <div class="search-item" *ngFor="let search of history" (click)="onSearch(search)">
-                <p class="label">{{search}}</p>
-                <button class="remove" (click)="deleteSearch(search)">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5l-10-10zm0-10l-10 10"></path>
-                    </svg>
-                </button>
-            </div>       
+        <div class="search-history hidden" #search_history>
+            <div class="section">
+                <span class="name">RECENT SEARCHES</span>
+                <span class="history-empty" *ngIf="history.length === 0">No history found</span>
+                <div class="search-item" *ngFor="let search of history" (click)="onSearch(search)">
+                    <p class="label">{{search}}</p>
+                    <button class="remove" (click)="deleteSearch(search)">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5l-10-10zm0-10l-10 10"></path>
+                        </svg>
+                    </button>
+                </div>       
+            </div>
         </div>
     </div>
+    <div class="input-box active">
+        <label for="sort">Sort By</label>
+        <select name="sorting-options">
+            <option value="byStartDate">Start date</option>
+            <option value="byDuration">Duration</option>
+            <option value="byMembers">Members</option>
+            <option value="byGroups">Groups</option>
+        </select>
+    </div>
 </form>
+<div class="display-modes">
+    <button [ngClass]="{'display-mode-selected' : displayMode === 'grid'}" (click)="onDisplayModeSelected('grid')">
+        <svg width="32" height="32" viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H5c-.55 0-1-.45-1-1v-3h4v4zm0-6H4v-4h4v4zm0-6H4V5c0-.55.45-1 1-1h3v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm5 12h-3v-4h4v3c0 .55-.45 1-1 1zm1-6h-4v-4h4v4zm0-6h-4V4h3c.55 0 1 .45 1 1v3z"/>
+        </svg>
+    </button>
+    <button [ngClass]="{'display-mode-selected' : displayMode === 'list'}" (click)="onDisplayModeSelected('list')">
+        <svg width="32" height="32" viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H5c-.55 0-1-.45-1-1v-3h4v4zm0-6H4v-4h4v4zm0-6H4V5c0-.55.45-1 1-1h3v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm5 12h-3v-4h4v3c0 .55-.45 1-1 1zm1-6h-4v-4h4v4zm0-6h-4V4h3c.55 0 1 .45 1 1v3z"/>
+        </svg>
+    </button>
+</div>
 <div class="backdrop hidden" #backdrop></div>

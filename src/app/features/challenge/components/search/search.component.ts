@@ -12,13 +12,17 @@ import { SearchService } from 'src/app/core/services/search.service';
 export class SearchComponent implements OnInit, AfterViewInit {
 
   @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
+  @Output() displayModeEvent: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('backdrop') backdropNode: ElementRef | undefined;
-  @ViewChild('search_history') searchHistoryNode: ElementRef | undefined;
-  @ViewChild('name') searchInputNode: ElementRef | undefined;
+  @ViewChild('backdrop') backdropNode!: ElementRef;
+  @ViewChild('search_history') searchHistoryNode!: ElementRef;
+  @ViewChild('name') searchInputNode!: ElementRef;
+
+  displayMode: any = 'grid';
 
   searchForm = new FormGroup({
-    'name': new FormControl('')
+    'name': new FormControl(''),
+    'sortType': new FormControl(''),
   })
 
   history = this.searchService.fetchHistory();
@@ -26,31 +30,50 @@ export class SearchComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) { }
 
   ngOnInit() {
+    //this.searchForm.controls['sortType'].disable();
     this.route.queryParams.subscribe(params => {
       let searchQuery = '';
-      if (params['search_query']) searchQuery = params['search_query'] 
+      if (params['search_query']) searchQuery = params['search_query']
       else this.setQueryParams({'search_query': null });
-      this.searchForm.controls['name'].setValue(searchQuery)
+      this.searchForm.controls['name'].setValue(searchQuery);
+      if (searchQuery) this.searchService.saveSearch(searchQuery);
       this.searchEvent.emit(this.getSearch());
       this.history = this.searchService.fetchHistory();
     })
   }
 
   ngAfterViewInit() {
-    this.searchInputNode?.nativeElement.addEventListener('focus', () => {
-      this.searchHistoryNode?.nativeElement.classList.remove('hidden');
-      this.backdropNode?.nativeElement.classList.remove('hidden');
-    });
-    this.backdropNode?.nativeElement.addEventListener('click', () => {
-      this.searchHistoryNode?.nativeElement.classList.add('hidden');
-      this.backdropNode?.nativeElement.classList.add('hidden');
+    this.searchInputNode.nativeElement.addEventListener('focus', () => this.displaySearchHistory());
+    this.backdropNode.nativeElement.addEventListener('click', () => this.hideSearchHistory());
+    const inputElement = this.searchInputNode.nativeElement;
+    const parentNode = inputElement.parentNode;
+    if (this.searchForm.controls['name'].value) parentNode.classList.add('active');
+    inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
+    inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
+    inputElement.addEventListener('focusout', () => {
+      if (inputElement.value === '') parentNode.classList.remove('active');
     });
   }
 
+  private displaySearchHistory() {
+    this.searchHistoryNode.nativeElement.classList.remove('hidden');
+    this.backdropNode.nativeElement.classList.remove('hidden');
+  }
+
+  private hideSearchHistory() {
+    this.searchHistoryNode.nativeElement.classList.add('hidden');
+    this.backdropNode.nativeElement.classList.add('hidden');
+  }
+
+  onDisplayModeSelected(mode: string) {
+    this.displayModeEvent.emit(this.displayMode = mode);
+  }
+
   onSearch(name?: string) {
-    this.searchHistoryNode?.nativeElement.classList.add('hidden');
-    this.searchInputNode?.nativeElement.blur();
-    const value = (name) ? name : this.getSearch().name; 
+    this.searchHistoryNode.nativeElement.classList.add('hidden');
+    this.searchInputNode.nativeElement.blur();
+    const value = (name) ? name : this.getSearch().name;
+    this.searchInputNode.nativeElement.parentNode.classList.add('active');
     this.setQueryParams({'search_query': (value) ? value : null });
   }
 
@@ -58,13 +81,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.history = this.searchService.deleteSearch(`${name}`);
   }
 
-  getSearch(): Search {
+  private getSearch(): Search {
     return {
       name: `${this.searchForm.value.name}`
     };
   }
 
-  setQueryParams(params: any) {
+  private setQueryParams(params: any) {
     this.router.navigate([], { 
       relativeTo: this.route, 
       queryParams: params,
