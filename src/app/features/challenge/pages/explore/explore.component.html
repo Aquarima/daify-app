@@ -8,8 +8,10 @@
                 <p class="about">Browse challenges created by the community</p>
             </div>
         </div>
-        <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
-        <app-challenge-store [challenges$]="challenges$" [displayMode]="displayMode"></app-challenge-store>
+        <app-challenge-store 
+            [challenges$]="challenges$" 
+            (searchEvent)="onSearch($event)">
+        </app-challenge-store>
     </div>
 </main>
 <app-footer></app-footer>

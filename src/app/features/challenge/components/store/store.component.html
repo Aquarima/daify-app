@@ -1,3 +1,4 @@
+<app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
 <div class="items display-{{displayMode}}">
     <app-challenge-card class="{{displayMode}}-cell" [challenge]="challenge" *ngFor="let challenge of challenges$ | async"></app-challenge-card>
 </div>

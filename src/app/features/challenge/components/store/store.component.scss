@@ -1,4 +1,6 @@
 :host {
+    display: flex;
+    flex-direction: column;
     
     .items {
         padding: 60px;

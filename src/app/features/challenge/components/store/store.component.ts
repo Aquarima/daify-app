@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Challenge } from 'src/app/core/models/challenge';
+import { Challenge, Search } from 'src/app/core/models/challenge';
 
 @Component({
   selector: 'app-challenge-store',
@@ -9,10 +9,20 @@ import { Challenge } from 'src/app/core/models/challenge';
 })
 export class StoreComponent implements OnInit {
 
+  @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
   @Input() challenges$: Observable<Challenge[]> | undefined;
-  @Input() displayMode: any = 'grid';
+  displayMode: any = 'grid';
 
   constructor() { }
 
   ngOnInit(): void { }
+
+  onDisplayModeSelected(mode: any) {
+    this.displayMode = mode;
+  }
+
+  onSearch(search: Search) {
+    console.log('dddddffsdfsddd');
+    this.searchEvent.emit(search);
+  }
 }
