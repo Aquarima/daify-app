@@ -30,6 +30,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) { }
 
   ngOnInit() {
+    //this.searchForm.controls['sortType'].disable();
     this.route.queryParams.subscribe(params => {
       let searchQuery = '';
       if (params['search_query']) searchQuery = params['search_query']
