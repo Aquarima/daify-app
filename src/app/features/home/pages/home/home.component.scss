@@ -1,15 +1,11 @@
-@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
-
-$font-family: 'Sora';
-
 :host {
     height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #F8F8FB;
-}
 
-.main-content {
-    width: 100%;
-    height: 100%;
+    .main-content {
+        width: 100%;
+        height: 100%;
+    }
 }

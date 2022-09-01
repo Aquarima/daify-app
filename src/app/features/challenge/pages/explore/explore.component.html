@@ -9,7 +9,9 @@
             </div>
         </div>
         <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
-        <app-challenge-store [challenges$]="challenges$" [displayMode]="displayMode"></app-challenge-store>
+        <div class="items display-{{displayMode}}">
+            <app-challenge-card class="{{displayMode}}-cell" [challenge]="challenge" *ngFor="let challenge of challenges$ | async"></app-challenge-card>
+        </div>
     </div>
 </main>
 <app-footer></app-footer>
