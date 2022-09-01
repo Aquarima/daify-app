@@ -371,10 +371,12 @@ $font-family: 'Sora';
                         list-style-type: none;
 
                         li {
+                            margin-bottom: 8px;
                             height: 32px;
                             display: flex;
                             justify-content: center;
                             align-items: center;
+                            gap: 8px;
                             color: #3E3F5E;
                             font-size: .9em;
                             cursor: pointer;
@@ -383,6 +385,10 @@ $font-family: 'Sora';
                                 background-color: #5465FF;
                                 color: #FFF;
 
+                                svg {
+                                    fill: #FFF;
+                                }
+
                                 a {
                                     color: #FFF;
                                 }
@@ -390,6 +396,12 @@ $font-family: 'Sora';
 
                             &:last-child:hover {
                                 background-color: #FF5252;
+                            }
+
+                            svg {
+                                width: 20px;
+                                height: 20px;
+                                fill: #3E3F5E;
                             }
 
                             a {
