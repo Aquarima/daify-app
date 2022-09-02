@@ -357,6 +357,10 @@ $font-family: 'Sora';
                         .with-tag {
                             font-size: .85em;
                             color: #ADAFCA;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                             
                             &:before {
                                 content: "@";
