@@ -1,0 +1,1 @@
+export { OrderByChallengePipe } from './order-by-challenge.pipe';
