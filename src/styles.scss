@@ -2,6 +2,24 @@
 
 $font-family: 'Sora';
 
+:root {
+    --color-primary: #5465FF;
+    --color-primary-hover: #4355FF;
+    --color-primary-2: #F8F8FB;
+    --color-secondary: #50D8D7;
+    --color-tertiary: #F46197;
+    --color-tertiary-2: #F6AE2D;
+    --color-text: #3E3F5E;
+    --color-text-alt: #7D7E9E;
+    --color-text-alt-2: #ADAFCA;
+    --preset-font-size-tiny: .7em;
+    --preset-font-size-small: .87em;
+    --preset-font-size-normal: 1em;
+    --preset-font-size-medium: 1em;
+    --preset-font-size-large: 2em;
+    --preset-font-size-x-large: 2.8em;
+}
+
 html {
     width: 100%;
     height: 100%;

@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyListComponent } from './pages/my-list/my-list.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { OrderByChallengePipe } from 'src/app/shared';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { CoreModule } from 'src/app/core/core.module';
     ChallengeRoutingModule,
     CoreModule,
     LayoutModule,
+    SharedModule,
   ]
 })
 export class ChallengeModule { }

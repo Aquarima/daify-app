@@ -1,7 +1,3 @@
-@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
-
-$font-family: 'Sora';
-
 :host(.viewstyle-opaque) {
     box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 12px;
     background-color: #FFF;
@@ -10,7 +6,7 @@ $font-family: 'Sora';
 :host {
     padding: 0 100px;
     width: 100%;
-    height: 60px;
+    height: 56px;
     position: fixed;
     z-index: 99;
     display: flex;
@@ -21,6 +17,27 @@ $font-family: 'Sora';
     background-color: #FFF;
     user-select: none;
 
+    .dropdown-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity .3s linear;
+
+        .dropdown {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            border-radius: 8px;
+            background-color: #FFF;
+        }
+    }
+
     a {
         text-decoration: none;
     }
@@ -30,8 +47,7 @@ $font-family: 'Sora';
         text-decoration: none;
         font-weight: 600;
         font-size: 1.4em;
-        font-family: $font-family;
-        color: #3E3F5E;
+        color: var(--color-text);
     }
 
     .navbar {
@@ -39,7 +55,7 @@ $font-family: 'Sora';
         padding: 0;
         display: flex;
         justify-content: center;
-        gap: 45px;
+        gap: 32px;
         list-style-type: none;
     
         .item {
@@ -50,7 +66,7 @@ $font-family: 'Sora';
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
 
             &:hover .item-link {
@@ -68,10 +84,9 @@ $font-family: 'Sora';
                 display: flex;
                 align-items: center;
                 text-decoration: none;
-                font-family: $font-family;
-                font-weight: 600;
-                font-size: .9em;
-                color: #3E3F5E;
+                font-weight: 500;
+                font-size: var(--preset-font-size-small);
+                color: var(--color-text);
             }
 
             .item-link {
@@ -88,7 +103,7 @@ $font-family: 'Sora';
                 left: 8px;
                 display: inline-block;
                 content: "";
-                border-color: #3E3F5E transparent transparent;
+                border-color: var(--color-text) transparent transparent;
                 border-radius: 8px;
                 border-width: 6px 6px 0;
                 border-style: solid;
@@ -98,76 +113,41 @@ $font-family: 'Sora';
                 transform: rotate(180deg);
             }
 
-            .dropdown-wrapper {
-                padding-top: 25px;
-                padding-left: 25px;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 1;
-                visibility: hidden;
-                opacity: 0;
-                transition: visibility 0s, opacity .3s linear;
+            .dropdown {
+                padding: 8px;
 
-                .dropdown {
-                    padding: 12px;
-                    display: grid;
-                    grid-template-columns: repeat(1, 300px);
-                    grid-gap: 12px;
-                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                    border-radius: 15px;
-                    background-color: #FFF;
-
-                    .dropdown-item {
-                        padding: 0 12px 0 12px;
-                        height: 80px;
-                        box-sizing: border-box;
-                        border-radius: 5px;
-                        text-decoration: none;
-
-                        &:hover {
-                            background-color: #F8F8F8;
+                .dropdown-item {
+                    padding: 0 16px 0 16px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    border-radius: 8px;
+                    text-decoration: none;
+    
+                    &:hover {
+                        background-color: var(--color-primary);
+    
+                        a svg {
+                            fill: #FFF;
                         }
-
-                        a {
-                            height: 100%;
-                            display: flex;
-                            align-items: center;
-                            column-gap: 15px;
-
-                            .dropdown-item-icon {
-                                width: 50px;
-                                height: 50px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-                                border-radius: 5px;
-                                
-                                svg {
-                                    width: 28px;
-                                    height: 28px;
-                                    fill: #3E3F5E;
-                                }
-                            }
     
-                            .dropdown-item-info {
-                                font-family: $font-family;
+                        a .name {
+                            color: #FFF;
+                        }
+                    }
     
-                                .name {
-                                    font-weight: 600;
-                                    font-size: .9em;
-                                    color: #3E3F5E;
-                                }
+                    a {
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        column-gap: 8px;
+                        font-weight: 500;
+                        font-size: var(--preset-font-size-small);
+                        color: var(--color-text);
     
-                                .description {
-                                    margin: 5px 0 0 0;
-                                    max-width: 200px;
-                                    font-size: .9em;
-                                    color: #ADAFCA;
-                                }
-                            }
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                            fill: var(--color-text);
                         }
                     }
                 }
@@ -185,10 +165,9 @@ $font-family: 'Sora';
             display: flex;
             align-items: center;
             gap: 5px;
-            font-weight: 700;
-            font-size: .8em;
-            font-family: $font-family;
-            color: #3E3F5E;
+            font-weight: 500;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text);
             cursor: pointer;
     
             .lang-current {
@@ -198,7 +177,7 @@ $font-family: 'Sora';
             svg {
                 height: 18px;
                 width: 18px;
-                fill: #3E3F5E;
+                fill: var(--color-text);
             }
     
             &:hover .wrapper {
@@ -218,19 +197,22 @@ $font-family: 'Sora';
     
                 .list {
                     margin: 16px 0 0 0;
-                    padding: 0;
+                    padding: 4px 0;
                     list-style-type: none;
                     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
                     border-radius: 8px;
                     background-color: #FFF;
         
                     li {
-                        padding: 16px;
+                        padding: 0 16px;
+                        height: 40px;
                         position: relative;
-                        text-align: center;
-                        font-weight: 700;
-                        font-size: 1.1em;
-                        color: #3E3F5E;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 600;
+                        font-size: var(--preset-font-size-normal);
+                        color: var(--color-text);
     
                         &:hover::before {
                             display: inline-block;
@@ -243,7 +225,7 @@ $font-family: 'Sora';
                             position: relative;
                             display: none;
                             content: '';
-                            border-color: #3E3F5E transparent transparent;
+                            border-color: var(--color-text) transparent transparent;
                             border-style: solid;
                             border-width: 6px 6px 0;
                             border-radius: 8px;
@@ -268,8 +250,7 @@ $font-family: 'Sora';
                 border-radius: 8px;
                 background-color: #FFF;
                 font-weight: 500;
-                font-size: .9em;
-                font-family: $font-family;
+                font-size: var(--preset-font-size-small);
                 color: #FFF;
                 cursor: pointer;
             }
@@ -283,10 +264,10 @@ $font-family: 'Sora';
             }
     
             .signup {
-                background-color: #F6AE2D;
+                background-color: var(--color-accent-2);
     
                 &:hover {
-                    background-color: #F5A81F;
+                    background-color: var(--color-accent-2);
                 }
             }
         }
@@ -310,54 +291,44 @@ $font-family: 'Sora';
 
             svg {
                 margin-bottom: 5px;
-                width: 24px;
-                height: 24px;
+                width: 28px;
+                height: 28px;
                 align-self: flex-end;
-                fill: #3E3F5E;
+                fill: var(--color-text);
                 cursor: pointer;
             }
 
-            .wrapper {
-                width: 200px;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                visibility: hidden;
-                opacity: 0;
-                transition: visibility 0s, opacity .3s linear;
+            &:hover .dropdown-wrapper {
+                visibility: visible;
+                opacity: 1;
+            }
 
-                .dropdown {
-                    margin-top: 16px;
-                    padding-top: 16px;
+            .dropdown {
+                padding-top: 16px;
+                width: 180px;
+
+                .user-info {
                     display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    row-gap: 8px;
-                    overflow: hidden;
-                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-                    border-radius: 8px;
-                    background-color: #FFF;
-                    cursor: default;
-
+                    justify-content: center;
+                    column-gap: 16px;
+    
                     .user-avatar {
-                        width: 72px;
-                        height: 72px;
+                        width: 56px;
+                        height: 56px;
                     }
-
+    
                     .user-username {
                         display: flex;
                         flex-direction: column;
-                        align-items: center;
-
+    
                         .raw {
-                            color: #3E3F5E;
+                            color: var(--color-text);
                         }
-
+    
                         .with-tag {
-                            font-size: .85em;
-                            color: #ADAFCA;
-
+                            font-size: var(--preset-font-size-small);
+                            color: var(--color-text-alt);
+    
                             &:hover {
                                 text-decoration: underline;
                             }
@@ -367,50 +338,38 @@ $font-family: 'Sora';
                             }
                         }
                     }
-
-                    ul {
-                        margin: 0;
-                        padding: 0;
-                        width: 100%;
-                        list-style-type: none;
-
-                        li {
-                            margin-bottom: 8px;
-                            height: 32px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            gap: 8px;
-                            color: #3E3F5E;
-                            font-size: .9em;
-                            cursor: pointer;
-
-                            &:hover {
-                                background-color: #5465FF;
-                                color: #FFF;
-
-                                svg {
-                                    fill: #FFF;
-                                }
-
-                                a {
-                                    color: #FFF;
-                                }
-                            }
-
-                            &:last-child:hover {
-                                background-color: #FF5252;
-                            }
-
-                            svg {
-                                width: 20px;
-                                height: 20px;
-                                fill: #3E3F5E;
-                            }
-
-                            a {
-                                color: #3E3F5E;
-                            }
+                }
+    
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    list-style-type: none;
+    
+                    li {
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+                        color: var(--color-text);
+                        font-weight: 600;
+                        font-size: var(--preset-font-size-small);
+                        cursor: pointer;
+    
+                        &:hover {
+                            background-color: #F8F8F8;
+                        }
+    
+                        &:last-child {
+                            color: #FF5252;
+                        }
+    
+                        a {
+                            font-weight: 600;
+                            color: var(--color-text-alt);
                         }
                     }
                 }

@@ -33,8 +33,8 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   getDuration() {
-    let d1: Date = new Date(this.challenge.config.startDate);
-    let d2: Date = new Date(this.challenge.config.endDate);
+    let d1: Date = new Date(this.challenge.config.start);
+    let d2: Date = new Date(this.challenge.config.end);
     const time = d2.getTime() - d1.getTime();
     const days = time / (24 * 60 * 60 * 1000);
     const hours = time / (1000 * 60 * 60);

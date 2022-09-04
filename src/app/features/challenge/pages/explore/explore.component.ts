@@ -10,7 +10,8 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
 })
 export class ExploreComponent implements OnInit {
 
-  challenges$: Observable<Challenge[]> | undefined
+  challenges$: Observable<Challenge[]> | undefined;
+  groupingOption: string = 'alphabetical';
   displayMode: string = 'grid';
 
   constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
@@ -24,15 +25,19 @@ export class ExploreComponent implements OnInit {
     });*/
   }
 
-  onDisplayModeSelected(mode: any) {
-    this.displayMode = mode;
-  }
-
   onSearch(search: Search) {
     if (!search.name) {
       this.challenges$ = this.challengeService.getChallenges();
       return;
     }
     this.challenges$ = this.challengeService.getChallengesByName(search.name);
+  }
+
+  onGroupBySelected(option: any) {
+    this.groupingOption = option;
+  }
+
+  onDisplayModeSelected(mode: any) {
+    this.displayMode = mode;
   }
 }

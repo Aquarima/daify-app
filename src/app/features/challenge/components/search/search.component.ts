@@ -12,6 +12,7 @@ import { SearchService } from 'src/app/core/services/search.service';
 export class SearchComponent implements OnInit, AfterViewInit {
 
   @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
+  @Output() groupByEvent: EventEmitter<any> = new EventEmitter();
   @Output() displayModeEvent: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('backdrop') backdropNode!: ElementRef;
@@ -30,7 +31,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) { }
 
   ngOnInit() {
-    //this.searchForm.controls['sortType'].disable();
     this.route.queryParams.subscribe(params => {
       let searchQuery = '';
       if (params['search_query']) searchQuery = params['search_query']
@@ -75,6 +75,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
     const value = (name) ? name : this.getSearch().name;
     this.searchInputNode.nativeElement.parentNode.classList.add('active');
     this.setQueryParams({'search_query': (value) ? value : null });
+  }
+
+  onGroupBy(groupOption: string) {
+    this.groupByEvent.emit(groupOption);
   }
 
   deleteSearch(name: string) {

@@ -1,7 +1,3 @@
-@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
-
-$font-family: 'Sora';
-
 :host {
     padding: 32px 0;
     background-color: #FFF;
@@ -23,7 +19,7 @@ $font-family: 'Sora';
                 svg {
                     width: 24px;
                     height: 24px;
-                    fill: #3E3F5E;
+                    fill: var(--color-text);
                 }
             }
         }
@@ -37,8 +33,7 @@ $font-family: 'Sora';
         justify-content: space-between;
         border-top: 1px solid #E6E6EF;
         font-weight: 500;
-        font-family: $font-family;
-        color: #3E3F5E;
+        color: var(--color-text);
 
         ul {
             display: flex;
@@ -47,7 +42,7 @@ $font-family: 'Sora';
 
             a { 
                 text-decoration: none;
-                color: #3E3F5E;
+                color: var(--color-text);
 
                 &:hover {
                     text-decoration: underline;

@@ -1,7 +1,7 @@
 :host {
     margin: 0 auto;
-    width: 70%;
-    height: 100px;
+    width: 60%;
+    height: 90px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -16,16 +16,17 @@
         gap: 40px;
 
         .input-box {
-            width: 300px;
-            height: 40px;
+            width: 400px;
+            min-width: 200px;
+            height: 50px;
             position: relative;
             display: flex;
             align-items: center;
-            border: 2px solid #DEDEEA;
+            border: 1px solid #DEDEEA;
             border-radius: 16px;
     
             &:focus-within {
-                border-color: #5465FF;
+                border-color: var(--color-primary);
             }
             
             label {
@@ -37,8 +38,8 @@
                 display: block;
                 background-color: #FFF;
                 font-weight: 500;
-                font-size: .85em;
-                color: #DEDEEA;
+                font-size: var(--preset-font-size-small);
+                color: var(--color-text-alt);
                 cursor: text;
                 pointer-events: none;
             }
@@ -54,8 +55,8 @@
                 background-color: #FFF;
                 outline: none;
                 font-weight: 600;
-                font-size: .9em;
-                color: #3E3F5E;
+                font-size: var(--preset-font-size-small);
+                color: var(--color-text);
             }
     
             .search-btn {
@@ -70,15 +71,15 @@
                     width: 28px;
                     height: 28px;
                     box-sizing: border-box;
-                    fill: #ADAFCA;
+                    fill: var(--color-text);
                 }
             }
 
-            sorting {
-                margin-bottom: 5px;
+            select {
+                cursor: pointer;
             }
 
-            .sorting-options option {
+            .options option {
                 height: 32px;
             }
         }
@@ -89,7 +90,7 @@
                 padding: 0 4px;
                 top: 0;
                 left: 16px;
-                font-size: .7em;
+                font-size: var(--preset-font-size-tiny);
             }
         }
     
@@ -116,16 +117,16 @@
                     margin: 0 0 12px 16px;
                     display: block;
                     font-weight: 500;
-                    font-size: 0.7em;
-                    color: #7D7E9E;
+                    font-size: var(--preset-font-size-tiny);
+                    color: var(--color-text-alt);
                 }
     
                 .history-empty {
                     margin: 0 0 16px 16px;
                     display: flex;
                     font-weight: 500;
-                    font-size: 0.9em;
-                    color: #3E3F5E;
+                    font-size: var(--preset-font-size-small);
+                    color: var(--color-text);
                 }
     
                 .search-item {
@@ -154,7 +155,7 @@
                         align-items: center;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        font-size: 0.9em;
+                        font-size: var(--preset-font-size-small);
                         color: #252526;
                     }
     
@@ -198,7 +199,7 @@
     
         .display-mode-selected {
             svg {
-                fill: #3E3F5E;
+                fill: var(--color-text);
             }
         }
     }

@@ -1,6 +1,6 @@
 export interface ChallengeConfig {
-    startDate: Date,
-    endDate: Date,
+    start: Date,
+    end: Date,
     capacity: number,
     groupSize: number
 }

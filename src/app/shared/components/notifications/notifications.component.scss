@@ -1,7 +1,3 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
-
-$font-family: 'Inter';
-
 :host {
     width: 100%;
     height: 100%;
@@ -48,7 +44,6 @@ $font-family: 'Inter';
                 h1 {
                     margin: 0;
                     font-size: 1.3em;
-                    font-family: $font-family;
                 }
 
                 .right-box {
@@ -60,7 +55,6 @@ $font-family: 'Inter';
                         border: none;
                         background-color: transparent;
                         font-size: 0.9em;
-                        font-family: $font-family;
                         color: #4285F4;
                         cursor: pointer;
     
@@ -120,7 +114,6 @@ $font-family: 'Inter';
                     background: none;
                     font-weight: 500;
                     font-size: 1em;
-                    font-family: $font-family;
                     cursor: pointer;
                 }
             }
@@ -170,7 +163,6 @@ $font-family: 'Inter';
                   
                     .first {
                         font-size: 1em;
-                        font-family: $font-family;
     
                         .author {
                             margin-right: 5px;
@@ -191,7 +183,6 @@ $font-family: 'Inter';
     
                     .last {
                         margin-top: 5px;
-                        font-family: $font-family;
                         color: #808080;
                         font-size: 0.9em;
     

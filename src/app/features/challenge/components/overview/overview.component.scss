@@ -1,7 +1,3 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
-
-$font-family: 'Inter';
-
 :host {
     width: 100%;
     height: 100%;
@@ -73,7 +69,6 @@ $font-family: 'Inter';
                     min-width: 80px;
                     text-align: center;
                     font-weight: 600;
-                    font-family: $font-family;
                     color: #252526;
                 }
             }
@@ -90,7 +85,6 @@ $font-family: 'Inter';
                     height: 35px;
                     border-radius: 8px;
                     font-weight: 500;
-                    font-family: $font-family;
                     cursor: pointer;
                 }
 

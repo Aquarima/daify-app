@@ -8,9 +8,16 @@
                 <p class="about">Browse challenges created by the community</p>
             </div>
         </div>
-        <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
+        <app-challenge-search 
+            (searchEvent)="onSearch($event)" 
+            (groupByEvent)="onGroupBySelected($event)" 
+            (displayModeEvent)="onDisplayModeSelected($event)">
+        </app-challenge-search>
         <div class="items display-{{displayMode}}">
-            <app-challenge-card class="{{displayMode}}-cell" [challenge]="challenge" *ngFor="let challenge of challenges$ | async"></app-challenge-card>
+            <app-challenge-card class="{{displayMode}}-cell" 
+                [challenge]="challenge" 
+                *ngFor="let challenge of challenges$ | async | orderByChallenge:groupingOption">
+            </app-challenge-card>
         </div>
     </div>
 </main>
