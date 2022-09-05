@@ -11,6 +11,7 @@
         display: flex;
         flex: 1;
         box-sizing: border-box;
+        background-color: #F8F8FB;
 
         .browse {
             padding-top: 10vh;
@@ -24,11 +25,12 @@
             .top {
                 margin: 0 auto 80px auto;
                 padding: 32px 64px;
-                width: 60%;
-                height: 100px;
+                width: 70%;
+                height: 150px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                box-sizing: border-box;
                 border-radius: 8px;
                 background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-secondary) 100%);
 
@@ -50,21 +52,22 @@
             }
 
             .items {
-                padding: 60px;
+                margin: 0 auto;
+                padding: 60px 0;
+                width: 70%;
                 display: grid;
-                justify-content: center;
+                justify-content: space-evenly;
                 align-items: stretch;
                 box-sizing: border-box;
-                background-color: #F8F8FB;
             }
         
             .display-grid {
-                grid-template-columns: repeat(auto-fit, 380px);
-                gap: 64px;
+                grid-template-columns: repeat(auto-fit, 350px);
+                gap: 32px;
             }
         
             .display-list {
-                grid-template-columns: repeat(1, 70%);
+                grid-template-columns: repeat(1, 100%);
                 gap: 32px;
             }
         }

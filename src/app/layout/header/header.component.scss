@@ -90,22 +90,15 @@
         }
 
         .unfoldable-item {
-
-            &::after {
-                width: 0;
-                height: 0;
-                position: relative;
-                left: 8px;
-                display: inline-block;
-                content: "";
-                border-color: var(--color-text) transparent transparent;
-                border-radius: 8px;
-                border-width: 6px 6px 0;
-                border-style: solid;
-            }
     
-            &:hover::after {
+            &:hover .unfold-arrow {
                 transform: rotate(180deg);
+            }
+
+            .unfold-arrow {
+                width: 24px;
+                height: 24px;
+                fill: var(--color-text);
             }
 
             .dropdown {

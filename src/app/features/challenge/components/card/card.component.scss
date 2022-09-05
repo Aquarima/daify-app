@@ -18,7 +18,7 @@
 
     .challenge-author {
         width: fit-content;
-        margin-left: 24px;
+        margin-left: 64px;
 
         .avatar {
             width: 40px;
@@ -73,7 +73,7 @@
 }
 
 :host(.grid-cell) {
-    height: 500px;
+    height: 450px;
     flex-direction: column;
 
     &:hover {
@@ -102,6 +102,7 @@
 
     .challenge-description {
         margin: 16px 0 0 0;
+        padding: 0 16px;
         font-size: .9em;
     }
 
@@ -120,8 +121,7 @@
     .challenge-stats {
         margin-top: 32px;
         height: 50px;
-        row-gap: 32px;
-        column-gap: 64px;
+        gap: 40px;
 
         > div {
 
@@ -138,7 +138,7 @@
     }
 
     .challenge-tags {
-        margin: 24px 16px;
+        margin: 16px;
     }
 }
 
