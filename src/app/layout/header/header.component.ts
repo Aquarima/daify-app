@@ -10,21 +10,21 @@ import { NotificationsComponent } from 'src/app/shared/components';
 })
 
 export class HeaderComponent implements OnInit {
-
-  currentLang = '';
   
-  constructor(private elementRef: ElementRef,
+  constructor(
     private viewContainerRef: ViewContainerRef, 
     private cookies: CookieService, 
     public authService: AuthService) 
   { }
 
-  ngOnInit(): void {
-    const lang = this.cookies.get('lang');
-    this.currentLang = (lang) ? lang : 'EN';
+  ngOnInit(): void { }
+
+  getCurrentLanguage(): string {
+    const current = this.cookies.get('lang');
+    return current ? current.toUpperCase() : 'EN';
   }
 
-  @HostListener('window:scroll', ['$event'])
+  /*@HostListener('window:scroll', ['$event'])
   onScroll($event: Event): void {
     if($event) {
       if (window.pageYOffset > 0) {
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       }
       this.elementRef.nativeElement.classList.remove('viewstyle-opaque');
     }
-  }
+  }*/
 
   onDisplayNotifications() {
     const componentRef = this.viewContainerRef.createComponent(NotificationsComponent);

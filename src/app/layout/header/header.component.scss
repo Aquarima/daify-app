@@ -1,8 +1,3 @@
-:host(.viewstyle-opaque) {
-    box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 12px;
-    background-color: #FFF;
-}
-
 :host {
     padding: 0 100px;
     width: 100%;
@@ -32,7 +27,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 6px;
             border-radius: 8px;
             background-color: #FFF;
         }
@@ -119,6 +114,8 @@
                 .dropdown-item {
                     padding: 0 16px 0 16px;
                     height: 40px;
+                    display: flex;
+                    justify-content: space-between;
                     box-sizing: border-box;
                     border-radius: 8px;
                     text-decoration: none;
@@ -149,6 +146,14 @@
                             height: 24px;
                             fill: var(--color-text);
                         }
+                    }
+
+                    .mark-beta {
+                        padding: 3px 8px;
+                        border-radius: 8px;
+                        background-color: var(--color-tertiary);
+                        font-size: var(--preset-font-size-tiny);
+                        color: #FFF;
                     }
                 }
             }
@@ -361,6 +366,10 @@
     
                         &:hover {
                             background-color: #F8F8F8;
+                        }
+
+                        &:not(:last-child) {
+                            border-bottom: 1px solid #F2F2F2;
                         }
     
                         &:last-child {
