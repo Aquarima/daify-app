@@ -5,6 +5,7 @@ import { ChallengeModule } from './challenge/challenge.module';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
+import { UserModule } from './user/user/user.module';
 
 @NgModule({
   declarations: [ ],
@@ -17,6 +18,7 @@ import { CoreModule } from '../core/core.module';
     HomeModule,
     AuthModule,
     ChallengeModule,
+    UserModule,
   ],
 })
 export class FeaturesModule { }

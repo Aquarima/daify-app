@@ -109,7 +109,7 @@
         <a class="login" [routerLink]="['/auth/login']">Login</a>
         <a class="signup">Join us - it's free</a>
     </div>
-    <div class="user-box">
+    <div class="user-box" *ngIf="authService.isAuthenticated()">
         <img class="user-avatar" src="https://i.pinimg.com/564x/cc/54/cd/cc54cdd7e22d63ab4704abf68b1bde81.jpg"
             alt="User avatar">
         <svg width="32" height="32" viewBox="0 0 24 24">

@@ -24,17 +24,6 @@ export class HeaderComponent implements OnInit {
     return current ? current.toUpperCase() : 'EN';
   }
 
-  /*@HostListener('window:scroll', ['$event'])
-  onScroll($event: Event): void {
-    if($event) {
-      if (window.pageYOffset > 0) {
-        this.elementRef.nativeElement.classList.add('viewstyle-opaque');
-        return;
-      }
-      this.elementRef.nativeElement.classList.remove('viewstyle-opaque');
-    }
-  }*/
-
   onDisplayNotifications() {
     const componentRef = this.viewContainerRef.createComponent(NotificationsComponent);
     componentRef.instance.closeEvent.subscribe(() => {

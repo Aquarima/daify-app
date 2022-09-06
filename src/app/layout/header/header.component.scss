@@ -241,7 +241,7 @@
     
             a {
                 padding: 0 16px;
-                height: 36px;
+                height: 28px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -254,18 +254,18 @@
             }
     
             .login {
-                background-color: #50D8D7;
+                background-color: var(--color-secondary);
     
                 &:hover {
-                    background-color: #43D5D4;
+                    background-color: var(--color-secondary-hover);
                 }
             }
     
             .signup {
-                background-color: var(--color-accent-2);
+                background-color: var(--color-tertiary-2);
     
                 &:hover {
-                    background-color: var(--color-accent-2);
+                    background-color: var(--color-tertiary-2-hover);
                 }
             }
         }
