@@ -4,39 +4,68 @@
     flex-direction: column;
     background-color: var(--color-primary-2);
     
-    .profile-banner {
-        width: 100%;
-        height: 120px;
-        position: relative;
-        object-fit: fill;
-        background-color: var(--color-primary);
-        //background: url('https://st2.depositphotos.com/4015615/6213/i/950/depositphotos_62135953-stock-photo-grass-field-with-forest-background.jpg') no-repeat;
-        background-size: 100%;
+    .main-content {
+        align-items: center;
 
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            background-color: #FFF;
-
-            img {
-                width: 85%;
-                height: 85%;
+        .profile-banner {
+            margin-top: 64px;
+            width: 70%;
+            height: 150px;
+            position: relative;
+            object-fit: fill;
+            border-radius: 16px 16px 0 0;
+            background-color: var(--color-primary);
+            //background: url('https://st2.depositphotos.com/4015615/6213/i/950/depositphotos_62135953-stock-photo-grass-field-with-forest-background.jpg') no-repeat;
+            background-size: 100%;
+    
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 border-radius: 50%;
+                background-color: #FFF;
+    
+                img {
+                    width: 85%;
+                    height: 85%;
+                    border-radius: 50%;
+                }
             }
         }
-    }
+    
+        .noidea {
+            width: 70%;
+            height: 120px;
+            box-sizing: border-box;
+            border-radius: 0 0 16px 16px;
+            background-color:#FFF;
 
-    .noidea {
-        height: 80px;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-        background-color:#FFF;
+            .profile-details {
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+    
+                .username-short {
+                    font-weight: 700;
+                    font-size: var(--preset-font-size-medium);
+                    color: var(--color-text);
+                }
+    
+                .username {
+                    font-size: 16px;
+                    font-weight: 400;
+                    font-size: var(--preset-font-size-small);
+                    color: var(--color-text-alt);
+                }
+            }
+        }
     }
 }
