@@ -13,11 +13,22 @@ export class ChallengeService {
 
   getChallenges(): Observable<Challenge[]> {
     return this.http.get<any>(`${env.apiUrl}/challenge/all`)
-      .pipe(map( response => response.content));
+      .pipe(
+        map( response => response.content)
+      );
   }
 
   getChallengesByName(name: string): Observable<Challenge[]> {
     return this.http.get<any>(`${env.apiUrl}/challenge/all/${name}`)
-      .pipe(map( response => response.content));
+      .pipe(
+        map( response => response.content)
+      );
+  }
+
+  getChallengesByAuthor(authorId: number): Observable<Challenge[]> {
+    return this.http.get<any>(`${env.apiUrl}/challenge/author/${authorId}`)
+      .pipe(
+        map( response => response.content)
+      );
   }
 }

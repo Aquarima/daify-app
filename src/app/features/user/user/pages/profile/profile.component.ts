@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Challenge, ChallengeService } from 'src/app/core';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  challenges$: Observable<Challenge[]> | undefined;
 
-  ngOnInit(): void { }
+  constructor(private challengeService: ChallengeService) { }
+
+  ngOnInit(): void {
+    this.challenges$ = this.challengeService.getChallengesByAuthor(1);
+  }
 }

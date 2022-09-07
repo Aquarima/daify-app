@@ -28,6 +28,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CoreModule,
     LayoutModule,
     SharedModule,
+  ],
+  exports: [
+    CardComponent
   ]
 })
 export class ChallengeModule { }
