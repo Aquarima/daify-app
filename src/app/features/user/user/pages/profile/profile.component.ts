@@ -10,6 +10,7 @@ import { Challenge, ChallengeService } from 'src/app/core';
 export class ProfileComponent implements OnInit {
 
   challenges$: Observable<Challenge[]> | undefined;
+  section: number = 0;
 
   constructor(private challengeService: ChallengeService) { }
 

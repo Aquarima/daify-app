@@ -16,7 +16,7 @@
             box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
             border-radius: 16px 16px 0 0;
             background-color: var(--color-primary);
-            background: url('https://st2.depositphotos.com/4015615/6213/i/950/depositphotos_62135953-stock-photo-grass-field-with-forest-background.jpg') no-repeat;
+            background: url('https://i.pinimg.com/originals/b1/da/c0/b1dac0470bdf2f7cc0c559599fba19f9.jpg') no-repeat;
             background-size: 100%;
     
             .profile-avatar {
@@ -77,9 +77,14 @@
         .center {
             margin: 64px 0;
             width: 70%;
+            display: flex;
+            column-gap: 32px;
 
             .profile-nav {
+                padding: 24px 0;
                 width: 80px;
+                min-width: 80px;
+                height: fit-content;
                 border-radius: 16px;
                 box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
                 background-color: #FFF;
@@ -113,7 +118,7 @@
                             }
 
                             .tooltip {
-                                left: calc(100% + 16px);
+                                left: calc(-100% - 16px);
                                 opacity: 1;
                                 visibility: visible;
                             }
@@ -138,7 +143,7 @@
                         .tooltip {
                             padding: 5px 8px;
                             position: absolute;
-                            left: calc(100%);
+                            left: -100%;
                             transition: left .5s, opacity .3s;
                             opacity: 0;
                             visibility: hidden;
@@ -152,10 +157,66 @@
                 }
             }
 
+            .section-hidden {
+                display: none!important;
+            }
+
+            .profile-about {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 16px;
+
+                .info-field {
+                    
+                    p {
+                        margin: 0;
+                        display: inline-block;
+                        font-size: var(--preset-font-size-small);
+                    }
+
+                    .name {
+                        margin-right: 8px;
+                        font-weight: 500;
+                        color: var(--color-text);
+                    }
+
+                    .value {
+                        color: var(--color-text-alt);
+                    }
+                }
+
+                > div {
+                    padding: 24px;
+                    width: 280px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    box-sizing: border-box;
+                    box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+                    border-radius: 16px;
+                    background-color: #FFF;
+
+                    .box-title {
+                        margin: 0;
+                        text-align: center;
+                        font-weight: 600;
+                        font-size: var(--preset-font-size-small);
+                        color: var(--color-text);
+                    }
+
+                    .text {
+                        margin: 0;
+                        font-size: var(--preset-font-size-small);
+                        color: var(--color-text-alt);
+                    }
+                }
+            }
+
             .profile-challenges {
-                width: 70%;
+                width: 100%;
                 display: grid;
-                justify-content: space-evenly;
+                justify-content: center;
                 align-items: stretch;
                 grid-template-columns: repeat(auto-fit, 350px);
                 gap: 64px;

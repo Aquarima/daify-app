@@ -2,6 +2,7 @@ import { Profile } from "../user";
 import { ChallengeConfig } from "./challenge-config.model";
 
 export interface Challenge {
+    id: number,
     author: Profile
     name: string
     description: string
