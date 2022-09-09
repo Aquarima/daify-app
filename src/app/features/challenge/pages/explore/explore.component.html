@@ -8,17 +8,16 @@
                 <p class="about">Browse challenges created by the community</p>
             </div>
         </div>
-        <app-challenge-search 
+        <dfy-challenge-search 
             (searchEvent)="onSearch($event)" 
             (groupByEvent)="onGroupBySelected($event)" 
             (displayModeEvent)="onDisplayModeSelected($event)">
-        </app-challenge-search>
-        <div class="items display-{{displayMode}}">
-            <app-challenge-card class="{{displayMode}}-cell" 
-                [challenge]="challenge" 
-                *ngFor="let challenge of challenges$ | async | orderByChallenge:groupingOption">
-            </app-challenge-card>
-        </div>
+        </dfy-challenge-search>
+        <dfy-browse-results-list 
+            [challenges$]="challenges$" 
+            [displayMode]="displayMode" 
+            [groupBy]="groupBy">
+        </dfy-browse-results-list>
     </div>
 </main>
 <app-footer></app-footer>

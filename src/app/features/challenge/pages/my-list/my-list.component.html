@@ -8,9 +8,15 @@
                 <p class="about">Browse challenges you joined or created</p>
             </div>
         </div>
-        <app-challenge-search (searchEvent)="onSearch($event)" (displayModeEvent)="onDisplayModeSelected($event)"></app-challenge-search>
+        <dfy-challenge-search (searchEvent)="onSearch($event)" 
+            (displayModeEvent)="onDisplayModeSelected($event)">
+        </dfy-challenge-search>
         <div class="items display-{{displayMode}}">
-            <app-challenge-card class="{{displayMode}}-cell" [challenge]="challenge" *ngFor="let challenge of challenges$ | async"></app-challenge-card>
+            <dfy-browse-results-list 
+                [challenges$]="challenges$" 
+                [displayMode]="displayMode" 
+                [groupBy]="groupBy">
+            </dfy-browse-results-list>
         </div>
     </div>
 </main>

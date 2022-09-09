@@ -5,7 +5,7 @@ import { Search } from 'src/app/core/models';
 import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
-  selector: 'app-challenge-search',
+  selector: 'dfy-challenge-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })

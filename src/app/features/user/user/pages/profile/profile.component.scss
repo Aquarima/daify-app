@@ -12,6 +12,7 @@
             width: 70%;
             height: 200px;
             position: relative;
+            z-index: 1;
             object-fit: fill;
             box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
             border-radius: 16px 16px 0 0;
@@ -40,16 +41,26 @@
             }
         }
     
-        .noidea {
+        .profile-info {
+            padding: 0 32px;
             width: 70%;
-            height: 120px;
+            height: 150px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
             box-sizing: border-box;
             border-radius: 0 0 16px 16px;
             box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
             background-color:#FFF;
 
+            .filler {
+                width: 400px;
+            }
+
             .profile-details {
-                margin-top: 50px;
+                margin-top: 32px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -70,6 +81,74 @@
                     &:before {
                         content: "@";
                     }
+                }
+            }
+
+            .profile-socials {
+                padding: 8px 0;
+                width: 400px;
+                height: fit-content;
+                position: relative;
+                left: 64px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: center;
+                align-items: center;
+                gap: 16px;
+                overflow: hidden;
+
+                .social-link {
+                    width: 40px;
+                    min-width: 40px;
+                    height: 40px;
+                    transition: transform ease .3s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 8px;
+                    
+
+                    &:hover {
+                        transform: translate(0, -3px);
+                    }
+
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                        fill: #FFF;
+                    }
+                }
+
+                .twitter-link {
+                    background-color: #1DA1F2;
+                }
+
+                .facebook-link {
+                    background-color:#1877F2;
+                }
+
+                .spotify-link {
+                    background-color: #1ED760;
+                }
+
+                .youtube-link {
+                    background-color: #FF0000;
+                }
+
+                .github-link {
+                    background-color: #171515;
+                }
+
+                .discord-link {
+                    background-color: #5865f2;
+                }
+
+                .twitch-link {
+                    background-color: #9146FF;
+                }
+
+                .instagram-link {
+                    background-color: #E1306C;
                 }
             }
         }
@@ -164,8 +243,8 @@
             .profile-about {
                 width: 100%;
                 display: flex;
-                justify-content: space-between;
-                gap: 16px;
+                justify-content: flex-end;
+                gap: 24px;
 
                 .info-field {
                     
@@ -188,7 +267,9 @@
 
                 > div {
                     padding: 24px;
-                    width: 280px;
+                    min-width: 280px;
+                    max-width: 380px;
+                    height: fit-content;
                     display: flex;
                     flex-direction: column;
                     gap: 16px;

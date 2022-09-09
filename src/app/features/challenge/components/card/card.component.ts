@@ -3,7 +3,7 @@ import { FastAverageColor } from 'fast-average-color';
 import { Challenge } from 'src/app/core/models/challenge';
 
 @Component({
-  selector: 'app-challenge-card',
+  selector: 'dfy-challenge-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
@@ -14,7 +14,9 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this.challenge);
+  }
 
   ngAfterViewInit(): void {
     const coverUrl = this.challenge.coverUrl;
@@ -43,5 +45,5 @@ export class CardComponent implements OnInit, AfterViewInit {
     if (hours >= 1) return `${hours.toFixed(1)}h`;
     if (minutes >= 1) return `${minutes}m`;
     return 'Unknown';
-}
+  }
 }

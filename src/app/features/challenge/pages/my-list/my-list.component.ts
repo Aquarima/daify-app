@@ -10,16 +10,13 @@ import { ChallengeService } from 'src/app/core/services';
 })
 export class MyListComponent implements OnInit {
 
-  challenges$: Observable<Challenge[]> | undefined
+  challenges$: Observable<Challenge[]> | undefined;
+  groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
 
   constructor(private challengeService: ChallengeService) { }
 
   ngOnInit(): void { }
-
-  onDisplayModeSelected(mode: any) {
-    this.displayMode = mode;
-  }
 
   onSearch(search: Search) {
     if (!search.name) {
@@ -27,5 +24,13 @@ export class MyListComponent implements OnInit {
       return;
     }
     this.challenges$ = this.challengeService.getChallengesByName(search.name);
+  }
+
+  onGroupBySelected(option: any) {
+    this.groupBy = option;
+  }
+
+  onDisplayModeSelected(mode: any) {
+    this.displayMode = mode;
   }
 }

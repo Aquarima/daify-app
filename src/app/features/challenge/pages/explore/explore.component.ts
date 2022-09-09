@@ -11,7 +11,7 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
 export class ExploreComponent implements OnInit {
 
   challenges$: Observable<Challenge[]> | undefined;
-  groupingOption: string = 'alphabetical';
+  groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
 
   constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
@@ -34,7 +34,7 @@ export class ExploreComponent implements OnInit {
   }
 
   onGroupBySelected(option: any) {
-    this.groupingOption = option;
+    this.groupBy = option;
   }
 
   onDisplayModeSelected(mode: any) {

@@ -11,6 +11,7 @@ import { MyListComponent } from './pages/my-list/my-list.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BrowseResultsListComponent } from './components/browse-results-list/browse-results-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SearchComponent,
     MyListComponent,
     OverviewComponent,
+    BrowseResultsListComponent,
   ],
   imports: [
     CommonModule,
