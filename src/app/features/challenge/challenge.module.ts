@@ -32,6 +32,7 @@ import { BrowseResultsListComponent } from './components/browse-results-list/bro
     SharedModule,
   ],
   exports: [
+    BrowseResultsListComponent,
     CardComponent
   ]
 })

@@ -1,5 +1,6 @@
 <div class="items display-{{displayMode}}">
-    <dfy-challenge-card class="{{displayMode}}-cell" 
+    <dfy-challenge-card class="{{displayMode}}-cell"
+        [challenge]="challenge"
         *ngFor="let challenge of challenges$ | async | orderByChallenge:groupBy">
     </dfy-challenge-card>
 </div>

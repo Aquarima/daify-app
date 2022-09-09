@@ -10,7 +10,7 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
 })
 export class ExploreComponent implements OnInit {
 
-  challenges$: Observable<Challenge[]> | undefined;
+  challenges$!: Observable<Challenge[]>;
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
 
