@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { NotificationsComponent } from 'src/app/shared/components';
 
 @Component({
-  selector: 'app-header',
+  selector: 'dfy-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

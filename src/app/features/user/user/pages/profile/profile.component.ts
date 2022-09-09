@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Challenge, ChallengeService } from 'src/app/core';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'dfy-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })

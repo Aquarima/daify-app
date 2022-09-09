@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject, tap } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
+import { User } from '../models/user';
 
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -12,6 +13,7 @@ const headers = new HttpHeaders({'Content-Type': 'application/json'});
 })
 export class AuthService {
 
+  user: User | undefined;
   redirectUrl: string = '/';
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -27,13 +29,13 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-
     this.http.post(`${env.apiUrl}/auth/login`, { email: email, password: password }, { headers: headers, observe: 'response' })
       .subscribe({
         next: (res: any) => {
           this.cookies.put('access_token', res.headers.get('Authorization') || undefined);
           this.cookies.put('expires', res.body.expires);
           this.cookies.put('refresh_token', res.body.refresh_token);
+          //localStorage.setItem('user', res.body.user);
           this.loginError.next(false);
           this.doRedirect();
         },

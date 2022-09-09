@@ -4,7 +4,7 @@ import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
 
 @Component({
-  selector: 'app-explore',
+  selector: 'dfy-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
