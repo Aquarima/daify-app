@@ -1,10 +1,6 @@
 <div class="challenge-preview-cover" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}">
     <div></div>
 </div>
-<div class="challenge-author">
-    <img class="avatar" src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-    <a class="username" [routerLink]="['/users/profile/', challenge.author.id]">{{challenge.author.username}}</a>
-</div>
 <div class="presentation">
     <p class="challenge-name">{{challenge.name || "Unknown"}}</p>
     <p class="challenge-description">{{challenge.description || "No description provided"}}</p>
@@ -28,3 +24,10 @@
     <li class="item">Nature</li>
     <li class="item">Design</li>
 </ul>
+<div class="challenge-author">
+    <img class="avatar" src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+    <p class="username">
+        By
+        <a [routerLink]="['/users/profile/', challenge.author.id]">{{challenge.author.username}}</a>
+    </p>
+</div>
