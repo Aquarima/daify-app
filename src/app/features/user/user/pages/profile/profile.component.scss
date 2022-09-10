@@ -47,7 +47,7 @@
             height: 150px;
             position: relative;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             overflow: hidden;
             box-sizing: border-box;
@@ -55,8 +55,44 @@
             box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
             background-color:#FFF;
 
-            .filler {
-                width: 400px;
+            .zone {
+                width: 33%;
+                display: flex;
+            }
+
+            .center {
+                justify-content: center;
+            }
+
+            .right {
+                justify-content: flex-end;
+            }
+
+            .profile-online-status {
+                padding: 2px 8px;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                border-radius: 16px;
+                background-color: #F3F3F3;
+                font-weight: 500;
+                font-size: var(--preset-font-size-normal);
+                color: var(--color-text-alt);
+
+                .indicator {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                }
+
+                .online {
+                    background-color: #4CAF50;
+                }
+
+                .offline {
+                    background-color: #F44336;
+                }
             }
 
             .profile-details {
@@ -86,10 +122,7 @@
 
             .profile-socials {
                 padding: 8px 0;
-                width: 400px;
                 height: fit-content;
-                position: relative;
-                left: 64px;
                 display: flex;
                 flex-wrap: wrap;
                 align-content: center;
@@ -196,8 +229,8 @@
                                 fill: var(--color-text);
                             }
 
-                            .tooltip {
-                                left: calc(-100% - 16px);
+                            .tooltip .tooltip-text {
+                                margin-right: 32px;
                                 opacity: 1;
                                 visibility: visible;
                             }
@@ -220,17 +253,23 @@
                         }
 
                         .tooltip {
-                            padding: 5px 8px;
+                            width: 100px;
                             position: absolute;
                             left: -100%;
-                            transition: left .5s, opacity .3s;
-                            opacity: 0;
-                            visibility: hidden;
-                            border-radius: 16px;
-                            background-color: var(--color-primary);
-                            white-space:nowrap;
-                            font-size: var(--preset-font-size-small);
-                            color: #FFF;
+                            display: flex;
+                            justify-content: right;
+
+                            .tooltip-text {
+                                padding: 5px 8px;
+                                transition: margin .5s, opacity .3s;
+                                opacity: 0;
+                                visibility: hidden;
+                                border-radius: 16px;
+                                background-color: var(--color-primary);
+                                white-space:nowrap;
+                                font-size: var(--preset-font-size-small);
+                                color: #FFF;
+                            }
                         }
                     }
                 }
@@ -267,8 +306,8 @@
 
                 > div {
                     padding: 24px;
+                    width: 50%;
                     min-width: 280px;
-                    max-width: 380px;
                     height: fit-content;
                     display: flex;
                     flex-direction: column;

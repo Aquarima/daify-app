@@ -1,10 +1,9 @@
 :host {
     width:  100%;
+    display: inline-block;
 
     .items {
-        //margin: 0 auto;
-        padding: 60px 0;
-        width: 70%;
+        width: 100%;
         display: grid;
         justify-content: space-evenly;
         align-items: stretch;

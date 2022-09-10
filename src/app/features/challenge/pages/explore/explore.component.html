@@ -13,11 +13,13 @@
             (groupByEvent)="onGroupBySelected($event)" 
             (displayModeEvent)="onDisplayModeSelected($event)">
         </dfy-challenge-search>
-        <dfy-browse-results-list 
-            [challenges$]="challenges$" 
-            [displayMode]="displayMode" 
-            [groupBy]="groupBy">
-        </dfy-browse-results-list>
+        <div class="item-list">
+            <dfy-browse-results-list 
+                [challenges$]="challenges$" 
+                [displayMode]="displayMode" 
+                [groupBy]="groupBy">
+            </dfy-browse-results-list>
+        </div>
     </div>
 </main>
 <dfy-footer></dfy-footer>
