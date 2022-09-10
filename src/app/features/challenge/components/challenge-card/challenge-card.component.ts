@@ -4,19 +4,17 @@ import { Challenge } from 'src/app/core/models/challenge';
 
 @Component({
   selector: 'dfy-challenge-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  templateUrl: './challenge-card.component.html',
+  styleUrls: ['./challenge-card.component.scss']
 })
-export class CardComponent implements OnInit, AfterViewInit {
+export class ChallengeCardComponent implements OnInit, AfterViewInit {
 
   @Input() challenge!: Challenge;
   @ViewChild('tag_list') tagList!: ElementRef;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.challenge);
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     const coverUrl = this.challenge.coverUrl;

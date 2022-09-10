@@ -6,10 +6,10 @@ import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'dfy-challenge-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  templateUrl: './challenge-search.component.html',
+  styleUrls: ['./challenge-search.component.scss']
 })
-export class SearchComponent implements OnInit, AfterViewInit {
+export class ChallengeSearchComponent implements OnInit, AfterViewInit {
 
   @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
   @Output() groupByEvent: EventEmitter<any> = new EventEmitter();
