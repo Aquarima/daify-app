@@ -1,34 +1,31 @@
 import { Injectable } from '@angular/core';
-import { ChallengeService } from './challenge.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  constructor(private challengeService: ChallengeService) { }
-
-  fetchHistory(): string[] {
-    let json = localStorage.getItem('history');
+  fetchHistory(historyName: string): string[] {
+    let json = localStorage.getItem(`${historyName}_history`);
     return (json) ? JSON.parse(json) : [];
   }
 
-  saveSearch(name: string): string[] {
-    let searches = this.fetchHistory();
-    if (searches.includes(name)) searches = this.deleteSearch(name);
+  saveSearch(historyName: string, search: string): string[] {
+    let searches = this.fetchHistory(historyName);
+    if (searches.includes(search)) searches = this.deleteSearch(historyName, search);
     if (searches.length >= 4) searches.pop();
-    searches.unshift(name);
-    return this.updateHistory(searches);
+    searches.unshift(search);
+    return this.updateHistory('challenges', searches);
   }
 
-  deleteSearch(name: string, history?: string[]): string[] {
-    const searches = (history) ? history : this.fetchHistory();
-    searches.splice(searches.indexOf(name), 1);
-    return this.updateHistory(searches);
+  deleteSearch(historyName: string, search: string): string[] {
+    const searches = this.fetchHistory(`${historyName}_history`);
+    searches.splice(searches.indexOf(search), 1);
+    return this.updateHistory('challenges', searches);
   }
 
-  private updateHistory(history: string[]): string[] {
-    localStorage.setItem('history', JSON.stringify(history));
+  private updateHistory(historyName: string, history: string[]): string[] {
+    localStorage.setItem(`${historyName}_history`, JSON.stringify(history));
     return history;
   }
 }

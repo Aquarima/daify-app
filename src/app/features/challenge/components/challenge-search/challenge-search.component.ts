@@ -19,14 +19,13 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
   @ViewChild('search_history') searchHistoryNode!: ElementRef;
   @ViewChild('name') searchInputNode!: ElementRef;
 
-  displayMode: any = 'grid';
-
   searchForm = new FormGroup({
     'name': new FormControl(''),
     'sortType': new FormControl(''),
   })
 
-  history = this.searchService.fetchHistory();
+  displayMode: any = 'grid';
+  history = this.searchService.fetchHistory('challenges');
   
   constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) { }
 
@@ -36,9 +35,9 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
       if (params['search_query']) searchQuery = params['search_query']
       else this.setQueryParams({'search_query': null });
       this.searchForm.controls['name'].setValue(searchQuery);
-      if (searchQuery) this.searchService.saveSearch(searchQuery);
+      if (searchQuery) this.searchService.saveSearch('challenges', searchQuery);
       this.searchEvent.emit(this.getSearch());
-      this.history = this.searchService.fetchHistory();
+      this.history = this.searchService.fetchHistory('challenges');
     })
   }
 
@@ -82,7 +81,7 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
   }
 
   deleteSearch(name: string) {
-    this.history = this.searchService.deleteSearch(`${name}`);
+    this.history = this.searchService.deleteSearch('challenges', `${name}`);
   }
 
   private getSearch(): Search {
