@@ -5,13 +5,15 @@ import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { ChallengeModule } from '../challenge/challenge.module';
-import { ProfileCardComponent } from './components/profile-card/profile-card.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserCardComponent } from './components';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    ProfileCardComponent
+    UserCardComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
