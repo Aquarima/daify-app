@@ -131,44 +131,6 @@
         background-color: #E6E6EF;   
     }
 
-    .challenge-author {
-        margin-top: 8px;
-        padding-right: 16px;
-        position: absolute;
-        bottom: 16px;
-        right: 8px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 8px;
-
-        .avatar {
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-        }
-
-        .username {
-            margin: 0;
-            font-size: var(--preset-font-size-small);
-            color: var(--color-text-alt);
-
-            a {
-                text-decoration: none;
-                font-weight: 500;
-                color: var(--color-text-alt);
-
-                &:hover {
-                    text-decoration: underline;
-                }
-
-                &:before {
-                    content: "@";
-                }
-            }
-        }
-    }
-
     .challenge-name {
         text-align: center;
         font-weight: 600;
@@ -227,4 +189,43 @@
             color: #FFF;
         }
     }
+
+    .challenge-author {
+        margin-top: 8px;
+        padding-right: 16px;
+        position: absolute;
+        bottom: 16px;
+        right: 8px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+
+        .avatar {
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+        }
+
+        .username {
+            margin: 0;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text-alt);
+
+            a {
+                text-decoration: none;
+                font-weight: 500;
+                color: var(--color-text-alt);
+
+                &:hover {
+                    text-decoration: underline;
+                    color: var(--color-secondary);
+                }
+
+                &:before {
+                    content: "@";
+                }
+            }
+        }
+    } 
 }

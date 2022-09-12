@@ -31,7 +31,7 @@ html {
         padding: 0;
         width: 100%;
         height: 100%;
-        background-color: #FFF;
+        background-color: var(--color-primary-2);
         font-family: $font-family;
 
         .main-content {
@@ -42,7 +42,6 @@ html {
             flex-direction: column;
             flex: 1;
             box-sizing: border-box;
-            background-color: #F8F8FB;
         }
 
         .twitter-link {
