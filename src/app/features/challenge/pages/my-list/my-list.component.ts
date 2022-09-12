@@ -10,7 +10,7 @@ import { ChallengeService } from 'src/app/core/services';
 })
 export class MyListComponent implements OnInit {
 
-  challenges$: Observable<Challenge[]> | undefined;
+  challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
 
@@ -20,10 +20,14 @@ export class MyListComponent implements OnInit {
 
   onSearch(search: Search) {
     if (!search.name) {
-      this.challenges$ = this.challengeService.getChallenges();
+      this.challengeService.getChallenges(12).subscribe(data => {
+        this.challenges = data.content;
+      })
       return;
     }
-    this.challenges$ = this.challengeService.getChallengesByName(search.name);
+    this.challengeService.getChallengesByName(search.name).subscribe(data => {
+      this.challenges = data.content;
+    })
   }
 
   onGroupBySelected(option: any) {

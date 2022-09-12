@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Challenge } from 'src/app/core';
 
 @Component({
@@ -9,7 +8,7 @@ import { Challenge } from 'src/app/core';
 })
 export class BrowseResultsListComponent implements OnInit {
 
-  @Input() challenges$: Observable<Challenge[]> | undefined;
+  @Input() challenges: Challenge[] = [];
   @Input() displayMode: string = 'grid';
   @Input() groupBy: string = 'alphabetical';
 

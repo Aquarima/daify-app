@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
 
@@ -10,27 +9,28 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
 })
 export class ExploreComponent implements OnInit {
 
-  challenges$!: Observable<Challenge[]>;
+  challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
+  page: number = 0;
+  totalPages: number = 0;
 
   constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
 
   ngOnInit(): void { }
 
-  onItemSelected() {
-    /*const componentRef = this.viewContainerRef.createComponent(OverviewComponent);
-    componentRef.instance.closeEvent.subscribe(() => {
-      this.viewContainerRef.clear();
-    });*/
-  }
-
   onSearch(search: Search) {
     if (!search.name) {
-      this.challenges$ = this.challengeService.getChallenges();
+      this.challengeService.getChallenges(12).subscribe(data => {
+        this.challenges = data.content;
+        this.totalPages = data.totalPages;
+      })
       return;
     }
-    this.challenges$ = this.challengeService.getChallengesByName(search.name);
+    this.challengeService.getChallengesByName(search.name).subscribe(data => {
+      this.challenges = data.content;
+      this.totalPages = data.totalPages;
+    })
   }
 
   onGroupBySelected(option: any) {
@@ -39,5 +39,12 @@ export class ExploreComponent implements OnInit {
 
   onDisplayModeSelected(mode: any) {
     this.displayMode = mode;
+  }
+
+  onShowMore() {
+    this.challengeService.getChallenges(12, this.page++).subscribe(data => {
+      Array.prototype.push.apply(this.challenges, data.content);
+      this.totalPages = data.totalPages;
+    })
   }
 }

@@ -7,7 +7,7 @@
     .main-content {
         align-items: center;
 
-        .profile-banner {
+        .user-banner {
             margin-top: 64px;
             width: 70%;
             height: 200px;
@@ -20,7 +20,7 @@
             background: url('https://i.pinimg.com/originals/b1/da/c0/b1dac0470bdf2f7cc0c559599fba19f9.jpg') no-repeat;
             background-size: 100%;
     
-            .profile-avatar {
+            .user-avatar {
                 width: 120px;
                 height: 120px;
                 position: absolute;
@@ -41,8 +41,8 @@
             }
         }
     
-        .profile-info {
-            padding: 0 32px;
+        .user-info {
+            padding: 0 3%;
             width: 70%;
             height: 150px;
             position: relative;
@@ -68,7 +68,7 @@
                 justify-content: flex-end;
             }
 
-            .profile-online-status {
+            .user-online-status {
                 padding: 2px 8px;
                 width: fit-content;
                 display: flex;
@@ -95,7 +95,7 @@
                 }
             }
 
-            .profile-details {
+            .user-details {
                 margin-top: 32px;
                 display: flex;
                 flex-direction: column;
@@ -120,7 +120,7 @@
                 }
             }
 
-            .profile-socials {
+            .user-socials {
                 padding: 8px 0;
                 height: fit-content;
                 display: flex;
@@ -279,7 +279,7 @@
                 display: none!important;
             }
 
-            .profile-about {
+            .user-about {
                 width: 100%;
                 display: flex;
                 justify-content: flex-end;
@@ -333,7 +333,7 @@
                 }
             }
 
-            .profile-challenges {
+            .user-challenges {
                 width: 100%;
                 display: grid;
                 justify-content: center;

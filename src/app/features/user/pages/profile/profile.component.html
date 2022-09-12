@@ -1,25 +1,25 @@
 <dfy-header></dfy-header>
 <main class="main-content">
-    <div class="profile-banner">
-        <div class="profile-avatar">
+    <div class="user-banner">
+        <div class="user-avatar">
             <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg">
         </div>
     </div>
-    <div class="profile-info">
+    <div class="user-info">
         <div class="zone left">
-            <div class="profile-online-status">
+            <div class="user-online-status">
                 <div class="indicator online"></div>
                 Online
             </div>
         </div>
         <div class="zone center">
-            <div class="profile-details">
+            <div class="user-details">
                 <span class="username-short">Jodoe</span>
                 <span class="username">Jodoe</span>
             </div>
         </div>
         <div class="zone right">
-            <div class="profile-socials">
+            <div class="user-socials">
                 <a href="" class="social-link twitter-link">
                     <svg width="32" height="32" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 0 1-2.825.775a4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827a4.996 4.996 0 0 1-2.212.085a4.936 4.936 0 0 0 4.604 3.417a9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985c0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"/></svg>
                 </a>
@@ -81,7 +81,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="profile-about" *ngIf="section == 0">
+        <div class="user-about" *ngIf="section == 0">
             <div>
                 <p class="box-title">What about me?</p>
                 <p class="text">
@@ -117,7 +117,8 @@
                 </div>
             </div>
         </div>
-        <dfy-browse-results-list [challenges$]="challenges$" *ngIf="section == 2"></dfy-browse-results-list>
+        <dfy-user-list *ngIf="section == 1"></dfy-user-list>
+        <dfy-browse-results-list [challenges]="challenges" *ngIf="section == 2"></dfy-browse-results-list>
     </div>
 </main>
 <dfy-footer></dfy-footer>

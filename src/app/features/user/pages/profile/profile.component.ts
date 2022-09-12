@@ -9,12 +9,14 @@ import { Challenge, ChallengeService } from 'src/app/core';
 })
 export class ProfileComponent implements OnInit {
 
-  challenges$: Observable<Challenge[]> | undefined;
+  challenges: Challenge[] = [];
   section: number = 0;
 
   constructor(private challengeService: ChallengeService) { }
 
   ngOnInit(): void {
-    this.challenges$ = this.challengeService.getChallengesByAuthor(1);
+    this.challengeService.getChallengesByAuthor(1).subscribe(data => {
+      this.challenges = data.content;
+    });
   }
 }

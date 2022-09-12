@@ -15,11 +15,12 @@
         </dfy-challenge-search>
         <div class="item-list">
             <dfy-browse-results-list 
-                [challenges$]="challenges$" 
+                [challenges]="challenges" 
                 [displayMode]="displayMode" 
                 [groupBy]="groupBy">
             </dfy-browse-results-list>
         </div>
+        <button class="show-more-btn" (click)="onShowMore()" *ngIf="page != totalPages">Show More</button>
     </div>
 </main>
 <dfy-footer></dfy-footer>

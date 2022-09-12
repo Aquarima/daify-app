@@ -27,7 +27,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 6px;
+            box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
             border-radius: 8px;
             background-color: #FFF;
         }
@@ -105,10 +105,9 @@
                 padding: 8px;
 
                 .dropdown-item {
-                    padding: 0 16px 0 16px;
+                    padding: 0 24px;
                     height: 40px;
                     display: flex;
-                    justify-content: space-between;
                     box-sizing: border-box;
                     border-radius: 8px;
                     text-decoration: none;
@@ -158,7 +157,7 @@
         gap: 32px;
 
         .langs {
-            margin-right: 25px;
+            margin-right: 24px;
             position: relative;
             display: flex;
             align-items: center;
@@ -195,25 +194,32 @@
     
                 .list {
                     margin: 16px 0 0 0;
-                    padding: 4px 0;
+                    padding: 8px;
                     list-style-type: none;
-                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                    box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
                     border-radius: 8px;
                     background-color: #FFF;
         
                     li {
-                        padding: 0 16px;
+                        padding: 0 24px;
                         height: 40px;
                         position: relative;
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        border-radius: 8px;
                         font-weight: 600;
                         font-size: var(--preset-font-size-normal);
                         color: var(--color-text);
+
+                        &:hover {
+                            background-color: var(--color-primary);
+                            color: #FFF;
+                        }
     
                         &:hover::before {
                             display: inline-block;
+                            border-color: #FFF transparent transparent;
                         }
                 
                         &::before {

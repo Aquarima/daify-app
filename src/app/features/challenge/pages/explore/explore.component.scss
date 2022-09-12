@@ -7,46 +7,63 @@
     .main-content {
 
         .browse {
-            padding-top: 10vh;
-            width: 100%;
+            padding-top: 32px;
+            width: 65%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             box-sizing: border-box;
-            border-width: 1px 0 0 1px;
-            border-style: solid;
-            border-color: #FFF;
 
             .top {
-                margin: 0 auto 80px auto;
-                padding: 32px 64px;
-                width: 70%;
-                height: 150px;
+                margin-bottom: 64px;
+                padding: 0 64px;
+                height: 160px;
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 box-sizing: border-box;
-                border-radius: 8px;
+                border-radius: 16px;
                 background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-secondary) 100%);
 
                 .details {
                     
                     h1 {
-                        margin: 0 0 16px 0;
+                        margin: 0 0 8px 0;
                         font-weight: 600;
-                        font-size: var(--preset-font-size-x-large);
+                        font-size: var(--preset-font-size-large);
                         color: #FFF;
                     }
         
                     .about {
                         margin: 0;
-                        font-size: var(--preset-font-size-normal);
+                        font-size: var(--preset-font-size-small);
                         color: #FFF;
                     }
                 }
             }
 
             .item-list {
-                margin: 60px auto;
-                width: 70%;
+                margin: 40px 0 64px 0;
+                width: 100%;
+            }
+
+            .show-more-btn {
+                padding: 0 16px;
+                min-width: 200px;
+                height: 48px;
+                border: none;
+                border-radius: 8px;
+                background-color: var(--color-secondary);
+                font-weight: 600;
+                font-size: var(--preset-font-size-normal);
+                color: #FFF;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--color-secondary-hover);
+                }
             }
         }
     }

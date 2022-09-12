@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
-import { Challenge } from '../models/challenge';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +9,15 @@ export class ChallengeService {
 
   constructor(private http: HttpClient) { }
 
-  getChallenges(): Observable<Challenge[]> {
-    return this.http.get<any>(`${env.apiUrl}/challenge/all`)
-      .pipe(
-        map( response => response.content)
-      );
+  getChallenges(size?: number, page?: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/all?size=${size  || 12}&page=${page || 0}`);
   }
 
-  getChallengesByName(name: string): Observable<Challenge[]> {
-    return this.http.get<any>(`${env.apiUrl}/challenge/all/${name}`)
-      .pipe(
-        map( response => response.content)
-      );
+  getChallengesByName(name: string) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/all/${name}`);
   }
 
-  getChallengesByAuthor(authorId: number): Observable<Challenge[]> {
-    return this.http.get<any>(`${env.apiUrl}/challenge/author/${authorId}`)
-      .pipe(
-        map( response => response.content)
-      );
+  getChallengesByAuthor(authorId: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/author/${authorId}`);
   }
 }

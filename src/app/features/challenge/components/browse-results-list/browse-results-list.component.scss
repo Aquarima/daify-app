@@ -11,8 +11,7 @@
 
     .display-grid {
         grid-template-columns: repeat(auto-fit, 300px);
-        row-gap: 64px;
-        column-gap: 32px;
+        gap: 80px;
     }
 
     .display-list {
