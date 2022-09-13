@@ -12,24 +12,93 @@
     background-color: #FFF;
     user-select: none;
 
-    .dropdown-wrapper {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity .3s linear;
+    .unfoldable-item {
+        height: 32px;
 
-        .dropdown {
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
-            border-radius: 8px;
-            background-color: #FFF;
+        &:hover > .dropdown-wrapper {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        &:hover .unfold-arrow {
+            transform: rotate(180deg);
+            fill: #FFF;
+        }
+
+        .unfold-arrow {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-text);
+        }
+
+        .dropdown-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity .3s linear;
+    
+            .dropdown {
+                margin-top: 24px;
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+                border-radius: 8px;
+                background-color: #FFF;
+
+                .dropdown-item {
+                    padding: 0 24px;
+                    height: 40px;
+                    display: flex;
+                    box-sizing: border-box;
+                    border-radius: 8px;
+                    text-decoration: none;
+    
+                    &:hover {
+                        background-color: var(--color-primary);
+    
+                        a svg, .item-name svg {
+                            fill: #FFF;
+                        }
+    
+                        .item-name {
+                            color: #FFF;
+                        }
+                    }
+
+                    .item-name {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 8px;
+                        font-weight: 500;
+                        font-size: var(--preset-font-size-small);
+                        color: var(--color-text);
+
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                            fill: var(--color-text);
+                        }
+                    }
+    
+                    a {
+                        height: 100%;
+                    }
+    
+                    .mark-beta {
+                        padding: 3px 8px;
+                        border-radius: 8px;
+                        background-color: var(--color-tertiary);
+                        font-size: var(--preset-font-size-tiny);
+                        color: #FFF;
+                    }
+                }
+            }
         }
     }
 
@@ -56,7 +125,7 @@
         .item {
             padding: 0 15px 0 15px;
             width: fit-content;
-            height: 35px;
+            height: 32px;
             position: relative;
             display: flex;
             justify-content: center;
@@ -64,16 +133,17 @@
             border-radius: 8px;
             cursor: pointer;
 
-            &:hover .item-link {
-                transform: translate(0, -5px);
+            &:hover {
+                background-color: var(--color-primary);
             }
 
-            &:hover > .dropdown-wrapper {
-                visibility: visible;
-                opacity: 1;
+            &:hover .item-link {
+                color: #FFF;
             }
+
+            
     
-            .item-link, & > span {
+            .item-link {
                 height: 100%;
                 position: relative;
                 display: flex;
@@ -82,72 +152,6 @@
                 font-weight: 500;
                 font-size: var(--preset-font-size-small);
                 color: var(--color-text);
-            }
-
-            .item-link {
-                transition: transform ease .3s;
-            }
-        }
-
-        .unfoldable-item {
-    
-            &:hover .unfold-arrow {
-                transform: rotate(180deg);
-            }
-
-            .unfold-arrow {
-                width: 24px;
-                height: 24px;
-                fill: var(--color-text);
-            }
-
-            .dropdown {
-                padding: 8px;
-
-                .dropdown-item {
-                    padding: 0 24px;
-                    height: 40px;
-                    display: flex;
-                    box-sizing: border-box;
-                    border-radius: 8px;
-                    text-decoration: none;
-    
-                    &:hover {
-                        background-color: var(--color-primary);
-    
-                        a svg {
-                            fill: #FFF;
-                        }
-    
-                        a .name {
-                            color: #FFF;
-                        }
-                    }
-    
-                    a {
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        column-gap: 8px;
-                        font-weight: 500;
-                        font-size: var(--preset-font-size-small);
-                        color: var(--color-text);
-    
-                        svg {
-                            width: 24px;
-                            height: 24px;
-                            fill: var(--color-text);
-                        }
-                    }
-
-                    .mark-beta {
-                        padding: 3px 8px;
-                        border-radius: 8px;
-                        background-color: var(--color-tertiary);
-                        font-size: var(--preset-font-size-tiny);
-                        color: #FFF;
-                    }
-                }
             }
         }
     }
@@ -175,69 +179,6 @@
                 height: 18px;
                 width: 18px;
                 fill: var(--color-text);
-            }
-    
-            &:hover .wrapper {
-                visibility: visible;
-                opacity: 1;
-            }
-    
-            .wrapper {
-                width: 150px;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                visibility: hidden;
-                opacity: 0;
-                transition: visibility 0s, opacity .3s linear;
-    
-                .list {
-                    margin: 16px 0 0 0;
-                    padding: 8px;
-                    list-style-type: none;
-                    box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
-                    border-radius: 8px;
-                    background-color: #FFF;
-        
-                    li {
-                        padding: 0 24px;
-                        height: 40px;
-                        position: relative;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 8px;
-                        font-weight: 600;
-                        font-size: var(--preset-font-size-normal);
-                        color: var(--color-text);
-
-                        &:hover {
-                            background-color: var(--color-primary);
-                            color: #FFF;
-                        }
-    
-                        &:hover::before {
-                            display: inline-block;
-                            border-color: #FFF transparent transparent;
-                        }
-                
-                        &::before {
-                            margin: 0 5px 1px 0;
-                            width: 0;
-                            height: 0;
-                            position: relative;
-                            display: none;
-                            content: '';
-                            border-color: var(--color-text) transparent transparent;
-                            border-style: solid;
-                            border-width: 6px 6px 0;
-                            border-radius: 8px;
-                            transform: rotate(270deg);
-                            transition: border-color 0.5s;
-                        }
-                    }
-                }
             }
         }
     
