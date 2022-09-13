@@ -6,6 +6,7 @@ export interface Challenge {
     author: Profile
     name: string
     description: string
+    tags: string[]
     coverUrl: string,
     config: ChallengeConfig,
     creationDate: Date

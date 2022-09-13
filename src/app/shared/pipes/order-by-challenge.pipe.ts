@@ -7,7 +7,7 @@ import { getDuration } from 'src/app/core/models/challenge/challenge.model';
 })
 export class OrderByChallengePipe implements PipeTransform {
 
-  transform(challenges: any, order = ''): any[] {
+  transform(challenges: Challenge[], order = ''): any[] {
     if (!challenges || order === '' || !order) return challenges;
     if (challenges.length <= 1) return challenges;
     switch (order) {

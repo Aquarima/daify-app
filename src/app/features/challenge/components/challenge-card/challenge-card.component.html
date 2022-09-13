@@ -20,9 +20,7 @@
     </div>
 </div>
 <ul class="challenge-tags" #tag_list>
-    <li class="item">Development</li>
-    <li class="item">Nature</li>
-    <li class="item">Design</li>
+    <li class="item" *ngFor="let tag of challenge.tags">{{tag}}</li>
 </ul>
 <div class="challenge-author">
     <img class="avatar" src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
