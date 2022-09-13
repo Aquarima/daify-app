@@ -1,7 +1,7 @@
 :host {
     padding: 0 100px;
     width: 100%;
-    height: 50px;
+    height: 64px;
     position: fixed;
     z-index: 99;
     display: flex;
@@ -23,7 +23,7 @@
         transition: visibility 0s, opacity .3s linear;
 
         .dropdown {
-            margin-top: 16px;
+            margin-top: 24px;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -326,16 +326,14 @@
                         flex-direction: column;
     
                         .raw {
+                            margin: 0;
                             color: var(--color-text);
                         }
     
                         .with-tag {
+                            margin: 0;
                             font-size: var(--preset-font-size-small);
                             color: var(--color-text-alt);
-    
-                            &:hover {
-                                text-decoration: underline;
-                            }
                             
                             &:before {
                                 content: "@";

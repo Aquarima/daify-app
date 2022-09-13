@@ -35,7 +35,7 @@ export class AuthService {
           this.cookies.put('access_token', res.headers.get('Authorization') || undefined);
           this.cookies.put('expires', res.body.expires);
           this.cookies.put('refresh_token', res.body.refresh_token);
-          //localStorage.setItem('user', res.body.user);
+          localStorage.setItem('logged_user', JSON.stringify(res.body.user));
           this.loginError.next(false);
           this.doRedirect();
         },
@@ -52,6 +52,11 @@ export class AuthService {
 
   getToken() {
     return this.cookies.get('access_token') || undefined;
+  }
+
+  getLoggedUser(): User {
+    const loggedUser = localStorage.getItem('logged_user');
+    return loggedUser ? JSON.parse(loggedUser) : null;
   }
 
   doRedirect() {
