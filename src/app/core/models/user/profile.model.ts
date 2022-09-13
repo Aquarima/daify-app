@@ -6,6 +6,7 @@ export interface Profile {
     avatarUrl: string
     country: string
     birthday: Date
+    online: boolean
     lastLogin: Date
     dateCreated: Date
 }
