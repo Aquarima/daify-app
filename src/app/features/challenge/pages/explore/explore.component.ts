@@ -11,7 +11,7 @@ export class ExploreComponent implements OnInit {
 
   challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
-  displayMode: string = 'grid';
+  displayMode: string = 'list';
   page: number = 0;
   totalPages: number = 0;
 

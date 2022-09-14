@@ -1,4 +1,71 @@
-<div class="challenge-preview-cover" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}">
+<div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}"></div>
+<div class="challenge-preview-info">
+    <div class="challenge-short-description">
+        <p class="challenge-short-description-name">{{challenge.name}}</p>
+        <p class="challenge-short-description-text">{{challenge.description}}</p>
+    </div>
+    <ul class="challenge-stats">
+        <li>
+            <p class="value">{{getDuration()}}</p>
+            <p class="name">Duration</p>
+        </li>
+        <li>
+            <p class="value">25/{{challenge.config.capacity}}</p>
+            <p class="name">Members</p>
+        </li>
+        <li>
+            <p class="value">{{challenge.config.groupSize}}</p>
+            <p class="name">Groups</p>
+        </li>
+    </ul>
+    <ul class="challenge-tags" #tag_list>
+        <li *ngFor="let tag of challenge.tags">{{tag}}</li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="challenge-preview-cover" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}">
     <div></div>
 </div>
 <div class="presentation">
@@ -28,4 +95,4 @@
         By
         <a [routerLink]="['/users/profile/', challenge.author.id]">{{challenge.author.username}}</a>
     </p>
-</div>
+</div>-->
