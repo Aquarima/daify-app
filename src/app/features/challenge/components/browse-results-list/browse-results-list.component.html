@@ -1,9 +1,9 @@
-<div class="found-tags" >
-    <span *ngFor="let tag of challenges | challengeTagsCollector">#{{tag}}</span>
+<div class="found-tags">
+    <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}" *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
 </div>
 <div class="items display-{{displayMode}}">
     <dfy-challenge-card class="{{displayMode}}-cell"
         [challenge]="challenge"
-        *ngFor="let challenge of challenges | orderByChallenge:groupBy">
+        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
     </dfy-challenge-card>
 </div>

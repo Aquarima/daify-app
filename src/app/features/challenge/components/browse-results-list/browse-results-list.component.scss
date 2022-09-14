@@ -10,6 +10,10 @@
         row-gap: 16px;
         column-gap: 24px;
 
+        .tag-selected {
+            filter: brightness(90%);
+        }
+
         span {
             padding: 0 16px;
             height: 40px;
@@ -34,7 +38,7 @@
 
     .display-grid {
         grid-template-columns: repeat(auto-fit, 300px);
-        gap: 80px;
+        gap: 40px;
     }
 
     .display-list {
