@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Challenge } from 'src/app/core';
 
 
@@ -18,9 +18,14 @@ export class BrowseResultsListComponent implements OnInit, AfterViewInit {
 
   @ViewChildren("found_tag") tagNodes!: QueryList<ElementRef>;
 
+  @Output() showMoreEvent: EventEmitter<number> = new EventEmitter();
+
   @Input() challenges: Challenge[] = [];
   @Input() displayMode: string = 'list';
   @Input() groupBy: string = 'alphabetical';
+  @Input() totalPages: number = 0;
+
+  pageIndex: number = 0;
 
   filterTag: string | undefined;
 
@@ -41,5 +46,11 @@ export class BrowseResultsListComponent implements OnInit, AfterViewInit {
       return;
     }
     this.filterTag = tag;
+  }
+
+  onShowMore() {
+    const nextIdx = this.pageIndex++;
+    if (nextIdx >= this.totalPages) return;
+    this.showMoreEvent.emit(nextIdx);
   }
 }

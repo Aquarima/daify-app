@@ -17,10 +17,11 @@
             <dfy-browse-results-list 
                 [challenges]="challenges" 
                 [displayMode]="displayMode" 
-                [groupBy]="groupBy">
+                [groupBy]="groupBy"
+                [totalPages]="totalPages"
+                (showMoreEvent)="onShowMore($event)">
             </dfy-browse-results-list>
         </div>
-        <button class="show-more-btn" (click)="onShowMore()" *ngIf="page != totalPages">Show More</button>
     </div>
 </main>
 <dfy-footer></dfy-footer>

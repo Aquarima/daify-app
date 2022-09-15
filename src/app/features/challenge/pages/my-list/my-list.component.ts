@@ -12,7 +12,7 @@ export class MyListComponent implements OnInit {
 
   challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
-  displayMode: string = 'grid';
+  displayMode: string = 'list';
 
   constructor(private challengeService: ChallengeService) { }
 

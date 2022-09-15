@@ -48,23 +48,6 @@
                 margin: 64px 0;
                 width: 100%;
             }
-
-            .show-more-btn {
-                padding: 0 16px;
-                min-width: 200px;
-                height: 48px;
-                border: none;
-                border-radius: 8px;
-                background-color: var(--color-secondary);
-                font-weight: 600;
-                font-size: var(--preset-font-size-normal);
-                color: #FFF;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: var(--color-secondary-hover);
-                }
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewContainerRef } from '@angular/core';
 import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
 
@@ -8,6 +8,8 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
+
+  @Output('show_more_btn') showMoreBtn!: ElementRef;
 
   challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
@@ -21,7 +23,7 @@ export class ExploreComponent implements OnInit {
 
   onSearch(search: Search) {
     if (!search.name) {
-      this.challengeService.getChallenges(12).subscribe(data => {
+      this.challengeService.getChallenges(12, this.page).subscribe(data => {
         this.challenges = data.content;
         this.totalPages = data.totalPages;
       })
@@ -41,8 +43,8 @@ export class ExploreComponent implements OnInit {
     this.displayMode = mode;
   }
 
-  onShowMore() {
-    this.challengeService.getChallenges(12, this.page++).subscribe(data => {
+  onShowMore(nextPage: number) {
+    this.challengeService.getChallenges(12, nextPage).subscribe(data => {
       Array.prototype.push.apply(this.challenges, data.content);
       this.totalPages = data.totalPages;
     })

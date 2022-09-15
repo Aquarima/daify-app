@@ -1,9 +1,11 @@
 :host {
     width:  100%;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
 
     .found-tags {
-        margin-bottom: 64px;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -44,5 +46,30 @@
     .display-list {
         grid-template-columns: repeat(1, 100%);
         gap: 32px;
+    }
+
+    .more {
+        padding: 8px;
+        width: fit-content;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        border-radius: 8px;
+        background-color: #FFF;
+
+        .show-more-btn {
+            padding: 0 16px;
+            min-width: 200px;
+            height: 48px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--color-secondary);
+            font-weight: 600;
+            font-size: var(--preset-font-size-normal);
+            color: #FFF;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--color-secondary-hover);
+            }
+        }
     }
 }

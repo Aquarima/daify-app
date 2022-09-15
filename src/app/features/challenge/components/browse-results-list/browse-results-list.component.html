@@ -7,3 +7,6 @@
         *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
     </dfy-challenge-card>
 </div>
+<div class="more">
+    <button class="show-more-btn" #show_more_btn (click)="onShowMore()" *ngIf="pageIndex != totalPages">Show More</button>
+</div>
