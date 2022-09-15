@@ -2,13 +2,14 @@ import { Profile } from "../user";
 import { ChallengeConfig } from "./challenge-config.model";
 
 export interface Challenge {
-    id: number,
+    id: number
     author: Profile
     name: string
     description: string
     tags: string[]
-    coverUrl: string,
-    config: ChallengeConfig,
+    coverUrl: string
+    iconUrl: string
+    config: ChallengeConfig
     creationDate: Date
 }
 

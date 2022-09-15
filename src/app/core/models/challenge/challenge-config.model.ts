@@ -1,6 +1,9 @@
+import { AccessType } from "./access-type"
+
 export interface ChallengeConfig {
-    start: Date,
-    end: Date,
-    capacity: number,
+    access: AccessType
+    start: Date
+    end: Date
+    capacity: number
     groupSize: number
 }
