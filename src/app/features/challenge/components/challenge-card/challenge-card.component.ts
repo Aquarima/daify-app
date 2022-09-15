@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ComponentRef, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FastAverageColor } from 'fast-average-color';
-import { Challenge } from 'src/app/core/models/challenge';
+import { AccessType, Challenge } from 'src/app/core/models/challenge';
 
 @Component({
   selector: 'dfy-challenge-card',
@@ -11,6 +11,7 @@ export class ChallengeCardComponent implements OnInit, AfterViewInit {
 
   @Input() challenge!: Challenge;
   @ViewChild('tag_list') tagList!: ElementRef;
+AccessType: any;
 
   constructor() { }
 
@@ -43,5 +44,9 @@ export class ChallengeCardComponent implements OnInit, AfterViewInit {
     if (hours >= 1) return `${hours.toFixed(1)}h`;
     if (minutes >= 1) return `${minutes}m`;
     return 'Unknown';
+  }
+
+  hasAccess(access: any) {
+    return this.challenge.config.access === access;
   }
 }

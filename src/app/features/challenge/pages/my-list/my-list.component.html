@@ -15,7 +15,9 @@
             <dfy-browse-results-list 
                 [challenges]="challenges" 
                 [displayMode]="displayMode" 
-                [groupBy]="groupBy">
+                [groupBy]="groupBy"
+                [totalPages]="totalPages"
+                (showMoreEvent)="onShowMore($event)">
             </dfy-browse-results-list>
         </div>            
     </div>
