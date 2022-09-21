@@ -14,7 +14,7 @@ export interface Challenge {
 }
 
 export function getDuration(challenge: Challenge) {
-    let start: Date = new Date(challenge.config.start);
-    let end: Date = new Date(challenge.config.end);
+    let start: Date = new Date(challenge.config.startAt);
+    let end: Date = new Date(challenge.config.endAt);
     return end.getTime() - start.getTime();
 }

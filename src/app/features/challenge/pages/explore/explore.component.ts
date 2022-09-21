@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Output, ViewContainerRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
 

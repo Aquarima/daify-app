@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { Challenge } from 'src/app/core';
 
 
@@ -14,7 +14,7 @@ const colors: string[] = [
   templateUrl: './browse-results-list.component.html',
   styleUrls: ['./browse-results-list.component.scss']
 })
-export class BrowseResultsListComponent implements OnInit, AfterViewInit {
+export class BrowseResultsListComponent implements OnInit {
 
   @ViewChildren("found_tag") tagNodes!: QueryList<ElementRef>;
 
@@ -25,23 +25,21 @@ export class BrowseResultsListComponent implements OnInit, AfterViewInit {
   @Input() groupBy: string = 'alphabetical';
   @Input() totalPages: number = 0;
 
-  pageIndex: number = 0;
+  pageIndex: number = 1;
 
   filterTag: string | undefined;
 
   constructor() { }
-
-  ngOnInit(): void { }
   
-  ngAfterViewInit(): void { }
+  ngOnInit(): void { }
 
+  getTagColor(title: string): string {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+    const letter = title.charAt(0);
+    return colors[alphabet.indexOf(letter.toLowerCase())];
+  }
+  
   onTagSelected(tag: string) {
-    this.tagNodes.forEach(node => {
-      const el = node.nativeElement;
-      const alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
-      const letter = el.textContent.charAt(1);
-      el.style.backgroundColor = colors[alphabet.indexOf(letter.toLowerCase())];
-    });
     if (tag === this.filterTag) {
       this.filterTag = undefined;
       return;

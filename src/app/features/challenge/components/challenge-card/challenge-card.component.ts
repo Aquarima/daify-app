@@ -34,19 +34,19 @@ AccessType: any;
   }
 
   getDuration() {
-    let d1: Date = new Date(this.challenge.config.start);
-    let d2: Date = new Date(this.challenge.config.end);
+    let d1: Date = new Date(this.challenge.config.startAt);
+    let d2: Date = new Date(this.challenge.config.endAt);
     const time = d2.getTime() - d1.getTime();
     const days = time / (24 * 60 * 60 * 1000);
     const hours = time / (1000 * 60 * 60);
     const minutes = time / 1000 / 60;
-    if (days >= 1) return `${days.toFixed(1)}d`;
-    if (hours >= 1) return `${hours.toFixed(1)}h`;
-    if (minutes >= 1) return `${minutes}m`;
+    if (days >= 1) return `${Math.round(days)}d`;
+    if (hours >= 1) return `${Math.round(hours)}h`;
+    if (minutes >= 1) return `${Math.round(minutes)}m`;
     return 'Unknown';
   }
 
   hasAccess(access: any) {
-    return this.challenge.config.access === access;
+    return this.challenge.config.accessType === access;
   }
 }

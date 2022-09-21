@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Output } from '@angular/core';
+import { User } from 'src/app/core/models';
 import { Challenge, Search } from 'src/app/core/models/challenge';
-import { ChallengeService } from 'src/app/core/services';
+import { AuthService, ChallengeService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-my-list',
@@ -12,27 +13,27 @@ export class MyListComponent implements OnInit {
   @Output('show_more_btn') showMoreBtn!: ElementRef;
 
   challenges: Challenge[] = []
+  search: Search | undefined;
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
   page: number = 0;
   totalPages: number = 0;
 
-  constructor(private challengeService: ChallengeService) { }
+  constructor(private challengeService: ChallengeService, private authService: AuthService) { }
 
   ngOnInit(): void { }
 
   onSearch(search: Search) {
     if (!search.name) {
-      this.challengeService.getChallenges(12).subscribe(data => {
-        this.challenges = data.content;
-        this.totalPages = data.totalPages;
-      })
+      const loggedUser: User = this.authService.getLoggedUser();
+      this.challengeService.getChallengesByUser(loggedUser.id, 12).
+        subscribe(data => {
+          this.challenges = data.content;
+          this.totalPages = data.totalPages;
+        })
       return;
     }
-    this.challengeService.getChallengesByName(search.name).subscribe(data => {
-      this.challenges = data.content;
-      this.totalPages = data.totalPages;
-    })
+    this.search = search;
   }
 
   onGroupBySelected(option: any) {
@@ -44,7 +45,7 @@ export class MyListComponent implements OnInit {
   }
 
   onShowMore(nextPage: number) {
-    this.challengeService.getChallenges(12, nextPage).subscribe(data => {
+    this.challengeService.getChallengesByUser(12, nextPage).subscribe(data => {
       Array.prototype.push.apply(this.challenges, data.content);
       this.totalPages = data.totalPages;
     })

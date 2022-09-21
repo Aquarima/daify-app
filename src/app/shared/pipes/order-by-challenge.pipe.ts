@@ -7,7 +7,7 @@ import { getDuration } from 'src/app/core/models/challenge/challenge.model';
 })
 export class OrderByChallengePipe implements PipeTransform {
 
-  transform(challenges: Challenge[], order = ''): any[] {
+  transform(challenges: any[], order = ''): any[] {
     if (!challenges || order === '' || !order) return challenges;
     if (challenges.length <= 1) return challenges;
     switch (order) {
@@ -27,8 +27,8 @@ export class OrderByChallengePipe implements PipeTransform {
   }
 
   private compareByStart(a: Challenge, b: Challenge) {
-    let d1: Date = new Date(a.config.start);
-    let d2: Date = new Date(b.config.start);
+    let d1: Date = new Date(a.config.startAt);
+    let d2: Date = new Date(b.config.startAt);
     return d1.getTime() < d2.getTime() ? 1 : 0;
   }
 }
