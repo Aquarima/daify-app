@@ -1,6 +1,6 @@
 <div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ challenge.coverUrl +')'}">
     <div class="challenge-preview-icon">
-        <img src="{{challenge.coverUrl}}" alt="Challenge Icon">
+        <img [src]="challenge.coverUrl" alt="Challenge Icon">
     </div>
 </div>
 <div class="challenge-preview-info">

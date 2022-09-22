@@ -216,6 +216,22 @@
                 }
             }
         }
+
+        .logged-user {
+            display: flex;
+            align-items: center;
+            column-gap: 16px;
+
+            .user-name {
+                font-size: var(--preset-font-size-small);
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+            }
+        }
     
         .user-box {
             position: relative;

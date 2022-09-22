@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewContainerRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
+import { User } from 'src/app/core/models';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NotificationsComponent } from 'src/app/shared/components';
 
@@ -10,6 +11,8 @@ import { NotificationsComponent } from 'src/app/shared/components';
 })
 
 export class HeaderComponent implements OnInit {
+
+  loggedUser: User = this.authService.getLoggedUser();
   
   constructor(
     private viewContainerRef: ViewContainerRef, 
