@@ -221,9 +221,12 @@
             display: flex;
             align-items: center;
             column-gap: 16px;
+            cursor: pointer;
 
             .user-name {
+                font-weight: 500;
                 font-size: var(--preset-font-size-small);
+                color: var(--color-text);
             }
 
             .user-avatar {

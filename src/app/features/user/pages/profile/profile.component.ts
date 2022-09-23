@@ -25,11 +25,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.challengeService.getChallengesByUser(params['id']).subscribe(data => {
-        this.profileService.getProfileById(params['id'])
-          .subscribe(profile => {
-            if (profile) this.router.navigate(['/']);
-            this.profile = profile;
+      this.challengeService.getChallengesByUser(params['username']).subscribe(data => {
+        this.profileService.getProfileByUsername(params['username'])
+          .subscribe(response => {
+            //if (response) this.router.navigate(['/']);
+            this.profile = response;
           });
         this.challenges = data.content;
       });

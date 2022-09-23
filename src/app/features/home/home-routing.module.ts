@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MaintenanceGuard } from 'src/app/core/guards';
 import { HomeComponent, MaintenanceComponent } from './pages';
 
 const routes: Routes = [

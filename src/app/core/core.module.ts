@@ -15,6 +15,6 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
   ],
   imports: [
     CommonModule,
-  ]
+  ],
 })
 export class CoreModule { }

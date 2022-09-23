@@ -109,8 +109,8 @@
         <a class="login" [routerLink]="['/auth/login']">Login</a>
         <a class="signup">Join us - it's free</a>
     </div>
-    <div class="logged-user">
+    <a class="logged-user" [routerLink]="['', loggedUser.profile.username]" *ngIf="authService.isAuthenticated()">
         <img class="user-avatar" [src]="loggedUser.profile.avatarUrl" alt="Avatar" *ngIf="authService.isAuthenticated()">
         <span class="user-name">{{loggedUser.profile.username || loggedUser.profile.firstName + '' + loggedUser.profile.lastName }}</span>
-    </div>
+    </a>
 </div>

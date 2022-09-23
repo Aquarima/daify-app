@@ -28,10 +28,6 @@
             font-size: var(--preset-font-size-small);
             color: #FFF;
             cursor: pointer;
-
-            &:hover {
-                filter: brightness(90%);
-            }
         }
     }
 
