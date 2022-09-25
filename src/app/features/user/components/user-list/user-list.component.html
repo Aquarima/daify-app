@@ -1,6 +1,6 @@
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
-<dfy-user-card [routerLink]="['/users/profile/', 1]"></dfy-user-card>
+<div class="load" *ngIf="!loaded">
+    <span>LOADING...</span>
+</div>
+<div class="users display-grid" *ngIf="loaded">
+    <dfy-user-card [profile]="profile" *ngFor="let profile of profiles"></dfy-user-card>
+</div>

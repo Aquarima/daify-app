@@ -33,7 +33,7 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe(params => {
       let searchQuery = '';
       if (params['search_query']) searchQuery = params['search_query']
-      else this.setQueryParams({'search_query': null });
+      else this.setQueryParams({'search_query': null});
       this.searchForm.controls['name'].setValue(searchQuery);
       if (searchQuery) this.searchService.saveSearch('challenges', searchQuery);
       this.searchEvent.emit(this.getSearch());
@@ -55,12 +55,12 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
   }
 
   private displaySearchHistory() {
-    this.searchHistoryNode.nativeElement.classList.remove('hidden');
+    this.searchHistoryNode.nativeElement.classList.remove('search-history-disabled');
     this.backdropNode.nativeElement.classList.remove('hidden');
   }
 
   private hideSearchHistory() {
-    this.searchHistoryNode.nativeElement.classList.add('hidden');
+    this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
     this.backdropNode.nativeElement.classList.add('hidden');
   }
 
@@ -69,7 +69,7 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(name?: string) {
-    this.searchHistoryNode.nativeElement.classList.add('hidden');
+    this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
     this.searchInputNode.nativeElement.blur();
     const value = (name) ? name : this.getSearch().name;
     this.searchInputNode.nativeElement.parentNode.classList.add('active');

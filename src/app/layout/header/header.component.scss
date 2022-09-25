@@ -9,7 +9,7 @@
     align-items: center;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    background-color: #FFF;
+    background-color: var(--color-primary);
     user-select: none;
 
     .unfoldable-item {
@@ -28,7 +28,7 @@
         .unfold-arrow {
             width: 20px;
             height: 20px;
-            fill: var(--color-text-alt);
+            fill: #FFF;
         }
 
         .dropdown-wrapper {
@@ -107,11 +107,11 @@
     }
 
     .app-name {
-        margin-right: 25px;
+        margin-right: 24px;
         text-decoration: none;
         font-weight: 600;
         font-size: 1.4em;
-        color: var(--color-text);
+        color: #FFF;
     }
 
     .navbar {
@@ -133,15 +133,9 @@
             border-radius: 8px;
             cursor: pointer;
 
-            &:hover {
-                background-color: var(--color-primary);
-            }
-
             &:hover .item-link {
                 color: #FFF;
             }
-
-            
     
             .item-link {
                 height: 100%;
@@ -151,7 +145,22 @@
                 text-decoration: none;
                 font-weight: 500;
                 font-size: var(--preset-font-size-small);
-                color: var(--color-text-alt);
+                color: #FFF;
+
+                &:hover:after {
+                    width: 100%;
+                }
+
+                &:after {
+                    width: 0;
+                    height: 4px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    transition: width .5s ease;
+                    content: '';
+                    background-color: #FFF;
+                }
             }
         }
     }
@@ -168,7 +177,7 @@
             gap: 5px;
             font-weight: 500;
             font-size: var(--preset-font-size-small);
-            color: var(--color-text);
+            color: #FFF;
             cursor: pointer;
     
             .lang-current {
@@ -178,7 +187,7 @@
             svg {
                 height: 18px;
                 width: 18px;
-                fill: var(--color-text);
+                fill: #FFF;
             }
         }
     

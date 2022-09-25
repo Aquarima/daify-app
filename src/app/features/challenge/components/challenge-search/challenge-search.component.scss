@@ -91,10 +91,15 @@
                 font-size: var(--preset-font-size-tiny);
             }
         }
+
+        .search-history-disabled {
+            opacity: 0;
+            visibility: 0;
+        }
     
         .search-history {
             padding: 16px 0;
-            width: 350px;
+            width: 100%;
             height: fit-content;
             position: absolute;
             top: calc(100% + 8px);
@@ -104,6 +109,7 @@
             display: flex;
             flex-direction: column;
             row-gap: 8px;
+            transition: visibility 0s, opacity .2s linear;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             border-radius: 16px;
             background-color: #FFF;

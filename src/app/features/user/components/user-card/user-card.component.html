@@ -1,13 +1,17 @@
-<div class="user-banner">
+<div class="user-banner" [ngStyle]="{'background-image': 'url('+ getBanner() +')'}">
     <div class="user-avatar">
-        <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg">
+        <img [src]="profile.avatarUrl">
     </div>
 </div>
 <div class="user-username">
-    Jodoe
-    <p class="with-tag">Jodoe</p>
+    {{profile.username}}
+    <a class="with-tag" [routerLink]="['/app/user/', profile.username]">{{profile.username}}</a>
 </div>
-<div class="user-activity-status">
+<div class="user-online-status" *ngIf="!profile?.online">
+    <div class="indicator offline"></div>
+    Offline
+</div>
+<div class="user-online-status" *ngIf="profile?.online">
     <div class="indicator online"></div>
     Online
 </div>

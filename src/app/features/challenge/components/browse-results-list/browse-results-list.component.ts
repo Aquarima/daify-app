@@ -23,10 +23,10 @@ export class BrowseResultsListComponent implements OnInit {
   @Input() challenges: Challenge[] = [];
   @Input() displayMode: string = 'list';
   @Input() groupBy: string = 'alphabetical';
-  @Input() totalPages: number = 0;
+  @Input() totalPages: number = -1;
+  @Input() loaded: boolean = false;
 
   pageIndex: number = 1;
-
   filterTag: string | undefined;
 
   constructor() { }

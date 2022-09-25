@@ -1,12 +1,17 @@
-<div class="found-tags">
-    <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}" [ngStyle]="{'background-color': getTagColor(tag)}" *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
+<div class="load" *ngIf="!loaded">
+    <span>LOADING...</span>
 </div>
-<div class="items display-{{displayMode}}">
-    <dfy-challenge-card class="{{displayMode}}-cell"
-        [challenge]="challenge"
-        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
-    </dfy-challenge-card>
-</div>
-<div class="more">
-    <button class="show-more-btn" #show_more_btn (click)="onShowMore()" *ngIf="pageIndex != totalPages">Show More</button>
+<div class="content" *ngIf="loaded">
+    <div class="found-tags">
+        <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}" [ngStyle]="{'background-color': getTagColor(tag)}" *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
+    </div>
+    <div class="items display-{{displayMode}}">
+        <dfy-challenge-card class="{{displayMode}}-cell"
+            [challenge]="challenge"
+            *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
+        </dfy-challenge-card>
+    </div>
+    <div class="more" *ngIf="pageIndex != totalPages && totalPages != -1">
+        <button class="show-more-btn" #show_more_btn (click)="onShowMore()">Show More</button>
+    </div>
 </div>

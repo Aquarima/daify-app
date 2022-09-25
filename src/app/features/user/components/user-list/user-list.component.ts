@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Profile } from 'src/app/core/models/user';
 
 @Component({
   selector: 'dfy-user-list',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+
+  @Input() profiles: Profile[] = [];
+  @Input() loaded: boolean = false;
 
   constructor() { }
 

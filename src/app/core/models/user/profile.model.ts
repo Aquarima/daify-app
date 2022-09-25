@@ -4,9 +4,12 @@ export interface Profile {
     lastName: string
     username: string
     avatarUrl: string
+    bannerUrl: string
     country: string
-    birthday: Date
+    birthdate: Date
     online: boolean
-    lastLogin: Date
-    dateCreated: Date
+    about: string
+    profession: string
+    lastTimeOnline: Date
+    createdAt: Date
 }

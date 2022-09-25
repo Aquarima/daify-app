@@ -4,6 +4,7 @@ import { HomeComponent, MaintenanceComponent } from './pages';
 
 const routes: Routes = [
   {path: '', component: HomeComponent}, 
+  {path: 'app', component: HomeComponent}, 
   /*loadChildren: () => import('./home.module').then(m => m.HomeModule), canLoad: [MaintenanceGuard] }*/
   {path: 'info', component: MaintenanceComponent },
 ];

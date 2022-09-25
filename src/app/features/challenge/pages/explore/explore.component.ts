@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Output, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, delay } from 'rxjs';
 import { Challenge, Search } from 'src/app/core/models/challenge';
 import { ChallengeService } from 'src/app/core/services/challenge.service';
 
@@ -17,23 +17,27 @@ export class ExploreComponent implements OnInit {
   displayMode: string = 'grid';
   page: number = 0;
   totalPages: number = 0;
+  loaded: boolean = false;
 
   constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
 
   ngOnInit(): void { }
 
   onSearch(search: Search) {
+    this.loaded = false;
     if (!search.name) {
-      this.challengeService.getChallenges(12, this.page).subscribe(data => {
+      this.challengeService.getChallenges(12, this.page).subscribe(async data => {
         this.challenges = data.content;
         this.totalPages = data.totalPages;
       })
+      this.loaded = true;
       return;
     }
     this.challengeService.getChallengesByName(search.name).subscribe(data => {
       this.challenges = data.content;
       this.totalPages = data.totalPages;
     })
+    this.loaded = true;
   }
 
   onGroupBySelected(option: any) {

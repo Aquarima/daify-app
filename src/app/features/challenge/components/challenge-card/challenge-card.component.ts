@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ComponentRef, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FastAverageColor } from 'fast-average-color';
-import { AccessType, Challenge } from 'src/app/core/models/challenge';
+import { Challenge } from 'src/app/core/models/challenge';
 
 @Component({
   selector: 'dfy-challenge-card',
@@ -10,15 +10,15 @@ import { AccessType, Challenge } from 'src/app/core/models/challenge';
 export class ChallengeCardComponent implements OnInit, AfterViewInit {
 
   @Input() challenge!: Challenge;
-  @ViewChild('tag_list') tagList!: ElementRef;
-AccessType: any;
 
+  @ViewChild('tag_list') tagList!: ElementRef;
+  
   constructor() { }
 
   ngOnInit(): void { }
 
   ngAfterViewInit(): void {
-    const coverUrl = this.challenge.coverUrl;
+    /*const coverUrl = this.challenge.coverUrl;
     if (!coverUrl) return;
     const fac = new FastAverageColor();
     fac.getColorAsync(coverUrl)
@@ -30,7 +30,7 @@ AccessType: any;
         }
       }).catch(err => {
         console.log(err);
-      });
+      });*/
   }
 
   getDuration() {
