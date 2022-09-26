@@ -18,4 +18,9 @@ export class UserCardComponent implements OnInit {
     const banner = this.profile?.bannerUrl;
     return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;
   }
+
+  getAvatar(): string | undefined {
+    const avatar = this.profile?.avatarUrl;
+    return avatar === null ? '/assets/avatar_placeholder.svg' : avatar;
+  }
 }

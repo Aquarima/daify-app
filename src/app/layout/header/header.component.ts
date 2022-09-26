@@ -38,4 +38,9 @@ export class HeaderComponent implements OnInit {
     this.cookies.put('lang', language);
     window.location.reload();
   }
+
+  getAvatar(): string | undefined {
+    const avatar = this.loggedUser.profile.avatarUrl;
+    return avatar === null ? '/assets/avatar_placeholder.svg' : avatar;
+  }
 }

@@ -108,6 +108,6 @@
         <a class="signup">Join us - it's free</a>
     </div>
     <a class="logged-user" [routerLink]="['/app/user/', loggedUser.profile.username]" *ngIf="authService.isAuthenticated()">
-        <img class="user-avatar" [src]="loggedUser.profile.avatarUrl" alt="Avatar">
+        <img class="user-avatar" [src]="getAvatar()" alt="Avatar">
     </a>
 </div>

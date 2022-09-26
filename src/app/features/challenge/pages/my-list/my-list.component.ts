@@ -18,12 +18,14 @@ export class MyListComponent implements OnInit {
   displayMode: string = 'grid';
   page: number = 0;
   totalPages: number = 0;
+  loaded: boolean = false;
 
   constructor(private challengeService: ChallengeService, private authService: AuthService) { }
 
   ngOnInit(): void { }
 
   onSearch(search: Search) {
+    this.loaded = false;
     if (!search.name) {
       const loggedUser: User = this.authService.getLoggedUser();
       this.challengeService.getChallengesByUser(loggedUser.id, 12).
@@ -31,8 +33,10 @@ export class MyListComponent implements OnInit {
           this.challenges = data.content;
           this.totalPages = data.totalPages;
         })
+      this.loaded = true;
       return;
     }
+    this.loaded = true;
     this.search = search;
   }
 

@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FastAverageColor } from 'fast-average-color';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Challenge } from 'src/app/core/models/challenge';
 
 @Component({
@@ -7,7 +6,7 @@ import { Challenge } from 'src/app/core/models/challenge';
   templateUrl: './challenge-card.component.html',
   styleUrls: ['./challenge-card.component.scss']
 })
-export class ChallengeCardComponent implements OnInit, AfterViewInit {
+export class ChallengeCardComponent implements OnInit {
 
   @Input() challenge!: Challenge;
 
@@ -16,22 +15,6 @@ export class ChallengeCardComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void { }
-
-  ngAfterViewInit(): void {
-    /*const coverUrl = this.challenge.coverUrl;
-    if (!coverUrl) return;
-    const fac = new FastAverageColor();
-    fac.getColorAsync(coverUrl)
-      .then(color => {
-        if (!this.tagList) return;
-        const tagNodes = this.tagList.nativeElement.children;
-        for (const tag of tagNodes as HTMLElement[]) {
-          tag.style.backgroundColor = color.rgba.replace('1)', '0.5)');
-        }
-      }).catch(err => {
-        console.log(err);
-      });*/
-  }
 
   getDuration() {
     let d1: Date = new Date(this.challenge.config.startAt);
@@ -44,6 +27,11 @@ export class ChallengeCardComponent implements OnInit, AfterViewInit {
     if (hours >= 1) return `${Math.round(hours)}h`;
     if (minutes >= 1) return `${Math.round(minutes)}m`;
     return 'Unknown';
+  }
+
+  getBanner(): string | undefined {
+    const banner = this.challenge?.coverUrl;
+    return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;
   }
 
   hasAccess(access: any) {

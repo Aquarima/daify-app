@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onAbout() {
+    this.setSectionParam(null);
     this.section = 0;
   }
 
@@ -81,12 +82,17 @@ export class ProfileComponent implements OnInit {
     const banner = this.profile?.bannerUrl;
     return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;
   }
+  
+  getAvatar(): string | undefined {
+    const avatar = this.profile?.avatarUrl;
+    return avatar === null ? '/assets/avatar_placeholder.svg' : avatar;
+  }
 
   getCountry(): string | undefined {
     return new Intl.DisplayNames(['en'], {type: 'region'}).of(this.profile?.country || '');;
   }
 
-  private setSectionParam(value: number) {
+  private setSectionParam(value: any) {
     this.router.navigate([], { 
       relativeTo: this.route, 
       queryParams: {'p': value},
