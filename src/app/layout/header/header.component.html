@@ -107,7 +107,39 @@
         <a class="login" [routerLink]="['/auth/login']">Login</a>
         <a class="signup">Join us - it's free</a>
     </div>
-    <a class="logged-user" [routerLink]="['/app/user/', loggedUser.profile.username]" *ngIf="authService.isAuthenticated()">
-        <img class="user-avatar" [src]="getAvatar()" alt="Avatar">
-    </a>
+    <div class="logged-user unfoldable-item">
+        <a class="profile-link" [routerLink]="['/app/user/', loggedUser.profile.username]" *ngIf="authService.isAuthenticated()">
+            <img class="user-avatar" [src]="getAvatar()" alt="Avatar">
+            <svg class="unfold-arrow" width="32" height="32" viewBox="0 0 24 24">
+                <path d="m7 10l5 5l5-5H7z"/>
+            </svg>
+        </a>
+        <div class="dropdown-wrapper">
+            <div class="dropdown">
+                <img class="user-avatar-large" [src]="getAvatar()" alt="Avatar">
+                <p class="user-username">{{loggedUser.profile.username}}</p>
+                <p class="user-tag">{{loggedUser.profile.username}}</p>
+                <ul class="options">
+                    <li>
+                        Profile
+                        <svg width="32" height="32" viewBox="0 0 24 24">
+                            <path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+                        </svg>
+                    </li>
+                    <li>
+                        Settings
+                        <svg width="32" height="32" viewBox="0 0 24 24">
+                            <path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+                        </svg>
+                    </li>
+                    <li class="option-logout" (click)="onLogout()">
+                        Logout
+                        <svg width="32" height="32" viewBox="0 0 24 24">
+                            <path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

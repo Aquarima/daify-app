@@ -14,6 +14,7 @@
 
     .unfoldable-item {
         height: 32px;
+        position: relative;
 
         &:hover > .dropdown-wrapper {
             visibility: visible;
@@ -28,6 +29,7 @@
         .unfold-arrow {
             width: 20px;
             height: 20px;
+            transition: all .5s;
             fill: #FFF;
         }
 
@@ -126,7 +128,6 @@
             padding: 0 15px 0 15px;
             width: fit-content;
             height: 32px;
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -227,47 +228,11 @@
         }
 
         .logged-user {
-            display: flex;
-            align-items: center;
-            column-gap: 16px;
-            cursor: pointer;
-
-            .user-name {
-                font-weight: 500;
-                font-size: var(--preset-font-size-small);
-                color: var(--color-text);
-            }
-
-            .user-avatar {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-            }
-        }
-    
-        .user-box {
-            position: relative;
-            display: flex;
-            justify-content: baseline;
-            cursor: pointer;
-
-            &:hover .wrapper {
-                visibility: visible;
-                opacity: 1;
-            }
             
-            .user-avatar {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-            }
-
-            svg {
-                margin-bottom: 5px;
-                width: 28px;
-                height: 28px;
-                align-self: flex-end;
-                fill: var(--color-text);
+            .profile-link {
+                display: flex;
+                align-items: center;
+                column-gap: 8px;
                 cursor: pointer;
             }
 
@@ -276,71 +241,88 @@
                 opacity: 1;
             }
 
-            .dropdown {
-                padding-top: 16px;
-                width: 180px;
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+            }
 
-                .user-info {
-                    display: flex;
-                    justify-content: center;
-                    column-gap: 16px;
-    
-                    .user-avatar {
-                        width: 56px;
-                        height: 56px;
-                    }
-    
-                    .user-username {
-                        display: flex;
-                        flex-direction: column;
-    
-                        .raw {
-                            margin: 0;
-                            color: var(--color-text);
-                        }
-    
-                        .with-tag {
-                            margin: 0;
-                            font-size: var(--preset-font-size-small);
-                            color: var(--color-text-alt);
-                            
-                            &:before {
-                                content: "@";
-                            }
-                        }
+            svg {
+                width: 24px;
+                height: 24px;
+                fill: #FFF;
+            }
+
+            .dropdown {
+                width: 200px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .user-avatar-large {
+                    margin-top: 16px;
+                    width: 72px;
+                    height: 72px;
+                    border-radius: 50%;
+                }
+
+                .user-username {
+                    margin: 8px 0 0 0;
+                    font-weight: 500;
+                    color: var(--color-text);
+                }
+
+                .user-tag {
+                    margin: -4px 0 0 0;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 400;
+                    font-size: var(--preset-font-size-tiny);
+                    color: var(--color-text-alt);
+
+                    &:before {
+                        content: "@";
                     }
                 }
-    
-                ul {
-                    margin: 0;
+
+                .options {
+                    margin: 8px 0 0 0;
                     padding: 0;
                     width: 100%;
                     display: flex;
                     flex-direction: column;
                     list-style-type: none;
-    
+
                     li {
-                        height: 40px;
+                        height: 32px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        gap: 8px;
-                        color: var(--color-text);
-                        font-weight: 600;
+                        border-radius: 8px;
                         font-size: var(--preset-font-size-small);
+                        color: var(--color-text);
                         cursor: pointer;
 
-                        &:not(:last-child) {
-                            border-bottom: 1px solid #F2F2F2;
+                        &:hover {
+                            background-color: #F7F7F7;
+
+                            svg {
+                                display: block;
+                            }
                         }
-    
-                        &:last-child {
-                            color: #FF5252;
+
+                        svg {
+                            display: none;
+                            fill: var(--color-text);
                         }
-    
-                        a {
-                            font-weight: 600;
-                            color: var(--color-text-alt);
+                    }
+
+                    .option-logout {
+                        color: #FF5252;
+
+                        svg {
+                            fill: #FF5252;
                         }
                     }
                 }

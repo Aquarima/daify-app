@@ -34,6 +34,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
+
   setGlobalLanguage(language: string) {
     this.cookies.put('lang', language);
     window.location.reload();
