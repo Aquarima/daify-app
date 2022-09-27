@@ -50,6 +50,7 @@
             </div>
         </div>
         <div class="center">
+            <button class="profile-edit-btn" *ngIf="isSelfProfile()">Edit Profile</button>
             <nav class="profile-nav">
                 <ul>
                     <li (click)="onAbout()" [ngClass]="{'current-section': section === 0}">

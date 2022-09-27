@@ -316,6 +316,15 @@
                             display: none;
                             fill: var(--color-text);
                         }
+
+                        .option-link {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 8px;
+                            font-size: var(--preset-font-size-small);
+                            color: var(--color-text);
+                        }
                     }
 
                     .option-logout {

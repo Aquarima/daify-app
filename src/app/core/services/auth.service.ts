@@ -48,7 +48,7 @@ export class AuthService {
     this.cookies.remove('expires');
     this.cookies.remove('refresh_token');
     localStorage.removeItem('logged_user');
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login']);
   }
 
   getToken() {

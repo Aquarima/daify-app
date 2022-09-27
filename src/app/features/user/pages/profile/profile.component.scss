@@ -198,6 +198,11 @@
                 flex-direction: column;
                 align-items: flex-end;
                 row-gap: 64px;
+
+                .profile-edit-btn {
+                    padding: 0 24px;
+                    height: 40px;
+                }
     
                 .profile-nav {
                     padding: 0 16px;

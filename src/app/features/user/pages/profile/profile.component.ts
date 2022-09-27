@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
   loaded: boolean = false;
 
 
-  constructor(private authService: AuthService, 
+  constructor(
+    private authService: AuthService, 
     private profileService: ProfileService,
     private challengeService: ChallengeService, 
     private friendService: FriendService,
@@ -76,6 +77,11 @@ export class ProfileComponent implements OnInit {
 
   onBadges() { 
     this.setSectionParam(this.section = 3);
+  }
+
+  isSelfProfile(): boolean {
+    const selfUser = this.authService.getLoggedUser();
+    return selfUser && selfUser.profile.id === this.profile?.id;
   }
 
   getBanner(): string | undefined {

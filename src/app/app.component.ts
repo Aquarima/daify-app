@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Challenge } from './core/models';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { User } from './core/models';
+import { AuthService } from './core/services/auth.service';
+import { ProfileService } from './core/services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,22 @@ import { Challenge } from './core/models';
 })
 export class AppComponent implements OnInit {
 
-  challenges: Challenge[] = [];
+  constructor(private authService: AuthService, private profileService: ProfileService) { }
 
-  constructor() { }
+  ngOnInit(): void { 
+    this.updateProfile(true);
+  }
 
-  ngOnInit(): void { }
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler() {
+    this.updateProfile(false);
+  }
+
+  private updateProfile(online: boolean) {
+    const loggedUser: User = this.authService.getLoggedUser();
+    if (!loggedUser) return;
+    loggedUser.profile.online = online;
+    loggedUser.profile.lastTimeOnline = new Date();
+    this.profileService.updateProfile(loggedUser.profile).subscribe();
+  }
 }
