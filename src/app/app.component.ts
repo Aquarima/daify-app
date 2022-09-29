@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Challenge } from './core/models';
+import { Profile, User } from './core/models';
+import { AuthService } from './core/services/auth.service';
+import { ProfileService } from './core/services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +22,15 @@ export class AppComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void { }
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler() {
+    this.authService.state.next(0);
+  }
 
-  /*@HostListener('contextmenu')
-  preventContextMenu() {
-    return false;
-  }*/
+  private setOnline(online: boolean) {
+    const profile: Profile = this.authService.loggedUser.profile;
+    profile.online = online;
+    profile.lastTimeOnline = new Date();
+    this.profileService.updateProfile(profile).subscribe();
+  }
 }
