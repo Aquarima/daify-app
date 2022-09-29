@@ -198,11 +198,6 @@
                 flex-direction: column;
                 align-items: flex-end;
                 row-gap: 64px;
-
-                .profile-edit-btn {
-                    padding: 0 24px;
-                    height: 40px;
-                }
     
                 .profile-nav {
                     padding: 0 16px;
@@ -303,53 +298,87 @@
                 .user-about {
                     width: 100%;
                     display: flex;
-                    justify-content: flex-end;
-                    gap: 24px;
+                    flex-direction: column;
+                    align-items: flex-end;
+
+                    .profile-edit-btn {
+                        margin-bottom: 32px;
+                        padding: 0 16px;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        column-gap: 8px;
+                        border: none;
+                        border-radius: 8px;
+                        background-color: var(--color-secondary);
+                        font-weight: 600;
+                        font-size: var(--preset-font-size-small);
+                        color: #FFF;
+                        cursor: pointer;
     
-                    .info-field {
-                        
-                        p {
-                            margin: 0;
-                            display: inline-block;
-                            font-size: var(--preset-font-size-small);
+                        &:hover {
+                            background-color: var(--color-secondary-hover);
                         }
     
-                        .name {
-                            margin-right: 8px;
-                            font-weight: 500;
-                            color: var(--color-text);
-                        }
-    
-                        .value {
-                            color: var(--color-text-alt);
+                        svg {
+                            width: 16px;
+                            height: 16px;
+                            fill: #FFF;
                         }
                     }
-    
-                    > div {
-                        padding: 24px;
-                        width: 50%;
-                        min-width: 280px;
-                        height: fit-content;
+
+                    .public-info {
+                        width: 100%;
                         display: flex;
-                        flex-direction: column;
-                        gap: 16px;
-                        box-sizing: border-box;
-                        box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
-                        border-radius: 8px;
-                        background-color: #FFF;
-    
-                        .box-title {
-                            margin: 0;
-                            text-align: center;
-                            font-weight: 600;
-                            font-size: var(--preset-font-size-small);
-                            color: var(--color-text);
+                        justify-content: flex-end;
+                        gap: 24px;
+
+                        .info-field {
+                        
+                            p {
+                                margin: 0;
+                                display: inline-block;
+                                font-size: var(--preset-font-size-small);
+                            }
+        
+                            .name {
+                                margin-right: 8px;
+                                font-weight: 500;
+                                color: var(--color-text);
+                            }
+        
+                            .value {
+                                color: var(--color-text-alt);
+                            }
                         }
-    
-                        .text {
-                            margin: 0;
-                            font-size: var(--preset-font-size-small);
-                            color: var(--color-text-alt);
+
+                        > div {
+                            padding: 24px;
+                            width: 50%;
+                            min-width: 280px;
+                            height: fit-content;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 16px;
+                            box-sizing: border-box;
+                            box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+                            border-radius: 8px;
+                            background-color: #FFF;
+        
+                            .box-title {
+                                margin: 0;
+                                text-align: center;
+                                font-weight: 600;
+                                font-size: var(--preset-font-size-small);
+                                color: var(--color-text);
+                            }
+        
+                            .text {
+                                margin: 0;
+                                font-size: var(--preset-font-size-small);
+                                color: var(--color-text-alt);
+                            }
                         }
                     }
                 }

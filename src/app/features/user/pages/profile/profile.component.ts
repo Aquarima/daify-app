@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profile: Profile | undefined;
+  profile: Profile;
   challenges: Challenge[] = [];
   friends: Profile[] = [];
   section: number = 0;
@@ -80,8 +80,8 @@ export class ProfileComponent implements OnInit {
   }
 
   isSelfProfile(): boolean {
-    const selfUser = this.authService.getLoggedUser();
-    return selfUser && selfUser.profile.id === this.profile?.id;
+    const selfUser = this.authService.loggedUser;
+    return selfUser && selfUser.profile?.id === this.profile?.id;
   }
 
   getBanner(): string | undefined {
@@ -96,6 +96,19 @@ export class ProfileComponent implements OnInit {
 
   getCountry(): string | undefined {
     return new Intl.DisplayNames(['en'], {type: 'region'}).of(this.profile?.country || '');;
+  }
+
+  getLastTimeOnline(): string | undefined {
+    if (!this.profile?.lastTimeOnline) return undefined;
+    const date: Date = new Date(this.profile?.lastTimeOnline);
+    const now: Date = new Date();
+    const day: number = 24*60*60*1000;
+    const timeDiff: number = now.getTime() - date.getTime();
+    if (timeDiff < day) return "Today";
+    if (timeDiff < day * 2) return "Yesterday";
+    const daysAgo: number = timeDiff % day;
+    if (daysAgo > 30) return "30d+";
+    return `${daysAgo}d`;
   }
 
   private setSectionParam(value: any) {
