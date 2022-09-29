@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
 import { User } from '../models/user';
 
@@ -13,18 +13,23 @@ const headers = new HttpHeaders({'Content-Type': 'application/json'});
 })
 export class AuthService {
 
-  user: User | undefined;
+  state: BehaviorSubject<number> = new BehaviorSubject(-1);
+  loggedUser: User = this.getLoggedUser();
   redirectUrl: string = '/';
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private router: Router, private http: HttpClient, private cookies: CookieService) { }
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private cookies: CookieService
+  ) { }
 
   isAuthenticated(): boolean {
 
     if (this.getToken() && new Date(this.cookies.get('expires') || '') > new Date()) {
       return true;
     }
-
+    
     return false;
   }
 
@@ -36,7 +41,7 @@ export class AuthService {
           this.cookies.put('expires', res.body.expires);
           this.cookies.put('refresh_token', res.body.refresh_token);
           localStorage.setItem('logged_user', JSON.stringify(res.body.user));
-          this.loginError.next(false);
+          this.state.next(1);
           this.doRedirect();
         },
         error: () => this.loginError.next(true)
@@ -48,6 +53,7 @@ export class AuthService {
     this.cookies.remove('expires');
     this.cookies.remove('refresh_token');
     localStorage.removeItem('logged_user');
+    this.state.next(0);
     this.router.navigate(['/auth/login']);
   }
 

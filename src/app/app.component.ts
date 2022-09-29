@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { User } from './core/models';
+import { Profile, User } from './core/models';
 import { AuthService } from './core/services/auth.service';
 import { ProfileService } from './core/services/profile.service';
 
@@ -13,19 +13,24 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private profileService: ProfileService) { }
 
   ngOnInit(): void { 
-    this.updateProfile(true);
+    this.authService.state.subscribe(state => {
+      if (state != 1) {
+        this.setOnline(false);
+        return;
+      }
+      this.setOnline(true);
+    })
   }
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler() {
-    this.updateProfile(false);
+    this.authService.state.next(0);
   }
 
-  private updateProfile(online: boolean) {
-    const loggedUser: User = this.authService.getLoggedUser();
-    if (!loggedUser) return;
-    loggedUser.profile.online = online;
-    loggedUser.profile.lastTimeOnline = new Date();
-    this.profileService.updateProfile(loggedUser.profile).subscribe();
+  private setOnline(online: boolean) {
+    const profile: Profile = this.authService.loggedUser.profile;
+    profile.online = online;
+    profile.lastTimeOnline = new Date();
+    this.profileService.updateProfile(profile).subscribe();
   }
 }
