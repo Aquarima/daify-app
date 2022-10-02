@@ -105,7 +105,7 @@
     </div>
     <div class="auth-ways" *ngIf="!authService.isAuthenticated()">
         <a class="login" [routerLink]="['/auth/login']">Login</a>
-        <a class="signup">Join us - it's free</a>
+        <a class="signup" [routerLink]="['/auth/signup']">Join us - it's free</a>
     </div>
     <div class="logged-user unfoldable-item" *ngIf="authService.isAuthenticated()">
         <a class="profile-link" [routerLink]="['/app/user/', loggedUser.profile.username]" *ngIf="authService.isAuthenticated()">

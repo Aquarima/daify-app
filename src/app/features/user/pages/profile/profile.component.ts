@@ -100,17 +100,17 @@ export class ProfileComponent implements OnInit {
 
   getLastTimeOnline(): string | undefined {
     if (!this.profile?.lastTimeOnline) return undefined;
-    const date: Date = new Date(this.profile.lastTimeOnline);
-    const now: Date = new Date();
-    const day: number = 24*60*60*1000;
-    const timeDiff: number = now.getTime() - date.getTime();
+    const date = new Date(this.profile.lastTimeOnline);
+    const now = new Date();
+    const day = 24*60*60*1000;
+    const timeDiff = now.getTime() - date.getTime();
     if (timeDiff < day) return 'Today';
     if (timeDiff < day * 2) return 'Yesterday';
-    const daysAgo: number = Math.round(timeDiff / day);
-    if (daysAgo <= 7) return `${daysAgo}d ago`; 
-    if (daysAgo > 1 && daysAgo < 8) return 'Last week';
+    const daysAgo = Math.round(timeDiff / day);
+    if (daysAgo <= 7) return `${daysAgo}d ago`;
+    if (daysAgo < 14) return 'Last week';
     if (daysAgo < 30) return `${Math.round(daysAgo / 7)} weeks ago`;
-    if (daysAgo >= 30 && daysAgo < 60) return 'Last month';
+    if (daysAgo < 60) return 'Last month';
     return `${Math.round(daysAgo / 30)} months ago`;
   }
 

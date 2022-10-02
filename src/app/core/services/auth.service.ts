@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { BehaviorSubject } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
-import { User } from '../models/user';
+import { User } from '../models';
 
 const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -19,21 +19,16 @@ export class AuthService {
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
-    private router: Router, 
-    private http: HttpClient, 
+    private router: Router,
+    private http: HttpClient,
     private cookies: CookieService
   ) { }
 
   isAuthenticated(): boolean {
-
-    if (this.getToken() && new Date(this.cookies.get('expires') || '') > new Date()) {
-      return true;
-    }
-    
-    return false;
+    return !!(this.getToken() && new Date(this.cookies.get('expires') || '') > new Date());
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): boolean {
     this.http.post(`${env.apiUrl}/auth/login`, { email: email, password: password }, { headers: headers, observe: 'response' })
       .subscribe({
         next: (res: any) => {
@@ -43,9 +38,25 @@ export class AuthService {
           localStorage.setItem('logged_user', JSON.stringify(res.body.user));
           this.state.next(1);
           this.doRedirect();
+          return true;
         },
         error: () => this.loginError.next(true)
       });
+    return false;
+  }
+
+  register(username: string, email: string, password: string): string[] {
+    this.http.post(`${env.apiUrl}/auth/register`, { username: username, email: email, password: password }, { headers: headers, observe: 'response' })
+      .subscribe({
+        next: (res: any) => {
+
+        },
+        error: (error) => {
+          console.log(error);
+          return error.error;
+        }
+    })
+    return [];
   }
 
   logout() {
