@@ -17,6 +17,7 @@ export class AuthService {
   loggedUser: User = this.getLoggedUser();
   redirectUrl: string = '/';
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  signupError: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
     private router: Router,
@@ -45,18 +46,16 @@ export class AuthService {
     return false;
   }
 
-  register(username: string, email: string, password: string): string[] {
-    this.http.post(`${env.apiUrl}/auth/register`, { username: username, email: email, password: password }, { headers: headers, observe: 'response' })
+  register(username: string, email: string, password: string) {
+    this.http.post(`${env.apiUrl}/auth/register`, { profile: {username: username}, email: email, password: password }, { headers: headers, observe: 'response' })
       .subscribe({
         next: (res: any) => {
 
         },
-        error: (error) => {
-          console.log(error);
-          return error.error;
+        error: (err) => {
+          this.signupError.next(err.error);
         }
     })
-    return [];
   }
 
   logout() {

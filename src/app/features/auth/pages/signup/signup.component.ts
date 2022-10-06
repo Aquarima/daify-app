@@ -20,11 +20,15 @@ export class SignupComponent implements OnInit, AfterViewInit {
     agreements: new FormControl<boolean>(false)
   })
 
-  errors: string[] = [];
+  errors: any;
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.signupError.subscribe(errors => {
+      this.errors = errors;
+    })
+  }
 
   ngAfterViewInit(): void {
     this.initTextInputsListeners();
@@ -43,6 +47,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.errors = this.authService.register(`${this.signupForm.value.username}`, `${this.signupForm.value.email}`, `${this.signupForm.value.password}`);
+    this.authService.register(`${this.signupForm.value.username}`, `${this.signupForm.value.email}`, `${this.signupForm.value.password}`);
   }
 }
