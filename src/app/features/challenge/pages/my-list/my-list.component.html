@@ -8,7 +8,9 @@
                 <p class="about">Browse challenges you joined or created</p>
             </div>
         </div>
-        <dfy-challenge-search (searchEvent)="onSearch($event)" 
+        <dfy-challenge-search 
+            (searchEvent)="onSearch($event)" 
+            (groupByEvent)="onGroupBySelected($event)" 
             (displayModeEvent)="onDisplayModeSelected($event)">
         </dfy-challenge-search>
         <div class="item-list">

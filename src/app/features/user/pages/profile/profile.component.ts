@@ -52,6 +52,14 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  hasSocial(name: string): boolean {
+    return this.profile?.socials[name] !== undefined;
+  }
+
+  getSocial(name: string): string {
+    return this.profile?.socials[name] || '';
+  }
+
   onAbout() {
     this.setSectionParam(null);
     this.section = 0;
@@ -98,20 +106,41 @@ export class ProfileComponent implements OnInit {
     return new Intl.DisplayNames(['en'], {type: 'region'}).of(this.profile?.country || '');;
   }
 
-  getLastTimeOnline(): string | undefined {
-    if (!this.profile?.lastTimeOnline) return undefined;
-    const date = new Date(this.profile.lastTimeOnline);
+  toLiteralDelayFrom(from?: Date) {
+    if (!from) return;
     const now = new Date();
+    const date = new Date(from);
+    const time = date.getTime();
+    const dateRef = new Date();
+
+    dateRef.setUTCHours(0, 0, 0);
+    if (dateRef.getTime() <= time) return 'Today';
+
+    dateRef.setUTCDate(dateRef.getUTCDate() - 1);
+    if (dateRef.getTime() <= time) return 'Yesterday';
+
     const day = 24*60*60*1000;
-    const timeDiff = now.getTime() - date.getTime();
-    if (timeDiff < day) return 'Today';
-    if (timeDiff < day * 2) return 'Yesterday';
-    const daysAgo = Math.round(timeDiff / day);
-    if (daysAgo <= 7) return `${daysAgo}d ago`;
-    if (daysAgo < 14) return 'Last week';
-    if (daysAgo < 30) return `${Math.round(daysAgo / 7)} weeks ago`;
-    if (daysAgo < 60) return 'Last month';
-    return `${Math.round(daysAgo / 30)} months ago`;
+
+    dateRef.setUTCDate(dateRef.getUTCDate() - 6);
+    if (dateRef.getTime() <= time) return `${7-Math.floor((time - dateRef.getTime()) / day)}d ago`;
+
+    const daySinceMonday = (now.getUTCDay() + 6) % 7;
+    dateRef.setUTCDate(dateRef.getUTCDate() - daySinceMonday);
+    if (dateRef.getTime() <= time) return 'Last week';
+
+    dateRef.setUTCDate(dateRef.getUTCDate() - 7 * 3);
+    if (dateRef.getTime() <= time) return `${4-Math.floor((time - dateRef.getTime()) / (day * 7))} weeks ago`;
+
+    const refMonth = now.getUTCMonth();
+    const refYear = now.getUTCFullYear();
+
+    dateRef.setUTCFullYear(refYear, refMonth - 1, 1);
+    if (dateRef.getTime() <= time) return 'Last month';
+
+    const dateMonth = date.getUTCMonth();
+    const dateYear = date.getUTCFullYear();
+
+    return `${(dateYear - refYear) * 12 - (dateMonth - refMonth) - 1} months ago`;
   }
 
   private setSectionParam(value: any) {

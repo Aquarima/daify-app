@@ -14,6 +14,14 @@ export class UserCardComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  hasSocial(name: string): boolean {
+    return this.profile?.socials[name] !== undefined;
+  }
+
+  getSocial(name: string): string {
+    return this.profile?.socials[name] || '';
+  }
+
   getBanner(): string | undefined {
     const banner = this.profile?.bannerUrl;
     return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;

@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
     agreements: new FormControl<boolean>(false)
   })
 
-  errors: any;
+  errors: any = {};
 
   constructor(private authService: AuthService) { }
 
@@ -47,6 +47,18 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.authService.register(`${this.signupForm.value.username}`, `${this.signupForm.value.email}`, `${this.signupForm.value.password}`);
+    const entries = this.signupForm.value;
+    const confirmValid =  entries.password_confirm === entries.password;
+    const agreementsValid = entries.agreements === true;
+    if (confirmValid && agreementsValid) {
+      this.authService.register(`${this.signupForm.value.username}`, `${this.signupForm.value.email}`, `${this.signupForm.value.password}`);
+      return;
+    }
+    if (!confirmValid) {
+      this.errors.confirm = "Password and confirmation are not the same";
+    }
+    if (!agreementsValid) {
+      this.errors.agreements = "Before creating an account you must accept our Terms";
+    }
   }
 }

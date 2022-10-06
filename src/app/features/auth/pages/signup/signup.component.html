@@ -28,14 +28,18 @@
             <div class="input-wrapper">
                 <div class="input-box">
                     <label for="password-confirm">Confirm Password</label>
-                    <input id="password-confirm" class="form-control" #text_input type="password-confirm" name="password-confirm" formControlName="password_confirm">
+                    <input id="password-confirm" class="form-control" #text_input type="password" name="password-confirm" formControlName="password_confirm">
                 </div>
+                <p class="form-error" *ngIf="errors?.agreements">{{errors.confirm}}</p>
             </div>
-            <div class="agreements">
-                <label for="agreements">
-                    <input id="agreements" class="form-control" type="checkbox" name="agreements" formControlName="agreements">
-                    Creating an account means you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
-                </label>
+            <div class="input-wrapper">
+                <div class="agreements">
+                    <label for="agreements">
+                        <input id="agreements" class="form-control" type="checkbox" name="agreements" formControlName="agreements">
+                        Creating an account means you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                    </label>
+                </div>
+                <p class="form-error" *ngIf="errors?.agreements">{{errors.agreements}}</p>
             </div>
             <button class="confirm" type="submit">Sign up</button>
         </form>

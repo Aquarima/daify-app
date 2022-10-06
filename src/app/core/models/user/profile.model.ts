@@ -8,6 +8,7 @@ export interface Profile {
     country: string
     birthdate: Date
     online: boolean
+    socials: any
     about: string
     profession: string
     lastTimeOnline: Date

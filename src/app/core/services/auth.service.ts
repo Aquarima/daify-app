@@ -17,7 +17,7 @@ export class AuthService {
   loggedUser: User = this.getLoggedUser();
   redirectUrl: string = '/';
   loginError: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  signupError: BehaviorSubject<any> = new BehaviorSubject(null);
+  signupError: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(
     private router: Router,
