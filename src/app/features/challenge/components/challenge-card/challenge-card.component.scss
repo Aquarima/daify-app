@@ -20,11 +20,11 @@
 
         .challenge-short-description {
             width: 280px;
-    
+
             .challenge-short-description-name {
                 text-align: left;
             }
-    
+
             .challenge-short-description-text {
                 text-align: left;
             }
@@ -70,7 +70,7 @@
                 padding: 0 32px;
                 text-align: center;
             }
-    
+
             .challenge-short-description-text {
                 padding: 0 24px;
                 text-align: center;
@@ -135,14 +135,14 @@
                 font-weight: 600;
                 color: var(--color-text);
             }
-    
+
             .challenge-short-description-text {
                 margin: 4px 0 0 0;
                 font-size: var(--preset-font-size-small);
                 color: var(--color-text-alt);
             }
         }
-    
+
         .challenge-stats {
             margin: 0;
             padding: 0;
@@ -196,20 +196,20 @@
         }
 
         .challenge-access-security {
-            width: 56px;
-            min-width: 56px;
-            height: 56px;
+            width: 48px;
+            min-width: 48px;
+            height: 48px;
             display: flex;
             justify-content: center;
             align-items: center;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             border-radius: 16px;
-            background-color: #FFF;
+            background-color: var(--color-secondary);
 
             svg {
-                width: 24px;
-                height: 24px;
-                fill: var(--color-text);
+                width: 20px;
+                height: 20px;
+                fill: #FFF;
             }
         }
     }

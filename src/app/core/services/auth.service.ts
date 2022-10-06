@@ -29,8 +29,8 @@ export class AuthService {
     return !!(this.getToken() && new Date(this.cookies.get('expires') || '') > new Date());
   }
 
-  login(email: string, password: string): boolean {
-    this.http.post(`${env.apiUrl}/auth/login`, { email: email, password: password }, { headers: headers, observe: 'response' })
+  login(password: string, email?: string, username?: string): boolean {
+    this.http.post(`${env.apiUrl}/auth/login`, { profile: {username: username}, email: email, password: password }, { headers: headers, observe: 'response' })
       .subscribe({
         next: (res: any) => {
           this.cookies.put('access_token', res.headers.get('Authorization') || undefined);

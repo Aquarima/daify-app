@@ -44,7 +44,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.authService.login(`${this.loginForm.value.username}`, `${this.loginForm.value.password}`);
+    const identifier = this.loginForm.value.username;
+    if (identifier?.includes('@')) {
+      this.authService.login(`${this.loginForm.value.password}`, `${this.loginForm.value.username}`);
+      return;
+    }
+    this.authService.login(`${this.loginForm.value.password}`, undefined, `${this.loginForm.value.username}`);
   }
 
   onHideError() {
