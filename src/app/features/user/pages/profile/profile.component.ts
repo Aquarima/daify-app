@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService, Challenge, ChallengeService, Friend, Profile } from 'src/app/core';
+import { AuthService, Challenge, ChallengeService, Friend, Profile, User } from 'src/app/core';
 import { FriendService } from 'src/app/core/services/friend.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
 
@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
   }
 
   isSelfProfile(): boolean {
-    const selfUser = this.authService.loggedUser;
+    const selfUser = this.authService.user$.getValue();
     return selfUser && selfUser.profile?.id === this.profile?.id;
   }
 

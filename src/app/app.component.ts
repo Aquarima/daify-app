@@ -28,9 +28,9 @@ export class AppComponent implements OnInit {
   }
 
   private setOnline(online: boolean) {
-    const profile: Profile = this.authService.loggedUser.profile;
+    /*const profile: Profile = this.authService.loggedUser.profile;
     profile.online = online;
     profile.lastTimeOnline = new Date();
-    this.profileService.updateProfile(profile).subscribe();
+    this.profileService.updateProfile(profile).subscribe();*/
   }
 }

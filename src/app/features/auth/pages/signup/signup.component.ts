@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class SignupComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('login_error') loginErrorMessage!: ElementRef;
+  @ViewChild('login_error') loginError$Message!: ElementRef;
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
   signupForm = new FormGroup({

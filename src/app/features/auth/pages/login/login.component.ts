@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('login_error') loginErrorMessage!: ElementRef;
+  @ViewChild('login_error') loginError$Message!: ElementRef;
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
   loginForm = new FormGroup({
@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
 
   ngAfterViewInit(): void {
-    this.authService.loginError.subscribe(error => {
+    this.authService.loginError$.subscribe(error => {
       if (error) {
-        this.loginErrorMessage.nativeElement.classList.add('login-error-shown');
+        this.loginError$Message.nativeElement.classList.add('login-error-shown');
       }
     });
     this.initTextInputsListeners();
@@ -46,13 +46,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onSubmit() {
     const identifier = this.loginForm.value.username;
     if (identifier?.includes('@')) {
-      this.authService.login(`${this.loginForm.value.password}`, `${this.loginForm.value.username}`);
+      this.authService.login({email: `${this.loginForm.value.username}`, password:`${this.loginForm.value.password}`});
       return;
     }
-    this.authService.login(`${this.loginForm.value.password}`, undefined, `${this.loginForm.value.username}`);
+    this.authService.login({username: `${this.loginForm.value.username}`, password:`${this.loginForm.value.password}`});
   }
 
   onHideError() {
-    this.loginErrorMessage.nativeElement.classList.remove('login-error-shown');
+    this.loginError$Message.nativeElement.classList.remove('login-error-shown');
   }
 }
