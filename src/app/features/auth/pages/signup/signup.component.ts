@@ -12,7 +12,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
   @ViewChild('login_error') loginError$Message!: ElementRef;
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
-  signupForm = new FormGroup({
+  signupForm: FormGroup = new FormGroup({
     username: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
@@ -21,13 +21,14 @@ export class SignupComponent implements OnInit, AfterViewInit {
   })
 
   errors: any = {};
+  success: boolean = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.signupError.subscribe(errors => {
+    this.authService.signupError$.subscribe(errors => {
       this.errors = errors;
-    })
+    });
   }
 
   ngAfterViewInit(): void {

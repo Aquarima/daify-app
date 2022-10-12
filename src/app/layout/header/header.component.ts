@@ -13,14 +13,16 @@ import { NotificationsComponent } from 'src/app/shared/components';
 export class HeaderComponent implements OnInit {
 
   loggedUser: User = this.authService.getLoggedUser();
-  
+
   constructor(
-    private viewContainerRef: ViewContainerRef, 
-    private cookies: CookieService, 
-    public authService: AuthService) 
+    private viewContainerRef: ViewContainerRef,
+    private cookies: CookieService,
+    public authService: AuthService)
   { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.user$.subscribe(user => this.loggedUser = user);
+  }
 
   getCurrentLanguage(): string {
     const current = this.cookies.get('lang');

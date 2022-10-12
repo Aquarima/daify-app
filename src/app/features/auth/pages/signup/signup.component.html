@@ -1,4 +1,4 @@
-<div class="auth-box">
+<div class="auth-box" *ngIf="!success">
     <div class="auth-box-header">
         <h1>Sign up to Daify</h1>
     </div>
@@ -30,7 +30,7 @@
                     <label for="password-confirm">Confirm Password</label>
                     <input id="password-confirm" class="form-control" #text_input type="password" name="password-confirm" formControlName="password_confirm">
                 </div>
-                <p class="form-error" *ngIf="errors?.agreements">{{errors.confirm}}</p>
+                <p class="form-error" *ngIf="errors?.confirm">{{errors.confirm}}</p>
             </div>
             <div class="input-wrapper">
                 <div class="agreements">
@@ -48,4 +48,19 @@
             <a [routerLink]="['/auth/login']">Log in</a>
         </p>
     </div>
+</div>
+<div class="op-success" *ngIf="success">
+  <svg class="top-icon" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z"/>
+  </svg>
+  <p class="title">Your account has been successfully created</p>
+  <div class="instructions">
+    <p>Check your email inbox</p>
+    <div class="message">
+      We've sent you a verification link to your email address
+      <div class="value">email.addr@email.com</div>.
+      Please check your inbox and verify your email before the
+      <div class="value">11 Oct 2022</div>.
+    </div>
+  </div>
 </div>

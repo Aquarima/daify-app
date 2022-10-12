@@ -42,7 +42,7 @@
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity .3s linear;
-    
+
             .dropdown {
                 margin-top: 24px;
                 padding: 8px;
@@ -60,14 +60,14 @@
                     box-sizing: border-box;
                     border-radius: 8px;
                     text-decoration: none;
-    
+
                     &:hover {
                         background-color: var(--color-primary);
-    
+
                         a svg, .item-name svg {
                             fill: #FFF;
                         }
-    
+
                         .item-name {
                             color: #FFF;
                         }
@@ -87,11 +87,11 @@
                             fill: var(--color-text);
                         }
                     }
-    
+
                     a {
                         height: 100%;
                     }
-    
+
                     .mark-beta {
                         padding: 3px 8px;
                         border-radius: 8px;
@@ -123,7 +123,7 @@
         justify-content: center;
         gap: 32px;
         list-style-type: none;
-    
+
         .item {
             padding: 0 15px 0 15px;
             width: fit-content;
@@ -137,7 +137,7 @@
             &:hover .item-link {
                 color: #FFF;
             }
-    
+
             .item-link {
                 height: 100%;
                 position: relative;
@@ -180,55 +180,62 @@
             font-size: var(--preset-font-size-small);
             color: #FFF;
             cursor: pointer;
-    
+
             .lang-current {
                 text-transform: uppercase;
             }
-    
+
             svg {
                 height: 18px;
                 width: 18px;
                 fill: #FFF;
             }
         }
-    
+
         .auth-ways {
             display: flex;
             column-gap: 8px;
-    
+
             a {
                 padding: 0 16px;
                 height: 28px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                transition: background-color .3s;
                 border-radius: 8px;
-                background-color: #FFF;
+                border: 2px solid #FFF;
+                background-color: transparent;
                 font-weight: 500;
                 font-size: var(--preset-font-size-small);
                 color: #FFF;
                 cursor: pointer;
             }
-    
-            .login {
+
+          a:hover {
+            background-color: #FFF;
+            color: var(--color-text);
+          }
+
+            /*.login {
                 background-color: var(--color-secondary);
-    
+
                 &:hover {
                     background-color: var(--color-secondary-hover);
                 }
             }
-    
+
             .signup {
                 background-color: var(--color-tertiary-2);
-    
+
                 &:hover {
                     background-color: var(--color-tertiary-2-hover);
                 }
-            }
+            }*/
         }
 
         .logged-user {
-            
+
             .profile-link {
                 display: flex;
                 align-items: center;

@@ -18,13 +18,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5l-10-10zm0-10l-10 10"></path>
                         </svg>
                     </button>
-                </div>       
+                </div>
             </div>
         </div>
     </div>
     <div class="input-box active">
-        <label for="order-by">Order By</label>
-        <select name="options" #option_selected (change)="onGroupBy(option_selected.value)">
+        <label for="options">Order By</label>
+        <select id="options" name="options" #option_selected (change)="onGroupBy(option_selected.value)">
             <option value="alphabetical">Alphabetical</option>
             <option value="duration">Duration</option>
             <option value="start">Start</option>
