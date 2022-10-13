@@ -61,5 +61,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
     if (!agreementsValid) {
       this.errors.agreements = "Before creating an account you must accept our Terms";
     }
+    this.success = true;
   }
 }

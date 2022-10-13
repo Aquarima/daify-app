@@ -23,14 +23,25 @@ export class AuthService {
    * Currently logged user
    */
 
-  user$ = new BehaviorSubject(this.getLoggedUser());
+  user$ = new BehaviorSubject(this.getStoredUser());
 
   /**
    * Whether if an error has occured on a login request
    */
 
   loginError$ = new BehaviorSubject(false); // Whether
-  signupError$: BehaviorSubject<any> = new BehaviorSubject({});
+
+  /**
+   * Whether if an error has occured on a sign up request
+   */
+
+  signupError$ = new BehaviorSubject({});
+
+  /**
+   * 
+   */
+
+  logoutEvent$ = new BehaviorSubject(false);
 
   /**
    * The location url to redirect when authentication is successful
@@ -46,7 +57,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     //return !(this.getToken() && new Date(this.cookies.get('access_token_expires_at') || '') > new Date());
-    return false;
+    return true;
   }
 
   login(form: {username?: string, email?: string, password: string}) {
@@ -56,8 +67,8 @@ export class AuthService {
           this.setAuthentication(
             res.body.user,
             res.headers.get('Authorization'),
-            res.body.access_token_expires_at,
             res.body.refresh_token,
+            res.body.access_token_expires_at,
             res.body.access_token_expires_at
           );
           this.doRedirect();
@@ -69,33 +80,12 @@ export class AuthService {
 
   private setAuthentication(user: User, accessToken: string, accessTokenExpiresAt: Date, refreshToken: string, refreshTokenExpiresAt: Date) {
     this.cookies.put('access_token', accessToken);
-    this.cookies.put('access_token_expires_at', JSON.stringify(accessTokenExpiresAt));
     this.cookies.put('refresh_token', refreshToken);
+    this.cookies.put('access_token_expires_at', JSON.stringify(accessTokenExpiresAt));
     this.cookies.put('refresh_token_expires_at', JSON.stringify(refreshTokenExpiresAt));
     localStorage.setItem('user', JSON.stringify(user));
     this.user$.next(user);
   }
-
-  setOnSuccessRedirectTo(location: string) {
-    this.onSuccessRedirectTo = location;
-  }
-
-  /*login(password: string, email?: string, username?: string): boolean {
-    this.http.post(`${env.apiUrl}/auth/login`, { profile: {username: username}, email: email, password: password }, { headers: headers, observe: 'response' })
-      .subscribe({
-        next: (res: any) => {
-          this.cookies.put('access_token', res.headers.get('Authorization') || undefined);
-          this.cookies.put('expires', res.body.expires);
-          this.cookies.put('refresh_token', res.body.refresh_token);
-          localStorage.setItem('logged_user', JSON.stringify(res.body.user));
-          this.state.next(1);
-          this.doRedirect();
-          return true;
-        },
-        error: () => this.loginError$.next(true)
-      });
-    return false;
-  }*/
 
   register(username: string, email: string, password: string) {
     this.http.post(`${env.apiUrl}/auth/register`, { profile: { username: username }, email: email, password: password }, { headers: headers, observe: 'response' })
@@ -111,20 +101,46 @@ export class AuthService {
 
   logout() {
     this.cookies.remove('access_token');
-    this.cookies.remove('expires');
     this.cookies.remove('refresh_token');
-    localStorage.removeItem('logged_user');
-
+    this.cookies.remove('access_token_expires_at');
+    this.cookies.remove('refresh_token_expires_at');
+    localStorage.removeItem('user');
+    this.logoutEvent$.next(true);
     this.router.navigate(['/auth/login']);
   }
 
-  getToken() {
-    return this.cookies.get('access_token') || undefined;
+  isAccessTokenExpired() {
+    return this.getAccessTokenExpiry() > new Date()
   }
 
-  getLoggedUser(): User {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+  isRefreshTokenExpired() {
+    return this.getRefreshTokenExpiry() > new Date();
+  }
+
+  getAccessToken() {
+    return this.cookies.get('access_token');
+  }
+
+  getAccessTokenExpiry() {
+    const expiry = this.cookies.get('access_token_expires_at');
+    return expiry ? new Date(expiry) : new Date();
+  }
+
+  getRefreshToken() {
+    return this.cookies.get('refresh_token');
+  }
+
+  getRefreshTokenExpiry() {
+    const expiry = this.cookies.get('refresh_token_expires_at');
+    return expiry ? new Date(expiry) : new Date();
+  }
+
+  getStoredUser() {
+    return JSON.parse(localStorage.getItem('user') || '');
+  }
+
+  setOnSuccessRedirectTo(location: string) {
+    this.onSuccessRedirectTo = location;
   }
 
   doRedirect() {

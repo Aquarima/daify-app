@@ -27,7 +27,7 @@ export class MyListComponent implements OnInit {
   onSearch(search: Search) {
     this.loaded = false;
     if (!search.name) {
-      const loggedUser: User = this.authService.getLoggedUser();
+      const loggedUser: User = this.authService.getStoredUser();
       this.challengeService.getChallengesByUser(loggedUser.id, 12).
         subscribe(data => {
           this.challenges = data.content;

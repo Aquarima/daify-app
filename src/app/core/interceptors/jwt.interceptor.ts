@@ -19,7 +19,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     if (request.url.startsWith('http://localhost:8080') && this.authService.isAuthenticated()) {
       request = request.clone({
-        setHeaders: {Authorization: `${this.authService.getToken()}`}
+        setHeaders: {Authorization: `${this.authService.getAccessToken()}`}
       });
     }
 

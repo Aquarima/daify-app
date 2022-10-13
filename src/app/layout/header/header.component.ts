@@ -12,7 +12,7 @@ import { NotificationsComponent } from 'src/app/shared/components';
 
 export class HeaderComponent implements OnInit {
 
-  loggedUser: User = this.authService.getLoggedUser();
+  loggedUser: User = this.authService.getStoredUser();
 
   constructor(
     private viewContainerRef: ViewContainerRef,
