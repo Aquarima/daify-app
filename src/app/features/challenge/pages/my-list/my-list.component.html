@@ -2,27 +2,27 @@
 <dfy-header></dfy-header>
 <main class="main-content">
     <div class="browse">
-        <div class="top">
+        <div class="section-banner">
             <div class="details">
                 <h1>My List</h1>
                 <p class="about">Browse challenges you joined or created</p>
             </div>
         </div>
-        <dfy-challenge-search 
-            (searchEvent)="onSearch($event)" 
-            (groupByEvent)="onGroupBySelected($event)" 
+        <dfy-challenge-search
+            (searchEvent)="onSearch($event)"
+            (groupByEvent)="onGroupBySelected($event)"
             (displayModeEvent)="onDisplayModeSelected($event)">
         </dfy-challenge-search>
         <div class="item-list">
-            <dfy-browse-results-list 
-                [challenges]="challenges" 
-                [displayMode]="displayMode" 
+            <dfy-browse-results-list
+                [challenges]="challenges"
+                [displayMode]="displayMode"
                 [groupBy]="groupBy"
                 [totalPages]="totalPages"
                 [loaded]="loaded"
                 (showMoreEvent)="onShowMore($event)">
             </dfy-browse-results-list>
-        </div>            
+        </div>
     </div>
 </main>
 <dfy-footer></dfy-footer>

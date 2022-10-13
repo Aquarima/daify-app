@@ -7,7 +7,6 @@
     .main-content {
 
         .browse {
-            padding-top: 40px;
             width: 65%;
             height: 100%;
             display: flex;
@@ -15,7 +14,7 @@
             align-items: center;
             box-sizing: border-box;
 
-            .top {
+            .section-banner {
                 margin-bottom: 40px;
                 padding: 0 64px;
                 height: 160px;
@@ -28,14 +27,14 @@
                 background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-secondary) 100%);
 
                 .details {
-                    
+
                     h1 {
                         margin: 0 0 8px 0;
                         font-weight: 600;
                         font-size: var(--preset-font-size-large);
                         color: #FFF;
                     }
-        
+
                     .about {
                         margin: 0;
                         font-size: var(--preset-font-size-small);

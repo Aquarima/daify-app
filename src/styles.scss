@@ -35,9 +35,9 @@ html {
         font-family: $font-family;
 
         .main-content {
+            padding-top: 102px;
             width: 100%;
             height: fit-content;
-            padding-top: 50px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -84,8 +84,8 @@ html {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }

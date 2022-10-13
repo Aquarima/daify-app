@@ -11,6 +11,7 @@ import { MyListComponent } from './pages/my-list/my-list.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowseResultsListComponent } from './components/browse-results-list/browse-results-list.component';
+import { ChallengeCreateComponent } from './pages/challenge-create/challenge-create.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BrowseResultsListComponent } from './components/browse-results-list/bro
     ChallengeSearchComponent,
     MyListComponent,
     BrowseResultsListComponent,
+    ChallengeCreateComponent,
   ],
   imports: [
     CommonModule,

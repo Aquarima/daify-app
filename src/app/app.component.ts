@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService, private profileService: ProfileService) { }
 
-  ngOnInit(): void { 
-    this.authService.logoutEvent$.subscribe(state => { 
+  ngOnInit(): void {
+    this.authService.logoutEvent$.subscribe(state => {
       if (state) this.setOnline(false);
     })
     this.setOnline(true);
@@ -24,7 +24,9 @@ export class AppComponent implements OnInit {
   }
 
   private setOnline(online: boolean) {
-    const profile: Profile = this.authService.user$.getValue().profile;
+    const profile = this.authService.user?.profile;
+    console.log(profile?.online);
+    if (!profile || profile.online) return;
     profile.online = online;
     profile.lastTimeOnline = new Date();
     this.profileService.updateProfile(profile).subscribe();

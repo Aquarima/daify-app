@@ -26,22 +26,20 @@ export class AuthService {
   user$ = new BehaviorSubject(this.getStoredUser());
 
   /**
-   * Whether if an error has occured on a login request
+   * Whether if an error has occurred on a login request
    */
 
   loginError$ = new BehaviorSubject(false); // Whether
 
   /**
-   * Whether if an error has occured on a sign up request
+   * Whether if an error has occurred on a sign up request
    */
 
   signupError$ = new BehaviorSubject({});
 
-  /**
-   * 
-   */
-
   logoutEvent$ = new BehaviorSubject(false);
+
+  user!: User;
 
   /**
    * The location url to redirect when authentication is successful
@@ -53,11 +51,12 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private cookies: CookieService
-  ) { }
+  ) {
+    this.user$.subscribe(user => this.user = user);
+  }
 
   isAuthenticated(): boolean {
-    //return !(this.getToken() && new Date(this.cookies.get('access_token_expires_at') || '') > new Date());
-    return true;
+    return !(this.getAccessToken() && new Date(this.cookies.get('access_token_expires_at') || '') > new Date());
   }
 
   login(form: {username?: string, email?: string, password: string}) {
@@ -136,7 +135,8 @@ export class AuthService {
   }
 
   getStoredUser() {
-    return JSON.parse(localStorage.getItem('user') || '');
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 
   setOnSuccessRedirectTo(location: string) {
