@@ -33,7 +33,7 @@ export class ExploreComponent implements OnInit {
       this.loaded = true;
       return;
     }
-    this.challengeService.getChallengesByName(search.name).subscribe(data => {
+    this.challengeService.getChallengeByTitle(search.name).subscribe(data => {
       this.challenges = data.content;
       this.totalPages = data.totalPages;
     })

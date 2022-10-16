@@ -13,8 +13,8 @@ export class ChallengeService {
     return this.http.get<any>(`${env.apiUrl}/challenge/all?size=${size  || 12}&page=${page || 0}`);
   }
 
-  getChallengesByName(name: string) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/all/${name}`);
+  getChallengeByTitle(title: string) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/all/${title}`);
   }
 
   getChallengesByUser(userId: number, size?: number, page?: number) {

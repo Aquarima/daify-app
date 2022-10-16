@@ -4,7 +4,7 @@ import { ChallengeConfig } from "./challenge-config.model";
 export interface Challenge {
     id: number
     author: Profile
-    name: string
+    title: string
     description: string
     tags: string[]
     coverUrl: string

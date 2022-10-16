@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
 
   private setOnline(online: boolean) {
     const profile = this.authService.user?.profile;
-    console.log(profile?.online);
     if (!profile || profile.online) return;
     profile.online = online;
     profile.lastTimeOnline = new Date();

@@ -1,91 +1,189 @@
-@font-face { font-family: 'Sora'; src: url('/assets/fonts/Sora.ttf'); }
+@font-face {
+  font-family: 'Sora';
+  src: url('/assets/fonts/Sora.ttf');
+}
 
 $font-family: 'Sora';
 
 :root {
-    --color-primary: #5465FF;
-    --color-primary-hover: #4355FF;
-    --color-primary-2: #F8F8FB;
-    --color-secondary: #50D8D7;
-    --color-secondary-hover: #43D5D4;
-    --color-tertiary: #F46197;
-    --color-tertiary-2: #F6AE2D;
-    --color-tertiary-2-hover: #F5A81F;
-    --color-text: #3E3F5E;
-    --color-text-alt: #7D7E9E;
-    --color-text-alt-2: #ADAFCA;
-    --preset-font-size-tiny: .7em;
-    --preset-font-size-small: .87em;
-    --preset-font-size-normal: 1em;
-    --preset-font-size-medium: 1.6em;
-    --preset-font-size-large: 2em;
-    --preset-font-size-x-large: 2.8em;
+  --color-primary: #5465FF;
+  --color-primary-hover: #4355FF;
+  --color-primary-2: #F8F8FB;
+  --color-secondary: #50D8D7;
+  --color-secondary-hover: #43D5D4;
+  --color-tertiary: #F46197;
+  --color-tertiary-2: #F6AE2D;
+  --color-tertiary-2-hover: #F5A81F;
+  --color-text: #3E3F5E;
+  --color-text-alt: #7D7E9E;
+  --color-text-alt-2: #ADAFCA;
+  --preset-font-size-tiny: .7em;
+  --preset-font-size-small: .87em;
+  --preset-font-size-normal: 1em;
+  --preset-font-size-medium: 1.6em;
+  --preset-font-size-large: 2em;
+  --preset-font-size-x-large: 2.8em;
 }
 
 html {
+  width: 100%;
+  height: 100%;
+
+  body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
+    background-color: var(--color-primary-2);
+    font-family: $font-family;
 
-    body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--color-primary-2);
-        font-family: $font-family;
-
-        .main-content {
-            padding-top: 102px;
-            width: 100%;
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            box-sizing: border-box;
-        }
-
-        .twitter-link {
-            background-color: #1DA1F2;
-        }
-
-        .facebook-link {
-            background-color:#1877F2;
-        }
-
-        .spotify-link {
-            background-color: #1ED760;
-        }
-
-        .youtube-link {
-            background-color: #FF0000;
-        }
-
-        .github-link {
-            background-color: #171515;
-        }
-
-        .discord-link {
-            background-color: #5865f2;
-        }
-
-        .twitch-link {
-            background-color: #9146FF;
-        }
-
-        .instagram-link {
-            background-color: #E1306C;
-        }
+    .main-content {
+      padding-top: 102px;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      box-sizing: border-box;
     }
+
+    .user-input {
+
+      .user-input-box {
+        width: 350px;
+        position: relative;
+        display: flex;
+        border: 1px solid #DEDEEA;
+        border-radius: 8px;
+
+
+        label {
+          position: absolute;
+          top: 50%;
+          left: 24px;
+          transform: translateY(-50%);
+          transition: top ease .3s, font-size ease .3s;
+          display: block;
+          background-color: #FFF;
+          font-size: .85em;
+          color: var(--color-text-alt-2);
+          cursor: text;
+          pointer-events: none;
+        }
+
+        .form-control, select {
+          padding: 0 16px;
+          width: 100%;
+          height: 46px;
+          box-sizing: border-box;
+          border: none;
+          border-radius: 8px;
+          background-color: transparent;
+          outline: none;
+          font-weight: 600;
+          font-size: var(--preset-font-size-small);
+          font-family: $font-family;
+          color: var(--color-text);
+
+          &:focus {
+            border-color: var(--color-primary);
+          }
+        }
+
+        .form-control[type=date] {
+          font-weight: 500;
+          font-size: var(--preset-font-size-small);
+          font-family: $font-family;
+          color: var(--color-text);
+          cursor: pointer;
+        }
+
+        textarea {
+          font-weight: 500;
+          font-family: $font-family;
+          color: var(--color-text);
+          resize: none;
+        }
+
+        select {
+          cursor: pointer;
+        }
+
+        .submit-data-btn {
+          width: 60px;
+
+          border: none;
+          border-radius: 0 8px 8px 0;
+          background-color: var(--color-secondary);
+          cursor: pointer;
+
+          svg {
+            width: 50%;
+            height: 50%;
+            fill: #FFF;
+          }
+        }
+      }
+
+      .user-input-error {
+        margin: 8px 0 0 0;
+        font-size: var(--preset-font-size-small);
+        color: #FF5252;
+      }
+    }
+
+    .twitter-link {
+      background-color: #1DA1F2;
+    }
+
+    .facebook-link {
+      background-color: #1877F2;
+    }
+
+    .spotify-link {
+      background-color: #1ED760;
+    }
+
+    .youtube-link {
+      background-color: #FF0000;
+    }
+
+    .github-link {
+      background-color: #171515;
+    }
+
+    .discord-link {
+      background-color: #5865f2;
+    }
+
+    .twitch-link {
+      background-color: #9146FF;
+    }
+
+    .instagram-link {
+      background-color: #E1306C;
+    }
+  }
+}
+
+.user-input-active {
+
+  label {
+    padding: 0 4px;
+    top: 0;
+    left: 16px;
+    font-size: .75em;
+  }
 }
 
 .hidden {
-    display: none!important;
+  display: none !important;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }

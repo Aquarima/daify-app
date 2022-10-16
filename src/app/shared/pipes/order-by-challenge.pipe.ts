@@ -11,15 +11,15 @@ export class OrderByChallengePipe implements PipeTransform {
     if (!challenges || order === '' || !order) return challenges;
     if (challenges.length <= 1) return challenges;
     switch (order) {
-      case 'alphabetical': return challenges.sort(this.compareByName);
+      case 'alphabetical': return challenges.sort(this.compareByTitle);
       case 'start': return challenges.sort(this.compareByStart);
       case 'duration': return challenges.sort(this.compareByDuration);
     }
     return challenges;
   }
 
-  private compareByName(a: Challenge, b: Challenge) {
-    return a.name > b.name ? 1 : 0;
+  private compareByTitle(a: Challenge, b: Challenge) {
+    return a.title > b.title ? 1 : 0;
   }
 
   private compareByDuration(a: Challenge, b: Challenge) {
