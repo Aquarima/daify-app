@@ -38,7 +38,10 @@
                   <label for="title">Title</label>
                   <input id="title" class="form-control" name="title" type="text" #text_input formControlName="title">
                 </div>
-                <p class="user-input-error"></p>
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('required')">Title is required</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('minlength')">Title must be 2 or more characters</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('maxlength')">Title must be 24 or less characters</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('pattern')">Please enter a valid title</p>
               </div>
             </div>
             <div class="attr">
@@ -49,7 +52,8 @@
                   <label for="description">Description</label>
                   <textarea id="description" class="form-control" name="description" #text_input rows="5" cols="33" formControlName="description"></textarea>
                 </div>
-                <p class="user-input-error"></p>
+                <p class="user-input-error" *ngIf="challengeForm.get('description')?.hasError('maxlength')">Description must be 128 or less characters</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('description')?.hasError('pattern')">Please enter a valid description</p>
               </div>
             </div>
             <div class="attr">
@@ -68,7 +72,6 @@
                     </svg>
                   </button>
                 </div>
-                <p class="user-input-error"></p>
               </div>
             </div>
           </div>
@@ -83,7 +86,6 @@
                     <option value="accessType" *ngFor="let accessType of getAccessTypes()">{{accessType}}</option>
                   </select>
                 </div>
-                <p class="user-input-error"></p>
               </div>
             </div>
             <div class="attr">
@@ -92,9 +94,9 @@
               <div class="user-input user-input-active">
                 <div class="user-input-box">
                   <label for="start">Start date</label>
-                  <input id="start" class="form-control" name="start" type="datetime-local" [min]="getDefaultStart()" [valueAsDate]="getDefaultStart()" formControlName="start">
+                  <input id="start" class="form-control" name="start" type="datetime-local" [min]="getDefaultStart()" formControlName="start">
                 </div>
-                <p class="user-input-error"></p>
+                <p class="user-input-error" *ngIf="challengeForm.get('start')?.hasError('required')">Start date is required</p>
               </div>
             </div>
             <div class="attr">
@@ -103,9 +105,9 @@
               <div class="user-input user-input-active">
                 <div class="user-input-box">
                   <label for="end">End date</label>
-                  <input id="end" class="form-control" name="end" type="datetime-local" [min]="getDefaultStart()" [valueAsDate]="getDefaultEnd()" formControlName="end">
+                  <input id="end" class="form-control" name="end" type="datetime-local" [min]="getDefaultStart()" formControlName="end">
                 </div>
-                <p class="user-input-error"></p>
+                <p class="user-input-error" *ngIf="challengeForm.get('end')?.hasError('required')">End date is required</p>
               </div>
             </div>
             <div class="attr">
@@ -116,7 +118,10 @@
                   <label for="members-limit">Members limit</label>
                   <input id="members-limit" class="form-control" name="members-limit" type="number" value="2" min="2" max="30" formControlName="limit">
                 </div>
-                <p class="user-input-error"></p>
+                <p class="user-input-error" *ngIf="challengeForm.get('limit')?.hasError('required')">Members limit is required</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('limit')?.hasError('minlength')">Members limit must be 2 or more members</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('limit')?.hasError('maxlength')">Members limit must be 60 or less members</p>
+                <p class="user-input-error" *ngIf="challengeForm.get('limit')?.hasError('pattern')">Please enter a valid number</p>
               </div>
             </div>
             <div class="attr">

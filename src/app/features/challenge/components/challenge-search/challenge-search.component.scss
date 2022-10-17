@@ -73,7 +73,7 @@
         cursor: pointer;
 
         svg {
-          padding: 2px 5px 0 0;
+          padding: 2px 0 0 0;
           width: 28px;
           height: 28px;
           box-sizing: border-box;
@@ -84,10 +84,6 @@
       select {
         cursor: pointer;
         border-right: 8px solid transparent;
-      }
-
-      .options option {
-        height: 32px;
       }
     }
 
@@ -103,7 +99,7 @@
 
     .search-history-disabled {
       opacity: 0;
-      visibility: 0;
+      visibility: hidden;
     }
 
     .search-history {

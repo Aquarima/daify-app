@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {AccessType} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-challenge-create',
@@ -13,13 +13,35 @@ export class ChallengeCreateComponent implements OnInit {
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
   challengeForm = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
+    title: new FormControl('',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(24),
+        Validators.pattern('^[a-zA-Z0-9 \'\]*$')
+      ]),
+    description: new FormControl('',
+      [
+        Validators.maxLength(128),
+        Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')
+      ]),
     tag: new FormControl(''),
     access: new FormControl<AccessType>(AccessType.FREE),
-    start: new FormControl<Date>(this.getDefaultStart()),
-    end: new FormControl<Date>(this.getDefaultEnd()),
-    limit: new FormControl<number>(2),
+    start: new FormControl(null,
+      [
+      Validators.required
+    ]),
+    end: new FormControl(null,
+      [
+      Validators.required
+    ]),
+    limit: new FormControl<number>(2,
+      [
+        Validators.required,
+        Validators.min(2),
+        Validators.max(60),
+        Validators.pattern('^0*?[1-9]\\d*$')
+    ]),
     spectators: new FormControl<boolean>(false)
   })
 
@@ -58,7 +80,7 @@ export class ChallengeCreateComponent implements OnInit {
 
   onTagAdd() {
     const tag = this.challengeForm.value.tag;
-    if (!tag) return;
+    if (!tag || this.tags.length > 3 || this.tags.includes(tag)) return;
     this.tags.push(tag);
   }
 

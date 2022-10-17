@@ -79,12 +79,13 @@ html {
           box-sizing: border-box;
           border: none;
           border-radius: 8px;
-          background-color: transparent;
+          background-color: #FFF;
           outline: none;
           font-weight: 600;
           font-size: var(--preset-font-size-small);
           font-family: $font-family;
           color: var(--color-text);
+          cursor: pointer;
 
           &:focus {
             border-color: var(--color-primary);
