@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment as env } from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment as env} from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FriendService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  getFriendsByUser(userId: number) {
-    return this.http.get<any>(`${env.apiUrl}/user/profile/${userId}/friend`);
-  }
+    getFriendsByProfileId(userId: number) {
+        return this.http.get<any>(`${env.apiUrl}/user/profile/${userId}/friend`);
+    }
 }

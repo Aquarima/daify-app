@@ -12,7 +12,6 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowseResultsListComponent } from './components/browse-results-list/browse-results-list.component';
 import { ChallengeCreateComponent } from './pages/challenge-create/challenge-create.component';
-import {ImageCropperModule} from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import {ImageCropperModule} from "ngx-image-cropper";
         CoreModule,
         LayoutModule,
         SharedModule,
-        ImageCropperModule,
     ],
   exports: [
     BrowseResultsListComponent,

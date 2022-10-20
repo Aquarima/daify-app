@@ -1,1 +1,1 @@
-export { NotificationsComponent } from './notifications/notifications.component';
+export {InboxComponent} from './inbox/inbox.component';

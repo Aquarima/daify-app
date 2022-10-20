@@ -1,15 +1,15 @@
-import { Profile } from "../user";
-import { ChallengeConfig } from "./challenge-config.model";
+import {Profile} from "../user";
+import {ChallengeConfig} from "./challenge-config.model";
 
 export interface Challenge {
-    id: number
-    author: Profile
-    title: string
-    description: string
-    tags: string[]
-    coverUrl: string
-    iconUrl: string
-    config: ChallengeConfig
+    id: number,
+    author: Profile,
+    title: string,
+    description: string,
+    tags: string[],
+    coverUrl: string,
+    iconUrl: string,
+    config: ChallengeConfig,
     creationDate: Date
 }
 

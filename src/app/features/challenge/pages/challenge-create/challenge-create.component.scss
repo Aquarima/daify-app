@@ -135,6 +135,7 @@
 
       .edit-zone {
         display: flex;
+        flex-wrap: wrap;
         gap: 32px;
 
         > div {
@@ -186,6 +187,14 @@
             margin: 8px 0 16px 0;
             font-size: var(--preset-font-size-small);
             color: var(--color-text-alt);
+          }
+
+          .user-input {
+            width: 100%;
+
+            .user-input-box {
+              width: 100%;
+            }
           }
 
           input[type=checkbox] {
