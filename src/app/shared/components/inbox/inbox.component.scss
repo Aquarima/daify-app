@@ -89,6 +89,7 @@
         position: relative;
         display: flex;
         justify-content: center;
+        font-weight: 500;
 
         &:hover::after {
           border-color: #4285F4;

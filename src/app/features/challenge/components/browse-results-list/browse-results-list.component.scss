@@ -46,13 +46,14 @@
     }
 
     .display-grid {
-      grid-template-columns: repeat(auto-fit, 300px);
-      gap: 64px;
+      grid-template-columns: repeat(auto-fit, 290px);
+      row-gap: 48px;
+      column-gap: 16px;
     }
 
     .display-list {
       grid-template-columns: repeat(1, 100%);
-      gap: 64px;
+      gap: 48px;
     }
 
     .more {
@@ -70,6 +71,7 @@
         border-radius: 8px;
         background-color: var(--color-secondary);
         font-weight: 600;
+        font-family: 'Sora';
         font-size: var(--preset-font-size-normal);
         color: #FFF;
         cursor: pointer;
