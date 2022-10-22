@@ -1,4 +1,3 @@
-<router-outlet></router-outlet>
 <dfy-header></dfy-header>
 <main class="main-content">
     <div class="browse">
@@ -9,18 +8,18 @@
             </div>
         </div>
         <dfy-challenge-search
-            (searchEvent)="onSearch($event)"
-            (groupByEvent)="onGroupBySelected($event)"
-            (displayModeEvent)="onDisplayModeSelected($event)">
+                (searchEvent)="onSearch($event)"
+                (groupByEvent)="onGroupBySelected($event)"
+                (displayModeEvent)="onDisplayModeSelected($event)">
         </dfy-challenge-search>
         <div class="item-list">
             <dfy-browse-results-list
-                [challenges]="challenges"
-                [displayMode]="displayMode"
-                [groupBy]="groupBy"
-                [totalPages]="totalPages"
-                [loaded]="loaded"
-                (showMoreEvent)="onShowMore($event)">
+                    [challenges]="challenges"
+                    [displayMode]="displayMode"
+                    [groupBy]="groupBy"
+                    [totalPages]="totalPages"
+                    [loaded]="loaded"
+                    (showMoreEvent)="onShowMore($event)">
             </dfy-browse-results-list>
         </div>
     </div>

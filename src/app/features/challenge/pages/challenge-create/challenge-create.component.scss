@@ -5,7 +5,7 @@
   background-color: var(--color-primary-2);
 
   .econtent {
-    width: 65%;
+    width: 70%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -53,14 +53,15 @@
       flex-direction: column;
 
       .action-bar {
-        margin-top: 32px;
-        padding: 0 32px;
+        margin: 24px 0;
+        padding: 32px;
         width: 100%;
-        height: 80px;
+        min-height: 80px;
         box-sizing: border-box;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         gap: 24px;
         box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
         border-radius: 8px;
@@ -103,9 +104,11 @@
         background-color: rgba(0, 0, 0, 0.025);
 
         .placeholder {
+          padding: 32px 0;
           width: 100%;
           height: 100%;
           display: flex;
+          box-sizing: border-box;
           flex-direction: column;
           justify-content: center;
           align-items: center;
@@ -117,7 +120,7 @@
           }
 
           p {
-            margin: 8px 0 0 0;
+            margin: 16px 0 0 0;
             max-width: 400px;
             text-align: center;
             font-weight: 500;

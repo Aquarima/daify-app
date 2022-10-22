@@ -38,9 +38,8 @@ html {
     font-family: $font-family;
 
     .main-content {
-      padding-top: 102px;
+      margin-top: 32px;
       width: 100%;
-      height: fit-content;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -187,4 +186,14 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+@media only screen and (max-width: 1050px) {
+
+  :host {
+    .main-content {
+      padding-top: 156px;
+      background-color: red;
+    }
+  }
 }

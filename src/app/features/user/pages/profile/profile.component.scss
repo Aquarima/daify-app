@@ -7,8 +7,7 @@
   .main-content {
 
     .container {
-      padding-top: 40px;
-      width: 65%;
+      width: 70%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -114,7 +113,6 @@
           }
 
           .username {
-            font-size: 16px;
             font-weight: 400;
             font-size: var(--preset-font-size-small);
             color: var(--color-text-alt);
@@ -175,7 +173,7 @@
           justify-content: center;
           box-sizing: border-box;
           border-radius: 8px;
-          box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+          box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
           background-color: #FFF;
 
           ul {
@@ -274,7 +272,7 @@
             margin-bottom: 32px;
             padding: 8px;
             width: fit-content;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+            box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
             border-radius: 8px;
             background-color: #FFF;
 
