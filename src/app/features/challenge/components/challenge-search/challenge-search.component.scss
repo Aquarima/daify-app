@@ -203,7 +203,11 @@
         width: 24px;
         height: 24px;
         transition: fill .3s;
-        fill: rgba(62, 63, 94, 0.5);
+        fill: var(--color-text-alt-2);
+
+        &:hover {
+          fill: var(--color-text-alt);
+        }
       }
     }
 

@@ -49,7 +49,7 @@
     .display-grid {
       grid-template-columns: repeat(auto-fit, 290px);
       row-gap: 48px;
-      column-gap: 16px;
+      column-gap: 32px;
     }
 
     .display-list {
@@ -88,8 +88,9 @@
       gap: 32px;
 
       > div {
-        width: 48px;
-        height: 48px;
+        padding: 4px;
+        min-width: 40px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -98,35 +99,43 @@
         background-color: #FFF;
         cursor: pointer;
 
-        span {
-          width: 80%;
-          height: 80%;
+        > div {
+          padding: 0 8px;
+          width: 100%;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
+          box-sizing: border-box;
           border-radius: 8px;
           background-color: var(--color-secondary);
-          font-size: var(--preset-font-size-normal);
-          color: #FFF;
 
           &:hover {
             background-color: var(--color-secondary-hover);
           }
-        }
 
-        input {
-          padding: 0;
-          width: 80%;
-          height: 80%;
-          outline: none;
-          border: none;
-          border-radius: 8px;
-          background-color: var(--color-secondary);
-          text-align: center;
-          text-overflow: ellipsis;
-          font-size: var(--preset-font-size-normal);
-          font-family: 'Sora';
-          color: #FFF;
+          span, label {
+            height: fit-content;
+            display: inline-block;
+            word-spacing: 4px;
+            font-size: var(--preset-font-size-normal);
+            color: #FFF;
+          }
+
+          input {
+            margin-right: 4px;
+            padding: 0;
+            width: 26px;
+            height: 80%;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            text-align: center;
+            text-overflow: ellipsis;
+            font-size: var(--preset-font-size-normal);
+            font-family: 'Sora';
+            color: #FFF;
+          }
         }
       }
     }
