@@ -13,6 +13,7 @@
     row-gap: 64px;
 
     .found-tags {
+      width: 100%;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -59,7 +60,7 @@
     .more {
       padding: 8px;
       width: fit-content;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+      box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
       border-radius: 8px;
       background-color: #FFF;
 
@@ -78,6 +79,54 @@
 
         &:hover {
           background-color: var(--color-secondary-hover);
+        }
+      }
+    }
+
+    .page-nav {
+      display: flex;
+      gap: 32px;
+
+      > div {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+        border-radius: 8px;
+        background-color: #FFF;
+        cursor: pointer;
+
+        span {
+          width: 80%;
+          height: 80%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 8px;
+          background-color: var(--color-secondary);
+          font-size: var(--preset-font-size-normal);
+          color: #FFF;
+
+          &:hover {
+            background-color: var(--color-secondary-hover);
+          }
+        }
+
+        input {
+          padding: 0;
+          width: 80%;
+          height: 80%;
+          outline: none;
+          border: none;
+          border-radius: 8px;
+          background-color: var(--color-secondary);
+          text-align: center;
+          text-overflow: ellipsis;
+          font-size: var(--preset-font-size-normal);
+          font-family: 'Sora';
+          color: #FFF;
         }
       }
     }

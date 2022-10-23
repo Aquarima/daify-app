@@ -48,14 +48,15 @@
 
         .right-box {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
 
           .mark-all-btn {
             margin-right: 25px;
             border: none;
             background-color: transparent;
             font-size: var(--preset-font-size-small);
-            color: var(--color-tertiary);
+            font-family: 'Sora';
+            color: var(--color-primary);
             cursor: pointer;
 
             &:hover {

@@ -38,7 +38,7 @@ html {
     font-family: $font-family;
 
     .main-content {
-      margin-top: 32px;
+      margin-top: 112px;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -190,10 +190,7 @@ input:-webkit-autofill:active {
 
 @media only screen and (max-width: 1050px) {
 
-  :host {
-    .main-content {
-      padding-top: 156px;
-      background-color: red;
-    }
+  .main-content {
+    margin-top: 328px!important;
   }
 }

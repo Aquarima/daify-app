@@ -1,6 +1,8 @@
 :host {
-  padding: 24px 100px;
+  padding: 32px 40px;
   width: 100%;
+  position: fixed;
+  top: 0;
   z-index: 99;
   display: flex;
   justify-content: space-between;
@@ -107,10 +109,9 @@
   }
 
   .app-name {
-    margin-right: 24px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.4em;
+    font-size: var(--preset-font-size-medium);
     color: #FFF;
   }
 
@@ -277,6 +278,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
 
         .user-avatar-large {
           margin-top: 16px;
@@ -362,9 +364,18 @@
 @media only screen and (max-width: 1050px) {
 
   :host {
-    height: 156px;
     flex-direction: column;
-    justify-content: center !important;
+    justify-content: center!important;
     gap: 16px;
+
+    .app-name {
+      font-size: var(--preset-font-size-large);
+    }
+
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
   }
 }

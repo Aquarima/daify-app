@@ -1,4 +1,7 @@
 :host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-primary-2);
 
   .main-content {
