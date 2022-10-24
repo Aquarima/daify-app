@@ -1,57 +1,61 @@
-import { Component, ElementRef, OnInit, Output, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject, delay } from 'rxjs';
-import { Challenge, Search } from 'src/app/core/models/challenge';
-import { ChallengeService } from 'src/app/core/services/challenge.service';
+import {Component, ElementRef, NgZone, OnInit, Output, ViewContainerRef} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Challenge, Search} from 'src/app/core/models/challenge';
+import {ChallengeService} from 'src/app/core/services/challenge.service';
 
 @Component({
-  selector: 'dfy-explore',
-  templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.scss']
+    selector: 'dfy-explore',
+    templateUrl: './explore.component.html',
+    styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
 
-  @Output('show_more_btn') showMoreBtn!: ElementRef;
+    @Output('show_more_btn') showMoreBtn!: ElementRef;
 
-  challenges: Challenge[] = []
-  groupBy: string = 'alphabetical';
-  displayMode: string = 'grid';
-  page: number = 0;
-  totalPages: number = 0;
-  loaded: boolean = false;
+    challenges: Challenge[] = []
+    groupBy: string = 'alphabetical';
+    displayMode: string = 'grid';
+    page: number = 0;
+    totalPages: number = 0;
+    loaded: boolean = false;
+    dataUpdateEvent: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
-
-  ngOnInit(): void { }
-
-  onSearch(search: Search) {
-    this.loaded = false;
-    if (!search.name) {
-      this.challengeService.getChallenges(12, this.page).subscribe(async data => {
-        this.challenges = data.content;
-        this.totalPages = data.totalPages;
-      })
-      this.loaded = true;
-      return;
+    constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService, private ngZone: NgZone) {
     }
-    this.challengeService.getChallengeByTitle(search.name).subscribe(data => {
-      this.challenges = data.content;
-      this.totalPages = data.totalPages;
-    })
-    this.loaded = true;
-  }
 
-  onGroupBySelected(option: any) {
-    this.groupBy = option;
-  }
+    ngOnInit(): void {
+    }
 
-  onDisplayModeSelected(mode: any) {
-    this.displayMode = mode;
-  }
+    onSearch(search: Search) {
+        this.loaded = false;
+        if (!search.name) {
+            this.challengeService.getChallenges(12, this.page).subscribe(async data => {
+                this.challenges = data.content;
+                this.totalPages = data.totalPages;
+                this.dataUpdateEvent.next(true);
+            })
+            this.loaded = true;
+            return;
+        }
+        this.challengeService.getChallengeByTitle(search.name).subscribe(data => {
+            this.challenges = data.content;
+            this.totalPages = data.totalPages;
+        })
+        this.loaded = true;
+    }
 
-  onShowMore(nextPage: number) {
-    this.challengeService.getChallenges(12, nextPage).subscribe(data => {
-      Array.prototype.push.apply(this.challenges, data.content);
-      this.totalPages = data.totalPages;
-    })
-  }
+    onGroupBySelected(option: any) {
+        this.groupBy = option;
+    }
+
+    onDisplayModeSelected(mode: any) {
+        this.displayMode = mode;
+    }
+
+    onShowMore(nextPage: number) {
+        this.challengeService.getChallenges(12, nextPage).subscribe(data => {
+            Array.prototype.push.apply(this.challenges, data.content);
+            this.totalPages = data.totalPages;
+        })
+    }
 }
