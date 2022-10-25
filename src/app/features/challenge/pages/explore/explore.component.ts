@@ -26,7 +26,7 @@ export class ExploreComponent implements OnInit {
   onSearch(search: Search) {
     this.loaded = false;
     if (!search.name) {
-      this.challengeService.getChallenges(12, this.page).subscribe(async data => {
+      this.challengeService.getChallenges(this.page).subscribe( data => {
         this.challenges = data.content;
         this.totalPages = data.totalPages;
       })
@@ -49,7 +49,7 @@ export class ExploreComponent implements OnInit {
   }
 
   onShowMore(nextPage: number) {
-    this.challengeService.getChallenges(12, nextPage).subscribe(data => {
+    this.challengeService.getChallenges(nextPage).subscribe(data => {
       Array.prototype.push.apply(this.challenges, data.content);
       this.totalPages = data.totalPages;
     })

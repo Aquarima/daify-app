@@ -28,7 +28,7 @@ export class MyListComponent implements OnInit {
     this.loaded = false;
     if (!search.name) {
       const loggedUser: User = this.authService.getStoredUser();
-      this.challengeService.getChallengesByUser(loggedUser.id, 12).
+      this.challengeService.getChallengesByUser(loggedUser.id).
         subscribe(data => {
           this.challenges = data.content;
           this.totalPages = data.totalPages;
@@ -49,7 +49,8 @@ export class MyListComponent implements OnInit {
   }
 
   onShowMore(nextPage: number) {
-    this.challengeService.getChallengesByUser(12, nextPage).subscribe(data => {
+    const user: User = this.authService.user;
+    this.challengeService.getChallengesByUser(user.id, nextPage).subscribe(data => {
       Array.prototype.push.apply(this.challenges, data.content);
       this.totalPages = data.totalPages;
     })
