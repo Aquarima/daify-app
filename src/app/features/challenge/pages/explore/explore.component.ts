@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, Output, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject, delay } from 'rxjs';
-import { Challenge, Search } from 'src/app/core/models/challenge';
-import { ChallengeService } from 'src/app/core/services/challenge.service';
+import {Component, OnInit,} from '@angular/core';
+import {Search} from 'src/app/core/models/challenge';
+import {BehaviorSubject} from "rxjs";
+import {environment as env} from "../../../../../environments/environment";
 
 @Component({
   selector: 'dfy-explore',
@@ -10,34 +10,19 @@ import { ChallengeService } from 'src/app/core/services/challenge.service';
 })
 export class ExploreComponent implements OnInit {
 
-  @Output('show_more_btn') showMoreBtn!: ElementRef;
-
-  challenges: Challenge[] = []
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
-  page: number = 0;
-  totalPages: number = 0;
-  loaded: boolean = false;
+  request: BehaviorSubject<any> = new BehaviorSubject({url: '', replace: false});
 
-  constructor(public viewContainerRef: ViewContainerRef, private challengeService: ChallengeService) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   onSearch(search: Search) {
-    this.loaded = false;
-    if (!search.name) {
-      this.challengeService.getChallenges(this.page).subscribe( data => {
-        this.challenges = data.content;
-        this.totalPages = data.totalPages;
-      })
-      this.loaded = true;
+    if (!search.title) {
+      this.request.next({url: `${env.apiUrl}/challenge/all?size&page`, replace: false});
       return;
     }
-    this.challengeService.getChallengeByTitle(search.name).subscribe(data => {
-      this.challenges = data.content;
-      this.totalPages = data.totalPages;
-    })
-    this.loaded = true;
+    this.request.next({url: `${env.apiUrl}/challenge/all/${search.title}?size&page`, replace: true});
   }
 
   onGroupBySelected(option: any) {
@@ -46,12 +31,5 @@ export class ExploreComponent implements OnInit {
 
   onDisplayModeSelected(mode: any) {
     this.displayMode = mode;
-  }
-
-  onShowMore(nextPage: number) {
-    this.challengeService.getChallenges(nextPage).subscribe(data => {
-      Array.prototype.push.apply(this.challenges, data.content);
-      this.totalPages = data.totalPages;
-    })
   }
 }

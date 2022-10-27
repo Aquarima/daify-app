@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Challenge } from 'src/app/core/models/challenge';
+import {ChallengeService} from "../../../../core";
 
 @Component({
   selector: 'dfy-challenge-card',
@@ -11,10 +12,14 @@ export class ChallengeCardComponent implements OnInit {
   @Input() challenge!: Challenge;
 
   @ViewChild('tag_list') tagList!: ElementRef;
-  
-  constructor() { }
+
+  constructor(private challengeService: ChallengeService) { }
 
   ngOnInit(): void { }
+
+  getColorByTag(title: string) {
+    return this.challengeService.getColorByTag(title);
+  }
 
   getDuration() {
     let d1: Date = new Date(this.challenge.config.startAt);

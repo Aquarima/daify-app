@@ -12,15 +12,16 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private profileService: ProfileService) { }
 
   ngOnInit(): void {
-    this.authService.logoutEvent$.subscribe(state => {
+
+    /*this.authService.logoutEvent$.subscribe(state => {
       if (state) this.setOnline(false);
     })
-    this.setOnline(true);
+    this.setOnline(true);*/
   }
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler() {
-    this.setOnline(false);
+    //this.setOnline(false);
   }
 
   private setOnline(online: boolean) {

@@ -3,7 +3,8 @@
 </div>
 <div class="content" *ngIf="loaded">
   <div class="found-tags">
-    <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}" [ngStyle]="{'background-color': getTagColor(tag)}"
+    <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}"
+          [ngStyle]="{'background-color': getColorByTag(tag)}"
           *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
   </div>
   <div class="items display-{{displayMode}}">
@@ -12,60 +13,4 @@
                         *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
     </dfy-challenge-card>
   </div>
-  <div class="more" *ngIf="pageIndex != totalPages && totalPages != -1">
-    <button class="show-more-btn" #show_more_btn (click)="onShowMore()">Show More</button>
-  </div>
-  <!--<div class="page-nav">
-    <div *ngIf="totalPages >= 1">
-      <div>
-        <span>1</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 2">
-      <div>
-        <span>2</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 3">
-      <div>
-        <span>3</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 4">
-      <div>
-        <span>4</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 5">
-      <div>
-        <span>5</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 6">
-      <div>
-        <span>6</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 7">
-      <div>
-        <span>7</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 8">
-      <div>
-        <span>8</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages >= 9">
-      <div>
-        <span>9</span>
-      </div>
-    </div>
-    <div *ngIf="totalPages > 9">
-      <div>
-        <input id="custom-page" name="custom-page" type="text" placeholder="...">
-        <label for="custom-page">on {{totalPages}}</label>
-      </div>
-    </div>
-  </div>-->
 </div>

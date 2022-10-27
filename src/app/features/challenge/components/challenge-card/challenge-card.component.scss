@@ -93,12 +93,7 @@
       }
     }
 
-    .challenge-stats {
-      margin-top: 24px;
-    }
-
     .challenge-tags {
-      margin-top: 24px;
       padding: 0 24px;
     }
   }
@@ -211,17 +206,17 @@
       list-style-type: none;
 
       li {
-        padding: 0 8px;
-        min-width: 50px;
-        height: 24px;
+        padding: 4px 8px;
+        min-width: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 8px;
-        background-color: #F5F5F5;
+        background-color: var(--color-tertiary);
         font-weight: 500;
         font-size: var(--preset-font-size-tiny);
-        color: var(--color-text-alt-2);
+        color: #FFF;
+        cursor: pointer;
       }
     }
   }

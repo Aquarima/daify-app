@@ -1,55 +1,59 @@
 :host {
-    margin-top: 64px;
-    padding: 32px 0;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    background-color: #FFF;
+  margin-top: 64px;
+  padding: 48px 0 24px 0;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  background-color: #FFF;
 
-    .content {
+  .content {
 
-        .social-items {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
+    .social-items {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
 
-            a {
-                transition: transform ease .3s;
+      a {
+        transition: transform ease .3s;
 
-                &:hover {
-                    transform: translate(0, -3px);
-                }
-
-                svg {
-                    width: 24px;
-                    height: 24px;
-                    fill: var(--color-text);
-                }
-            }
+        &:hover {
+          transform: translate(0, -3px);
         }
-    }
 
-    .lower-content {
-        margin: 32px auto 0 auto;
-        padding-top: 16px;
-        width: 80%;
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid #E6E6EF;
-        font-weight: 500;
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+
+  .lower-content {
+    margin: 32px auto 0 auto;
+    padding-top: 16px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #E6E6EF;
+    font-weight: 500;
+    color: var(--color-text);
+
+    ul {
+      display: flex;
+      gap: 16px;
+      list-style-type: none;
+
+      a {
+        text-decoration: none;
         color: var(--color-text);
 
-        ul {
-            display: flex;
-            gap: 16px;
-            list-style-type: none;
-
-            a {
-                text-decoration: none;
-                color: var(--color-text);
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
+        &:hover {
+          text-decoration: underline;
         }
+      }
     }
+  }
 }

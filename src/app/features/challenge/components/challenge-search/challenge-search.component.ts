@@ -73,7 +73,7 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
     onSearch(name?: string) {
         this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
         this.searchInputNode.nativeElement.blur();
-        const value = (name) ? name : this.getSearch().name;
+        const value = (name) ? name : this.getSearch().title;
         this.searchInputNode.nativeElement.parentNode.classList.add('active');
         this.setQueryParams({'search_query': (value) ? value : null});
     }
@@ -88,7 +88,7 @@ export class ChallengeSearchComponent implements OnInit, AfterViewInit {
 
     private getSearch(): Search {
         return {
-            name: `${this.searchForm.value.name}`
+            title: `${this.searchForm.value.name}`
         };
     }
 

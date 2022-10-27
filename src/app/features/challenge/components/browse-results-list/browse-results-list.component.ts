@@ -1,42 +1,75 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
-import { Challenge } from 'src/app/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
+import {Challenge, ChallengeService} from 'src/app/core';
+import {EMPTY, Observable, Subscription} from "rxjs";
+import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
+import {HttpClient} from "@angular/common/http";
 
-
-const colors: string[] = [
-  "#9ed44c", "#d44c4c", "#d44c90", "#804cd4",  "#4cd473", "#4cb2d4", "#d44c93",
-  "#c24cd4", "#9ed44c", "#d44c4c", "#d4c04c", "#5ed44c", "#be4cd4", "#4cb2d4",
-  "#b9d44c", "#d49b4c", "#d49b4c", "#4cd485", "#d2d44c", "#d44cb2", "#4cd489",
-  "#bdd44c", "#d48b4c", "#4cb9d4", "#d4b44c", "#d44c70",
-];
 
 @Component({
   selector: 'dfy-browse-results-list',
   templateUrl: './browse-results-list.component.html',
   styleUrls: ['./browse-results-list.component.scss']
 })
-export class BrowseResultsListComponent implements OnInit {
+export class BrowseResultsListComponent implements OnInit, OnDestroy {
 
   @ViewChildren("found_tag") tagNodes!: QueryList<ElementRef>;
 
-  @Output() showMoreEvent: EventEmitter<number> = new EventEmitter();
-
-  @Input() challenges: Challenge[] = [];
+  @Input() request: Observable<{url: string, replace: boolean}> = EMPTY;
   @Input() displayMode: string = 'grid';
   @Input() groupBy: string = 'alphabetical';
-  @Input() totalPages: number = -1;
-  @Input() loaded: boolean = false;
 
-  pageIndex: number = 1;
+  requestSubscription: Subscription = EMPTY_SUBSCRIPTION;
+
+  loaded: boolean = true;
+  challenges: Challenge[] = [];
+  totalPages: number = 0;
+  pageIndex: number = 0;
   filterTag: string | undefined;
 
-  constructor() { }
+  lastRequest: {url: string, replace: boolean} = {url: '', replace: false};
 
-  ngOnInit(): void { }
+  constructor(private http: HttpClient, private ngZone: NgZone, private challengeService: ChallengeService) {
+  }
 
-  getTagColor(title: string): string {
-    const alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
-    const letter = title.charAt(0);
-    return colors[alphabet.indexOf(letter.toLowerCase())];
+  ngOnInit(): void {
+    this.requestSubscription = this.request.subscribe(request => this.ngZone.run(() => this.executeUpdate(request)));
+  }
+
+  ngOnDestroy() {
+    this.requestSubscription.unsubscribe();
+  }
+
+  private executeUpdate(request?: {url: string, replace: boolean}) {
+    if (!request) request = this.lastRequest;
+    this.http.get(this.formatURL(request.url)).subscribe({
+      next: (data: any) => {
+        if (data.totalPages <= this.pageIndex) return;
+        if (request?.replace) this.challenges = [];
+        Array.prototype.push.apply(this.challenges, data.content);
+        this.totalPages = data.totalPages;
+      },
+      error: () => alert('Something went wrong...'),
+    });
+    this.lastRequest = request;
+  }
+
+  private formatURL(url: string): string {
+    return url.replace('size', `size=32`)
+      .replace('page', `page=${this.pageIndex++}`);
+  }
+
+  getColorByTag(title: string) {
+    return this.challengeService.getColorByTag(title);
   }
 
   onTagSelected(tag: string) {
@@ -47,9 +80,10 @@ export class BrowseResultsListComponent implements OnInit {
     this.filterTag = tag;
   }
 
-  onShowMore() {
-    const nextIdx = this.pageIndex++;
-    if (nextIdx >= this.totalPages) return;
-    this.showMoreEvent.emit(nextIdx);
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      this.executeUpdate();
+    }
   }
 }

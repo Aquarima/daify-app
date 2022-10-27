@@ -17,16 +17,14 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      row-gap: 16px;
-      column-gap: 16px;
+      gap: 12px;
 
       .tag-selected {
         filter: brightness(90%);
       }
 
       span {
-        padding: 0 16px;
-        height: 40px;
+        padding: 8px;
         display: flex;
         justify-content: center;
         align-items: center;

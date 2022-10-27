@@ -42,6 +42,6 @@
     </li>
   </ul>
   <ul class="challenge-tags" #tag_list *ngIf="challenge.config">
-    <li *ngFor="let tag of challenge.tags">{{tag}}</li>
+    <li *ngFor="let tag of challenge.tags" [ngStyle]="{'background-color': getColorByTag(tag)}">{{tag}}</li>
   </ul>
 </div>
