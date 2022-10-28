@@ -9,6 +9,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     row-gap: 64px;
 
@@ -45,14 +46,14 @@
     }
 
     .display-grid {
-      grid-template-columns: repeat(auto-fit, 290px);
-      row-gap: 48px;
-      column-gap: 32px;
+      grid-template-columns: repeat(auto-fit, 280px);
+      row-gap: 64px;
+      column-gap: 16px;
     }
 
     .display-list {
       grid-template-columns: repeat(1, 100%);
-      gap: 48px;
+      gap: 16px;
     }
 
     .more {
