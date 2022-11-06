@@ -1,6 +1,6 @@
-<div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ getBanner() +')'}">
+<div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ banner +')'}">
   <div class="challenge-preview-icon">
-    <img [src]="challenge.coverUrl" alt="">
+    <img [src]="icon" alt="">
   </div>
   <div class="challenge-access-security" *ngIf="challenge.config">
     <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('PUBLIC')">
@@ -29,7 +29,7 @@
   </div>
   <ul class="challenge-stats" *ngIf="challenge.config">
     <li>
-      <p class="value">{{getDuration()}}</p>
+      <p class="value">{{duration}}</p>
       <p class="name">Duration</p>
     </li>
     <li>
@@ -41,7 +41,7 @@
       <p class="name">Groups</p>
     </li>
   </ul>
-  <ul class="challenge-tags" #tag_list *ngIf="challenge.config">
+  <ul class="challenge-tags" #tag_list>
     <li *ngFor="let tag of challenge.tags" [ngStyle]="{'background-color': getColorByTag(tag)}">{{tag}}</li>
   </ul>
 </div>

@@ -9,7 +9,6 @@ import { Profile } from 'src/app/core/models/user';
 export class UserListComponent implements OnInit {
 
   @Input() profiles: Profile[] = [];
-  @Input() loaded: boolean = false;
 
   constructor() { }
 

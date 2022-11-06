@@ -12,6 +12,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowseResultsListComponent } from './components/browse-results-list/browse-results-list.component';
 import { ChallengeCreateComponent } from './pages/challenge-create/challenge-create.component';
+import { InviteFriendsComponent } from './components/invite-friends/invite-friends.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ChallengeCreateComponent } from './pages/challenge-create/challenge-cre
     MyListComponent,
     BrowseResultsListComponent,
     ChallengeCreateComponent,
+    InviteFriendsComponent,
   ],
     imports: [
         CommonModule,

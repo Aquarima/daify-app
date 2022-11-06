@@ -1,14 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ChallengeFilterPipe, ChallengeTagsCollectorPipe, OrderByChallengePipe} from './pipes';
-import {InboxComponent} from "./components";
+import {AlertBoxComponent, InboxComponent} from "./components";
 
 @NgModule({
     declarations: [
         OrderByChallengePipe,
         ChallengeTagsCollectorPipe,
         ChallengeFilterPipe,
-        InboxComponent
+        InboxComponent,
+        AlertBoxComponent
     ],
     imports: [
         CommonModule
@@ -16,7 +17,8 @@ import {InboxComponent} from "./components";
         ChallengeTagsCollectorPipe,
         ChallengeFilterPipe,
         OrderByChallengePipe,
-        InboxComponent
+        InboxComponent,
+        AlertBoxComponent
     ]
 })
 export class SharedModule {

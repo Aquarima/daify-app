@@ -16,7 +16,8 @@
         <div class="item-list">
             <dfy-browse-results-list
                 [displayMode]="displayMode"
-                [groupBy]="groupBy">
+                [groupBy]="groupBy"
+                [request]="request.asObservable()">
             </dfy-browse-results-list>
         </div>
     </div>

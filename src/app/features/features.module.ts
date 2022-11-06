@@ -14,7 +14,7 @@ import { UserModule } from './user/user.module';
     ReactiveFormsModule,
     CoreModule,
   ],
-  exports: [ 
+  exports: [
     HomeModule,
     AuthModule,
     ChallengeModule,

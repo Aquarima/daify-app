@@ -10,22 +10,24 @@ import { LayoutModule } from './layout/layout.module';
 import { FeaturesModule } from './features/features.module';
 import { CookieModule } from 'ngx-cookie';
 import { ReactiveFormsModule } from '@angular/forms';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    RouterModule,
-    CookieModule.withOptions(),
-    ReactiveFormsModule,
-    CoreModule,
-    FeaturesModule,
-    LayoutModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        RouterModule,
+        CookieModule.withOptions(),
+        ReactiveFormsModule,
+        CoreModule,
+        FeaturesModule,
+        LayoutModule,
+        SharedModule,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

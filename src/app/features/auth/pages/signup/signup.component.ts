@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {AuthService} from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +23,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
   errors: any = {};
   success: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.authService.signupError$.subscribe(errors => {
@@ -39,8 +40,12 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.textInputs.forEach(input => {
       const inputElement = input.nativeElement;
       const parentNode = inputElement.parentNode;
-      inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
-      inputElement.addEventListener('focus', () => { parentNode.classList.add('active') });
+      inputElement.addEventListener('focus', () => {
+        parentNode.classList.add('active')
+      });
+      inputElement.addEventListener('focus', () => {
+        parentNode.classList.add('active')
+      });
       inputElement.addEventListener('focusout', () => {
         if (inputElement.value === '') parentNode.classList.remove('active');
       });
@@ -49,7 +54,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     const entries = this.signupForm.value;
-    const confirmValid =  entries.password_confirm === entries.password;
+    const confirmValid = entries.password_confirm === entries.password;
     const agreementsValid = entries.agreements === true;
     if (confirmValid && agreementsValid) {
       this.authService.register(`${this.signupForm.value.username}`, `${this.signupForm.value.email}`, `${this.signupForm.value.password}`);

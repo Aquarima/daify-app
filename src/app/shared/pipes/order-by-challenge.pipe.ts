@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Challenge } from 'src/app/core';
-import { getDuration } from 'src/app/core/models/challenge/challenge.model';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Challenge} from 'src/app/core';
+import {getDuration} from 'src/app/core/models/challenge/challenge.model';
 
 @Pipe({
   name: 'orderByChallenge'
@@ -11,9 +11,12 @@ export class OrderByChallengePipe implements PipeTransform {
     if (!challenges || order === '' || !order) return challenges;
     if (challenges.length <= 1) return challenges;
     switch (order) {
-      case 'alphabetical': return challenges.sort(this.compareByTitle);
-      case 'start': return challenges.sort(this.compareByStart);
-      case 'duration': return challenges.sort(this.compareByDuration);
+      case 'alphabetical':
+        return challenges.sort(this.compareByTitle);
+      case 'start':
+        return challenges.sort(this.compareByStart);
+      case 'duration':
+        return challenges.sort(this.compareByDuration);
     }
     return challenges;
   }

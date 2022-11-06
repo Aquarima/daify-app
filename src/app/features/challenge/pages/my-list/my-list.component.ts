@@ -22,7 +22,7 @@ export class MyListComponent implements OnInit {
 
   onSearch(search: Search) {
     if (!search.title) {
-      this.request.next({url: `${env.apiUrl}/challenge/all?size&page`, replace: true});
+      this.request.next({url: `{API_URL}/challenge/author/${this.authService.user.id}?size&page`, replace: false});
       return;
     }
     this.search = search;

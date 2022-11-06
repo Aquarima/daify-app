@@ -6,14 +6,20 @@
 $font-family: 'Sora';
 
 :root {
+  --color-primary-rgb: 84, 101, 255;
   --color-primary: #5465FF;
   --color-primary-hover: #4355FF;
   --color-primary-2: #F8F8FB;
   --color-secondary: #50D8D7;
   --color-secondary-hover: #43D5D4;
   --color-tertiary: #F46197;
+  --color-tertiary-hover: #F35790;
   --color-tertiary-2: #F6AE2D;
   --color-tertiary-2-hover: #F5A81F;
+  --color-semantic-info: 0, 150, 255;
+  --color-semantic-warn: 253, 218, 13;
+  --color-semantic-success: 76, 175, 80;
+  --color-semantic-error: 255, 82, 82;
   --color-text: #3E3F5E;
   --color-text-alt: #7D7E9E;
   --color-text-alt-2: #ADAFCA;
@@ -25,20 +31,79 @@ $font-family: 'Sora';
   --preset-font-size-x-large: 2.8em;
 }
 
+// CSS Reset
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+div[ng-view] {
+  height: 100%;
+}
+
+button, input {
+  font-family: $font-family;
+}
+
+// End of CSS Reset
+
 html {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 
   body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     background-color: var(--color-primary-2);
     font-family: $font-family;
 
     .main-content {
-      margin-top: 128px;
+      margin-top: 112px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -48,93 +113,102 @@ html {
 
     .user-input {
 
-      .user-input-box {
-        width: 350px;
-        position: relative;
-        display: flex;
-        border: 1px solid #DEDEEA;
-        border-radius: 16px;
-
-        label {
-          position: absolute;
-          top: 50%;
-          left: 24px;
-          transform: translateY(-50%);
-          transition: top ease .3s, font-size ease .3s;
-          display: block;
-          background-color: #FFF;
-          font-size: .85em;
-          color: var(--color-text-alt-2);
-          cursor: text;
-          pointer-events: none;
-        }
-
-        .form-control, select {
-          padding: 0 16px;
-          width: 100%;
-          height: 46px;
-          box-sizing: border-box;
-          border: none;
-          border-radius: 16px;
-          background-color: #FFF;
-          outline: none;
-          font-weight: 600;
-          font-size: var(--preset-font-size-small);
-          font-family: $font-family;
-          color: var(--color-text);
-          cursor: pointer;
-
-          &:focus {
-            border-color: var(--color-primary);
-          }
-        }
-
-        .form-control[type=date] {
-          font-weight: 500;
-          font-size: var(--preset-font-size-small);
-          font-family: $font-family;
-          color: var(--color-text);
-          cursor: pointer;
-        }
-
-        textarea {
-          font-weight: 500;
-          font-family: $font-family;
-          color: var(--color-text);
-          resize: none;
-        }
-
-        select {
-          cursor: pointer;
-        }
-
-        .submit-data-btn {
-          width: 60px;
-          height: 100%;
-          position: absolute;
-          right: 0;
-          box-sizing: content-box;
-          border: none;
-          border-radius: 0 16px 16px 0;
-          background-color: var(--color-secondary);
-          cursor: pointer;
-
-          &:hover {
-            background-color: var(--color-secondary-hover);
-          }
-
-          svg {
-            width: 50%;
-            height: 50%;
-            fill: #FFF;
-          }
-        }
-      }
-
       .user-input-error {
         margin: 8px 0 0 0;
         font-size: var(--preset-font-size-small);
         color: #FF5252;
+      }
+    }
+
+    .user-input-box {
+      width: 100%;
+      position: relative;
+      display: flex;
+      border: 1px solid #DEDEEA;
+      border-radius: 8px;
+
+      &:focus-within {
+        border-color: var(--color-primary);
+      }
+
+      label {
+        position: absolute;
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+        transition: top ease .3s, font-size ease .3s;
+        display: block;
+        background-color: #FFF;
+        font-size: .85em;
+        color: var(--color-text-alt-2);
+        cursor: text;
+        pointer-events: none;
+      }
+
+      .form-control, select {
+        padding: 0 16px;
+        width: 100%;
+        height: 48px;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 8px;
+        background-color: #FFF;
+        outline: none;
+        font-weight: 600;
+        font-size: var(--preset-font-size-small);
+        font-family: $font-family;
+        color: var(--color-text);
+
+        &:focus {
+          border-color: var(--color-primary);
+        }
+      }
+
+      .form-control[type=date] {
+        cursor: text;
+      }
+
+      .form-control[type=date] {
+        font-weight: 500;
+        font-size: var(--preset-font-size-small);
+        font-family: $font-family;
+        color: var(--color-text);
+        cursor: pointer;
+      }
+
+      select {
+        cursor: pointer;
+      }
+
+      textarea {
+        height: 100%;
+        font-weight: 500;
+        font-family: $font-family;
+        color: var(--color-text);
+        resize: none;
+      }
+
+      .submit-btn {
+        padding: 0;
+        width: 60px;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        box-sizing: content-box;
+        border: none;
+        border-radius: 8px;
+        background-color: var(--color-secondary);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--color-secondary-hover);
+        }
+
+        svg {
+          width: 60%;
+          height: 60%;
+          fill: #FFF;
+        }
       }
     }
 
@@ -182,8 +256,32 @@ html {
   }
 }
 
+.active {
+
+  label {
+    padding: 0 4px;
+    top: 0;
+    left: 16px;
+    font-size: .75em;
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
 .hidden {
   display: none !important;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 input:-webkit-autofill,
@@ -196,6 +294,6 @@ input:-webkit-autofill:active {
 @media only screen and (max-width: 1050px) {
 
   .main-content {
-    margin-top: 328px!important;
+    margin-top: 328px !important;
   }
 }

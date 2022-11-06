@@ -5,98 +5,98 @@ import {Search} from 'src/app/core/models';
 import {SearchService} from 'src/app/core/services/search.service';
 
 @Component({
-    selector: 'dfy-challenge-search',
-    templateUrl: './challenge-search.component.html',
-    styleUrls: ['./challenge-search.component.scss']
+  selector: 'dfy-challenge-search',
+  templateUrl: './challenge-search.component.html',
+  styleUrls: ['./challenge-search.component.scss']
 })
 export class ChallengeSearchComponent implements OnInit, AfterViewInit {
 
-    @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
-    @Output() groupByEvent: EventEmitter<any> = new EventEmitter();
-    @Output() displayModeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
+  @Output() groupByEvent: EventEmitter<any> = new EventEmitter();
+  @Output() displayModeEvent: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild('backdrop') backdropNode!: ElementRef;
-    @ViewChild('search_history') searchHistoryNode!: ElementRef;
-    @ViewChild('name') searchInputNode!: ElementRef;
+  @ViewChild('backdrop') backdropNode!: ElementRef;
+  @ViewChild('search_history') searchHistoryNode!: ElementRef;
+  @ViewChild('name') searchInputNode!: ElementRef;
 
-    searchForm = new FormGroup({
-        'name': new FormControl(''),
-        'sortType': new FormControl(''),
+  searchForm = new FormGroup({
+    'name': new FormControl(''),
+    'sortType': new FormControl(''),
+  })
+
+  displayMode: any = 'grid';
+  history = this.searchService.fetchHistory('challenges');
+
+  constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) {
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      let searchQuery = '';
+      if (params['search_query']) searchQuery = params['search_query']
+      else this.setQueryParams({'search_query': null});
+      this.searchForm.controls['name'].setValue(searchQuery);
+      if (searchQuery) this.searchService.saveSearch('challenges', searchQuery);
+      this.searchEvent.emit(this.getSearch());
+      this.history = this.searchService.fetchHistory('challenges');
     })
+  }
 
-    displayMode: any = 'grid';
-    history = this.searchService.fetchHistory('challenges');
+  ngAfterViewInit() {
+    this.searchInputNode.nativeElement.addEventListener('focus', () => this.displaySearchHistory());
+    this.backdropNode.nativeElement.addEventListener('click', () => this.hideSearchHistory());
+    const inputElement = this.searchInputNode.nativeElement;
+    const parentNode = inputElement.parentNode;
+    if (this.searchForm.controls['name'].value) parentNode.classList.add('active');
+    inputElement.addEventListener('focus', () => {
+      parentNode.classList.add('active')
+    });
+    inputElement.addEventListener('focusout', () => {
+      if (inputElement.value === '') parentNode.classList.remove('active');
+    });
+  }
 
-    constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) {
-    }
+  private displaySearchHistory() {
+    this.searchHistoryNode.nativeElement.classList.remove('search-history-disabled');
+    this.backdropNode.nativeElement.classList.remove('hidden');
+  }
 
-    ngOnInit() {
-        this.route.queryParams.subscribe(params => {
-            let searchQuery = '';
-            if (params['search_query']) searchQuery = params['search_query']
-            else this.setQueryParams({'search_query': null});
-            this.searchForm.controls['name'].setValue(searchQuery);
-            if (searchQuery) this.searchService.saveSearch('challenges', searchQuery);
-            this.searchEvent.emit(this.getSearch());
-            this.history = this.searchService.fetchHistory('challenges');
-        })
-    }
+  private hideSearchHistory() {
+    this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
+    this.backdropNode.nativeElement.classList.add('hidden');
+  }
 
-    ngAfterViewInit() {
-        this.searchInputNode.nativeElement.addEventListener('focus', () => this.displaySearchHistory());
-        this.backdropNode.nativeElement.addEventListener('click', () => this.hideSearchHistory());
-        const inputElement = this.searchInputNode.nativeElement;
-        const parentNode = inputElement.parentNode;
-        if (this.searchForm.controls['name'].value) parentNode.classList.add('active');
-        inputElement.addEventListener('focus', () => {
-            parentNode.classList.add('active')
-        });
-        inputElement.addEventListener('focusout', () => {
-            if (inputElement.value === '') parentNode.classList.remove('active');
-        });
-    }
+  onDisplayModeSelected(mode: string) {
+    this.displayModeEvent.emit(this.displayMode = mode);
+  }
 
-    private displaySearchHistory() {
-        this.searchHistoryNode.nativeElement.classList.remove('search-history-disabled');
-        this.backdropNode.nativeElement.classList.remove('hidden');
-    }
+  onSearch(name?: string) {
+    this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
+    this.searchInputNode.nativeElement.blur();
+    const value = (name) ? name : this.getSearch().title;
+    this.searchInputNode.nativeElement.parentNode.classList.add('active');
+    this.setQueryParams({'search_query': (value) ? value : null});
+  }
 
-    private hideSearchHistory() {
-        this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
-        this.backdropNode.nativeElement.classList.add('hidden');
-    }
+  onGroupBy(groupOption: string) {
+    this.groupByEvent.emit(groupOption);
+  }
 
-    onDisplayModeSelected(mode: string) {
-        this.displayModeEvent.emit(this.displayMode = mode);
-    }
+  onDeleteSearch(name: string) {
+    this.history = this.searchService.deleteSearch('challenges', `${name}`);
+  }
 
-    onSearch(name?: string) {
-        this.searchHistoryNode.nativeElement.classList.add('search-history-disabled');
-        this.searchInputNode.nativeElement.blur();
-        const value = (name) ? name : this.getSearch().title;
-        this.searchInputNode.nativeElement.parentNode.classList.add('active');
-        this.setQueryParams({'search_query': (value) ? value : null});
-    }
+  private getSearch(): Search {
+    return {
+      title: `${this.searchForm.value.name}`
+    };
+  }
 
-    onGroupBy(groupOption: string) {
-        this.groupByEvent.emit(groupOption);
-    }
-
-    deleteSearch(name: string) {
-        this.history = this.searchService.deleteSearch('challenges', `${name}`);
-    }
-
-    private getSearch(): Search {
-        return {
-            title: `${this.searchForm.value.name}`
-        };
-    }
-
-    private setQueryParams(params: any) {
-        this.router.navigate([], {
-            relativeTo: this.route,
-            queryParams: params,
-            queryParamsHandling: 'merge',
-        });
-    }
+  private setQueryParams(params: any) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: params,
+      queryParamsHandling: 'merge',
+    });
+  }
 }

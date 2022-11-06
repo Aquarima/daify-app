@@ -8,6 +8,6 @@ export interface ChallengeConfig {
     groupSize: number,
     minDeposits: number,
     maxDeposits: number,
-    group_leader_enabled: number,
-    spectators_allowed: boolean
+    groupLeaderEnabled: number,
+    spectatorsAllowed: boolean
 }

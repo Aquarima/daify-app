@@ -1,98 +1,97 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="popup">
-    <div class="head">
-        <div>
-            <h1>Inbox</h1>
-            <div class="right-box">
-                <button class="mark-all-btn">Mark all as read</button>
-                <button class="close-overlay-btn" (click)="onClose()">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true" role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet"
-                         viewBox="0 0 21 21">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m15.5 15.5l-10-10zm0-10l-10 10"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul class="sections">
-            <li>
-                <button (click)="onAll()">All</button>
-            </li>
-            <li>
-                <button (click)="onFollowed()">Followed</button>
-            </li>
-        </ul>
+  <div class="head">
+    <div>
+      <h1>Inbox</h1>
+      <div class="right-box">
+        <button class="mark-all-btn">Mark all as read</button>
+        <button class="close-overlay-btn" (click)="onClose()">
+          <svg width="32" height="32" viewBox="0 0 36 36">
+            <path d="m19.41 18l7.29-7.29a1 1 0 0 0-1.41-1.41L18 16.59l-7.29-7.3A1 1 0 0 0 9.3 10.7l7.29 7.3l-7.3 7.29a1 1 0 1 0 1.41 1.41l7.3-7.29l7.29 7.29a1 1 0 0 0 1.41-1.41Z"/>
+            <path fill="none" d="M0 0h36v36H0z"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="inbox">
-        <div class="item">
-            <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-            <div class="info">
-                <div class="first">
-                    <p class="subject">
-                        <span class="author">Author</span>started the challenge
-                    </p>
-                </div>
-                <div class="last">
-                    <span class="time-ago">0m ago</span>
-                    <span class="source">Source</span>
-                </div>
-            </div>
+    <ul class="sections">
+      <li>
+        <button (click)="onAll()">All</button>
+      </li>
+      <li>
+        <button (click)="onFollowed()">Followed</button>
+      </li>
+    </ul>
+  </div>
+  <div class="inbox">
+    <div class="item">
+      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
+      <div class="info">
+        <div class="first">
+          <p class="subject">
+            <span class="author">Author</span>started the challenge
+          </p>
         </div>
-        <div class="item">
-            <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-            <div class="info">
-                <div class="first">
-                    <p class="subject">
-                        <span class="author">Author</span>started the challenge
-                    </p>
-                </div>
-                <div class="last">
-                    <span class="time-ago">0m ago</span>
-                    <span class="source">Source</span>
-                </div>
-            </div>
+        <div class="last">
+          <span class="time-ago">0m ago</span>
+          <span class="source">Source</span>
         </div>
-        <div class="item">
-            <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-            <div class="info">
-                <div class="first">
-                    <p class="subject">
-                        <span class="author">Author</span>started the challenge
-                    </p>
-                </div>
-                <div class="last">
-                    <span class="time-ago">0m ago</span>
-                    <span class="source">Source</span>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-            <div class="info">
-                <div class="first">
-                    <p class="subject">
-                        <span class="author">Author</span>started the challenge
-                    </p>
-                </div>
-                <div class="last">
-                    <span class="time-ago">0m ago</span>
-                    <span class="source">Source</span>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-            <div class="info">
-                <div class="first">
-                    <p class="subject">
-                        <span class="author">Author</span>started the challenge
-                    </p>
-                </div>
-                <div class="last">
-                    <span class="time-ago">0m ago</span>
-                    <span class="source">Source</span>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="item">
+      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
+      <div class="info">
+        <div class="first">
+          <p class="subject">
+            <span class="author">Author</span>started the challenge
+          </p>
+        </div>
+        <div class="last">
+          <span class="time-ago">0m ago</span>
+          <span class="source">Source</span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
+      <div class="info">
+        <div class="first">
+          <p class="subject">
+            <span class="author">Author</span>started the challenge
+          </p>
+        </div>
+        <div class="last">
+          <span class="time-ago">0m ago</span>
+          <span class="source">Source</span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
+      <div class="info">
+        <div class="first">
+          <p class="subject">
+            <span class="author">Author</span>started the challenge
+          </p>
+        </div>
+        <div class="last">
+          <span class="time-ago">0m ago</span>
+          <span class="source">Source</span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
+      <div class="info">
+        <div class="first">
+          <p class="subject">
+            <span class="author">Author</span>started the challenge
+          </p>
+        </div>
+        <div class="last">
+          <span class="time-ago">0m ago</span>
+          <span class="source">Source</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

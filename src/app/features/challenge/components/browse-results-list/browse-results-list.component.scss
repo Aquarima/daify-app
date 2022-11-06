@@ -14,6 +14,7 @@
     row-gap: 64px;
 
     .found-tags {
+      margin-top: 64px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -25,7 +26,7 @@
       }
 
       span {
-        padding: 8px;
+        padding: 8px 12px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -47,8 +48,8 @@
 
     .display-grid {
       grid-template-columns: repeat(auto-fit, 280px);
-      row-gap: 64px;
-      column-gap: 16px;
+      row-gap: 48px;
+      column-gap: 32px;
     }
 
     .display-list {

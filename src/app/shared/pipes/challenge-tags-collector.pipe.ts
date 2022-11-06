@@ -1,20 +1,17 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Challenge } from 'src/app/core/models/challenge';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Challenge} from 'src/app/core/models/challenge';
 
 @Pipe({
-  name: 'challengeTagsCollector'
+  name: 'challengeTagsCollector',
+  pure: false
 })
 export class ChallengeTagsCollectorPipe implements PipeTransform {
 
-  transform(challenges: Challenge[]): string[] {
-    const tags: string[] = [];
-    challenges.forEach((challenge) => {
-      challenge.tags.forEach((tag) => {
-        if (!tags.includes(tag)) {
-          tags.push(tag);
-        }
-      })
-    });
+  transform(challenges: Challenge[]): Set<string> {
+    const tags: Set<string> = new Set();
+    for (let challenge of challenges) {
+      challenge.tags.forEach((tag) => tags.add(tag));
+    }
     return tags;
   }
 }

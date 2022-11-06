@@ -1,6 +1,7 @@
 :host {
-  padding: 32px 40px;
+  padding: 0 40px;
   width: 100%;
+  height: 80px;
   position: fixed;
   top: 0;
   z-index: 99;
@@ -44,7 +45,7 @@
       transition: visibility 0s, opacity .3s linear;
 
       .dropdown {
-        margin-top: 24px;
+        margin-top: 8px;
         padding: 8px;
         display: flex;
         flex-direction: column;
@@ -321,8 +322,6 @@
             justify-content: center;
             align-items: center;
             border-radius: 8px;
-            font-size: var(--preset-font-size-normal);
-            color: var(--color-text-alt);
             cursor: pointer;
 
             &:hover {
@@ -349,6 +348,7 @@
           }
 
           .option-logout {
+            font-size: var(--preset-font-size-small);
             color: #FF5252;
 
             svg {
@@ -357,25 +357,6 @@
           }
         }
       }
-    }
-  }
-}
-
-@media only screen and (max-width: 1050px) {
-
-  :host {
-    flex-direction: column;
-    justify-content: center!important;
-    gap: 16px;
-
-    .app-name {
-      font-size: var(--preset-font-size-large);
-    }
-
-    .navbar {
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
     }
   }
 }

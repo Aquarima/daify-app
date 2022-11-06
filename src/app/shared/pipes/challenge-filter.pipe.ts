@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Challenge } from 'src/app/core/models/challenge';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Challenge} from 'src/app/core/models/challenge';
 
 @Pipe({
   name: 'challengeFilter'

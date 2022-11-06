@@ -1,7 +1,7 @@
 :host {
   margin-top: 64px;
   padding: 48px 0 24px 0;
-  min-height: 400px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,12 +33,14 @@
 
   .lower-content {
     margin: 32px auto 0 auto;
-    padding-top: 16px;
+    padding-top: 24px;
     width: 80%;
     display: flex;
     justify-content: space-between;
+    column-gap: 32px;
     border-top: 1px solid #E6E6EF;
     font-weight: 500;
+    font-size: var(--preset-font-size-small);
     color: var(--color-text);
 
     ul {
@@ -47,6 +49,9 @@
       list-style-type: none;
 
       a {
+        width: 100%;
+        text-align: center;
+        display: block;
         text-decoration: none;
         color: var(--color-text);
 
@@ -54,6 +59,33 @@
           text-decoration: underline;
         }
       }
+    }
+  }
+}
+
+/*@media all and (min-width: 1024px) and (max-width: 1280px) { }
+
+@media all and (min-width: 768px) and (max-width: 1024px) { }*/
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+
+  .lower-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+@media all and (max-width: 480px) {
+
+  .lower-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    ul {
+      flex-direction: column;
+      gap: 24px!important;
     }
   }
 }

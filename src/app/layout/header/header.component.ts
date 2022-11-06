@@ -31,9 +31,7 @@ export class HeaderComponent implements OnInit {
 
     onInbox() {
         const componentRef = this.viewContainerRef.createComponent(InboxComponent);
-        componentRef.instance.closeEvent.subscribe(() => {
-            this.viewContainerRef.clear();
-        });
+        componentRef.instance.closeEvent.subscribe(() => this.viewContainerRef.clear());
     }
 
     onNews() {

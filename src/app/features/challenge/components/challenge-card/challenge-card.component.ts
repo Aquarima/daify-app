@@ -21,7 +21,11 @@ export class ChallengeCardComponent implements OnInit {
     return this.challengeService.getColorByTag(title);
   }
 
-  getDuration() {
+  hasAccess(access: any) {
+    return this.challenge.config.accessType === access;
+  }
+
+  get duration() {
     let d1: Date = new Date(this.challenge.config.startAt);
     let d2: Date = new Date(this.challenge.config.endAt);
     const time = d2.getTime() - d1.getTime();
@@ -34,12 +38,11 @@ export class ChallengeCardComponent implements OnInit {
     return 'Unknown';
   }
 
-  getBanner(): string | undefined {
-    const banner = this.challenge?.coverUrl;
-    return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;
+  get icon(): string {
+    return this.challenge?.iconUrl || '/assets/challenge_icon_placeholder.svg';
   }
 
-  hasAccess(access: any) {
-    return this.challenge.config.accessType === access;
+  get banner(): string {
+    return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
   }
 }

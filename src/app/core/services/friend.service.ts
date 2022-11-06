@@ -10,7 +10,7 @@ export class FriendService {
     constructor(private http: HttpClient) {
     }
 
-    getFriendsByProfileId(userId: number) {
+    getFriendsByUserId(userId: number) {
         return this.http.get<any>(`${env.apiUrl}/user/profile/${userId}/friend`);
     }
 }

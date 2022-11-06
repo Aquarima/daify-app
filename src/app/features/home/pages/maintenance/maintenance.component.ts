@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-maintenance',
@@ -16,7 +16,7 @@ export class MaintenanceComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.endDate = new Date('08/27/2022 22:00'); // Example
-    this.passed = this.getTimeBeforeEnd() < 0;
+    this.passed = this.timeBeforeEnd < 0;
   }
 
   ngAfterViewInit(): void {
@@ -28,19 +28,19 @@ export class MaintenanceComponent implements OnInit, AfterViewInit {
     setInterval(() => this.updateCountdown(), 1000);
   }
 
-  updateCountdown() {
+  private updateCountdown() {
     if (!this.endDate) return;
-    let time = this.getTimeBeforeEnd();
+    let time = this.timeBeforeEnd;
     if (time < 0) {
       this.passed = true;
       return;
     }
-    this.counterHours.nativeElement.textContent = Math.floor(time / (1000*60*60));
-    this.counterMinutes.nativeElement.textContent = Math.floor(((time % (1000*60*60)) / 60000));
-    this.counterSeconds.nativeElement.textContent = Math.floor((((time % (1000*60*60))% 60000) / 1000));
+    this.counterHours.nativeElement.textContent = Math.floor(time / (1000 * 60 * 60));
+    this.counterMinutes.nativeElement.textContent = Math.floor(((time % (1000 * 60 * 60)) / 60000));
+    this.counterSeconds.nativeElement.textContent = Math.floor((((time % (1000 * 60 * 60)) % 60000) / 1000));
   }
 
-  private getTimeBeforeEnd(): number {
+  private get timeBeforeEnd(): number {
     const now = new Date();
     const end = (this.endDate) ? this.endDate : now;
     return end.getTime() - now.getTime();

@@ -1,10 +1,7 @@
-<div class="load" *ngIf="!loaded">
-  <span>LOADING...</span>
-</div>
-<div class="content" *ngIf="loaded">
+<div class="content" #winref>
   <div class="found-tags">
     <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}"
-          [ngStyle]="{'background-color': getColorByTag(tag)}"
+          [ngStyle]="{'background-color': getTagColor(tag)}"
           *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
   </div>
   <div class="items display-{{displayMode}}">

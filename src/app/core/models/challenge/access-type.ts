@@ -1,3 +1,3 @@
 export enum AccessType {
-    FREE, ON_REQUEST, FRIEND_ONLY, CODE
+    FREE = 'Free', ON_REQUEST = 'On Request', FRIENDS_ONLY = 'Friends Only', CODE = 'Code'
 }

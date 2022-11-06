@@ -18,7 +18,7 @@
                         </svg>
                         <p>Click to choose a cover image that makes your challenge shine!</p>
                     </div>
-                    <img [src]="getSelectedPreviewCover()" alt="" *ngIf="selectedCoverFile">
+                    <img [src]="previewCover" alt="" *ngIf="selectedCoverFile">
                 </div>
                 <div class="edit-zone">
                     <div>
@@ -28,7 +28,7 @@
                             <div class="challenge-preview-icon">
                                 <input type="file" class="file-upload" accept="image/png, image/jpeg"
                                        (change)="onPreviewIconSelected($event)">
-                                <img [src]="getSelectedPreviewIcon()" alt="" *ngIf="selectedIconFile">
+                                <img [src]="previewIcon" alt="" *ngIf="selectedIconFile">
                                 <img src="assets/challenge_icon_placeholder.svg" alt="" *ngIf="!selectedIconFile">
                             </div>
                         </div>
@@ -72,14 +72,19 @@
                             <p class="attr-key">Tags</p>
                             <p class="attr-description">The challenge's tags</p>
                             <ul class="challenge-tag-list">
-                                <li *ngFor="let tag of tags">{{tag}}</li>
+                                <li *ngFor="let tag of tags" [ngStyle]="{'background-color': getTagColor(tag)}">
+                                  {{tag}}
+                                  <svg viewBox="0 0 24 24" (click)="onTagRemove(tag)">
+                                    <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
+                                  </svg>
+                                </li>
                             </ul>
                             <div class="user-input">
                                 <div class="user-input-box">
                                     <label for="tag">Tag</label>
                                     <input id="tag" class="form-control" name="tag" type="text" #text_input
                                            formControlName="tag">
-                                    <button class="submit-data-btn" (click)="onTagAdd()">
+                                    <button class="submit-btn" (click)="onTagAdd()">
                                         <svg width="32" height="32" viewBox="0 0 24 24">
                                             <path d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z"/>
                                         </svg>
@@ -95,9 +100,9 @@
                             <div class="user-input user-input-active">
                                 <div class="user-input-box">
                                     <label for="description">Access Type</label>
-                                    <select id="options" name="options" class="options" formControlName="access">
+                                    <select id="options" name="options" class="options" formControlName="accessType">
                                         <option value="accessType"
-                                                *ngFor="let accessType of getAccessTypes()">{{accessType}}</option>
+                                                *ngFor="let accessType of accessTypes">{{accessType}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +114,7 @@
                                 <div class="user-input-box">
                                     <label for="start">Start date</label>
                                     <input id="start" class="form-control" name="start" type="datetime-local"
-                                           [min]="getDefaultStart()" formControlName="start">
+                                           [min]="defaultStart" formControlName="startAt">
                                 </div>
                                 <p class="user-input-error" *ngIf="challengeForm.get('start')?.hasError('required')">
                                     Start date is required</p>
@@ -122,7 +127,7 @@
                                 <div class="user-input-box">
                                     <label for="end">End date</label>
                                     <input id="end" class="form-control" name="end" type="datetime-local"
-                                           [min]="getDefaultStart()" formControlName="end">
+                                           [min]="defaultEnd" formControlName="endAt">
                                 </div>
                                 <p class="user-input-error" *ngIf="challengeForm.get('end')?.hasError('required')">End
                                     date is required</p>
@@ -152,14 +157,14 @@
                             <p class="attr-description">
                                 Allow users to join as spectator
                                 <input id="allow-spectators" class="form-control" name="allow-spectators"
-                                       type="checkbox" formControlName="spectators">
+                                       type="checkbox" formControlName="spectatorsAllowed">
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="action-bar">
-                <button class="cancel-challenge-btn">Back to home</button>
+                <a class="cancel-challenge-btn" [routerLink]="['/']">Back to home</a>
                 <input class="create-challenge-btn" type="submit" value="Create my challenge" (click)="onSubmit()">
             </div>
         </form>
