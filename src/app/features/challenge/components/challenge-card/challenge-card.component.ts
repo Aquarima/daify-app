@@ -17,10 +17,6 @@ export class ChallengeCardComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  getColorByTag(title: string) {
-    return this.challengeService.getColorByTag(title);
-  }
-
   hasAccess(access: any) {
     return this.challenge.config.accessType === access;
   }
@@ -44,5 +40,9 @@ export class ChallengeCardComponent implements OnInit {
 
   get banner(): string {
     return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
+  }
+
+  get themeColor() {
+    return this.challengeService.getColorByTag(this.challenge.theme);
   }
 }

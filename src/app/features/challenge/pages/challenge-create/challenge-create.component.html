@@ -69,26 +69,13 @@
                             </div>
                         </div>
                         <div class="attr">
-                            <p class="attr-key">Tags</p>
-                            <p class="attr-description">The challenge's tags</p>
-                            <ul class="challenge-tag-list">
-                                <li *ngFor="let tag of tags" [ngStyle]="{'background-color': getTagColor(tag)}">
-                                  {{tag}}
-                                  <svg viewBox="0 0 24 24" (click)="onTagRemove(tag)">
-                                    <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
-                                  </svg>
-                                </li>
-                            </ul>
+                            <p class="attr-key">Theme</p>
+                            <p class="attr-description">The challenge's theme</p>
                             <div class="user-input">
                                 <div class="user-input-box">
-                                    <label for="tag">Tag</label>
-                                    <input id="tag" class="form-control" name="tag" type="text" #text_input
-                                           formControlName="tag">
-                                    <button class="submit-btn" (click)="onTagAdd()">
-                                        <svg width="32" height="32" viewBox="0 0 24 24">
-                                            <path d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z"/>
-                                        </svg>
-                                    </button>
+                                    <label for="theme">Theme</label>
+                                    <input id="theme" class="form-control" name="theme" type="text" #text_input
+                                           formControlName="theme">
                                 </div>
                             </div>
                         </div>
@@ -165,7 +152,7 @@
             </div>
             <div class="action-bar">
                 <a class="cancel-challenge-btn" [routerLink]="['/']">Back to home</a>
-                <input class="create-challenge-btn" type="submit" value="Create my challenge" (click)="onSubmit()">
+                <input class="create-challenge-btn" type="submit" value="Create" (click)="onSubmit()">
             </div>
         </form>
     </div>

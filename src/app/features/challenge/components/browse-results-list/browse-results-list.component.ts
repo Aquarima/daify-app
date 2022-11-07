@@ -77,16 +77,16 @@ export class BrowseResultsListComponent implements OnInit, OnDestroy {
       .replace('page', `page=${this.pageIndex++}`);
   }
 
-  getTagColor(title: string) {
+  getThemeColor(title: string) {
     return this.challengeService.getColorByTag(title);
   }
 
-  onTagSelected(tag: string) {
-    if (tag === this.filterTag) {
+  onThemeSelected(theme: string) {
+    if (theme === this.filterTag) {
       this.filterTag = '';
       return;
     }
-    this.filterTag = tag;
+    this.filterTag = theme;
   }
 
   @HostListener("window:scroll", [])

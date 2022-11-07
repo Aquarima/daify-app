@@ -6,8 +6,8 @@ import {Challenge} from 'src/app/core/models/challenge';
 })
 export class ChallengeFilterPipe implements PipeTransform {
 
-  transform(challenges: Challenge[], targetTag?: string): Challenge[] {
-    if (!targetTag) return challenges;
-    return challenges.filter(c => c.tags.includes(targetTag));
+  transform(challenges: Challenge[], targetTheme?: string): Challenge[] {
+    if (!targetTheme) return challenges;
+    return challenges.filter(c => c.theme === targetTheme);
   }
 }

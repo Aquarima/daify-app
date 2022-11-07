@@ -26,6 +26,7 @@
   <div class="challenge-short-description">
     <p class="challenge-short-description-title">{{challenge.title}}</p>
     <p class="challenge-short-description-text">{{challenge.description}}</p>
+    <span class="challenge-theme" [ngStyle]="{'background-color': themeColor}">{{challenge.theme}}</span>
   </div>
   <ul class="challenge-stats" *ngIf="challenge.config">
     <li>
@@ -40,8 +41,5 @@
       <p class="value">{{challenge.config.groupSize}}</p>
       <p class="name">Groups</p>
     </li>
-  </ul>
-  <ul class="challenge-tags" #tag_list>
-    <li *ngFor="let tag of challenge.tags" [ngStyle]="{'background-color': getColorByTag(tag)}">{{tag}}</li>
   </ul>
 </div>

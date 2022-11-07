@@ -6,7 +6,7 @@ export interface Challenge {
   author: Profile,
   title: string,
   description: string,
-  tags: string[],
+  theme: string,
   coverUrl: string,
   iconUrl: string,
   invite: string,

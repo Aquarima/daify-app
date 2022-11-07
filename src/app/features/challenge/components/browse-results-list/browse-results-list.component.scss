@@ -13,7 +13,7 @@
     align-items: center;
     row-gap: 64px;
 
-    .found-tags {
+    .found-themes {
       margin-top: 64px;
       width: 100%;
       display: flex;
@@ -21,7 +21,7 @@
       flex-wrap: wrap;
       gap: 12px;
 
-      .tag-selected {
+      .theme-selected {
         filter: brightness(90%);
       }
 

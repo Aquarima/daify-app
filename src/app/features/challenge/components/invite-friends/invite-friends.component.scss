@@ -35,6 +35,7 @@
       }
     }
   }
+
   .invite-link-join-type-select {
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@
     }
   }
 
-  .friend-list-cell-invite-btn {
+  .friends-list-cell-invite-btn {
     border: none;
     background-color: transparent;
     color: #4CAF50;
@@ -126,7 +127,7 @@
     }
   }
 
-  .friend-list-cell-revoke-btn {
+  .friends-list-cell-revoke-btn {
     border: none;
     background-color: transparent;
     color: #F44336;
@@ -242,18 +243,15 @@
     }
   }
 
-  .friend-list {
+  .friends {
     padding: 16px 0;
+    width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: auto;
     border-width: 1px 0;
     border-style: solid;
     border-color: #DEDEEA;
 
-    .friend-list-search {
+    .friends-search {
       margin: 0 auto 16px 0;
       padding: 0 32px;
       width: 100%;
@@ -270,6 +268,13 @@
           background-color: var(--color-secondary);
         }
       }
+    }
+
+    .friends-list {
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
 
       .user-input-active {
 
@@ -282,7 +287,7 @@
       }
     }
 
-    .friend-list-cell {
+    .friends-list-cell {
       padding: 8px 32px;
       height: 48px;
       display: flex;
@@ -300,17 +305,17 @@
         gap: 16px;
       }
 
-      .friend-list-cell-state {
+      .friends-list-cell-state {
         width: 18px;
         height: 18px;
         fill: var(--color-text-alt-2);
       }
 
-      .friend-list-cell-state-sent {
+      .friends-list-cell-state-sent {
         fill: #4CAF50;
       }
 
-      .friend-list-cell-avatar {
+      .friends-list-cell-avatar {
         position: relative;
 
         img {
@@ -319,7 +324,7 @@
           border-radius: 50%;
         }
 
-        .friend-list-cell-status {
+        .friends-list-cell-status {
           width: 14px;
           height: 14px;
           position: absolute;
@@ -339,22 +344,22 @@
           }
         }
 
-        .friend-list-cell-status-online span {
+        .friends-list-cell-status-online span {
           background-color: #4CAF50;
         }
 
-        .friend-list-cell-status-offline span {
+        .friends-list-cell-status-offline span {
           background-color: #F44336;
         }
       }
 
-      .friend-list-cell-username {
+      .friends-list-cell-username {
         font-weight: 500;
         font-size: var(--preset-font-size-small);
         color: var(--color-text);
       }
 
-      .friend-list-cell-profession {
+      .friends-list-cell-profession {
         margin-top: 4px;
         font-size: var(--preset-font-size-tiny);
         color: var(--color-text-alt-2);

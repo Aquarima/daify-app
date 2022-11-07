@@ -64,6 +64,21 @@
         font-size: calc(var(--preset-font-size-tiny) + 1px);
         color: var(--color-text-alt-2);
       }
+
+      .challenge-theme {
+        padding: 8px 12px;
+        margin: 16px auto 16px auto;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        //background-color: var(--color-tertiary);
+        font-weight: 500;
+        font-size: var(--preset-font-size-tiny);
+        color: #FFF;
+        cursor: pointer;
+      }
     }
 
     .challenge-stats {
@@ -90,32 +105,6 @@
         font-weight: 600;
         font-size: calc(var(--preset-font-size-tiny) - 2px);
         color: var(--color-text-alt-2);
-      }
-    }
-
-    .challenge-tags {
-      margin: 0;
-      padding: 0;
-      width: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      list-style-type: none;
-
-      li {
-        padding: 5px 8px;
-        min-width: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 16px;
-        background-color: var(--color-tertiary);
-        font-weight: 500;
-        font-size: var(--preset-font-size-tiny);
-        color: #FFF;
-        cursor: pointer;
       }
     }
   }
@@ -167,10 +156,6 @@
         text-align: center;
       }
     }
-
-    .challenge-tags {
-      padding: 0 24px;
-    }
   }
 }
 
@@ -215,10 +200,6 @@
     }
 
     .challenge-stats {
-      margin: 0 16px;
-    }
-
-    .challenge-tags {
       margin: 0 16px;
     }
   }

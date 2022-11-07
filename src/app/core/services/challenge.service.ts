@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
+import {Challenge} from "../models";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class ChallengeService {
 
   getChallengesByUser(userId: number, page?: number, size?: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge/author/${userId}?size=${size  || 32}&page=${page || 0}`);
+  }
+
+  createChallenge(challenge: Challenge) {
+    return this.http.post<any>(`${env.apiUrl}/challenge/add`, challenge);
   }
 
   getColorByTag(title: string): string {

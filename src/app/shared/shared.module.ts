@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ChallengeFilterPipe, ChallengeTagsCollectorPipe, OrderByChallengePipe} from './pipes';
+import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, OrderByChallengePipe} from './pipes';
 import {AlertBoxComponent, InboxComponent} from "./components";
 
 @NgModule({
     declarations: [
         OrderByChallengePipe,
-        ChallengeTagsCollectorPipe,
+        ChallengeThemesCollectorPipe,
         ChallengeFilterPipe,
         InboxComponent,
         AlertBoxComponent
@@ -14,7 +14,7 @@ import {AlertBoxComponent, InboxComponent} from "./components";
     imports: [
         CommonModule
     ], exports: [
-        ChallengeTagsCollectorPipe,
+        ChallengeThemesCollectorPipe,
         ChallengeFilterPipe,
         OrderByChallengePipe,
         InboxComponent,

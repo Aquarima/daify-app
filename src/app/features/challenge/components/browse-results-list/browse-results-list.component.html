@@ -1,8 +1,8 @@
 <div class="content" #winref>
-  <div class="found-tags">
-    <span #found_tag [ngClass]="{'tag-selected': tag === filterTag}"
-          [ngStyle]="{'background-color': getTagColor(tag)}"
-          *ngFor="let tag of challenges | challengeTagsCollector" (click)="onTagSelected(tag)">#{{tag}}</span>
+  <div class="found-themes">
+    <span #found_tag [ngClass]="{'tag-selected': theme === filterTag}"
+          [ngStyle]="{'background-color': getThemeColor(theme)}"
+          *ngFor="let theme of challenges | challengeThemesCollector" (click)="onThemeSelected(theme)">#{{theme}}</span>
   </div>
   <div class="items display-{{displayMode}}">
     <dfy-challenge-card class="{{displayMode}}-cell"

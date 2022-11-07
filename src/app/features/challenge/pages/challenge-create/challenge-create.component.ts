@@ -17,7 +17,7 @@ export class ChallengeCreateComponent implements OnInit {
   challengeForm = new FormGroup({
     title: new FormControl<string>('', [Validators.required, Validators.minLength(2), Validators.maxLength(24), Validators.pattern('^[a-zA-Z0-9 \'\]*$')]),
     description: new FormControl<string>('', [Validators.maxLength(128), Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')]),
-    tag: new FormControl<string>(''),
+    theme: new FormControl<string>('', [Validators.minLength(3), Validators.max(24)]),
     accessType: new FormControl<AccessType>(AccessType.FREE, [Validators.required]),
     startAt: new FormControl(null, [Validators.required]),
     endAt: new FormControl(undefined, [Validators.required]),
@@ -27,7 +27,6 @@ export class ChallengeCreateComponent implements OnInit {
 
   selectedCoverFile: File | undefined;
   selectedIconFile: File | undefined;
-  tags: string[] = [];
 
   constructor(
     private router: Router,
@@ -68,21 +67,6 @@ export class ChallengeCreateComponent implements OnInit {
     this.selectedIconFile = event.target.files[0];
   }
 
-  onTagAdd() {
-    if (this.tags.length > 3) return;
-    const tag = this.challengeForm.value.tag;
-    if (!tag || this.tags.length > 3 || this.tags.includes(tag)) return;
-    this.tags.push(tag);
-  }
-
-  onTagRemove(tag: string) {
-    this.tags.splice(this.tags.indexOf(tag), 1);
-  }
-
-  getTagColor(tag: string): string {
-    return this.challengeService.getColorByTag(tag);
-  }
-
   private showInviteFriendsPopup(challenge: Challenge) {
     const componentRef = this.viewContainerRef.createComponent(InviteFriendsComponent);
     componentRef.instance.closeEvent.subscribe(() => {
@@ -104,7 +88,7 @@ export class ChallengeCreateComponent implements OnInit {
     challenge.author = this.authService.user.profile;
     challenge.title = `${form.title}`;
     challenge.description = `${form.title}`;
-    challenge.tags = this.tags;
+    challenge.theme = `${form.theme}`;
     challenge.config = config;
     config.accessType = form.accessType || AccessType.FREE;
     config.startAt = form.startAt || this.defaultStart;
