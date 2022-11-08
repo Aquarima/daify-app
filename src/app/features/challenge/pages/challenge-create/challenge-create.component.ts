@@ -82,6 +82,13 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    //if (this.challengeForm.invalid) return;
+    const challenge = this.buildChallenge();
+    this.challengeService.createChallenge(challenge).subscribe();
+    this.showInviteFriendsPopup(challenge);
+  }
+
+  private buildChallenge() {
     const form = this.challengeForm.value;
     const challenge = {} as Challenge;
     const config = {} as ChallengeConfig;
@@ -94,7 +101,11 @@ export class ChallengeCreateComponent implements OnInit {
     config.startAt = form.startAt || this.defaultStart;
     config.startAt = form.endAt || this.defaultEnd;
     config.spectatorsAllowed = form.spectatorsAllowed || false;
-    this.showInviteFriendsPopup(challenge);
+    return challenge;
+  }
+
+  toAccessType(value: string): string {
+    return value.replace(' ', '_').toUpperCase();
   }
 
   get defaultStart() {

@@ -88,7 +88,7 @@
                                 <div class="user-input-box">
                                     <label for="description">Access Type</label>
                                     <select id="options" name="options" class="options" formControlName="accessType">
-                                        <option value="accessType"
+                                        <option value="{{toAccessType(accessType)}}"
                                                 *ngFor="let accessType of accessTypes">{{accessType}}</option>
                                     </select>
                                 </div>
