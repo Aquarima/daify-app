@@ -1,0 +1,119 @@
+:host {
+
+  .content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+
+    .challenge-preview {
+      width: 100%;
+      box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .challenge-preview-banner {
+        width: 100%;
+        height: 180px;
+        position: relative;
+        background-size: cover;
+        background-color: #E6E6EF;
+
+        .challenge-preview-icon {
+          width: 128px;
+          height: 128px;
+          position: absolute;
+          top: calc(50% + 16px);
+          left: 8%;
+          border-radius: 50%;
+          background-color: #FFF;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .challenge-preview-info {
+        width: 100%;
+        height: 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFF;
+
+        .challenge-preview-info-short {
+          width: fit-content;
+          position: relative;
+          left: calc(8% + 156px);
+
+          .challenge-preview-info-short-title {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: var(--preset-font-size-medium);
+            color: var(--color-text);
+          }
+
+          .challenge-preview-info-short-author {
+            display: flex;
+            align-items: center;
+            column-gap: 4px;
+
+            p {
+              font-size: var(--preset-font-size-small);
+              color: var(--color-text);
+            }
+
+            .challenge-preview-info-short-author-username {
+              color: var(--color-text-alt);
+
+              &::before {
+                content: '@';
+              }
+
+              &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+            }
+
+            img {
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .challenge-preview-info-state {
+          position: relative;
+          right: 8%;
+
+          .challenge-preview-info-state-access {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 8px;
+            background-color: #FFF;
+
+            svg {
+              width: 50%;
+              height: 50%;
+              fill: var(--color-text);
+            }
+          }
+        }
+      }
+    }
+  }
+}

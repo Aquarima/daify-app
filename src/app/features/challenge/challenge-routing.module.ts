@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards';
 import {ChallengeCreateComponent, ExploreComponent, MyListComponent} from './pages';
-import {HomeComponent} from "../home";
+import {ChallengeComponent} from "./pages/challenge/challenge.component";
 
 const routes: Routes = [
-  { path: 'app/challenge/dashboard/:id', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'app/challenge/explore', component: ExploreComponent, canActivate: [AuthGuard] },
-  { path: 'app/challenge/mylist', component: MyListComponent, canActivate: [AuthGuard] },
-  { path: 'app/challenge/create', component: ChallengeCreateComponent },
+  { path: 'app/explore', component: ExploreComponent, canActivate: [AuthGuard] },
+  { path: 'app/mylist', component: MyListComponent, canActivate: [AuthGuard] },
+  { path: 'app/create', component: ChallengeCreateComponent, canActivate: [AuthGuard] },
+  { path: 'app/challenge/:id', component: ChallengeComponent },
 ];
 
 @NgModule({

@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { UserRoutingModule } from './user-routing.module';
-import { ProfileComponent } from './pages';
-import { ChallengeModule } from '../challenge/challenge.module';
-import { UserListComponent, UserCardComponent } from './components';
-import { LayoutModule } from "../../layout/layout.module";
+import {UserRoutingModule} from './user-routing.module';
+import {ProfileComponent} from './pages';
+import {ChallengeModule} from '../challenge/challenge.module';
+import {UserCardComponent, UserListComponent} from './components';
+import {LayoutModule} from "../../layout/layout.module";
 
 @NgModule({
   declarations: [
@@ -20,4 +20,5 @@ import { LayoutModule } from "../../layout/layout.module";
     ChallengeModule
   ]
 })
-export class UserModule { }
+export class UserModule {
+}

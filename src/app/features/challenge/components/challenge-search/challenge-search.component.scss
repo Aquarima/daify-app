@@ -1,6 +1,6 @@
 :host {
   margin: 0 auto;
-  padding: 32px;
+  padding: 16px;
   width: 100%;
   min-height: 100px;
   box-sizing: border-box;
@@ -9,7 +9,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 24px;
-  box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
   border-radius: 0 0 8px 8px;
   background-color: #FFF;
 
@@ -21,6 +21,11 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 32px;
+
+    .select-order-by {
+      width: 30%;
+      height: 48px;
+    }
 
     .user-input {
       width: 30%;
@@ -54,7 +59,7 @@
       flex-direction: column;
       row-gap: 8px;
       transition: visibility 0s, opacity .2s linear;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
       border-radius: 8px;
       background-color: #FFF;
 
@@ -156,6 +161,7 @@
       }
     }
   }
+
 }
 
 .create-new-btn {

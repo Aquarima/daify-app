@@ -1,6 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Challenge } from 'src/app/core/models/challenge';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Challenge} from 'src/app/core/models/challenge';
 import {ChallengeService} from "../../../../core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'dfy-challenge-card',
@@ -13,12 +14,19 @@ export class ChallengeCardComponent implements OnInit {
 
   @ViewChild('tag_list') tagList!: ElementRef;
 
-  constructor(private challengeService: ChallengeService) { }
+  constructor(private router: Router, private challengeService: ChallengeService) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   hasAccess(access: any) {
     return this.challenge.config.accessType === access;
+  }
+
+  @HostListener('click', ['$event.target'])
+  onClick() {
+    this.router.navigate([`/app/challenge/${this.challenge.id}`]);
   }
 
   get duration() {
@@ -34,11 +42,11 @@ export class ChallengeCardComponent implements OnInit {
     return 'Unknown';
   }
 
-  get icon(): string {
+  get iconUrl(): string {
     return this.challenge?.iconUrl || '/assets/challenge_icon_placeholder.svg';
   }
 
-  get banner(): string {
+  get bannerUrl(): string {
     return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
   }
 

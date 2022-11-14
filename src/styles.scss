@@ -158,14 +158,15 @@ html {
         font-size: var(--preset-font-size-small);
         font-family: $font-family;
         color: var(--color-text);
+        cursor: pointer;
 
         &:focus {
           border-color: var(--color-primary);
         }
       }
 
-      .form-control[type=date] {
-        cursor: text;
+      .form-control[type=text], textarea {
+        cursor: text!important;
       }
 
       .form-control[type=date] {
@@ -173,7 +174,6 @@ html {
         font-size: var(--preset-font-size-small);
         font-family: $font-family;
         color: var(--color-text);
-        cursor: pointer;
       }
 
       select {
@@ -205,8 +205,8 @@ html {
         }
 
         svg {
-          width: 60%;
-          height: 60%;
+          width: 50%;
+          height: 50%;
           fill: #FFF;
         }
       }

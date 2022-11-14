@@ -7,7 +7,7 @@
   .main-content {
 
     .container {
-      width: 70%;
+      width: 80%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -20,7 +20,7 @@
         position: relative;
         z-index: 1;
         object-fit: fill;
-        box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
         border-radius: 8px 8px 0 0;
         background-size: 100%;
 
@@ -56,7 +56,7 @@
         overflow: hidden;
         box-sizing: border-box;
         border-radius: 0 0 8px 8px;
-        box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
         background-color: #FFF;
 
         .zone {

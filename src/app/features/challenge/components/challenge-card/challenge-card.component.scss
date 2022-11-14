@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
   border-radius: 16px;
   background-color: #FFF;
   cursor: pointer;
@@ -26,7 +26,7 @@
       }
     }
 
-    .challenge-access-security {
+    .challenge-access-access {
       width: 32px;
       height: 32px;
       position: absolute;
@@ -38,8 +38,8 @@
       background-color: #FFF;
 
       svg {
-        width: 16px;
-        height: 16px;
+        width: 50%;
+        height: 50%;
         fill: var(--color-text);
       }
     }
@@ -73,7 +73,6 @@
         justify-content: center;
         align-items: center;
         border-radius: 4px;
-        //background-color: var(--color-tertiary);
         font-weight: 500;
         font-size: var(--preset-font-size-tiny);
         color: #FFF;
@@ -129,7 +128,7 @@
       transform: translateX(-50%);
     }
 
-    .challenge-access-security {
+    .challenge-access-access {
       top: 50%;
       right: 16px;
       transform: translateY(-50%);
@@ -177,7 +176,7 @@
       transform: translateY(-50%);
     }
 
-    .challenge-access-security {
+    .challenge-access-access {
       top: 50%;
       left: 16px;
       transform: translateY(-50%);

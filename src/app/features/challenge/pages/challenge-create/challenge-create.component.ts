@@ -21,7 +21,8 @@ export class ChallengeCreateComponent implements OnInit {
     accessType: new FormControl<AccessType>(AccessType.FREE, [Validators.required]),
     startAt: new FormControl(null, [Validators.required]),
     endAt: new FormControl(undefined, [Validators.required]),
-    limit: new FormControl<number>(2, [Validators.required, Validators.min(2), Validators.max(60), Validators.pattern('^0*?[1-9]\\d*$')]),
+    capacity: new FormControl<number>(2, [Validators.required, Validators.min(2), Validators.max(60), Validators.pattern('^0*?[1-9]\\d*$')]),
+    groupSize: new FormControl<number>(1, [Validators.required, Validators.min(2), Validators.max(8), Validators.pattern('^0*?[1-9]\\d*$')]),
     spectatorsAllowed: new FormControl<boolean>(false)
   })
 

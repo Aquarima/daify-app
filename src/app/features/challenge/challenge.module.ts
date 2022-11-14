@@ -2,17 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ChallengeRoutingModule } from './challenge-routing.module';
-import { ExploreComponent } from './pages/explore/explore.component';
+import { ExploreComponent, ChallengeCreateComponent, MyListComponent } from './pages';
 import { LayoutModule } from 'src/app/layout/layout.module';
-import { ChallengeCardComponent } from './components/challenge-card/challenge-card.component';
-import { ChallengeSearchComponent } from './components/challenge-search/challenge-search.component';
+import { ChallengeCardComponent, ChallengeSearchComponent, BrowseResultsListComponent, InviteFriendsComponent } from './components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MyListComponent } from './pages/my-list/my-list.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { BrowseResultsListComponent } from './components/browse-results-list/browse-results-list.component';
-import { ChallengeCreateComponent } from './pages/challenge-create/challenge-create.component';
-import { InviteFriendsComponent } from './components/invite-friends/invite-friends.component';
+import { ChallengeComponent } from './pages/challenge/challenge.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +19,7 @@ import { InviteFriendsComponent } from './components/invite-friends/invite-frien
     BrowseResultsListComponent,
     ChallengeCreateComponent,
     InviteFriendsComponent,
+    ChallengeComponent,
   ],
     imports: [
         CommonModule,

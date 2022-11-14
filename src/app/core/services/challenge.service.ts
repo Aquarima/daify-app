@@ -21,12 +21,16 @@ export class ChallengeService {
     return this.http.get<any>(`${env.apiUrl}/challenge/all?size=${size  || 32}&page=${page || 0}`);
   }
 
-  getChallengeByTitle(title: string) {
+  getChallengesByTitle(title: string) {
     return this.http.get<any>(`${env.apiUrl}/challenge/all/${title}`);
   }
 
   getChallengesByUser(userId: number, page?: number, size?: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge/author/${userId}?size=${size  || 32}&page=${page || 0}`);
+  }
+
+  getChallengesById(id: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${id}`);
   }
 
   createChallenge(challenge: Challenge) {
