@@ -7,7 +7,7 @@
   .main-content {
 
     .browse {
-      width: 80%;
+      width: 60%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -15,16 +15,17 @@
       box-sizing: border-box;
 
       .section-banner {
+        margin-bottom: 24px;
         padding: 32px 64px;
-        min-height: 170px;
+        min-height: 140px;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        box-shadow: rgba(149, 157, 165, .1) 0px 8px 24px;
-        border-radius: 8px 8px 0 0;
-        background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-secondary) 100%);
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-secondary) 80%);
 
         .details {
 
@@ -37,7 +38,7 @@
 
           .about {
             margin: 0;
-            font-size: calc(var(--preset-font-size-normal) + .2em);
+            font-size: var(--preset-font-size-normal);
             color: #FFF;
           }
         }

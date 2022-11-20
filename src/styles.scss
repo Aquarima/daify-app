@@ -23,10 +23,10 @@ $font-family: 'Sora';
   --color-text: #3E3F5E;
   --color-text-alt: #7D7E9E;
   --color-text-alt-2: #ADAFCA;
-  --preset-font-size-tiny: .68em;
+  --preset-font-size-tiny: .75em;
   --preset-font-size-small: .85em;
   --preset-font-size-normal: 1em;
-  --preset-font-size-medium: 1.6em;
+  --preset-font-size-medium: 1.4em;
   --preset-font-size-large: 2em;
   --preset-font-size-x-large: 2.8em;
 }
@@ -58,6 +58,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -72,7 +73,6 @@ blockquote, q {
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none;
 }
 
 table {
@@ -289,11 +289,4 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
-}
-
-@media only screen and (max-width: 1050px) {
-
-  .main-content {
-    margin-top: 328px !important;
-  }
 }
