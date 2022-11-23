@@ -12,6 +12,7 @@ import {AlertType} from "../../../../core/models/system-alert";
 export class ChallengeComponent implements OnInit {
 
   challenge: Challenge = {} as Challenge;
+  section: number = 0;
 
   constructor(private route: ActivatedRoute, private alertHandlingService: AlertHandlingService, private challengeService: ChallengeService) { }
 
@@ -22,6 +23,26 @@ export class ChallengeComponent implements OnInit {
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenge'),
       })
     })
+  }
+
+  onOverview() {
+    this.section = 0;
+  }
+
+  onChats() {
+    this.section = 1;
+  }
+
+  onGroups() {
+    this.section = 2;
+  }
+
+  onLeaderboard() {
+    this.section = 3;
+  }
+
+  onSettings() {
+    this.section = 4;
   }
 
   hasAccess(access: any) {

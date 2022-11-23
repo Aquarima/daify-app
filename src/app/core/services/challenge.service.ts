@@ -34,7 +34,7 @@ export class ChallengeService {
   }
 
   createChallenge(challenge: Challenge) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/add`, challenge);
+    return this.http.post<any>(`${env.apiUrl}/challenge/create`, challenge);
   }
 
   getColorByTag(title: string): string {

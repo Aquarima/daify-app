@@ -68,6 +68,13 @@ export class ChallengeCreateComponent implements OnInit {
     this.selectedIconFile = event.target.files[0];
   }
 
+  onSubmit() {
+    //if (this.challengeForm.invalid) return;
+    const challenge = this.buildChallenge();
+    this.challengeService.createChallenge(challenge).subscribe();
+    this.showInviteFriendsPopup(challenge);
+  }
+
   private showInviteFriendsPopup(challenge: Challenge) {
     const componentRef = this.viewContainerRef.createComponent(InviteFriendsComponent);
     componentRef.instance.closeEvent.subscribe(() => {
@@ -80,13 +87,6 @@ export class ChallengeCreateComponent implements OnInit {
     });
     componentRef.instance.challenge = challenge;
     componentRef.changeDetectorRef.detectChanges();
-  }
-
-  onSubmit() {
-    //if (this.challengeForm.invalid) return;
-    const challenge = this.buildChallenge();
-    this.challengeService.createChallenge(challenge).subscribe();
-    this.showInviteFriendsPopup(challenge);
   }
 
   private buildChallenge() {
@@ -105,7 +105,7 @@ export class ChallengeCreateComponent implements OnInit {
     return challenge;
   }
 
-  toAccessType(value: string): string {
+  private toAccessType(value: string): string {
     return value.replace(' ', '_').toUpperCase();
   }
 
@@ -127,9 +127,5 @@ export class ChallengeCreateComponent implements OnInit {
   get previewIcon() {
     if (!this.selectedIconFile) return;
     return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedIconFile));
-  }
-
-  get accessTypes(): AccessType[] {
-    return Object.values(AccessType);
   }
 }
