@@ -86,150 +86,154 @@
         </li>
       </ul>
     </nav>
-    <div class="challenge-box">
+    <div #challenge_box class="challenge-box">
       <div class="challenge-box-chats" *ngIf="isOnSection(1)">
-        <ul class="challenge-box-chats-list">
-          <li>General</li>
-          <li>My Group</li>
-        </ul>
-        <div class="chat-box">
-          <div class="chat-box-messages" #messages>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
+        <h1>Chats</h1>
+        <div>
+          <ul class="challenge-box-chats-list">
+            <li>General</li>
+            <li>My Group</li>
+          </ul>
+          <div class="chat-box">
+            <div class="chat-box-messages" #messages>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">Tom</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Hi! 😀</p>
                 </div>
               </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">Tom</p>
-                  <p class="timestamp">at 10:00</p>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
                 </div>
-                <p class="message">Hi! 😀</p>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:03</p>
+                  </div>
+                  <p class="message">Welcome</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item current-member-message">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-online"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <a class="sender-username">Exalow</a>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Let's go 🔥</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Good luck everyone!</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Good luck everyone!</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Good luck everyone!</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Good luck everyone!</p>
+                </div>
+              </div>
+              <div class="chat-box-messages-item">
+                <div class="sender-avatar">
+                  <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
+                  <div class="sender-avatar-status">
+                    <span class="status-indicator status-indicator-offline"></span>
+                  </div>
+                </div>
+                <div>
+                  <div class="message-head">
+                    <p class="sender-username">John</p>
+                    <p class="timestamp">at 10:00</p>
+                  </div>
+                  <p class="message">Good luck everyone!</p>
+                </div>
               </div>
             </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
+            <div class="user-input send-message">
+              <div class="user-input-box">
+                <label for="message">Send message</label>
+                <input id="message" class="form-control" type="text" name="message" #text_input>
+                <button class="submit-btn" type="submit" value="">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="m3.4 20.4l17.45-7.48a1 1 0 0 0 0-1.84L3.4 3.6a.993.993 0 0 0-1.39.91L2 9.12c0 .5.37.93.87.99L17 12L2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/>
+                  </svg>
+                </button>
               </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:03</p>
-                </div>
-                <p class="message">Welcome</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item current-member-message">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-online"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <a class="sender-username">Exalow</a>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Let's go 🔥</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Good luck everyone!</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Good luck everyone!</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Good luck everyone!</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Good luck everyone!</p>
-              </div>
-            </div>
-            <div class="chat-box-messages-item">
-              <div class="sender-avatar">
-                <img src="https://fr.web.img6.acsta.net/medias/nmedia/18/78/46/81/19127253_fa1_vf.jpg" alt="">
-                <div class="sender-avatar-status">
-                  <span class="status-indicator status-indicator-offline"></span>
-                </div>
-              </div>
-              <div>
-                <div class="message-head">
-                  <p class="sender-username">John</p>
-                  <p class="timestamp">at 10:00</p>
-                </div>
-                <p class="message">Good luck everyone!</p>
-              </div>
-            </div>
-          </div>
-          <div class="user-input send-message">
-            <div class="user-input-box">
-              <label for="message">Send message</label>
-              <input id="message" class="form-control" type="text" name="message" #text_input>
-              <button class="submit-btn" type="submit" value="">
-                <svg width="32" height="32" viewBox="0 0 24 24">
-                  <path
-                    d="m3.4 20.4l17.45-7.48a1 1 0 0 0 0-1.84L3.4 3.6a.993.993 0 0 0-1.39.91L2 9.12c0 .5.37.93.87.99L17 12L2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/>
-                </svg>
-              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="challenge-box-groups" *ngIf="isOnSection(2)">
+        <h1>Groups / Members</h1>
         <div class="challenge-box-groups-list">
           <div class="groups-list-item groups-list-item-new">
             <svg width="32" height="32" viewBox="0 0 24 24">

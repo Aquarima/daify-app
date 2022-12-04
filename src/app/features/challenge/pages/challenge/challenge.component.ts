@@ -15,12 +15,14 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('text_input') textInputs!: QueryList<ElementRef>;
   @ViewChild('messages') messages!: ElementRef;
+  @ViewChild('challenge_box') challengeBox!: ElementRef;
 
   challenge: Challenge = {} as Challenge;
   groups: Group[] = [];
   section: number = 0;
 
-  constructor(private route: ActivatedRoute, private alertHandlingService: AlertHandlingService, private challengeService: ChallengeService, private groupService: GroupService) { }
+  constructor(private route: ActivatedRoute, private alertHandlingService: AlertHandlingService, private challengeService: ChallengeService, private groupService: GroupService) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -58,6 +60,11 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
 
   onChats() {
     this.section = 1;
+    this.challengeBox.nativeElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   }
 
   onGroups() {
@@ -65,6 +72,11 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
       next: (data: any) => this.groups = data.content,
     })
     this.section = 2;
+    this.challengeBox.nativeElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   }
 
   onLeaderboard() {
