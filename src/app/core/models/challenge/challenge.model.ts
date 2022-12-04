@@ -11,7 +11,7 @@ export interface Challenge {
   iconUrl: string,
   invite: string,
   config: ChallengeConfig,
-  creationDate: Date
+  createdAt: Date
 }
 
 export function getDuration(challenge: Challenge) {

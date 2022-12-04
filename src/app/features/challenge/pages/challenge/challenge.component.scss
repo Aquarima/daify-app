@@ -222,14 +222,244 @@
       }
     }
 
-    .component {
+    .challenge-box {
       width: 100%;
-      height: 100%;
-    }
 
-    .group-list {
-      min-width: 260px;
-      height: 100%;
+      .challenge-box-chats {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+
+        .challenge-box-chats-list {
+          width: 20%;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          li {
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+            border: 1px solid #DEDEEA;
+            border-radius: 16px;
+            background-color: #FFF;
+            font-weight: 600;
+            color: var(--color-text);
+            cursor: pointer;
+          }
+        }
+
+        .chat-box {
+          width: 70%;
+          box-sizing: border-box;
+          box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+          border-radius: 16px;
+          background-color: #FFF;
+
+          .chat-box-messages {
+            padding: 40px;
+            max-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            row-gap: 32px;
+            overflow-y: auto;
+
+            .chat-box-messages-item {
+              max-width: 70%;
+              display: flex;
+              align-items: center;
+              gap: 16px;
+
+              > div {
+                display: flex;
+                flex-direction: column;
+                row-gap: 4px;
+              }
+
+              .sender-avatar {
+                width: 40px;
+                height: 40px;
+                position: relative;
+                border-radius: 50%;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 50%;
+                }
+
+                .sender-avatar-status {
+                  width: 16px;
+                  height: 16px;
+                  position: absolute;
+                  left: 28px;
+                  bottom: 2px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 50%;
+                  background-color: #FFF;
+
+                  .status-indicator {
+                    width: 80%;
+                    height: 80%;
+                    border-radius: 50%;
+                    background-color: #FFF;
+                  }
+
+                  .status-indicator-online {
+                    background-color: #4CAF50;
+                  }
+
+                  .status-indicator-offline {
+                    background-color: #F44336;
+                  }
+                }
+              }
+
+              .message-head {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .sender-username {
+                  font-weight: 600;
+                  font-size: var(--preset-font-size-normal);
+                  color: var(--color-text);
+                  text-decoration: none;
+                  cursor: pointer;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+
+                .timestamp {
+                  font-size: var(--preset-font-size-small);
+                  color: var(--color-text-alt);
+                }
+              }
+
+              .message {
+                font-size: var(--preset-font-size-normal);
+                color: var(--color-text-alt-2);
+              }
+            }
+
+            .current-member-message {
+              margin-left: 30%;
+              justify-content: flex-end;
+            }
+          }
+
+          .send-message {
+            padding: 40px;
+
+            .user-input-box {
+              height: 48px;
+              border-radius: 24px;
+
+              .form-control {
+                height: 100%;
+                border-radius: 24px;
+                font-size: var(--preset-font-size-normal);
+              }
+
+              .submit-btn {
+                height: 101%;
+                z-index: 999;
+                width: 64px;
+                border-radius: 0 24px 24px 0;
+              }
+            }
+          }
+        }
+      }
+
+      .challenge-box-groups {
+
+        .challenge-box-groups-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, 260px);
+          justify-content: center;
+          row-gap: 40px;
+          column-gap: 24px;
+
+          .groups-list-item {
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 16px;
+            box-sizing: border-box;
+            box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+            border-radius: 16px;
+            background-color: #FFF;
+
+            .groups-list-item-icon {
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+            }
+
+            .groups-list-item-members-count {
+              padding: 0 8px;
+              height: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              column-gap: 4px;
+              border-radius: 16px;
+              background-color: #F2F2F2;
+
+              svg {
+                width: 16px;
+                height: 16px;
+                fill: var(--color-text-alt);
+              }
+
+              p {
+                font-size: var(--preset-font-size-tiny);
+                color: var(--color-text-alt);
+              }
+            }
+
+            .groups-list-item-name {
+              font-weight: 600;
+              font-size: var(--preset-font-size-normal);
+              color: var(--color-text);
+            }
+
+            .groups-list-item-join-btn {
+              padding: 4px 16px;
+              border: none;
+              border-radius: 16px;
+              background-color: var(--color-secondary);
+              font-size: var(--preset-font-size-tiny);
+              color: #FFF;
+              cursor: pointer;
+
+              &:hover {
+                background-color: var(--color-secondary-hover);
+              }
+            }
+          }
+        }
+      }
     }
+  }
+}
+
+.user-input-active {
+
+  label {
+    padding: 0 4px;
+    top: 0;
+    left: 16px;
+    font-size: .75em;
   }
 }
