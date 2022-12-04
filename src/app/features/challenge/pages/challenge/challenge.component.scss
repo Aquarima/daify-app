@@ -237,7 +237,7 @@
           gap: 16px;
 
           li {
-            height: 40px;
+            height: 64px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -252,7 +252,7 @@
         }
 
         .chat-box {
-          width: 70%;
+          width: 75%;
           box-sizing: border-box;
           box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
           border-radius: 16px;
@@ -323,7 +323,7 @@
               .message-head {
                 display: flex;
                 align-items: center;
-                gap: 8px;
+                column-gap: 4px;
 
                 .sender-username {
                   font-weight: 600;
@@ -388,8 +388,40 @@
           row-gap: 40px;
           column-gap: 24px;
 
+          .groups-list-item-new {
+            border: 1px solid var(--color-secondary);
+            cursor: pointer;
+
+            &:hover {
+              border: 2px solid var(--color-secondary-hover);
+
+              svg {
+                width: 36px;
+                height: 36px;
+                transition: all .2s ease;
+              }
+
+              p {
+                transition: all .2s ease;
+                font-size: calc(var(--preset-font-size-normal) + .05em);
+              }
+            }
+
+            svg {
+              width: 32px;
+              height: 32px;
+              fill: var(--color-text);
+            }
+
+            p {
+              font-weight: 600;
+              color: var(--color-text);
+            }
+          }
+
           .groups-list-item {
             padding: 24px 16px;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
