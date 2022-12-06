@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    OnInit,
+    QueryList,
+    ViewChild,
+    ViewChildren,
+    ViewContainerRef
+} from '@angular/core';
 import {AuthService, Challenge, ChallengeService} from "../../../../core";
 import {ActivatedRoute} from "@angular/router";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
@@ -10,6 +19,8 @@ import {ChannelService} from "../../../../core/services/channel.service";
 import {MessageService} from "../../../../core/services/message.service";
 import {Message} from "../../../../core/models/challenge/message.model";
 import {Member} from "../../../../core/models/challenge/member.model";
+import {CreateGroupComponent} from "../../components/create-group/create-group.component";
+import {InviteFriendsComponent} from "../../components";
 
 @Component({
     selector: 'app-challenge',
@@ -31,6 +42,7 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
 
     constructor(
         private route: ActivatedRoute,
+        private viewContainerRef: ViewContainerRef,
         private alertHandlingService: AlertHandlingService,
         private authService: AuthService,
         private challengeService: ChallengeService,
@@ -105,6 +117,11 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
 
     onSettings() {
         this.section = 4;
+    }
+
+    onNewGroup() {
+        const componentRef = this.viewContainerRef.createComponent(CreateGroupComponent);
+        componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
     }
 
     setCurrentChannel(channel: Channel) {

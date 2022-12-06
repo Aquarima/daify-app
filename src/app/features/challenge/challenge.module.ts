@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ChallengeComponent } from './pages/challenge/challenge.component';
+import { CreateGroupComponent } from './components/create-group/create-group.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ChallengeComponent } from './pages/challenge/challenge.component';
     ChallengeCreateComponent,
     InviteFriendsComponent,
     ChallengeComponent,
+    CreateGroupComponent,
   ],
     imports: [
         CommonModule,
