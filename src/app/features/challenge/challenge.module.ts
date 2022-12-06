@@ -9,6 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ChallengeComponent } from './pages/challenge/challenge.component';
+import { SectionChatsComponent } from './components/section-chats/section-chats.component';
+import { SectionSettingsComponent } from './components/section-settings/section-settings.component';
+import { SectionLeaderboardComponent } from './components/section-leaderboard/section-leaderboard.component';
+import { SectionOverviewComponent } from './components/section-overview/section-overview.component';
+import { SectionGroupsComponent } from './components/section-groups/section-groups.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,11 @@ import { ChallengeComponent } from './pages/challenge/challenge.component';
     ChallengeCreateComponent,
     InviteFriendsComponent,
     ChallengeComponent,
+    SectionChatsComponent,
+    SectionSettingsComponent,
+    SectionLeaderboardComponent,
+    SectionOverviewComponent,
+    SectionGroupsComponent,
   ],
     imports: [
         CommonModule,
