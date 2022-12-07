@@ -1,0 +1,47 @@
+<h1>Chats</h1>
+<div>
+  <ul class="challenge-box-chats-list">
+    <li *ngFor="let channel of channels" (click)="setCurrentChannel(channel)">{{channel.name}}</li>
+  </ul>
+  <div class="chat-box">
+    <div class="chat-box-messages" #messages_box>
+      <div class="chat-box-messages-item" [ngClass]="{'current-member-message': isSelfMember(message.sender)}"
+           *ngFor="let message of messages">
+        <div class="sender-avatar" *ngIf="!isSelfMember(message.sender)">
+          <img [src]="message.sender.profile.avatarUrl" alt="">
+          <div class="sender-avatar-status">
+            <span class="status-indicator"
+                  [ngClass]="message.sender.profile.online ? 'status-indicator-online' : 'status-indicator-offline'"></span>
+          </div>
+        </div>
+        <div>
+          <div class="message-head">
+            <a class="sender-username"
+               [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
+            <p class="timestamp">{{message.sent_at}}</p>
+          </div>
+          <p class="message-content">{{message.content}}</p>
+        </div>
+        <div class="sender-avatar" *ngIf="isSelfMember(message.sender)">
+          <img [src]="message.sender.profile.avatarUrl" alt="">
+          <div class="sender-avatar-status">
+            <span class="status-indicator"
+                  [ngClass]="message.sender.profile.online ? 'status-indicator-online' : 'status-indicator-offline'"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="user-input send-message">
+      <div class="user-input-box">
+        <label for="message">Send message</label>
+        <input id="message" class="form-control" type="text" name="message" #text_input>
+        <button class="submit-btn" type="submit" value="">
+          <svg width="32" height="32" viewBox="0 0 24 24">
+            <path
+              d="m3.4 20.4l17.45-7.48a1 1 0 0 0 0-1.84L3.4 3.6a.993.993 0 0 0-1.39.91L2 9.12c0 .5.37.93.87.99L17 12L2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

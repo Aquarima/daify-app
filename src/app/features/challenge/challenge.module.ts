@@ -21,7 +21,6 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
     ChallengeCreateComponent,
     InviteFriendsComponent,
     ChallengeComponent,
-    CreateGroupComponent,
   ],
     imports: [
         CommonModule,
