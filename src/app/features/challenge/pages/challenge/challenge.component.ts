@@ -23,22 +23,22 @@ import {CreateGroupComponent} from "../../components/create-group/create-group.c
 import {InviteFriendsComponent} from "../../components";
 
 @Component({
-    selector: 'app-challenge',
-    templateUrl: './challenge.component.html',
-    styleUrls: ['./challenge.component.scss']
+  selector: 'app-challenge',
+  templateUrl: './challenge.component.html',
+  styleUrls: ['./challenge.component.scss']
 })
 export class ChallengeComponent implements OnInit, AfterViewInit {
 
-    @ViewChildren('text_input') textInputs!: QueryList<ElementRef>;
-    @ViewChild('messages_box') messagesBox!: ElementRef;
-    @ViewChild('challenge_box') challengeBox!: ElementRef;
+  @ViewChildren('text_input') textInputs!: QueryList<ElementRef>;
+  @ViewChild('messages_box') messagesBox!: ElementRef;
+  @ViewChild('challenge_box') challengeBox!: ElementRef;
 
-    challenge: Challenge = {} as Challenge;
-    channels: Channel[] = [];
-    groups: Group[] = [];
-    messages: Message[] = [];
-    section: number = 0;
-    currentChannel: Channel = {} as Channel;
+  challenge: Challenge = {} as Challenge;
+  channels: Channel[] = [];
+  groups: Group[] = [];
+  messages: Message[] = [];
+  section: number = 0;
+  currentChannel: Channel = {} as Channel;
 
     constructor(
         private route: ActivatedRoute,
@@ -51,73 +51,60 @@ export class ChallengeComponent implements OnInit, AfterViewInit {
         private groupService: GroupService) {
     }
 
-    ngOnInit(): void {
-        this.route.params.subscribe(params => {
-            this.challengeService.getChallengesById(params['id']).subscribe({
-                next: data => this.challenge = data,
-                error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenge'),
-            })
-        })
-    }
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.challengeService.getChallengesById(params['id']).subscribe({
+        next: data => this.challenge = data,
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenge'),
+      })
+    })
+  }
 
-    ngAfterViewInit(): void {
-        this.initTextInputsListeners();
-        this.messagesBox.nativeElement.scrollIntoView();
-    }
+  ngAfterViewInit(): void {
+    this.initTextInputsListeners();
+    this.messagesBox.nativeElement.scrollIntoView();
+  }
 
-    private initTextInputsListeners() {
-        this.textInputs.forEach(input => {
-            const inputElement = input.nativeElement;
-            const parentNode = inputElement.parentNode;
-            inputElement.addEventListener('focus', () => {
-                parentNode.classList.add('user-input-active')
-            });
-            inputElement.addEventListener('focus', () => {
-                parentNode.classList.add('user-input-active')
-            });
-            inputElement.addEventListener('focusout', () => {
-                if (inputElement.value === '') parentNode.classList.remove('user-input-active');
-            });
-        });
-    }
+  private initTextInputsListeners() {
+    this.textInputs.forEach(input => {
+      const inputElement = input.nativeElement;
+      const parentNode = inputElement.parentNode;
+      inputElement.addEventListener('focus', () => {
+        parentNode.classList.add('user-input-active')
+      });
+      inputElement.addEventListener('focus', () => {
+        parentNode.classList.add('user-input-active')
+      });
+      inputElement.addEventListener('focusout', () => {
+        if (inputElement.value === '') parentNode.classList.remove('user-input-active');
+      });
+    });
+  }
 
-    onOverview() {
-        this.section = 0;
-    }
+  onSection(index: number) {
+    this.section = index;
+    this.challengeBox.nativeElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
+  }
 
-    onChats() {
-        this.channelService.getChannelsByChallenge(this.challenge.id).subscribe({
-            next: (data: any) => this.channels = data.content,
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch channels'),
-        })
-        this.section = 1;
-        this.challengeBox.nativeElement.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest"
-        });
-    }
+  hasAccess(access: any) {
+    return this.challenge.config.accessType === access;
+  }
 
-    onGroups() {
-        this.groupService.getGroupsByChallenge(this.challenge.id).subscribe({
-            next: (data: any) => this.groups = data.content,
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch groups'),
-        })
-        this.section = 2;
-        this.challengeBox.nativeElement.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "nearest"
-        });
-    }
+  isOnSection(section: number) {
+    return this.section === section;
+  }
 
-    onLeaderboard() {
-        this.section = 3;
-    }
+  get iconUrl(): string {
+    return this.challenge?.iconUrl || '/assets/challenge_icon_placeholder.svg';
+  }
 
-    onSettings() {
-        this.section = 4;
-    }
+  get bannerUrl(): string {
+    return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
+  }
 
     onNewGroup() {
         const componentRef = this.viewContainerRef.createComponent(CreateGroupComponent);
