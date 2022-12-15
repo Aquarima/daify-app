@@ -1,9 +1,9 @@
 <h1>Chats</h1>
 <div>
-  <ul class="challenge-box-chats-list">
-    <li *ngFor="let channel of channels" (click)="setCurrentChannel(channel)">{{channel.name}}</li>
+  <ul class="challenge-box-chats-list" *ngIf="channelCache.length > 0">
+    <li *ngFor="let channel of channelCache" (click)="onChannelSelected(channel)">{{channel.name}}</li>
   </ul>
-  <div class="chat-box">
+  <div class="chat-box" *ngIf="channelCache.length > 0">
     <div class="chat-box-messages" #messages_box>
       <div class="chat-box-messages-item" [ngClass]="{'current-member-message': isSelfMember(message.sender)}"
            *ngFor="let message of messages">
