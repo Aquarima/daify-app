@@ -18,10 +18,10 @@ export class ExploreComponent implements OnInit {
 
   onSearch(search: Search) {
     if (!search.title) {
-      this.request.next({url: '{API_URL}/challenge/all?size&page', replace: false});
+      this.request.next({url: '{API_URL}/challenge?size&page', replace: false});
       return;
     }
-    this.request.next({url: '{API_URL}/challenge/all/${search.title}?size&page', replace: true});
+    this.request.next({url: '{API_URL}/challenge/title/${search.title}?size&page', replace: true});
   }
 
   onGroupBySelected(option: any) {

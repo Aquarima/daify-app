@@ -1,32 +1,45 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {AlertType} from "../../../../core/models/system-alert";
 import {GroupService} from "../../../../core/services/group.service";
 import {Challenge} from "../../../../core";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {Group} from "../../../../core/models/challenge/group.model";
+import {CreateGroupComponent} from "../create-group/create-group.component";
+import {Observable} from "rxjs";
 
 @Component({
-  selector: 'dfy-challenge-groups',
-  templateUrl: './section-groups.component.html',
-  styleUrls: ['./section-groups.component.scss']
+    selector: 'dfy-challenge-groups',
+    templateUrl: './section-groups.component.html',
+    styleUrls: ['./section-groups.component.scss']
 })
 export class SectionGroupsComponent implements OnInit {
 
-  @Input() challenge!: Challenge;
+    @Input() section!: Observable<number>;
+    @Input() challenge!: Challenge;
 
-  groups: Group[] = [];
+    groups: Group[] = [];
 
-  constructor(private alertHandlingService: AlertHandlingService, private groupService: GroupService) {
-  }
+    constructor(
+        private viewContainerRef: ViewContainerRef,
+        private alertHandlingService: AlertHandlingService,
+        private groupService: GroupService) {
+    }
 
-  ngOnInit(): void {
-    this.groupService.getGroupsByChallenge(this.challenge.id).subscribe({
-      next: (data: any) => this.groups = data.content,
-      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch groups'),
-    })
-  }
+    ngOnInit(): void {
+        this.section.subscribe(val => {
+            this.groupService.getGroupsByChallenge(this.challenge.id).subscribe({
+                next: (data: any) => this.groups = data.content,
+                error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch groups'),
+            })
+        })
+    }
 
-  getGroupIcon(group: Group) {
-    return group?.iconUrl || '/assets/challenge_icon_placeholder.svg';
-  }
+    onNewGroup() {
+        const componentRef = this.viewContainerRef.createComponent(CreateGroupComponent);
+        componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
+    }
+
+    getGroupIcon(group: Group) {
+        return group?.iconUrl || '/assets/challenge_icon_placeholder.svg';
+    }
 }

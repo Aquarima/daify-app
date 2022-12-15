@@ -18,11 +18,11 @@ export class ChallengeService {
   constructor(private http: HttpClient) { }
 
   getChallenges(page?: number, size?: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/all?size=${size  || 32}&page=${page || 0}`);
+    return this.http.get<any>(`${env.apiUrl}/challenge?size=${size  || 32}&page=${page || 0}`);
   }
 
   getChallengesByTitle(title: string) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/all/${title}`);
+    return this.http.get<any>(`${env.apiUrl}/challenge/${title}`);
   }
 
   getChallengesByUser(userId: number, page?: number, size?: number) {

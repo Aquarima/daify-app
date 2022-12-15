@@ -9,7 +9,7 @@ export class ChannelService {
 
   constructor(private http: HttpClient) { }
 
-  getChannelsByChallenge(id: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${id}/channel/all`);
+  getChannelsByChallenge(challengeId: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/channel`);
   }
 }

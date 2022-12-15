@@ -9,7 +9,7 @@ export class GroupService {
 
   constructor(private http: HttpClient) { }
 
-  getGroupsByChallenge(id: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${id}/group/all`);
+  getGroupsByChallenge(challengeId: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/group`);
   }
 }
