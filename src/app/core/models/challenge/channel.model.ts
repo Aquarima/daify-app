@@ -1,5 +1,5 @@
 export interface Channel {
-    id: number,
-    name: string,
-    createdAt: Date
+    id: number;
+    name: string;
+    createdAt: Date;
 }

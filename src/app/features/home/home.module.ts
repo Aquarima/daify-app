@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './pages/home/home.component';
-import { LayoutModule } from 'src/app/layout/layout.module';
-import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
+import {HomeRoutingModule} from './home-routing.module';
+import {HomeComponent, MaintenanceComponent} from './pages';
+import {LayoutModule} from 'src/app/layout/layout.module';
 
 @NgModule({
-  declarations: [ 
+  declarations: [
     HomeComponent, MaintenanceComponent,
   ],
   imports: [
@@ -15,8 +14,9 @@ import { MaintenanceComponent } from './pages/maintenance/maintenance.component'
     HomeRoutingModule,
     LayoutModule,
   ],
-  exports: [ 
+  exports: [
     HomeComponent,
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

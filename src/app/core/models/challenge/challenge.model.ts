@@ -2,16 +2,16 @@ import {Profile} from "../user";
 import {ChallengeConfig} from "./challenge-config.model";
 
 export interface Challenge {
-  id: number,
-  author: Profile,
-  title: string,
-  description: string,
-  theme: string,
-  coverUrl: string,
-  iconUrl: string,
-  invite: string,
-  config: ChallengeConfig,
-  createdAt: Date
+  id: number;
+  author: Profile;
+  title: string;
+  description: string;
+  theme: string;
+  coverUrl: string;
+  iconUrl: string;
+  invite: string;
+  config: ChallengeConfig;
+  createdAt: Date;
 }
 
 export function getDuration(challenge: Challenge) {

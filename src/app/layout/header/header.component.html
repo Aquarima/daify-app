@@ -11,7 +11,7 @@
     </svg>
     <div class="dropdown-wrapper">
       <div class="dropdown">
-        <div class="dropdown-item" *ngIf="authService.isAuthenticated()">
+        <div class="dropdown-item" *ngIf="authService.isSessionActive()">
           <a class="item-name" href="">
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path
@@ -31,7 +31,7 @@
             <span class="mark-beta">Beta</span>
           </a>
         </div>
-        <div class="dropdown-item" *ngIf="authService.isAuthenticated()">
+        <div class="dropdown-item" *ngIf="authService.isSessionActive()">
           <a class="item-name" [routerLink]="['/app/mylist']">
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path
@@ -41,7 +41,7 @@
             <span class="mark-beta">Beta</span>
           </a>
         </div>
-        <div class="dropdown-item" *ngIf="authService.isAuthenticated()">
+        <div class="dropdown-item" *ngIf="authService.isSessionActive()">
           <a class="item-name" [routerLink]="['/app/create']">
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4 11h-3v3c0 .55-.45 1-1 1s-1-.45-1-1v-3H8c-.55 0-1-.45-1-1s.45-1 1-1h3V8c0-.55.45-1 1-1s1 .45 1 1v3h3c.55 0 1 .45 1 1s-.45 1-1 1z"/>
@@ -105,22 +105,22 @@
   </li>
 </ul>
 <div class="end">
-  <div class="logged-user unfoldable-item" *ngIf="authService.isAuthenticated()">
-    <a class="profile-link" [routerLink]="['/app/user/', loggedUser.profile.username]"
-       *ngIf="authService.isAuthenticated()">
-      <img class="user-avatar" [src]="getAvatar()" alt="Avatar">
+  <div class="logged-user unfoldable-item" *ngIf="authService.isSessionActive()">
+    <a class="profile-link" [routerLink]="['/app/user/', profileUsername]"
+       *ngIf="authService.isSessionActive()">
+      <img class="user-avatar" [src]="profileAvatar" alt="Avatar">
       <svg class="unfold-arrow" width="32" height="32" viewBox="0 0 24 24">
         <path d="m7 10l5 5l5-5H7z"/>
       </svg>
     </a>
     <div class="dropdown-wrapper">
       <div class="dropdown">
-        <img class="user-avatar-large" [src]="getAvatar()" alt="Avatar">
-        <p class="user-username">{{loggedUser.profile.username}}</p>
-        <p class="user-tag">{{loggedUser.profile.username}}</p>
+        <img class="user-avatar-large" [src]="profileAvatar" alt="Avatar">
+        <p class="user-username">{{profileUsername}}</p>
+        <p class="user-tag">{{profileUsername}}</p>
         <ul class="options">
           <li>
-            <a class="option-link" [routerLink]="['/app/user/', loggedUser.profile.username]">
+            <a class="option-link" [routerLink]="['/app/user/', profileUsername]">
               Profile
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
@@ -148,7 +148,7 @@
       </div>
     </div>
   </div>
-  <div class="auth-ways" *ngIf="!authService.isAuthenticated()">
+  <div class="auth-ways" *ngIf="!authService.isSessionActive()">
     <a class="login" [routerLink]="['/auth/login']">Login</a>
     <a class="signup" [routerLink]="['/auth/signup']">Join us - it's free</a>
   </div>

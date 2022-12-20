@@ -75,20 +75,20 @@ export class SectionChatsComponent implements OnInit {
   }
 
   loadChat(channel: Channel) {
-    if (this.messageCache.has(channel)) return;
-    this.ngZone.run(() => {
-      this.messageService.getMessagesByChannel(channel.id)
-        .subscribe({
-          next: (messages: any) => this.messageCache.set(channel, messages.content),
-          error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, err),
-        })
-    })
+    if (this.messageCache.has(channel)) {
+      this.messages = this.messageCache.get(channel) || [];
+      return;
+    }
+    this.messageService.getMessagesByChannel(channel.id)
+      .subscribe({
+        next: (msg: any) => this.messageCache.set(channel, this.messages = msg.content),
+        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, err),
+      })
   }
 
   onChannelSelected(channel: Channel) {
-    this.loadChat(channel);
-    this.messages = this.messageCache.get(channel) || [];
     this.channel = channel;
+    this.loadChat(channel);
   }
 
   onSendMessage() {

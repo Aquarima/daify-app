@@ -32,16 +32,6 @@
     </div>
   </div>
   <dfy-select class="select-order-by" [formControl]="orderByControl" [data]="orderByList"></dfy-select>
-  <!--<div class="user-input">
-    <div class="user-input-box active">
-      <label for="options">Order By</label>
-      <select id="options" name="options" #option_selected (change)="onGroupBy(option_selected.value)">
-        <option value="alphabetical">Alphabetical</option>
-        <option value="duration">Duration</option>
-        <option value="start">Start</option>
-      </select>
-    </div>
-  </div>-->
   <div class="display-modes">
     <button [ngClass]="{'display-mode-selected' : displayMode === 'grid'}" (click)="onDisplayModeSelected('grid')">
       <svg width="32" height="32" viewBox="0 0 24 24">

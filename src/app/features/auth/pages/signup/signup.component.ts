@@ -27,9 +27,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.authService.signupError$.subscribe(errors => {
-      this.errors = errors;
-    });
   }
 
   ngAfterViewInit(): void {
