@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChildren, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {AccessType, AuthService, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -11,8 +11,6 @@ import {Router} from "@angular/router";
   styleUrls: ['./challenge-create.component.scss', "/../../../../../styles.scss",]
 })
 export class ChallengeCreateComponent implements OnInit {
-
-  @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
   challengeForm = new FormGroup({
     title: new FormControl<string>('', [Validators.required, Validators.minLength(2), Validators.maxLength(24), Validators.pattern('^[a-zA-Z0-9 \'\]*$')]),
@@ -38,26 +36,6 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.initTextInputsListeners();
-  }
-
-  private initTextInputsListeners() {
-    this.textInputs.forEach(input => {
-      const inputElement = input.nativeElement;
-      const parentNode = inputElement.parentNode;
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('user-input-active')
-      });
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('user-input-active')
-      });
-      inputElement.addEventListener('focusout', () => {
-        if (inputElement.value === '') parentNode.classList.remove('user-input-active');
-      });
-    });
   }
 
   onPreviewCoverSelected(event: any) {

@@ -4,5 +4,6 @@ export interface Message {
     id: number;
     sender: Member;
     content: string;
-    sent_at: Date;
+    sentAt: Date;
+    isFailed?: boolean;
 }

@@ -58,20 +58,6 @@ export class InviteFriendsComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngAfterViewInit(): void {
     this.renderer.addClass(this.document.body, 'no-scroll');
-    this.initTextInputsListeners();
-  }
-
-  private initTextInputsListeners() {
-    const inputElement = this.searchInput.nativeElement;
-    inputElement.addEventListener('focus', () => {
-      inputElement.parentNode.classList.add('user-input-active')
-    });
-    inputElement.addEventListener('focus', () => {
-      inputElement.parentNode.classList.add('user-input-active')
-    });
-    inputElement.addEventListener('focusout', () => {
-      if (inputElement.value === '') inputElement.parentNode.classList.remove('user-input-active');
-    });
   }
 
   onToggleInviteFormat() {

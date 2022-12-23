@@ -6,9 +6,14 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {ProfileService} from './services/profile.service';
 import {FriendService} from './services/friend.service';
 import {AlertHandlingService} from "./services/alert-handling.service";
+import { CustomInputFocusDirective } from './helpers/custom-input-focus.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+
+    CustomInputFocusDirective
+  ],
   providers: [
     AuthService,
     ChallengeService,
@@ -21,6 +26,9 @@ import {AlertHandlingService} from "./services/alert-handling.service";
   imports: [
     CommonModule,
   ],
+  exports: [
+    CustomInputFocusDirective
+  ]
 })
 export class CoreModule {
 }

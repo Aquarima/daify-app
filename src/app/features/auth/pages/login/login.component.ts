@@ -1,12 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {
-  ACCESS_TOKEN,
-  ACCESS_TOKEN_EXPIRY,
-  AuthService,
-  REFRESH_TOKEN,
-  REFRESH_TOKEN_EXPIRY
-} from 'src/app/core/services/auth.service';
+import {AuthService} from 'src/app/core/services/auth.service';
 import {CookieService} from "ngx-cookie";
 import {Router} from "@angular/router";
 
@@ -42,9 +36,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.textInputs.forEach(input => {
       const inputElement = input.nativeElement;
       const parentNode = inputElement.parentNode;
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('active')
-      });
       inputElement.addEventListener('focus', () => {
         parentNode.classList.add('active')
       });

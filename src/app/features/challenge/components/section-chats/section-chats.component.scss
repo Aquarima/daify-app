@@ -54,18 +54,20 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      row-gap: 32px;
+      row-gap: 16px;
       overflow-y: auto;
       border: 1px solid rgba(222, 222, 234, .5);
       border-radius: 16px;
 
       .chat-box-messages-item {
         margin: 0 30% 0 0;
+        padding: 8px 0 8px 8px;
         max-width: 70%;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         gap: 16px;
+        border-radius: 8px;
 
         > div {
           display: flex;
@@ -119,11 +121,11 @@
         .message-head {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 8px;
           flex-wrap: wrap;
 
           .sender-username {
-            font-weight: 600;
+            font-weight: 500;
             font-size: var(--preset-font-size-normal);
             color: var(--color-text);
             text-decoration: none;
@@ -146,8 +148,38 @@
         }
       }
 
+      .chat-box-messages-item-failed {
+        background-color: rgba(var(--color-semantic-error), .05);
+
+        .message-head {
+
+          .sender-username {
+            color: rgba(var(--color-semantic-error));
+          }
+
+          .timestamp {
+            color: rgba(var(--color-semantic-error));
+          }
+        }
+
+        .message-content {
+          color: rgba(var(--color-semantic-error));
+        }
+      }
+
+      .maintainer-member-message {
+
+        .message-head {
+
+          .sender-username {
+            font-weight: 600;
+          }
+        }
+      }
+
       .current-member-message {
         margin: 0 0 0 30%;
+        padding: 8px 8px 8px 0;
         justify-content: flex-end;
 
         .message-head {
@@ -189,6 +221,7 @@
       padding: 0 4px;
       top: 0;
       left: 16px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
       font-size: .75em;
     }
   }
