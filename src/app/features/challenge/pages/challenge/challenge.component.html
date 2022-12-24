@@ -7,88 +7,93 @@
           <img [src]="iconUrl" alt="">
         </div>
       </div>
-      <div class="challenge-preview-info">
-        <div class="challenge-preview-info-short">
-          <p class="challenge-preview-info-short-title">{{challenge.title}}</p>
-          <div class="challenge-preview-info-short-author">
-            <img [src]="authorAvatarUrl" alt="">
-            <p>By <span class="challenge-preview-info-short-author-username">{{challenge.author.username}}</span></p>
-          </div>
-        </div>
-        <div class="challenge-preview-info-state">
-          <div class="challenge-preview-info-state-access">
-            <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('FREE') ||!challenge.config">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93c0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41c0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
-            <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('CODE')">
-              <path
-                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"/>
-            </svg>
-            <svg width="32" height="32" viewBox="0 0 256 256" *ngIf="hasAccess('FRIENDS_ONLY')">
-              <path
-                d="M128 24a104 104 0 1 0 104 104A104.2 104.2 0 0 0 128 24Zm0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88ZM80 108a12 12 0 1 1 12 12a12 12 0 0 1-12-12Zm72 0a12 12 0 1 1 12 12a12 12 0 0 1-12-12Zm24.5 48a56 56 0 0 1-97 0a8 8 0 1 1 13.8-8a40.1 40.1 0 0 0 69.4 0a8 8 0 0 1 13.8 8Z"/>
-              <
-            </svg>
-            <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('ON_REQUEST')">
-              <path
-                d="m3.4 20.4l17.45-7.48a1 1 0 0 0 0-1.84L3.4 3.6a.993.993 0 0 0-1.39.91L2 9.12c0 .5.37.93.87.99L17 12L2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/>
-            </svg>
-          </div>
+      <div class="challenge-preview-info-short">
+        <p class="challenge-preview-info-short-title">{{challenge.title}}</p>
+        <div class="challenge-preview-info-short-author">
+          <img [src]="authorAvatarUrl" alt="">
+          <p>By <span class="challenge-preview-info-short-author-username" [routerLink]="['/app/user/', challenge.author.username]">{{challenge.author.username}}</span></p>
         </div>
       </div>
+      <!--<div class="challenge-preview-info">
+         <div class="challenge-preview-info-state">
+           <div class="challenge-preview-info-state-access">
+             <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('FREE') ||!challenge.config">
+               <path
+                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93c0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41c0 2.08-.8 3.97-2.1 5.39z"/>
+             </svg>
+             <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('CODE')">
+               <path
+                 d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"/>
+             </svg>
+             <svg width="32" height="32" viewBox="0 0 256 256" *ngIf="hasAccess('FRIENDS_ONLY')">
+               <path
+                 d="M128 24a104 104 0 1 0 104 104A104.2 104.2 0 0 0 128 24Zm0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88ZM80 108a12 12 0 1 1 12 12a12 12 0 0 1-12-12Zm72 0a12 12 0 1 1 12 12a12 12 0 0 1-12-12Zm24.5 48a56 56 0 0 1-97 0a8 8 0 1 1 13.8-8a40.1 40.1 0 0 0 69.4 0a8 8 0 0 1 13.8 8Z"/>
+               <
+             </svg>
+             <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('ON_REQUEST')">
+               <path
+                 d="m3.4 20.4l17.45-7.48a1 1 0 0 0 0-1.84L3.4 3.6a.993.993 0 0 0-1.39.91L2 9.12c0 .5.37.93.87.99L17 12L2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/>
+             </svg>
+           </div>
+         </div>
+      </div>-->
     </div>
-    <nav class="challenge-sections">
-      <ul>
-        <li [ngClass]="isOnSection(0) ? 'challenge-sections-selected' : ''" (click)="onSection(0)">
-          <span class="challenge-sections-name">Overview</span>
-          <svg width="32" height="32" viewBox="0 0 24 24">
-            <path fill="none" stroke-width="1.5"
-                  d="M3 9.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Zm11 11v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6h-5.8a.6.6 0 0 1-.6-.6Zm-11 0v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/>
-          </svg>
-        </li>
-        <li [ngClass]="isOnSection(1) ? 'challenge-sections-selected' : ''" (click)="onSection(1)">
-          <span class="challenge-sections-name">Chats</span>
-          <svg width="32" height="32" viewBox="0 0 24 24">
-            <g fill="none" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7 12h10M7 8h6"/>
-              <path
-                d="M3 20.29V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7.961a2 2 0 0 0-1.561.75l-2.331 2.914A.6.6 0 0 1 3 20.29Z"/>
-            </g>
-          </svg>
-        </li>
-        <li [ngClass]="isOnSection(2) ? 'challenge-sections-selected' : ''" (click)="onSection(2)">
-          <span class="challenge-sections-name">Groups</span>
-          <svg width="32" height="32" viewBox="0 0 24 24">
-            <g fill="none" stroke-linecap="round" stroke-width="1.5">
-              <path d="M1 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1"/>
-              <path d="M13 14v0a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v.5"/>
-              <path stroke-linejoin="round" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm10-3a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/>
-            </g>
-          </svg>
-        </li>
-        <li [ngClass]="isOnSection(3) ? 'challenge-sections-selected' : ''" (click)="onSection(3)">
-          <span class="challenge-sections-name">Leaderboard</span>
-          <svg width="32" height="32" viewBox="0 0 24 24">
-            <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M15 21H9v-8.4a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6V21Zm5.4 0H15v-2.9a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6v2.3a.6.6 0 0 1-.6.6ZM9 21v-4.9a.6.6 0 0 0-.6-.6H3.6a.6.6 0 0 0-.6.6v4.3a.6.6 0 0 0 .6.6H9Zm1.806-15.887l.909-1.927a.312.312 0 0 1 .57 0l.91 1.927l2.032.311c.261.04.365.376.176.568l-1.47 1.5l.347 2.118c.044.272-.228.48-.462.351l-1.818-1l-1.818 1c-.233.128-.506-.079-.462-.351l.347-2.118l-1.47-1.5c-.19-.192-.085-.528.175-.568l2.034-.31Z"/>
-          </svg>
-        </li>
-        <li [ngClass]="isOnSection(4) ? 'challenge-sections-selected' : ''" (click)="onSection(4)">
-          <span class="challenge-sections-name">Settings</span>
-          <svg width="32" height="32" viewBox="0 0 24 24">
-            <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-              <path d="M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/>
-              <path
-                d="m19.622 10.395l-1.097-2.65L20 6l-2-2l-1.735 1.483l-2.707-1.113L12.935 2h-1.954l-.632 2.401l-2.645 1.115L6 4L4 6l1.453 1.789l-1.08 2.657L2 11v2l2.401.655L5.516 16.3L4 18l2 2l1.791-1.46l2.606 1.072L11 22h2l.604-2.387l2.651-1.098C16.697 18.831 18 20 18 20l2-2l-1.484-1.75l1.098-2.652l2.386-.62V11l-2.378-.605Z"/>
-            </g>
-          </svg>
-        </li>
-      </ul>
-    </nav>
-    <div #challenge_box class="challenge-box">
-      <dfy-challenge-chats class="challenge-box-chats" [section]="section" [challenge]="challenge" [selfMember]="selfMember" *ngIf="isOnSection(1)"></dfy-challenge-chats>
-      <dfy-challenge-groups class="challenge-box-groups" [section]="section" [challenge]="challenge" *ngIf="isOnSection(2)"></dfy-challenge-groups>
+    <div class="challenge-sections">
+      <nav class="challenge-sections-nav">
+        <ul>
+          <li [ngClass]="isOnSection(0) ? 'challenge-sections-selected' : ''" (click)="onSection(0)">
+            <span class="challenge-sections-name">Overview</span>
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <path fill="none" stroke-width="1.5"
+                    d="M3 9.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Zm11 11v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6h-5.8a.6.6 0 0 1-.6-.6Zm-11 0v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/>
+            </svg>
+          </li>
+          <li [ngClass]="isOnSection(1) ? 'challenge-sections-selected' : ''" (click)="onSection(1)">
+            <span class="challenge-sections-name">Chats</span>
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <g fill="none" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 12h10M7 8h6"/>
+                <path
+                  d="M3 20.29V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7.961a2 2 0 0 0-1.561.75l-2.331 2.914A.6.6 0 0 1 3 20.29Z"/>
+              </g>
+            </svg>
+          </li>
+          <li [ngClass]="isOnSection(2) ? 'challenge-sections-selected' : ''" (click)="onSection(2)">
+            <span class="challenge-sections-name">Groups</span>
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <g fill="none" stroke-linecap="round" stroke-width="1.5">
+                <path d="M1 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1"/>
+                <path d="M13 14v0a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v.5"/>
+                <path stroke-linejoin="round" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm10-3a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/>
+              </g>
+            </svg>
+          </li>
+          <li [ngClass]="isOnSection(3) ? 'challenge-sections-selected' : ''" (click)="onSection(3)">
+            <span class="challenge-sections-name">Leaderboard</span>
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15 21H9v-8.4a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6V21Zm5.4 0H15v-2.9a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6v2.3a.6.6 0 0 1-.6.6ZM9 21v-4.9a.6.6 0 0 0-.6-.6H3.6a.6.6 0 0 0-.6.6v4.3a.6.6 0 0 0 .6.6H9Zm1.806-15.887l.909-1.927a.312.312 0 0 1 .57 0l.91 1.927l2.032.311c.261.04.365.376.176.568l-1.47 1.5l.347 2.118c.044.272-.228.48-.462.351l-1.818-1l-1.818 1c-.233.128-.506-.079-.462-.351l.347-2.118l-1.47-1.5c-.19-.192-.085-.528.175-.568l2.034-.31Z"/>
+            </svg>
+          </li>
+          <li [ngClass]="isOnSection(4) ? 'challenge-sections-selected' : ''" (click)="onSection(4)">
+            <span class="challenge-sections-name">Settings</span>
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                <path d="M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/>
+                <path
+                  d="m19.622 10.395l-1.097-2.65L20 6l-2-2l-1.735 1.483l-2.707-1.113L12.935 2h-1.954l-.632 2.401l-2.645 1.115L6 4L4 6l1.453 1.789l-1.08 2.657L2 11v2l2.401.655L5.516 16.3L4 18l2 2l1.791-1.46l2.606 1.072L11 22h2l.604-2.387l2.651-1.098C16.697 18.831 18 20 18 20l2-2l-1.484-1.75l1.098-2.652l2.386-.62V11l-2.378-.605Z"/>
+              </g>
+            </svg>
+          </li>
+        </ul>
+      </nav>
+      <div #challenge_box class="challenge-box">
+        <dfy-challenge-overview [challenge]="challenge" *ngIf="isOnSection(0)"></dfy-challenge-overview>
+        <dfy-challenge-chats [section]="section" [challenge]="challenge" [selfMember]="selfMember" *ngIf="isOnSection(1)"></dfy-challenge-chats>
+        <dfy-challenge-groups [section]="section" [challenge]="challenge" *ngIf="isOnSection(2)"></dfy-challenge-groups>
+        <dfy-challenge-leaderboard [challenge]="challenge" *ngIf="isOnSection(3)"></dfy-challenge-leaderboard>
+        <dfy-challenge-settings [challenge]="challenge" *ngIf="isOnSection(4)"></dfy-challenge-settings>
+      </div>
     </div>
   </div>
 </main>

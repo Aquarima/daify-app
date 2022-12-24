@@ -74,7 +74,7 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: (msg: any) => {
           this.messageCache.set(channel, this.messages = msg.content);
-          this.scrollToNewestMessage();
+          //this.scrollToNewestMessage();
         },
         error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, err),
       })
@@ -83,7 +83,7 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
   onChannelSelected(channel: Channel) {
     this.channel = channel;
     this.loadChat(channel);
-    this.scrollToNewestMessage();
+    //this.scrollToNewestMessage();
   }
 
   addMessageToChat(channel: Channel, message: Message, isFailed?: boolean) {

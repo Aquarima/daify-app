@@ -1,9 +1,9 @@
 <h1>Chats</h1>
 <div>
-  <ul class="challenge-box-chats-list" *ngIf="channelCache.length > 0">
-    <li *ngFor="let channel of channelCache" (click)="onChannelSelected(channel)">{{channel.name}}</li>
-  </ul>
   <div class="chat-box" *ngIf="channelCache.length > 0">
+    <ul class="challenge-box-chats-list" *ngIf="channelCache.length > 0">
+      <li *ngFor="let channel of channelCache" (click)="onChannelSelected(channel)">{{channel.name}}</li>
+    </ul>
     <div class="chat-box-messages" #messages_node>
       <div class="chat-box-messages-item"
            [class.current-member-message]="isSelfMember(message.sender)"
@@ -37,7 +37,8 @@
     <div class="user-input send-message" [formGroup]="userInputForm" (ngSubmit)="onSendMessage()">
       <div class="user-input-box">
         <label for="message">Send message</label>
-        <input id="message" class="form-control" type="text" name="message" formControlName="message" (keyup.enter)="onSendMessage()" [customFocus]="'user-input-active'">
+        <input id="message" class="form-control" type="text" name="message" formControlName="message"
+               (keyup.enter)="onSendMessage()" [customFocus]="'user-input-active'">
         <button class="submit-btn" type="submit" value="" (click)="onSendMessage()">
           <svg width="32" height="32" viewBox="0 0 24 24">
             <path

@@ -48,11 +48,11 @@ export class ChallengeComponent implements OnInit {
 
   onSection(index: number) {
     this.section.next(index);
-    this.challengeBox.nativeElement.scrollIntoView({
+    /*this.challengeBox.nativeElement.scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest"
-    });
+    });*/
   }
 
   hasAccess(access: any) {

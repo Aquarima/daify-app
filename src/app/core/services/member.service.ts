@@ -12,4 +12,8 @@ export class MemberService {
   getMemberByProfileId(challengeId: number, profileId: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member/profile/${profileId}`);
   }
+
+  getMembersByChallenge(challengeId: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member`);
+  }
 }
