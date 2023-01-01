@@ -12,6 +12,7 @@ export interface Challenge {
   invite: string;
   config: ChallengeConfig;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 export function getDuration(challenge: Challenge) {

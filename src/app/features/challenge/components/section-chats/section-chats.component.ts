@@ -9,6 +9,7 @@ import {Message} from "../../../../core/models/challenge/message.model";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {Observable} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -34,6 +35,7 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private ngZone: NgZone,
+    private route: ActivatedRoute,
     private alertHandlingService: AlertHandlingService,
     private authService: AuthService,
     private channelService: ChannelService,

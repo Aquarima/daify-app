@@ -15,6 +15,6 @@ export class MessageService {
   }
 
   getMessagesByChannel(channelId: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/channel/${channelId}/message`);
+    return this.http.get<any>(`${env.apiUrl}/challenge/channel/${channelId}/message?order=desc`);
   }
 }

@@ -23,8 +23,8 @@ $font-family: 'Sora';
   --color-text: #3E3F5E;
   --color-text-alt: #7D7E9E;
   --color-text-alt-2: #ADAFCA;
-  --preset-font-size-tiny: .75em;
-  --preset-font-size-small: .85em;
+  --preset-font-size-tiny: .8em;
+  --preset-font-size-small: .9em;
   --preset-font-size-normal: 1em;
   --preset-font-size-medium: 1.4em;
   --preset-font-size-large: 1.7em;
@@ -138,6 +138,7 @@ html {
         transform: translateY(-50%);
         transition: top ease .3s, font-size ease .3s;
         display: block;
+        background-color: #FFF;
         font-size: .85em;
         color: var(--color-text-alt-2);
         cursor: text;

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {AccessType, AuthService, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {InviteFriendsComponent} from "../../components";
 import {Router} from "@angular/router";
 
@@ -12,16 +12,21 @@ import {Router} from "@angular/router";
 })
 export class ChallengeCreateComponent implements OnInit {
 
-  challengeForm = new FormGroup({
-    title: new FormControl<string>('', [Validators.required, Validators.minLength(2), Validators.maxLength(24), Validators.pattern('^[a-zA-Z0-9 \'\]*$')]),
-    description: new FormControl<string>('', [Validators.maxLength(128), Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')]),
-    theme: new FormControl<string>('', [Validators.minLength(3), Validators.max(24)]),
-    accessType: new FormControl<AccessType>(AccessType.FREE, [Validators.required]),
-    startAt: new FormControl(null, [Validators.required]),
-    endAt: new FormControl(undefined, [Validators.required]),
-    capacity: new FormControl<number>(2, [Validators.required, Validators.min(2), Validators.max(60), Validators.pattern('^0*?[1-9]\\d*$')]),
-    groupSize: new FormControl<number>(1, [Validators.required, Validators.min(2), Validators.max(8), Validators.pattern('^0*?[1-9]\\d*$')]),
-    spectatorsAllowed: new FormControl<boolean>(false)
+  challengeInfoForm = new FormGroup({
+    title: new FormControl<string | undefined>(''),
+    description: new FormControl<string | undefined>(''),
+    theme: new FormControl<string | undefined>(undefined),
+  })
+
+  challengeConfigForm = new FormGroup({
+    accessType: new FormControl<AccessType>(AccessType.FREE),
+    startAt: new FormControl<Date>(new Date(new Date().toISOString().substring(0, new Date().toISOString().length - 1))),
+    endAt: new FormControl<Date>(new Date()),
+    capacity: new FormControl<number>(2),
+    groupSize: new FormControl<number>(1),
+    minDeposits: new FormControl<number>(0),
+    maxDeposits: new FormControl<number>(0),
+    spectatorsAllowed: new FormControl<boolean>(true)
   })
 
   selectedCoverFile: File | undefined;
@@ -47,44 +52,28 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    //if (this.challengeForm.invalid) return;
-    const challenge = this.buildChallenge();
-    this.challengeService.createChallenge(challenge).subscribe();
-    this.showInviteFriendsPopup(challenge);
+    const challenge: Challenge = this.challengeInfoForm.value as Challenge;
+    challenge.author = this.authService.user.profile;
+    challenge.config = this.challengeConfigForm.value as ChallengeConfig;
+    this.challengeService.createChallenge(challenge)
+      .subscribe({
+        next: (challenge: any) => this.showInviteFriendsPopup(challenge),
+        error: () => alert('Error')
+      })
+  }
+
+  private toAccessType(value: string): string {
+    return value.replace(' ', '_').toUpperCase();
   }
 
   private showInviteFriendsPopup(challenge: Challenge) {
     const componentRef = this.viewContainerRef.createComponent(InviteFriendsComponent);
     componentRef.instance.closeEvent.subscribe(() => {
       componentRef.destroy();
-      this.router.navigate([`/app/challenge/dashboard/`], {
-        queryParams: {
-          id: challenge.id
-        },
-      })
+      this.router.navigate([`/app/challenge/overview/`], {queryParams: {id: challenge.id}})
     });
     componentRef.instance.challenge = challenge;
     componentRef.changeDetectorRef.detectChanges();
-  }
-
-  private buildChallenge() {
-    const form = this.challengeForm.value;
-    const challenge = {} as Challenge;
-    const config = {} as ChallengeConfig;
-    challenge.author = this.authService.user.profile;
-    challenge.title = `${form.title}`;
-    challenge.description = `${form.title}`;
-    challenge.theme = `${form.theme}`;
-    challenge.config = config;
-    config.accessType = form.accessType || AccessType.FREE;
-    config.startAt = form.startAt || this.defaultStart;
-    config.startAt = form.endAt || this.defaultEnd;
-    config.spectatorsAllowed = form.spectatorsAllowed || false;
-    return challenge;
-  }
-
-  private toAccessType(value: string): string {
-    return value.replace(' ', '_').toUpperCase();
   }
 
   get defaultStart() {

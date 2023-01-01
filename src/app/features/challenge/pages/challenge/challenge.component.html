@@ -40,15 +40,18 @@
     </div>
     <div class="challenge-sections">
       <nav class="challenge-sections-nav">
-        <ul>
-          <li [ngClass]="isOnSection(0) ? 'challenge-sections-selected' : ''" (click)="onSection(0)">
+        <button class="challenge-sections-nav-scroll-btn" (click)="onMenuLeft()">
+          <svg width="32" height="32" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
+        </button>
+        <ul #sections>
+          <li [ngClass]="isOnSection(0) ? 'challenge-sections-selected' : ''" (click)="onOverview()">
             <span class="challenge-sections-name">Overview</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-width="1.5"
                     d="M3 9.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Zm11 11v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6h-5.8a.6.6 0 0 1-.6-.6Zm-11 0v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection(1) ? 'challenge-sections-selected' : ''" (click)="onSection(1)">
+          <li [ngClass]="isOnSection(1) ? 'challenge-sections-selected' : ''" (click)="onChats()">
             <span class="challenge-sections-name">Chats</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-width="1.5">
@@ -58,7 +61,7 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection(2) ? 'challenge-sections-selected' : ''" (click)="onSection(2)">
+          <li [ngClass]="isOnSection(2) ? 'challenge-sections-selected' : ''" (click)="onGroups()">
             <span class="challenge-sections-name">Groups</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-width="1.5">
@@ -68,14 +71,14 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection(3) ? 'challenge-sections-selected' : ''" (click)="onSection(3)">
+          <li [ngClass]="isOnSection(3) ? 'challenge-sections-selected' : ''" (click)="onLeaderboard()">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M15 21H9v-8.4a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6V21Zm5.4 0H15v-2.9a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6v2.3a.6.6 0 0 1-.6.6ZM9 21v-4.9a.6.6 0 0 0-.6-.6H3.6a.6.6 0 0 0-.6.6v4.3a.6.6 0 0 0 .6.6H9Zm1.806-15.887l.909-1.927a.312.312 0 0 1 .57 0l.91 1.927l2.032.311c.261.04.365.376.176.568l-1.47 1.5l.347 2.118c.044.272-.228.48-.462.351l-1.818-1l-1.818 1c-.233.128-.506-.079-.462-.351l.347-2.118l-1.47-1.5c-.19-.192-.085-.528.175-.568l2.034-.31Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection(4) ? 'challenge-sections-selected' : ''" (click)="onSection(4)">
+          <li [ngClass]="isOnSection(4) ? 'challenge-sections-selected' : ''" (click)="onSettings()">
             <span class="challenge-sections-name">Settings</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
@@ -86,11 +89,14 @@
             </svg>
           </li>
         </ul>
+        <button class="challenge-sections-nav-scroll-btn" (click)="onMenuRight()">
+          <svg width="32" height="32" viewBox="0 0 24 24"><path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/></svg>
+        </button>
       </nav>
       <div #challenge_box class="challenge-box">
-        <dfy-challenge-overview [challenge]="challenge" *ngIf="isOnSection(0)"></dfy-challenge-overview>
+        <dfy-challenge-overview [challenge]="challenge" [members]="members" [selfMember]="selfMember" *ngIf="isOnSection(0)"></dfy-challenge-overview>
         <dfy-challenge-chats [section]="section" [challenge]="challenge" [selfMember]="selfMember" *ngIf="isOnSection(1)"></dfy-challenge-chats>
-        <dfy-challenge-groups [section]="section" [challenge]="challenge" *ngIf="isOnSection(2)"></dfy-challenge-groups>
+        <dfy-challenge-groups [section]="section" [challenge]="challenge" [members]="members" *ngIf="isOnSection(2)"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge" *ngIf="isOnSection(3)"></dfy-challenge-leaderboard>
         <dfy-challenge-settings [challenge]="challenge" *ngIf="isOnSection(4)"></dfy-challenge-settings>
       </div>

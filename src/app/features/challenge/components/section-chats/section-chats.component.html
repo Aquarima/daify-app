@@ -5,31 +5,33 @@
       <li *ngFor="let channel of channelCache" (click)="onChannelSelected(channel)">{{channel.name}}</li>
     </ul>
     <div class="chat-box-messages" #messages_node>
-      <div class="chat-box-messages-item"
-           [class.current-member-message]="isSelfMember(message.sender)"
-           [class.maintainer-member-message]="isChannelMaintainer(message.sender)"
-           [class.chat-box-messages-item-failed]="message.isFailed"
-           *ngFor="let message of messages">
-        <div class="sender-avatar" *ngIf="!isSelfMember(message.sender)">
-          <img [src]="message.sender.profile.avatarUrl" alt="">
-          <div class="sender-avatar-status">
+      <div>
+        <div class="chat-box-messages-item"
+             [class.current-member-message]="isSelfMember(message.sender)"
+             [class.maintainer-member-message]="isChannelMaintainer(message.sender)"
+             [class.chat-box-messages-item-failed]="message.isFailed"
+             *ngFor="let message of messages">
+          <div class="sender-avatar" *ngIf="!isSelfMember(message.sender)">
+            <img [src]="message.sender.profile.avatarUrl" alt="">
+            <div class="sender-avatar-status">
             <span class="status-indicator"
                   [ngClass]="message.sender.profile.online ? 'status-indicator-online' : 'status-indicator-offline'"></span>
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="message-head">
-            <a class="sender-username"
-               [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
-            <p class="timestamp">{{message.sentAt | date:'MMM d \'at\' H:mm'}}</p>
+          <div>
+            <div class="message-head">
+              <a class="sender-username"
+                 [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
+              <p class="timestamp">{{message.sentAt | date:'MMM d \'at\' H:mm'}}</p>
+            </div>
+            <p class="message-content">{{message.content}}</p>
           </div>
-          <p class="message-content">{{message.content}}</p>
-        </div>
-        <div class="sender-avatar" *ngIf="isSelfMember(message.sender)">
-          <img [src]="message.sender.profile.avatarUrl" alt="">
-          <div class="sender-avatar-status">
+          <div class="sender-avatar" *ngIf="isSelfMember(message.sender)">
+            <img [src]="message.sender.profile.avatarUrl" alt="">
+            <div class="sender-avatar-status">
             <span class="status-indicator"
                   [ngClass]="message.sender.profile.online ? 'status-indicator-online' : 'status-indicator-offline'"></span>
+            </div>
           </div>
         </div>
       </div>

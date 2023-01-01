@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment as env} from '../../../environments/environment';
 import {HttpClient} from "@angular/common/http";
+import {Member} from "../models/challenge/member.model";
+import {Challenge, Profile} from "../models";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,15 @@ export class MemberService {
 
   constructor(private http: HttpClient) { }
 
-  getMemberByProfileId(challengeId: number, profileId: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member/profile/${profileId}`);
+  getMemberByProfileId(challenge: Challenge, profile: Profile) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/member/profile/${profile.id}`);
   }
 
-  getMembersByChallenge(challengeId: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member`);
+  getMembersByChallenge(challenge: Challenge) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/member`);
+  }
+
+  kickMember(member: Member) {
+    return this.http.delete<any>(`${env.apiUrl}/challenge/member/${member.id}/kick`);
   }
 }

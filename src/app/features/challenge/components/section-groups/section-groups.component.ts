@@ -6,6 +6,7 @@ import {AlertHandlingService} from "../../../../core/services/alert-handling.ser
 import {Group} from "../../../../core/models/challenge/group.model";
 import {CreateGroupComponent} from "../create-group/create-group.component";
 import {Observable} from "rxjs";
+import {Member} from "../../../../core/models/challenge/member.model";
 
 @Component({
   selector: 'dfy-challenge-groups',
@@ -16,6 +17,7 @@ export class SectionGroupsComponent implements OnInit {
 
   @Input() section!: Observable<number>;
   @Input() challenge!: Challenge;
+  @Input() members!: Member[];
 
   groups: Group[] = [];
 

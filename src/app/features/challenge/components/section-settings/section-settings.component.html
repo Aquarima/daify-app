@@ -1,1 +1,33 @@
 <h1>Settings</h1>
+<div>
+  <ul class="sections">
+    <li>Overview</li>
+    <li>Members</li>
+    <li>Deposits</li>
+    <li>Spectators</li>
+  </ul>
+  <div class="current-section">
+    <div>
+      <div class="current-section-parameter">
+        <p class="current-section-parameter-name">Title</p>
+        <p class="current-section-parameter-description">Gives a clear idea of the challenge before joining it.</p>
+        <div class="user-input send-message">
+          <div class="user-input-box">
+            <label for="title">Title</label>
+            <input id="title" class="form-control" type="text" name="title" formControlName="title" [customFocus]="'user-input-active'">
+          </div>
+        </div>
+      </div>
+      <div class="current-section-parameter">
+        <p class="current-section-parameter-name">Description</p>
+        <p class="current-section-parameter-description">Gives a clear idea of the challenge before joining it.</p>
+        <div class="user-input send-message">
+          <div class="user-input-box">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control" name="description" cols="30" rows="10" [customFocus]="'user-input-active'"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

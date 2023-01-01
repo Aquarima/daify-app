@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Challenge} from "../../../../core";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
+import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'dfy-challenge-overview',
@@ -11,17 +13,22 @@ import {MemberService} from "../../../../core/services/member.service";
 export class SectionOverviewComponent implements OnInit {
 
   @Input() challenge!: Challenge;
+  @Input() members!: Member[];
+  @Input() selfMember!: Member;
 
-  members: Member[] = [];
-
-  constructor(private memberService: MemberService) { }
+  constructor(private alertHandlingService: AlertHandlingService, private memberService: MemberService) { }
 
   ngOnInit(): void {
-    this.memberService.getMembersByChallenge(this.challenge.id)
-      .subscribe({
-        next: (members: any) => this.members = members.content,
-        error: () => alert('Error')
-      })
+  }
+
+  onKickMember(member: Member) {
+    if (!this.isSelfMemberAuthor()) return;
+    this.memberService.kickMember(member).subscribe(
+      {
+        next: () => this.members.splice(this.members.indexOf(member), 1),
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, `Could not kick member '${member.nickname ? member.nickname : member.profile.username}'`)
+      }
+    );
   }
 
   getNickname(member: Member): string {
@@ -30,5 +37,26 @@ export class SectionOverviewComponent implements OnInit {
 
   getAvatar(member: Member): string {
     return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+  }
+
+  isSelfMember(member: Member) {
+    return this.selfMember.id === member.id;
+  }
+
+  isSelfMemberAuthor(): boolean {
+    return this.selfMember.id === this.challenge.author.id;
+  }
+
+  get duration() {
+    let d1: Date = new Date(this.challenge.config.startAt);
+    let d2: Date = new Date(this.challenge.config.endAt);
+    const time = d2.getTime() - d1.getTime();
+    const days = time / (24 * 60 * 60 * 1000);
+    const hours = time / (1000 * 60 * 60);
+    const minutes = time / 1000 / 60;
+    if (days >= 1) return `${Math.round(days)}d`;
+    if (hours >= 1) return `${Math.round(hours)}h`;
+    if (minutes >= 1) return `${Math.round(minutes)}m`;
+    return 'Unknown';
   }
 }
