@@ -15,9 +15,9 @@ import {UserService} from "./core/services/user.service";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  private alertSubscription: Subscription = EMPTY_SUBSCRIPTION;
-
-  private isAlertDisplayed: boolean = false;
+  alertSubscription: Subscription = EMPTY_SUBSCRIPTION;
+  isAlertDisplayed: boolean = false;
+  showSplashScreen: boolean = true;
 
   constructor(
     private router: Router,
@@ -29,6 +29,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.showSplashScreen = false;
+    }, 1500);
     this.alertSubscription = this.alertHandlingService.alert
       .subscribe((alert) => {
         if (this.isAlertDisplayed) return;

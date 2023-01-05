@@ -4,10 +4,11 @@ import {CommonModule} from '@angular/common';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent, MaintenanceComponent} from './pages';
 import {LayoutModule} from 'src/app/layout/layout.module';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 @NgModule({
   declarations: [
-    HomeComponent, MaintenanceComponent,
+    HomeComponent, MaintenanceComponent, SplashScreenComponent,
   ],
   imports: [
     CommonModule,
@@ -16,6 +17,7 @@ import {LayoutModule} from 'src/app/layout/layout.module';
   ],
   exports: [
     HomeComponent,
+    SplashScreenComponent,
   ]
 })
 export class HomeModule {
