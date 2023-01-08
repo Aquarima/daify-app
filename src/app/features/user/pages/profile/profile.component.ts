@@ -4,7 +4,6 @@ import {AuthService, ChallengeService, Friend, Profile} from 'src/app/core';
 import {FriendService} from 'src/app/core/services/friend.service';
 import {ProfileService} from 'src/app/core/services/profile.service';
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
-import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'dfy-profile',
@@ -16,7 +15,6 @@ export class ProfileComponent implements OnInit {
   profile: Profile | undefined;
   friends: Profile[] = [];
   section: number = 0;
-  request: BehaviorSubject<any> = new BehaviorSubject({url: '', replace: false});
 
   constructor(
     private alertHandlingService: AlertHandlingService,
@@ -53,7 +51,6 @@ export class ProfileComponent implements OnInit {
 
   onChallenges() {
     this.section = 2;
-    this.request.next({url: `{API_URL}/challenge/author/${this.profile?.id}?size&page`, replace: false});
   }
 
   onBadges() {

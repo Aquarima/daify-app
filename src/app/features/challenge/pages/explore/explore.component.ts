@@ -9,19 +9,12 @@ import {BehaviorSubject} from "rxjs";
 })
 export class ExploreComponent implements OnInit {
 
+  searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
   request: BehaviorSubject<any> = new BehaviorSubject({url: '', replace: false});
 
   ngOnInit(): void {
-  }
-
-  onSearch(search: Search) {
-    if (!search.title) {
-      this.request.next({url: '{API_URL}/challenge?size&page', replace: false});
-      return;
-    }
-    this.request.next({url: '{API_URL}/challenge/title/${search.title}?size&page', replace: true});
   }
 
   onGroupBySelected(option: any) {

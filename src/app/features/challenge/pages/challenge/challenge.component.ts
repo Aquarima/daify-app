@@ -21,7 +21,8 @@ export class ChallengeComponent implements OnInit {
   section: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   challenge: Challenge = {} as Challenge;
   members: Member[] = [];
-  selfMember: Member = {} as Member;
+  selfMember: Member | undefined = undefined;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -40,8 +41,7 @@ export class ChallengeComponent implements OnInit {
           this.challenge = data;
           this.memberService.getMemberByProfileId(this.challenge, this.authService.user.profile)
             .subscribe({
-              next: (member: any) => this.selfMember = member,
-              error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch self member'),
+              next: (member: any) => this.selfMember = member
             })
           this.memberService.getMembersByChallenge(this.challenge)
             .subscribe({
@@ -52,7 +52,6 @@ export class ChallengeComponent implements OnInit {
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenge'),
       })
     })
-    this.onOverview();
     this.route.paramMap.subscribe(params => {
       switch (params.get('tab')) {
         case 'chats':
@@ -79,9 +78,9 @@ export class ChallengeComponent implements OnInit {
     this.sections.nativeElement.scrollLeft += 100;
   }
 
-  onNavigate(section: number, route: string) {
+  onNavigate(section: number, tab: string) {
     this.section.next(section);
-    this.router.navigate(['app/challenge', this.challenge.id, route]);
+    this.router.navigate(['/app/challenge', this.challenge.id, tab]);
   }
 
   onOverview() {
@@ -104,12 +103,16 @@ export class ChallengeComponent implements OnInit {
     this.onNavigate(4, 'settings');
   }
 
-  hasAccess(access: any) {
-    return this.challenge.config.accessType === access;
-  }
-
   isOnSection(section: number) {
     return this.section.value === section;
+  }
+
+  isMember(): boolean {
+    return !!this.selfMember;
+  }
+
+  hasAccess(access: any) {
+    return this.challenge.config.accessType === access;
   }
 
   get iconUrl(): string {

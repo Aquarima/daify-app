@@ -66,10 +66,10 @@
 <h2>Members</h2>
 <div class="members">
   <div class="members-item" *ngFor="let member of members">
-    <img class="members-item-avatar" [src]="getAvatar(member)" alt="">
+    <img class="members-item-avatar" [src]="getMemberAvatar(member)" alt="">
     <div>
-      <p class="members-item-nickname">{{member.nickname}}</p>
-      <p class="members-item-role">{{member.role ? member.role : member.profile.profession}}</p>
+      <p class="members-item-nickname">{{getMemberNickname(member)}}</p>
+      <p class="members-item-role">{{getMemberRole(member)}}</p>
       <div class="members-item-group" *ngIf="member.group">
         <svg width="32" height="32" viewBox="0 0 24 24">
           <path

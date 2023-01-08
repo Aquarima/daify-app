@@ -22,7 +22,7 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
 
   @Input() section!: Observable<number>;
   @Input() challenge!: Challenge;
-  @Input() selfMember!: Member;
+  @Input() selfMember: Member | undefined;
 
   userInputForm = new FormGroup({
     message: new FormControl(''),
@@ -96,13 +96,14 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
   }
 
   onSendMessage() {
-    if (!this.channel) return;
+    if (!this.channel || !this.selfMember) return;
     const messageToSend: Message = {
       id: 0,
       sender: this.selfMember,
       content: `${this.userInputForm.value.message}`,
       sentAt: new Date()
     };
+    this.userInputForm.reset({ message: undefined});
     this.messageService.sendMessage(this.channel.id, messageToSend).subscribe({
       next: (message: Message) => this.addMessageToChat(this.channel || {} as Channel, message),
       error: () => this.addMessageToChat(this.channel || {} as Channel, messageToSend, true)

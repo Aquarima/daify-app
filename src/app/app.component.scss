@@ -1,8 +1,8 @@
 .splash-screen {
   opacity: 1;
-  animation: splash-hide .5s linear;
-  animation-delay: 1s;
-  transition: opacity .5s;
+  animation: splash-hide 1s linear;
+  animation-delay: 2s;
+  transition: opacity 1s;
 }
 
 @keyframes splash-hide {

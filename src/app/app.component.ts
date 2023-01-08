@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     setTimeout(() => {
       this.showSplashScreen = false;
-    }, 1500);
+    }, 3000);
     this.alertSubscription = this.alertHandlingService.alert
       .subscribe((alert) => {
         if (this.isAlertDisplayed) return;

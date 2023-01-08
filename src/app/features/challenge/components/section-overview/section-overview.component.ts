@@ -14,7 +14,7 @@ export class SectionOverviewComponent implements OnInit {
 
   @Input() challenge!: Challenge;
   @Input() members!: Member[];
-  @Input() selfMember!: Member;
+  @Input() selfMember: Member | undefined;
 
   constructor(private alertHandlingService: AlertHandlingService, private memberService: MemberService) { }
 
@@ -31,20 +31,24 @@ export class SectionOverviewComponent implements OnInit {
     );
   }
 
-  getNickname(member: Member): string {
-    return (member.nickname) ? member.nickname : member.profile.username;
+  getMemberNickname(member: Member): string {
+    return member.nickname ? member.nickname : member.profile.username;
   }
 
-  getAvatar(member: Member): string {
+  getMemberRole(member: Member): string {
+    return member.role ? member.role : member.profile.profession;
+  }
+
+  getMemberAvatar(member: Member): string {
     return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
   }
 
   isSelfMember(member: Member) {
-    return this.selfMember.id === member.id;
+    return this.selfMember?.id === member.id;
   }
 
   isSelfMemberAuthor(): boolean {
-    return this.selfMember.id === this.challenge.author.id;
+    return this.selfMember?.id === this.challenge.author.id;
   }
 
   get duration() {

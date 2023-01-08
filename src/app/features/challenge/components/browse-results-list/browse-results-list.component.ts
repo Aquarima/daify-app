@@ -4,42 +4,33 @@ import {
   HostListener,
   Input,
   NgZone,
-  OnDestroy,
   OnInit,
   QueryList,
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Challenge, ChallengeService} from 'src/app/core';
-import {EMPTY, Observable, Subscription} from "rxjs";
-import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
+import {Challenge, ChallengeService, Search} from 'src/app/core';
+import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {AlertType} from "../../../../core/models/system-alert";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
-import {environment as env} from "../../../../../environments/environment";
-
 
 @Component({
   selector: 'dfy-browse-results-list',
   templateUrl: './browse-results-list.component.html',
   styleUrls: ['./browse-results-list.component.scss']
 })
-export class BrowseResultsListComponent implements OnInit, OnDestroy {
+export class BrowseResultsListComponent implements OnInit {
 
   @ViewChild('winref') winRef!: ElementRef;
   @ViewChildren('found_tag') tagNodes!: QueryList<ElementRef>;
 
-  @Input() request: Observable<{ url: string, replace: boolean }> = EMPTY;
+  @Input() searchSubject!: BehaviorSubject<Search>;
   @Input() displayMode: string = 'grid';
   @Input() groupBy: string = 'alphabetical';
 
-  requestSubscription: Subscription = EMPTY_SUBSCRIPTION;
-
+  search: Search = {} as Search;
   challenges: Challenge[] = [];
-  totalPages: number = 0;
-  pageIndex: number = 0;
   filterTag: string = '';
-  lastRequest: { url: string, replace: boolean } = {url: '', replace: false};
   scrollLoaderTimeout: null | ReturnType<typeof setTimeout> = null;
 
   constructor(
@@ -50,31 +41,15 @@ export class BrowseResultsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.requestSubscription = this.request.subscribe(request => this.ngZone.run(() => this.executeUpdate(request)));
-  }
-
-  ngOnDestroy() {
-    this.requestSubscription.unsubscribe();
-  }
-
-  private executeUpdate(request?: { url: string, replace: boolean }) {
-    if (!request) request = this.lastRequest;
-    this.http.get(this.formatURL(request.url)).subscribe({
-      next: (data: any) => {
-        if (this.pageIndex > data.totalPages) return;
-        if (request?.replace) this.challenges = [];
-        Array.prototype.push.apply(this.challenges, data.content);
-        this.totalPages = data.totalPages;
-      },
-      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenges'),
-    });
-    this.lastRequest = request;
-  }
-
-  private formatURL(url: string): string {
-    return url.replace('{API_URL}', env.apiUrl)
-      .replace('size', `size=32`)
-      .replace('page', `page=${this.pageIndex++}`);
+    this.searchSubject.subscribe(search => {
+      if (!search.title) {
+        this.challengeService.getChallenges()
+          .subscribe({next: (data: any) => Array.prototype.push.apply(this.challenges, data.content)});
+        return;
+      }
+      this.challengeService.getChallengesByTitle(`${search.title}`)
+        .subscribe({next: (data: any) => this.challenges = data.content})
+    })
   }
 
   getThemeColor(title: string) {
@@ -94,7 +69,6 @@ export class BrowseResultsListComponent implements OnInit, OnDestroy {
     if (this.scrollLoaderTimeout) return;
     if ((window.innerHeight + window.scrollY) >= this.winRef.nativeElement.offsetHeight) {
       this.scrollLoaderTimeout = setTimeout(() => { // To prevent API spam on scroll
-        this.executeUpdate();
         this.scrollLoaderTimeout = null;
       }, 1000);
     }

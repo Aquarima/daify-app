@@ -22,7 +22,7 @@ export class ChallengeService {
   }
 
   getChallengesByTitle(title: string) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${title}`);
+    return this.http.get<any>(`${env.apiUrl}/challenge/title/${title}`);
   }
 
   getChallengesByUser(userId: number, page?: number, size?: number) {

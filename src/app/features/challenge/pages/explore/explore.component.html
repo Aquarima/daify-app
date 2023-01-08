@@ -8,15 +8,15 @@
       </div>
     </div>
     <dfy-challenge-search class="search"
-      (searchEvent)="onSearch($event)"
-      (orderByEvent)="onGroupBySelected($event)"
-      (displayModeEvent)="onDisplayModeSelected($event)">
+                          [searchSubject]="searchSubject"
+                          (orderByEvent)="onGroupBySelected($event)"
+                          (displayModeEvent)="onDisplayModeSelected($event)">
     </dfy-challenge-search>
     <div class="item-list">
       <dfy-browse-results-list
+        [searchSubject]="searchSubject"
         [displayMode]="displayMode"
-        [groupBy]="groupBy"
-        [request]="request.asObservable()">
+        [groupBy]="groupBy">
       </dfy-browse-results-list>
     </div>
   </div>
