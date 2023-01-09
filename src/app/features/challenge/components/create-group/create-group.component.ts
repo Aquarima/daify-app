@@ -42,12 +42,12 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngOnDestroy() {
-    this.renderer.removeClass(this.document.body, 'no-scroll');
-  }
-
   ngAfterViewInit(): void {
     this.renderer.addClass(this.document.body, 'no-scroll');
+  }
+
+  ngOnDestroy() {
+    this.renderer.removeClass(this.document.body, 'no-scroll');
   }
 
   isNameAlreadyInUse(): boolean {
