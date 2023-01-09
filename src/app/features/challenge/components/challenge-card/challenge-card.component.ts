@@ -26,7 +26,7 @@ export class ChallengeCardComponent implements OnInit {
 
   @HostListener('click', ['$event.target'])
   onClick() {
-    this.router.navigate([`/app/challenge/${this.challenge.id}`]);
+    this.router.navigate([`/app/challenge/${this.challenge.id}/overview`]);
   }
 
   get duration() {

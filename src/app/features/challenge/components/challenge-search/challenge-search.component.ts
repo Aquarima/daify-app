@@ -36,14 +36,19 @@ export class ChallengeSearchComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const searchQuery = params.get('search_query');
       if (!searchQuery) return;
-      this.searchForm.value.title = searchQuery;
+      this.searchForm.controls.title.setValue(searchQuery);
       this.searchSubject.next({title: `${params.get('search_query')}`});
     });
   }
 
   onSearch() {
-    const search: Search = {title: `${this.searchForm.value.title}`};
-    if (search.title) this.router.navigate(['/app/explore/', search.title]);
-    this.searchSubject.next(search);
+    const title = this.searchForm.value.title;
+    if (title) {
+      this.router.navigate(['/app/explore/', title]);
+      this.searchSubject.next({title: `${title}`});
+      return;
+    }
+    this.router.navigate(['/app/explore']);
+    this.searchSubject.next({});
   }
 }

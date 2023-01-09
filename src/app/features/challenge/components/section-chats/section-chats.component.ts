@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild,} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild,} from '@angular/core';
 import {AuthService, Challenge} from "../../../../core";
 import {ChannelService} from "../../../../core/services/channel.service";
 import {MessageService} from "../../../../core/services/message.service";
@@ -7,16 +7,16 @@ import {Channel} from "../../../../core/models/challenge/channel.model";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {Message} from "../../../../core/models/challenge/message.model";
 import {Member} from "../../../../core/models/challenge/member.model";
-import {Observable} from "rxjs";
+import {Observable, timer} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'dfy-challenge-chats',
   templateUrl: './section-chats.component.html',
   styleUrls: ['./section-chats.component.scss']
 })
-export class SectionChatsComponent implements OnInit, AfterViewInit {
+export class SectionChatsComponent implements OnInit {
 
   @ViewChild('messages_node') messagesNode!: ElementRef;
 
@@ -32,6 +32,7 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
   messageCache: Map<Channel, Message[]> = new Map();
   channel: Channel | undefined;
   messages: Message[] = [];
+  canSendMessage: boolean = true;
 
   constructor(
     private ngZone: NgZone,
@@ -55,8 +56,29 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
       })
   }
 
-  ngAfterViewInit(): void {
+  onChannelSelected(channel: Channel) {
+    this.channel = channel;
+    this.loadChat(channel);
+    //this.scrollToNewestMessage();
+  }
 
+  onSendMessage() {
+    if (!this.canSendMessage) return;
+    if (!this.channel || !this.selfMember) return;
+    const messageToSend: Message = {
+      id: 0,
+      sender: this.selfMember,
+      content: `${this.userInputForm.value.message}`,
+      sentAt: new Date()
+    };
+    this.userInputForm.reset({message: undefined});
+    this.messageService.sendMessage(this.channel.id, messageToSend).subscribe({
+      next: (message: Message) => {
+        this.addMessageToChat(this.channel || {} as Channel, message);
+        this.startMessageTimeout();
+      },
+      error: () => this.addMessageToChat(this.channel || {} as Channel, messageToSend, true)
+    })
   }
 
   private scrollToNewestMessage() {
@@ -82,12 +104,6 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
       })
   }
 
-  onChannelSelected(channel: Channel) {
-    this.channel = channel;
-    this.loadChat(channel);
-    //this.scrollToNewestMessage();
-  }
-
   addMessageToChat(channel: Channel, message: Message, isFailed?: boolean) {
     const chat: Message[] | undefined = this.messageCache.get(channel);
     if (!chat) return;
@@ -95,19 +111,9 @@ export class SectionChatsComponent implements OnInit, AfterViewInit {
     chat.unshift(message);
   }
 
-  onSendMessage() {
-    if (!this.channel || !this.selfMember) return;
-    const messageToSend: Message = {
-      id: 0,
-      sender: this.selfMember,
-      content: `${this.userInputForm.value.message}`,
-      sentAt: new Date()
-    };
-    this.userInputForm.reset({ message: undefined});
-    this.messageService.sendMessage(this.channel.id, messageToSend).subscribe({
-      next: (message: Message) => this.addMessageToChat(this.channel || {} as Channel, message),
-      error: () => this.addMessageToChat(this.channel || {} as Channel, messageToSend, true)
-    })
+  startMessageTimeout() {
+    this.canSendMessage = false;
+    timer(5000).subscribe(() => this.canSendMessage = true);
   }
 
   isSelfMember(member: Member): boolean {
