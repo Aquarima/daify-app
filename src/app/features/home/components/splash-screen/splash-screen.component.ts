@@ -16,7 +16,6 @@ export class SplashScreenComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
