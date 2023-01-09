@@ -31,6 +31,7 @@
       right: 0;
       display: block;
       content: '';
+      animation: spin .8s ease-in-out;
       background-color: #FFF;
     }
 
@@ -53,6 +54,14 @@
     font-weight: 500;
     font-size: var(--preset-font-size-normal);
     color: #FFF;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    } to {
+      transform: rotate(180deg);
+    }
   }
 
   @keyframes reveal {

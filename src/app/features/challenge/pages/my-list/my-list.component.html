@@ -1,23 +1,25 @@
 <router-outlet></router-outlet>
 <dfy-header></dfy-header>
 <main class="main-content">
-  <div class="browse">
-    <div class="section-banner">
-      <div class="details">
-        <h1>My List</h1>
-        <p class="about">Browse challenges you joined or created</p>
-      </div>
+    <div class="browse">
+        <div class="section-banner">
+            <div class="details">
+                <h1>My List</h1>
+                <p class="about">Browse challenges you joined or created</p>
+            </div>
+        </div>
+        <dfy-challenge-search
+                [searchSubject]="searchSubject"
+                (orderByEvent)="onGroupBySelected($event)"
+                (displayModeEvent)="onDisplayModeSelected($event)">
+        </dfy-challenge-search>
+        <div class="item-list">
+            <dfy-browse-results-list
+                    [searchSubject]="searchSubject"
+                    [displayMode]="displayMode"
+                    [groupBy]="groupBy">
+            </dfy-browse-results-list>
+        </div>
     </div>
-    <dfy-challenge-search
-      (orderByEvent)="onGroupBySelected($event)"
-      (displayModeEvent)="onDisplayModeSelected($event)">
-    </dfy-challenge-search>
-    <div class="item-list">
-      <dfy-browse-results-list
-        [displayMode]="displayMode"
-        [groupBy]="groupBy">
-      </dfy-browse-results-list>
-    </div>
-  </div>
 </main>
 <dfy-footer></dfy-footer>

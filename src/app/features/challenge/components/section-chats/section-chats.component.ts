@@ -24,6 +24,8 @@ export class SectionChatsComponent implements OnInit {
   @Input() challenge!: Challenge;
   @Input() selfMember: Member | undefined;
 
+  MESSAGE_TIMEOUT: number = 5;
+
   userInputForm = new FormGroup({
     message: new FormControl(''),
   })
@@ -33,6 +35,8 @@ export class SectionChatsComponent implements OnInit {
   channel: Channel | undefined;
   messages: Message[] = [];
   canSendMessage: boolean = true;
+  messageTimeoutCounterId: number = 0;
+  messageTimeoutCounter: number = this.MESSAGE_TIMEOUT;
   displayTimeoutMessage: boolean = false;
 
   constructor(
@@ -117,9 +121,12 @@ export class SectionChatsComponent implements OnInit {
 
   startMessageTimeout() {
     this.canSendMessage = false;
-    timer(5000).subscribe(() => {
+    this.messageTimeoutCounterId = setTimeout(() => this.messageTimeoutCounter--);
+    timer(this.MESSAGE_TIMEOUT * 1000).subscribe(() => {
       this.canSendMessage = true;
       this.displayTimeoutMessage = false;
+      this.messageTimeoutCounter = this.MESSAGE_TIMEOUT;
+      clearTimeout(this.messageTimeoutCounterId);
     });
   }
 

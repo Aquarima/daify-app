@@ -12,7 +12,6 @@ export class ExploreComponent implements OnInit {
   searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
   groupBy: string = 'alphabetical';
   displayMode: string = 'grid';
-  request: BehaviorSubject<any> = new BehaviorSubject({url: '', replace: false});
 
   ngOnInit(): void {
   }
