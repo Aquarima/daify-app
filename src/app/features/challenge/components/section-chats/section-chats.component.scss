@@ -199,6 +199,9 @@
 
     .send-message {
       padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
 
       .user-input-box {
         height: 48px;
@@ -216,6 +219,12 @@
           width: 64px;
           border-radius: 0 24px 24px 0;
         }
+      }
+
+      .send-message-timeout {
+        margin-left: 16px;
+        font-size: var(--preset-font-size-small);
+        color: rgb(var(--color-semantic-error));
       }
     }
   }

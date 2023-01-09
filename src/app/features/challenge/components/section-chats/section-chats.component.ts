@@ -33,6 +33,7 @@ export class SectionChatsComponent implements OnInit {
   channel: Channel | undefined;
   messages: Message[] = [];
   canSendMessage: boolean = true;
+  displayTimeoutMessage: boolean = false;
 
   constructor(
     private ngZone: NgZone,
@@ -63,7 +64,10 @@ export class SectionChatsComponent implements OnInit {
   }
 
   onSendMessage() {
-    if (!this.canSendMessage) return;
+    if (!this.canSendMessage) {
+      this.displayTimeoutMessage = true;
+      return;
+    }
     if (!this.channel || !this.selfMember) return;
     const messageToSend: Message = {
       id: 0,
@@ -113,7 +117,10 @@ export class SectionChatsComponent implements OnInit {
 
   startMessageTimeout() {
     this.canSendMessage = false;
-    timer(5000).subscribe(() => this.canSendMessage = true);
+    timer(5000).subscribe(() => {
+      this.canSendMessage = true;
+      this.displayTimeoutMessage = false;
+    });
   }
 
   isSelfMember(member: Member): boolean {
