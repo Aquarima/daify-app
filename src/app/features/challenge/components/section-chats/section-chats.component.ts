@@ -35,8 +35,6 @@ export class SectionChatsComponent implements OnInit {
   channel: Channel | undefined;
   messages: Message[] = [];
   canSendMessage: boolean = true;
-  messageTimeoutCounterId: number = 0;
-  messageTimeoutCounter: number = this.MESSAGE_TIMEOUT;
   displayTimeoutMessage: boolean = false;
 
   constructor(
@@ -121,12 +119,9 @@ export class SectionChatsComponent implements OnInit {
 
   startMessageTimeout() {
     this.canSendMessage = false;
-    this.messageTimeoutCounterId = setTimeout(() => this.messageTimeoutCounter--);
     timer(this.MESSAGE_TIMEOUT * 1000).subscribe(() => {
       this.canSendMessage = true;
       this.displayTimeoutMessage = false;
-      this.messageTimeoutCounter = this.MESSAGE_TIMEOUT;
-      clearTimeout(this.messageTimeoutCounterId);
     });
   }
 

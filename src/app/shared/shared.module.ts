@@ -4,6 +4,7 @@ import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, OrderByChallengePipe}
 import {AlertBoxComponent, InboxComponent} from "./components";
 import {SelectComponent} from './components/select/select.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { CustomCheckboxComponent } from './components/custom-checkbox/custom-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     ChallengeFilterPipe,
     InboxComponent,
     AlertBoxComponent,
-    SelectComponent
+    SelectComponent,
+    CustomCheckboxComponent
   ],
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     OrderByChallengePipe,
     InboxComponent,
     AlertBoxComponent,
-    SelectComponent
+    SelectComponent,
+    CustomCheckboxComponent
   ]
 })
 export class SharedModule {

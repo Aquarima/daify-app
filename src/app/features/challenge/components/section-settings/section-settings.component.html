@@ -1,13 +1,16 @@
 <h1>Settings</h1>
 <div>
   <ul class="sections">
-    <li>Overview</li>
-    <li>Members</li>
-    <li>Deposits</li>
-    <li>Spectators</li>
+    <li (click)="showSection(0)">Overview</li>
+    <li (click)="showSection(1)">Members</li>
+    <li (click)="showSection(2)">Deposits</li>
+    <li (click)="showSection(3)">Spectators</li>
   </ul>
   <div class="current-section">
-    <div>
+    <div *ngIf="isOnSection(0)">
+      <div class="current-section-header">
+        <h3>Overview</h3>
+      </div>
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Title</p>
         <p class="current-section-parameter-description">Gives a clear idea of the challenge before joining it.</p>
@@ -27,6 +30,26 @@
             <textarea id="description" class="form-control" name="description" cols="30" rows="10" [customFocus]="'user-input-active'"></textarea>
           </div>
         </div>
+      </div>
+    </div>
+    <div *ngIf="isOnSection(1)">
+      <div class="current-section-header">
+        <h3>Members</h3>
+      </div>
+    </div>
+    <div *ngIf="isOnSection(2)">
+      <div class="current-section-header">
+        <h3>Deposits</h3>
+      </div>
+    </div>
+    <div *ngIf="isOnSection(3)">
+      <div class="current-section-header">
+        <h3>Spectators</h3>
+      </div>
+      <div class="current-section-parameter">
+        <p class="current-section-parameter-name">Allow Spectators</p>
+        <p class="current-section-parameter-description">Gives a clear idea of the challenge before joining it.</p>
+        <dfy-custom-checkbox [control]="control('spectators_allowed')"></dfy-custom-checkbox>
       </div>
     </div>
   </div>
