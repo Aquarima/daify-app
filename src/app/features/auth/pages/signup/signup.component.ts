@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthService} from 'src/app/core/services/auth.service';
 
@@ -7,7 +7,7 @@ import {AuthService} from 'src/app/core/services/auth.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit, AfterViewInit {
+export class SignupComponent implements OnInit {
 
   @ViewChild('login_error') loginError$Message!: ElementRef;
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
@@ -27,26 +27,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.initTextInputsListeners();
-  }
-
-  private initTextInputsListeners() {
-    this.textInputs.forEach(input => {
-      const inputElement = input.nativeElement;
-      const parentNode = inputElement.parentNode;
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('active')
-      });
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('active')
-      });
-      inputElement.addEventListener('focusout', () => {
-        if (inputElement.value === '') parentNode.classList.remove('active');
-      });
-    });
   }
 
   onSubmit() {

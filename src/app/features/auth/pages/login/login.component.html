@@ -17,15 +17,18 @@
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="input-box">
                 <label for="username">Email or Username</label>
-                <input id="username" class="form-control" #text_input type="text" name="username" formControlName="username">
+                <input id="username" class="form-control" #text_input type="text" name="username"
+                       formControlName="username" [customFocus]="'user-input-active'">
             </div>
             <div class="input-box">
                 <label for="password">Password</label>
-                <input id="password" class="form-control" #text_input type="password" name="password" formControlName="password">
+                <input id="password" class="form-control" #text_input type="password" name="password"
+                       formControlName="password" [customFocus]="'user-input-active'">
             </div>
             <div class="rempass">
                 <label for="remember-me">
-                    <input id="remember-me" class="form-control" type="checkbox" name="remember-me" formControlName="remember">
+                    <input id="remember-me" class="form-control" type="checkbox" name="remember-me"
+                           formControlName="remember">
                     Remember me
                 </label>
                 <a href="" class="forgot-password">Forgot Password?</a>

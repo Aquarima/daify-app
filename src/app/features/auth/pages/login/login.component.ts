@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {CookieService} from "ngx-cookie";
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
 
   @ViewChild('login_error') errorMessageLabel!: ElementRef;
   @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
@@ -26,23 +26,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.initTextInputsListeners();
-  }
-
-  private initTextInputsListeners() {
-    this.textInputs.forEach(input => {
-      const inputElement = input.nativeElement;
-      const parentNode = inputElement.parentNode;
-      inputElement.addEventListener('focus', () => {
-        parentNode.classList.add('active')
-      });
-      inputElement.addEventListener('focusout', () => {
-        if (inputElement.value === '') parentNode.classList.remove('active');
-      });
-    });
   }
 
   onSubmit() {

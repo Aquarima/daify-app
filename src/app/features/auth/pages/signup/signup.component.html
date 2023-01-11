@@ -7,36 +7,42 @@
             <div class="input-wrapper">
                 <div class="input-box">
                     <label for="username">Username</label>
-                    <input id="username" class="form-control" #text_input type="text" name="username" formControlName="username">
+                    <input id="username" class="form-control" #text_input type="text" name="username"
+                           formControlName="username" [customFocus]="'user-input-active'">
                 </div>
-              <p class="form-error" *ngIf="errors?.username">{{errors.username}}</p>
+                <p class="form-error" *ngIf="errors?.username">{{errors.username}}</p>
             </div>
             <div class="input-wrapper">
                 <div class="input-box">
                     <label for="email">Email</label>
-                    <input id="email" class="form-control" #text_input type="text" name="email" formControlName="email">
+                    <input id="email" class="form-control" #text_input type="text" name="email" formControlName="email"
+                           [customFocus]="'user-input-active'">
                 </div>
-              <p class="form-error" *ngIf="errors?.email">{{errors.email}}</p>
+                <p class="form-error" *ngIf="errors?.email">{{errors.email}}</p>
             </div>
             <div class="input-wrapper">
                 <div class="input-box">
                     <label for="password">Password</label>
-                    <input id="password" class="form-control" #text_input type="password" name="password" formControlName="password">
+                    <input id="password" class="form-control" #text_input type="password" name="password"
+                           formControlName="password" [customFocus]="'user-input-active'">
                 </div>
-              <p class="form-error" *ngIf="errors?.password">{{errors.password}}</p>
+                <p class="form-error" *ngIf="errors?.password">{{errors.password}}</p>
             </div>
             <div class="input-wrapper">
                 <div class="input-box">
                     <label for="password-confirm">Confirm Password</label>
-                    <input id="password-confirm" class="form-control" #text_input type="password" name="password-confirm" formControlName="password_confirm">
+                    <input id="password-confirm" class="form-control" #text_input type="password"
+                           name="password-confirm" formControlName="password_confirm" [customFocus]="'user-input-active'">
                 </div>
                 <p class="form-error" *ngIf="errors?.confirm">{{errors.confirm}}</p>
             </div>
             <div class="input-wrapper">
                 <div class="agreements">
                     <label for="agreements">
-                        <input id="agreements" class="form-control" type="checkbox" name="agreements" formControlName="agreements">
-                        Creating an account means you agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                        <input id="agreements" class="form-control" type="checkbox" name="agreements"
+                               formControlName="agreements">
+                        Creating an account means you agree to our <a href="">Terms of Service</a> and <a href="">Privacy
+                        Policy</a>.
                     </label>
                 </div>
                 <p class="form-error" *ngIf="errors?.agreements">{{errors.agreements}}</p>
@@ -50,17 +56,19 @@
     </div>
 </div>
 <div class="op-success" *ngIf="success">
-  <svg class="top-icon" width="32" height="32" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z"/>
-  </svg>
-  <p class="title">Your account has been successfully created</p>
-  <div class="instructions">
-    <p>Check your email inbox</p>
-    <div class="message">
-      We've sent you a verification link to your email address
-      <div class="value">email.addr@email.com</div>.
-      Please check your inbox and verify your email before the
-      <div class="value">11 Oct 2022</div>.
+    <svg class="top-icon" width="32" height="32" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z"/>
+    </svg>
+    <p class="title">Your account has been successfully created</p>
+    <div class="instructions">
+        <p>Check your email inbox</p>
+        <div class="message">
+            We've sent you a verification link to your email address
+            <div class="value">email.addr@email.com</div>
+            .
+            Please check your inbox and verify your email before the
+            <div class="value">11 Oct 2022</div>
+            .
+        </div>
     </div>
-  </div>
 </div>
