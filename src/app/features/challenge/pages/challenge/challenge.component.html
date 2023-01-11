@@ -101,7 +101,7 @@
         <dfy-challenge-chats [section]="section" [challenge]="challenge" [selfMember]="selfMember" *ngIf="isOnSection(1)"></dfy-challenge-chats>
         <dfy-challenge-groups [section]="section" [challenge]="challenge" [members]="members" *ngIf="isOnSection(2)"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge" *ngIf="isOnSection(3)"></dfy-challenge-leaderboard>
-        <dfy-challenge-settings [challenge]="challenge" *ngIf="isOnSection(4)"></dfy-challenge-settings>
+        <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember" *ngIf="isOnSection(4)"></dfy-challenge-settings>
       </div>
     </div>
   </div>

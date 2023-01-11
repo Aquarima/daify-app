@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Challenge} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Member} from "../../../../core/models/challenge/member.model";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -10,6 +12,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class SectionSettingsComponent implements OnInit {
 
   @Input() challenge!: Challenge;
+  @Input() members!: Member[];
+  @Input() selfMember: Member | undefined;
 
   currentSection: number = 0;
 
@@ -40,6 +44,26 @@ export class SectionSettingsComponent implements OnInit {
 
   onSpectators() {
     this.showSection(3);
+  }
+
+  getMemberNickname(member: Member): string {
+    return member.nickname ? member.nickname : member.profile.username;
+  }
+
+  getMemberRole(member: Member): string {
+    return member.role ? member.role : member.profile.profession;
+  }
+
+  getMemberAvatar(member: Member): string {
+    return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+  }
+
+  isSelfMember(member: Member) {
+    return this.selfMember?.id === member.id;
+  }
+
+  isSelfMemberAuthor(): boolean {
+    return this.selfMember?.id === this.challenge.author.id;
   }
 
   showSection(index: number) {

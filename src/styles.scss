@@ -254,14 +254,15 @@ html {
   }
 
   .tooltip {
-    padding: 8px 16px;
+    padding: 5px 8px;
     position: absolute;
     top: 50%;
     left: calc(100% + 16px);
+    z-index: 1;
     transform: translateY(-50%);
     display: none;
     border-radius: 8px;
-    background-color: var(--color-text);
+    background-color: #353536;
     font-size: var(--preset-font-size-small);
     color: #FFF;
   }

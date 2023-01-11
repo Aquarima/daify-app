@@ -21,7 +21,6 @@
   .configuration {
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
-    justify-content: center;
     align-items: center;
     gap: 16px;
 
@@ -59,7 +58,6 @@
   .members {
     display: grid;
     grid-template-columns: repeat(auto-fit, 260px);
-    justify-content: center;
     align-items: center;
     gap: 16px;
 
