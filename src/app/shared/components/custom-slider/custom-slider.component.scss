@@ -1,0 +1,21 @@
+:host {
+
+  .bar {
+    width: 200px;
+    height: 4px;
+    position: relative;
+    border-radius: 8px;
+    background-color: var(--color-secondary);
+
+    .cursor {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      transform: translateY(calc(-50% + 2px));
+      border: 2px solid #F5F5F5;
+      border-radius: 50%;
+      background-color: #FFF;
+      cursor: pointer;
+    }
+  }
+}

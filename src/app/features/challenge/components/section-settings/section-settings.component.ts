@@ -1,76 +1,99 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Challenge} from "../../../../core";
+import {Challenge, ChallengeConfig} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Member} from "../../../../core/models/challenge/member.model";
-import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
-  selector: 'dfy-challenge-settings',
-  templateUrl: './section-settings.component.html',
-  styleUrls: ['./section-settings.component.scss']
+    selector: 'dfy-challenge-settings',
+    templateUrl: './section-settings.component.html',
+    styleUrls: ['./section-settings.component.scss']
 })
 export class SectionSettingsComponent implements OnInit {
 
-  @Input() challenge!: Challenge;
-  @Input() members!: Member[];
-  @Input() selfMember: Member | undefined;
+    @Input() challenge!: Challenge;
+    @Input() members!: Member[];
+    @Input() selfMember: Member | undefined;
 
-  currentSection: number = 0;
+    currentSection: number = 0;
+    hasBeenUpdated: boolean = false;
 
-  configForm: FormGroup = new FormGroup({
-    spectators_allowed: new FormControl<boolean>(false)
-  })
+    initialConfigForm: any | undefined;
 
-  constructor() { }
+    configForm: FormGroup = new FormGroup({
+        title: new FormControl<string>(''),
+        description: new FormControl<string>(''),
+        theme: new FormControl<string>(''),
+        capacity: new FormControl<number>(2),
+        group_size: new FormControl<number>(2),
+        spectators_allowed: new FormControl<boolean>(false)
+    })
 
-  ngOnInit(): void {
-  }
+    constructor() {
+    }
 
-  control(name: string) {
-    return this.configForm.controls['spectators_allowed'];
-  }
+    ngOnInit(): void {
+        this.initConfigForm(this.challenge);
+        this.configForm.valueChanges.subscribe(() => {
+            this.hasBeenUpdated = JSON.stringify(this.initialConfigForm) !== JSON.stringify(this.configForm.value);
+        });
+    }
 
-  onOverview() {
-    this.showSection(0);
-  }
+    private initConfigForm(challenge: Challenge) {
+        const config: ChallengeConfig = challenge.config;
+        this.configForm.controls['title'].setValue(challenge.title);
+        this.configForm.controls['description'].setValue(challenge.description);
+        this.configForm.controls['theme'].setValue(challenge.theme);
+        this.configForm.controls['capacity'].setValue(config.capacity);
+        this.configForm.controls['group_size'].setValue(config.groupSize);
+        this.configForm.controls['spectators_allowed'].setValue(config.spectatorsAllowed);
+        this.initialConfigForm = this.configForm.value;
+    }
 
-  onMembers() {
-    this.showSection(1);
-  }
+    onOverview() {
+        this.showSection(0);
+    }
 
-  onDeposits() {
-    this.showSection(2);
-  }
+    onMembers() {
+        this.showSection(1);
+    }
 
-  onSpectators() {
-    this.showSection(3);
-  }
+    onDeposits() {
+        this.showSection(2);
+    }
 
-  getMemberNickname(member: Member): string {
-    return member.nickname ? member.nickname : member.profile.username;
-  }
+    onSpectators() {
+        this.showSection(3);
+    }
 
-  getMemberRole(member: Member): string {
-    return member.role ? member.role : member.profile.profession;
-  }
+    control(name: string) {
+        return this.configForm.controls['spectators_allowed'];
+    }
 
-  getMemberAvatar(member: Member): string {
-    return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
-  }
+    getMemberNickname(member: Member): string {
+        return member.nickname ? member.nickname : member.profile.username;
+    }
 
-  isSelfMember(member: Member) {
-    return this.selfMember?.id === member.id;
-  }
+    getMemberRole(member: Member): string {
+        return member.role ? member.role : member.profile.profession;
+    }
 
-  isSelfMemberAuthor(): boolean {
-    return this.selfMember?.id === this.challenge.author.id;
-  }
+    getMemberAvatar(member: Member): string {
+        return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+    }
 
-  showSection(index: number) {
-    this.currentSection = index;
-  }
+    isSelfMember(member: Member) {
+        return this.selfMember?.id === member.id;
+    }
 
-  isOnSection(index: number) {
-    return this.currentSection === index;
-  }
+    isSelfMemberAuthor(): boolean {
+        return this.selfMember?.id === this.challenge.author.id;
+    }
+
+    showSection(index: number) {
+        this.currentSection = index;
+    }
+
+    isOnSection(index: number) {
+        return this.currentSection === index;
+    }
 }
