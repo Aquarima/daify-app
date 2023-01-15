@@ -6,7 +6,7 @@ export interface ChallengeConfig {
     endAt: Date;
     capacity: number;
     groupSize: number;
-    minDeposits: number;
-    maxDeposits: number;
+    depositsMin: number;
+    depositsMax: number;
     spectatorsAllowed: boolean;
 }

@@ -180,14 +180,6 @@ html {
         cursor: pointer;
       }
 
-      textarea {
-        height: 100%;
-        font-weight: 500;
-        font-family: $font-family;
-        color: var(--color-text);
-        resize: none;
-      }
-
       .submit-btn {
         padding: 0;
         width: 60px;
@@ -256,10 +248,8 @@ html {
   .tooltip {
     padding: 5px 8px;
     position: absolute;
-    top: 50%;
-    left: calc(100% + 16px);
+    top: calc(-100% - 8px);
     z-index: 1;
-    transform: translateY(-50%);
     display: none;
     border-radius: 8px;
     background-color: #353536;

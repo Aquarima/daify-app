@@ -10,13 +10,16 @@ import {
   ChallengeSearchComponent,
   InviteFriendsComponent,
   SectionChatsComponent,
-  SectionGroupsComponent, SectionLeaderboardComponent,
-  SectionOverviewComponent, SectionSettingsComponent,
+  SectionGroupsComponent,
+  SectionLeaderboardComponent,
+  SectionOverviewComponent,
+  SectionSettingsComponent,
 } from './components';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from 'src/app/core/core.module';
 import {SharedModule} from 'src/app/shared/shared.module';
 import {CreateGroupComponent} from './components/create-group/create-group.component';
+import { MemberKickComponent } from './components/member-kick/member-kick.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import {CreateGroupComponent} from './components/create-group/create-group.compo
     SectionGroupsComponent,
     SectionChatsComponent,
     SectionLeaderboardComponent,
-    SectionSettingsComponent
+    SectionSettingsComponent,
+    MemberKickComponent
   ],
   imports: [
     CommonModule,

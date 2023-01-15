@@ -24,7 +24,7 @@ export class CustomInputFocusDirective implements AfterViewInit {
   @HostListener('blur')
   removeClass() {
     const value = this.el.nativeElement.value.trim();
-    if (value.length !== 0) return;
+    if (value.length !== 0 || this.el.nativeElement.type.contains('date')) return;
     this.el.nativeElement.parentNode.classList.remove(this.class);
   }
 }

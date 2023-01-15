@@ -1,0 +1,23 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">Kick {{nickname}} ?</h1>
+    <p class="popup-head-description">Are you sure you want to kick {{nickname}} from the challenge? This means he will no longer be able to participate in the conversations and activities."</p>
+  </div>
+  <form>
+    <div class="parameter">
+      <p class="parameter-name">Reason</p>
+      <p class="parameter-description">Tell to {{nickname}} the reason why he/she got kicked from the challenge.</p>
+      <div class="user-input">
+        <div class="user-input-box">
+          <label for="reason">Reason</label>
+          <textarea id="reason" class="form-control" rows="5" cols="33" [formControl]="reason" [customFocus]="'user-input-active'"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="popup-foot">
+    <button (click)="onCancel()">Cancel</button>
+    <button (click)="onKick()">Kick</button>
+  </div>
+</div>

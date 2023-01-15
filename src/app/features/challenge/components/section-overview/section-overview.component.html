@@ -5,6 +5,16 @@
   <div class="configuration-item">
     <svg width="32" height="32" viewBox="0 0 24 24">
       <path
+        d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5z"/>
+    </svg>
+    <div>
+      <p class="configuration-item-key">Access Type</p>
+      <p class="configuration-item-value">{{challenge.config.accessType}}</p>
+    </div>
+  </div>
+  <div class="configuration-item">
+    <svg width="32" height="32" viewBox="0 0 24 24">
+      <path
         d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm-.22-13h-.06c-.4 0-.72.32-.72.72v4.72c0 .35.18.68.49.86l4.15 2.49c.34.2.78.1.98-.24a.71.71 0 0 0-.25-.99l-3.87-2.3V7.72c0-.4-.32-.72-.72-.72z"/>
     </svg>
     <div>
@@ -60,6 +70,26 @@
     <div>
       <p class="configuration-item-key">Allow Spectators</p>
       <p class="configuration-item-value">{{challenge.config.spectatorsAllowed ? 'Yes' : 'No'}}</p>
+    </div>
+  </div>
+  <div class="configuration-item">
+    <svg width="32" height="32" viewBox="0 0 24 24">
+      <path
+        d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5z"/>
+    </svg>
+    <div>
+      <p class="configuration-item-key">Deposits Min</p>
+      <p class="configuration-item-value">{{challenge.config.depositsMin}}</p>
+    </div>
+  </div>
+  <div class="configuration-item">
+    <svg width="32" height="32" viewBox="0 0 24 24">
+      <path
+        d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5z"/>
+    </svg>
+    <div>
+      <p class="configuration-item-key">Deposits Max</p>
+      <p class="configuration-item-value">{{challenge.config.depositsMax}}</p>
     </div>
   </div>
 </div>

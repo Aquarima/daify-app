@@ -7,3 +7,4 @@ export {SectionGroupsComponent} from './section-groups/section-groups.component'
 export {SectionLeaderboardComponent} from './section-leaderboard/section-leaderboard.component';
 export {SectionOverviewComponent} from './section-overview/section-overview.component';
 export {SectionSettingsComponent} from './section-settings/section-settings.component';
+export {MemberKickComponent} from './member-kick/member-kick.component';
