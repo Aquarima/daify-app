@@ -77,6 +77,14 @@ export class SectionSettingsComponent implements OnInit {
     this.showSection(3);
   }
 
+  onCancel() {
+    this.initConfigForm(this.challenge);
+  }
+
+  onSave() {
+
+  }
+
   showKickMemberModal(member: Member) {
     const componentRef = this.viewContainerRef.createComponent(MemberKickComponent);
     componentRef.instance.member = member;

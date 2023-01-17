@@ -19,6 +19,7 @@ export class CustomSliderComponent implements OnInit {
   private isMouseDown: boolean = false;
 
   ngOnInit() {
+    this.control.valueChanges.subscribe(value => this.updateCursorPosition(value));
   }
 
   @HostListener('document:mouseup')
@@ -31,17 +32,24 @@ export class CustomSliderComponent implements OnInit {
     if (!this.isMouseDown) {
       return;
     }
-    const cursor = this.cursorNode.nativeElement as HTMLElement;
-    const bar = this.barNode.nativeElement as HTMLElement;
+    const cursor = this.cursorNode.nativeElement;
+    const bar = this.barNode.nativeElement;
     const barStart = bar.getBoundingClientRect().left;
     const barWidth = bar.offsetWidth;
     const cursorWidth = cursor.offsetWidth;
     let cursorLeft = event.clientX - barStart - cursorWidth / 2;
-
     cursorLeft = this.clamp(cursorLeft, 0, barWidth - cursorWidth);
     const value = this.min + (this.max - this.min) * cursorLeft / (barWidth - cursorWidth);
     this.control.setValue(Math.round(value / this.step) * this.step);
     cursor.style.left = cursorLeft + 'px';
+  }
+
+  private calculateCursorPosition(value: number) {
+    const cursor = this.cursorNode.nativeElement;
+    const bar = this.barNode.nativeElement;
+    const barWidth = bar.offsetWidth;
+    const cursorWidth = cursor.offsetWidth;
+    return this.clamp((value - this.min) * (barWidth - cursorWidth) / (this.max - this.min), 0, barWidth - cursorWidth);
   }
 
   startMove(event: MouseEvent) {
@@ -51,5 +59,14 @@ export class CustomSliderComponent implements OnInit {
 
   clamp(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max);
+  }
+
+  private updateCursorPosition(value: number) {
+    const cursor = this.cursorNode.nativeElement;
+    const bar = this.barNode.nativeElement;
+    const barWidth = bar.offsetWidth;
+    const cursorWidth = cursor.offsetWidth;
+    const cursorLeft = this.clamp((value - this.min) * (barWidth - cursorWidth) / (this.max - this.min), 0, barWidth - cursorWidth);
+    cursor.style.left = cursorLeft + 'px';
   }
 }

@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {Challenge} from "../../../../core";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
+import {MemberKickComponent} from "../member-kick/member-kick.component";
 
 @Component({
   selector: 'dfy-challenge-overview',
@@ -16,19 +17,28 @@ export class SectionOverviewComponent implements OnInit {
   @Input() members!: Member[];
   @Input() selfMember: Member | undefined;
 
-  constructor(private alertHandlingService: AlertHandlingService, private memberService: MemberService) { }
+  constructor(private viewContainerRef: ViewContainerRef,
+              private alertHandlingService: AlertHandlingService,
+              private memberService: MemberService) {
+  }
 
   ngOnInit(): void {
   }
 
-  onKickMember(member: Member) {
-    if (!this.isSelfMemberAuthor()) return;
-    this.memberService.kickMember(member).subscribe(
-      {
-        next: () => this.members.splice(this.members.indexOf(member), 1),
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, `Could not kick member '${member.nickname ? member.nickname : member.profile.username}'`)
-      }
-    );
+  showKickMemberModal(member: Member) {
+    const componentRef = this.viewContainerRef.createComponent(MemberKickComponent);
+    componentRef.instance.member = member;
+    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
+    componentRef.instance.kickEvent.subscribe((message: string) => {
+      this.memberService.kickMember(member)
+        .subscribe({
+          next: () => {
+            this.members.splice(this.members.indexOf(member), 1);
+            this.alertHandlingService.throwAlert(AlertType.SUCCESS, `${member.nickname ? member.nickname : member.profile.username} has been kicked`);
+          },
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, `Could not kick member ${member.nickname ? member.nickname : member.profile.username}`)
+        })
+    });
   }
 
   getMemberNickname(member: Member): string {
