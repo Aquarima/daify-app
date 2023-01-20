@@ -15,15 +15,19 @@
     </div>
     <div class="auth-box-body">
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="input-box">
-                <label for="username">Email or Username</label>
-                <input id="username" class="form-control" #text_input type="text" name="username"
-                       formControlName="username" [customFocus]="'user-input-active'">
+            <div class="user-input">
+                <div class="user-input-box">
+                    <label for="username">Email or Username</label>
+                    <input id="username" class="form-control" #text_input type="text" name="username"
+                           formControlName="username" [customFocus]="'user-input-active'">
+                </div>
             </div>
-            <div class="input-box">
-                <label for="password">Password</label>
-                <input id="password" class="form-control" #text_input type="password" name="password"
-                       formControlName="password" [customFocus]="'user-input-active'">
+            <div class="user-input">
+                <div class="user-input-box">
+                    <label for="password">Password</label>
+                    <input id="password" class="form-control" #text_input type="password" name="password"
+                           formControlName="password" [customFocus]="'user-input-active'">
+                </div>
             </div>
             <div class="rempass">
                 <label for="remember-me">

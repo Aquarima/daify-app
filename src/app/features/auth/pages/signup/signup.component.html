@@ -4,34 +4,34 @@
     </div>
     <div class="auth-box-body">
         <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-            <div class="input-wrapper">
-                <div class="input-box">
+            <div class="user-input">
+                <div class="user-input-box">
                     <label for="username">Username</label>
-                    <input id="username" class="form-control" #text_input type="text" name="username"
+                    <input id="username" class="form-control" type="text" name="username"
                            formControlName="username" [customFocus]="'user-input-active'">
                 </div>
                 <p class="form-error" *ngIf="errors?.username">{{errors.username}}</p>
             </div>
-            <div class="input-wrapper">
-                <div class="input-box">
+            <div class="user-input">
+                <div class="user-input-box">
                     <label for="email">Email</label>
-                    <input id="email" class="form-control" #text_input type="text" name="email" formControlName="email"
+                    <input id="email" class="form-control" type="text" name="email" formControlName="email"
                            [customFocus]="'user-input-active'">
                 </div>
                 <p class="form-error" *ngIf="errors?.email">{{errors.email}}</p>
             </div>
-            <div class="input-wrapper">
-                <div class="input-box">
+            <div class="user-input">
+                <div class="input-input-box">
                     <label for="password">Password</label>
-                    <input id="password" class="form-control" #text_input type="password" name="password"
+                    <input id="password" class="form-control" type="password" name="password"
                            formControlName="password" [customFocus]="'user-input-active'">
                 </div>
                 <p class="form-error" *ngIf="errors?.password">{{errors.password}}</p>
             </div>
-            <div class="input-wrapper">
-                <div class="input-box">
+            <div class="user-input">
+                <div class="user-input-box">
                     <label for="password-confirm">Confirm Password</label>
-                    <input id="password-confirm" class="form-control" #text_input type="password"
+                    <input id="password-confirm" class="form-control" type="password"
                            name="password-confirm" formControlName="password_confirm" [customFocus]="'user-input-active'">
                 </div>
                 <p class="form-error" *ngIf="errors?.confirm">{{errors.confirm}}</p>
