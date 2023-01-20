@@ -43,9 +43,16 @@ export class SectionGroupsComponent implements OnInit {
     componentRef.instance.groupCreateEvent.subscribe(group => {
       this.groupService.createGroup(this.challenge.id, group)
         .subscribe({
-          next: (group: Group) => this.groups.push(group),
+          next: (group: Group) => {
+            this.groups.push(group);
+            componentRef.destroy();
+          },
           error: () => alert('ERROR')
         })
     })
+  }
+
+  getGroupSize(group: Group): number {
+    return this.members.filter(member => member.group.id === group.id).length;
   }
 }

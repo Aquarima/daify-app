@@ -11,7 +11,7 @@
     <img class="groups-list-item-icon" src="assets/challenge_group_placeholder.svg" alt="">
     <p class="groups-list-item-name">{{group.name}}</p>
     <div class="groups-list-item-members-count">
-      <p>{{members.length}} / {{challenge.config.groupSize}}</p>
+      <p>{{getGroupSize(group)}} / {{challenge.config.groupSize}}</p>
     </div>
     <button class="groups-list-item-join-btn">Join</button>
   </div>
