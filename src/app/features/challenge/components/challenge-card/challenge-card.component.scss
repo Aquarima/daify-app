@@ -2,10 +2,15 @@
   position: relative;
   display: flex;
   overflow: hidden;
+  transition: all 500ms ease;
   box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
   border-radius: 16px;
   background-color: #FFF;
   cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
 
   .challenge-preview-banner {
     position: relative;

@@ -20,7 +20,7 @@
 
   .configuration {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(auto-fit, 180px);
     align-items: center;
     gap: 16px;
 
@@ -41,7 +41,7 @@
         fill: var(--color-text);
       }
 
-      .configuration-item-key {
+      .configuration-item-name {
         margin-bottom: 4px;
         font-weight: 600;
         font-size: var(--preset-font-size-small);
