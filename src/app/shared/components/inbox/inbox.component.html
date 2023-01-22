@@ -1,96 +1,22 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="popup">
-  <div class="head">
-    <div>
-      <h1>Inbox</h1>
-      <div class="right-box">
-        <button class="mark-all-btn">Mark all as read</button>
-        <button class="close-overlay-btn" (click)="onClose()">
-          <svg width="32" height="32" viewBox="0 0 36 36">
-            <path d="m19.41 18l7.29-7.29a1 1 0 0 0-1.41-1.41L18 16.59l-7.29-7.3A1 1 0 0 0 9.3 10.7l7.29 7.3l-7.3 7.29a1 1 0 1 0 1.41 1.41l7.3-7.29l7.29 7.29a1 1 0 0 0 1.41-1.41Z"/>
-            <path fill="none" d="M0 0h36v36H0z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <ul class="sections">
-      <li>
-        <button (click)="onAll()">All</button>
-      </li>
-      <li>
-        <button (click)="onFollowed()">Followed</button>
-      </li>
-    </ul>
+  <div class="popup-head">
+    <h1 class="popup-head-title">Inbox</h1>
+    <p class="popup-head-description">Get ready and create your own team!</p>
   </div>
-  <div class="inbox">
-    <div class="item">
-      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-      <div class="info">
-        <div class="first">
-          <p class="subject">
-            <span class="author">Author</span>started the challenge
-          </p>
-        </div>
-        <div class="last">
-          <span class="time-ago">0m ago</span>
-          <span class="source">Source</span>
+  <div class="notifications">
+    <div class="notifications-item" *ngFor="let notification of notifications">
+      <div class="sender-avatar">
+        <img [src]="'https://cdn.pixabay.com/photo/2018/12/13/03/00/hot-chocolate-3872047_960_720.jpg'" alt="Sender Avatar">
+        <div class="sender-avatar-status">
+            <span class="status-indicator"
+                  [ngClass]="isAuthorOnline(notification) ? 'status-indicator-online' : 'status-indicator-offline'"></span>
         </div>
       </div>
-    </div>
-    <div class="item">
-      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-      <div class="info">
-        <div class="first">
-          <p class="subject">
-            <span class="author">Author</span>started the challenge
-          </p>
-        </div>
-        <div class="last">
-          <span class="time-ago">0m ago</span>
-          <span class="source">Source</span>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-      <div class="info">
-        <div class="first">
-          <p class="subject">
-            <span class="author">Author</span>started the challenge
-          </p>
-        </div>
-        <div class="last">
-          <span class="time-ago">0m ago</span>
-          <span class="source">Source</span>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-      <div class="info">
-        <div class="first">
-          <p class="subject">
-            <span class="author">Author</span>started the challenge
-          </p>
-        </div>
-        <div class="last">
-          <span class="time-ago">0m ago</span>
-          <span class="source">Source</span>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="avatar" src="/assets/avatar_placeholder.svg" alt="Sender Avatar">
-      <div class="info">
-        <div class="first">
-          <p class="subject">
-            <span class="author">Author</span>started the challenge
-          </p>
-        </div>
-        <div class="last">
-          <span class="time-ago">0m ago</span>
-          <span class="source">Source</span>
-        </div>
+      <div class="content">
+        <p class="content-title">{{notification.title}}</p>
+        <p class="content-message">{{notification.message}}</p>
+        <p class="content-since">{{getTimeSince(notification)}} ago</p>
       </div>
     </div>
   </div>

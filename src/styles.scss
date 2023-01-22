@@ -158,7 +158,6 @@ html {
         font-size: var(--preset-font-size-small);
         font-family: $font-family;
         color: var(--color-text);
-        cursor: pointer;
 
         &:focus {
           border-color: var(--color-primary);

@@ -11,7 +11,7 @@ export class CustomSliderComponent implements OnInit {
   @Input() min: number = 1;
   @Input() max: number = 1;
   @Input() step: number = 1;
-  @Input() control!: AbstractControl<number>;
+  @Input() control!: AbstractControl<number | null>;
 
   @ViewChild('bar') barNode!: ElementRef;
   @ViewChild('cursor') cursorNode!: ElementRef;
@@ -19,7 +19,7 @@ export class CustomSliderComponent implements OnInit {
   private isMouseDown: boolean = false;
 
   ngOnInit() {
-    this.control.valueChanges.subscribe(value => this.updateCursorPosition(value));
+    this.control.valueChanges.subscribe(value => this.updateCursorPosition(value ? value : this.min));
   }
 
   @HostListener('document:mouseup')

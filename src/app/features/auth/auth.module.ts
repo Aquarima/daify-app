@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './pages/signup/signup.component';
 import {CoreModule} from "../../core/core.module";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {CoreModule} from "../../core/core.module";
         CommonModule,
         AuthRoutingModule,
         ReactiveFormsModule,
-        CoreModule
+        CoreModule,
+        SharedModule
     ],
   exports: [
     LoginComponent,

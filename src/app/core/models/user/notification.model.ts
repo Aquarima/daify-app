@@ -1,8 +1,10 @@
+import {Profile} from "./profile.model";
+
 export interface Notification {
     id: number;
-    sourceType: number;
-    sourceId: number;
-    body: string;
-    isRead: boolean;
+    sender: Profile;
+    title: string;
+    message: string;
+    read: boolean;
     sentAt: Date;
 }

@@ -23,12 +23,12 @@ export class SectionSettingsComponent implements OnInit {
 
   initialConfigForm: any | undefined;
 
-  configForm: FormGroup = new FormGroup({
+  configForm = new FormGroup({
     title: new FormControl<string>(''),
     description: new FormControl<string>(''),
     theme: new FormControl<string>(''),
-    startAt: new FormControl<string>(new Date().toISOString()),
-    endAt: new FormControl<string>(new Date().toISOString()),
+    startAt: new FormControl<Date>(new Date()),
+    endAt: new FormControl<Date>(new Date()),
     capacity: new FormControl<number>(2),
     groupSize: new FormControl<number>(2),
     spectatorsAllowed: new FormControl<boolean>(false),
@@ -99,10 +99,6 @@ export class SectionSettingsComponent implements OnInit {
           error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, `Could not kick member ${member.nickname ? member.nickname : member.profile.username}`)
         })
     });
-  }
-
-  control(name: string) {
-    return this.configForm.controls[name];
   }
 
   getMemberNickname(member: Member): string {

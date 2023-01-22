@@ -85,12 +85,12 @@
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Capacity</p>
         <p class="current-section-parameter-description">Number of members for this challenge.</p>
-        <dfy-custom-slider [control]="control('capacity')" [min]="2" [max]="100" [step]="1"></dfy-custom-slider>
+        <dfy-custom-slider [control]="configForm.controls.capacity" [min]="2" [max]="100" [step]="1"></dfy-custom-slider>
       </div>
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Group Size</p>
         <p class="current-section-parameter-description">Number of members for this challenge.</p>
-        <dfy-custom-slider [control]="control('groupSize')" [min]="2" [max]="10" [step]="1"></dfy-custom-slider>
+        <dfy-custom-slider [control]="configForm.controls.groupSize" [min]="2" [max]="10" [step]="1"></dfy-custom-slider>
       </div>
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">List of members</p>
@@ -129,7 +129,7 @@
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Allow Spectators</p>
         <p class="current-section-parameter-description">Gives a clear idea of the challenge before joining it.</p>
-        <dfy-custom-checkbox [control]="control('spectatorsAllowed')"></dfy-custom-checkbox>
+        <dfy-custom-checkbox [control]="configForm.controls.spectatorsAllowed"></dfy-custom-checkbox>
       </div>
     </div>
     <div *ngIf="isOnSection(3)">
@@ -139,12 +139,12 @@
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Min</p>
         <p class="current-section-parameter-description">Minimum number of deposits allowed.</p>
-        <dfy-custom-slider [control]="control('depositsMin')" [min]="1" [max]="5" [step]="1"></dfy-custom-slider>
+        <dfy-custom-slider [control]="configForm.controls.depositsMin" [min]="1" [max]="5" [step]="1"></dfy-custom-slider>
       </div>
       <div class="current-section-parameter">
         <p class="current-section-parameter-name">Max</p>
         <p class="current-section-parameter-description">Maximum number of deposits allowed.</p>
-        <dfy-custom-slider [control]="control('depositsMax')" [min]="1" [max]="5" [step]="1"></dfy-custom-slider>
+        <dfy-custom-slider [control]="configForm.controls.depositsMax" [min]="1" [max]="5" [step]="1"></dfy-custom-slider>
       </div>
     </div>
   </div>

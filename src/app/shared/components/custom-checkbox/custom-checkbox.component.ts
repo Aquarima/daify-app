@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'dfy-custom-checkbox',
@@ -8,7 +8,8 @@ import {AbstractControl} from "@angular/forms";
 })
 export class CustomCheckboxComponent implements OnInit {
 
-  @Input() control!: AbstractControl<boolean>;
+  @Input() control!: FormControl<boolean | null>;
+  @Input() label: string | undefined;
 
   constructor() { }
 
@@ -16,7 +17,7 @@ export class CustomCheckboxComponent implements OnInit {
   }
 
   onToggle() {
-    const checked: boolean = this.control.value;
+    const checked = this.control.value;
     this.control.setValue(!checked);
   }
 }

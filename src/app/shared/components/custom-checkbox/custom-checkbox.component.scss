@@ -1,4 +1,7 @@
 :host {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   .input {
     width: 48px;
@@ -34,6 +37,38 @@
 
     &::after {
       transform: translateX(26px);
+    }
+  }
+
+  label {
+    color: var(--color-text);
+    cursor: pointer;
+  }
+}
+
+:host(.small) {
+
+  .input {
+    width: 32px;
+    height: 16px;
+
+    &::after {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .input-false {
+
+    &::after {
+      transform: translateX(4px);
+    }
+  }
+
+  .input-true {
+
+    &::after {
+      transform: translateX(16px);
     }
   }
 }

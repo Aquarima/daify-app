@@ -55,6 +55,10 @@
 
   .auth-box {
 
+    .user-input {
+      width: 100%;
+    }
+
     .auth-box-header {
       margin-bottom: 32px;
 
@@ -67,13 +71,14 @@
     }
 
     .auth-box-body {
+      width: 350px;
       display: flex;
       flex-direction: column;
       align-items: center;
 
       .login-form {
+        width: 100%;
         margin-bottom: 24px;
-        width: fit-content;
         display: flex;
         flex-direction: column;
         gap: 32px;
