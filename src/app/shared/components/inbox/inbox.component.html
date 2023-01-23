@@ -1,23 +1,60 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="popup">
-  <div class="popup-head">
-    <h1 class="popup-head-title">Inbox</h1>
-    <p class="popup-head-description">Get ready and create your own team!</p>
-  </div>
-  <div class="notifications">
-    <div class="notifications-item" *ngFor="let notification of notifications">
-      <div class="sender-avatar">
-        <img [src]="'https://cdn.pixabay.com/photo/2018/12/13/03/00/hot-chocolate-3872047_960_720.jpg'" alt="Sender Avatar">
-        <div class="sender-avatar-status">
+    <div *ngIf="!isOnWatch">
+        <div class="popup-head">
+            <h1 class="popup-head-title">
+                Inbox
+                <button class="mark-as-read">
+                    <svg width="32" height="32" viewBox="0 0 24 24">
+                        <path
+                                d="M11 8c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1s.45 1 1 1h7c.55 0 1-.45 1-1zm0 8c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1s.45 1 1 1h7c.55 0 1-.45 1-1zm6.05-5.71a.996.996 0 0 1-1.41 0l-2.12-2.12a.996.996 0 1 1 1.41-1.41l1.41 1.41l3.54-3.54a.996.996 0 1 1 1.41 1.41l-4.24 4.25zm0 8a.996.996 0 0 1-1.41 0l-2.12-2.12a.996.996 0 1 1 1.41-1.41l1.41 1.41l3.54-3.54a.996.996 0 1 1 1.41 1.41l-4.24 4.25z"/>
+                    </svg>
+                    Mark all as read
+                </button>
+            </h1>
+            <p class="popup-head-description">Here is all the notifications that you received.</p>
+            <ul class="popup-head-filters">
+                <li [class.popup-head-filters-selected]="isFilterOn(0)" (click)="onFilter(0)">All</li>
+                <li [class.popup-head-filters-selected]="isFilterOn(1)" (click)="onFilter(1)">Following</li>
+            </ul>
+        </div>
+        <div class="notifications">
+            <div class="notifications-item" [class.notifications-item-read]="notification.read"
+                 (click)="onWatchNotification(notification)" *ngFor="let notification of notifications">
+                <div class="sender-avatar">
+                    <img [src]="'https://cdn.pixabay.com/photo/2018/12/13/03/00/hot-chocolate-3872047_960_720.jpg'"
+                         alt="Sender Avatar">
+                    <div class="sender-avatar-status">
             <span class="status-indicator"
                   [ngClass]="isAuthorOnline(notification) ? 'status-indicator-online' : 'status-indicator-offline'"></span>
+                    </div>
+                </div>
+                <div class="content">
+                    <p class="content-title">{{notification.title}}</p>
+                    <p class="content-message">{{notification.message}}</p>
+                    <p class="content-since">{{getTimeSince(notification)}} ago</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="content">
-        <p class="content-title">{{notification.title}}</p>
-        <p class="content-message">{{notification.message}}</p>
-        <p class="content-since">{{getTimeSince(notification)}} ago</p>
-      </div>
     </div>
-  </div>
+    <div *ngIf="isOnWatch">
+        <div class="popup-head">
+            <div class="popup-head-title">
+                <button (click)="onBackToInbox()">Back</button>
+                <button class="mark-as-read">
+                    <svg width="32" height="32" viewBox="0 0 24 24">
+                        <path
+                                d="M11 8c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1s.45 1 1 1h7c.55 0 1-.45 1-1zm0 8c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1s.45 1 1 1h7c.55 0 1-.45 1-1zm6.05-5.71a.996.996 0 0 1-1.41 0l-2.12-2.12a.996.996 0 1 1 1.41-1.41l1.41 1.41l3.54-3.54a.996.996 0 1 1 1.41 1.41l-4.24 4.25zm0 8a.996.996 0 0 1-1.41 0l-2.12-2.12a.996.996 0 1 1 1.41-1.41l1.41 1.41l3.54-3.54a.996.996 0 1 1 1.41 1.41l-4.24 4.25z"/>
+                    </svg>
+                    Mark as read
+                </button>
+            </div>
+        </div>
+        <div class="notification-watch-body">
+            <p>Title: </p>
+            <p>{{watchSubject.title}}</p>
+            <p>Message: </p>
+            <p>{{watchSubject.message}}</p>
+        </div>
+    </div>
 </div>

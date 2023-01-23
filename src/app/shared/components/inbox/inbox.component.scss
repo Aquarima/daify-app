@@ -3,7 +3,7 @@
   overflow: hidden;
 
   .popup {
-    padding: 32px;
+    padding: 32px 0;
     width: 520px;
     height: fit-content;
     position: fixed;
@@ -11,23 +11,55 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
     box-sizing: border-box;
     border-radius: 16px;
     background-color: #FFF;
-    overflow-x: auto;
+    overflow: hidden;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
 
     .popup-head {
+      padding: 0 32px;
       display: flex;
       flex-direction: column;
       gap: 16px;
 
       .popup-head-title {
+        display: flex;
+        justify-content: space-between;
         font-weight: 600;
         font-size: calc(var(--preset-font-size-normal) + 3px);
         color: var(--color-text);
+      }
+
+      .mark-as-read {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 8px;
+        border: none;
+        background-color: transparent;
+        color: var(--color-primary);
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+          color: var(--color-primary-hover);
+
+          svg {
+            fill: var(--color-primary-hover);
+          }
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+          fill: var(--color-primary);
+        }
       }
 
       .popup-head-description {
@@ -35,16 +67,60 @@
         font-size: var(--preset-font-size-normal);
         color: var(--color-text-alt);
       }
+
+      .popup-head-filters {
+        display: flex;
+
+        li {
+          padding: 0 16px;
+          min-width: 32px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 500;
+          color: var(--color-text);
+          cursor: pointer;
+
+          &::after {
+            width: 100%;
+            height: 4px;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            border-radius: 8px;
+            background-color: var(--color-secondary);
+          }
+
+          &:hover::after {
+            content: '';
+          }
+        }
+
+        .popup-head-filters-selected::after {
+          content: '';
+        }
+      }
     }
 
     .notifications {
+      padding: 0 32px 0 32px;
+      height: 300px;
       display: flex;
       flex-direction: column;
       row-gap: 24px;
+      overflow-y: auto;
 
       .notifications-item {
+        padding: 8px;
         display: flex;
         column-gap: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(84, 101, 255, .025);
+        }
 
         .sender-avatar {
           width: 42px;
@@ -109,6 +185,14 @@
           }
         }
       }
+
+      .notifications-item-read {
+        opacity: .5;
+      }
+    }
+
+    .notification-watch-body {
+      padding: 32px;
     }
   }
 }

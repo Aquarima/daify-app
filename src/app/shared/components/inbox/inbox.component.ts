@@ -13,6 +13,9 @@ export class InboxComponent implements OnInit {
 
   @Output() closeEvent: EventEmitter<any> = new EventEmitter();
 
+  filter: number = 0;
+  isOnWatch: boolean = false;
+  watchSubject: Notification = {} as Notification;
   notifications: Notification[] = [];
 
   constructor(private alertHandlingService: AlertHandlingService,
@@ -23,7 +26,10 @@ export class InboxComponent implements OnInit {
   ngOnInit(): void {
     this.notificationService.getNotificationsByUser(this.authService.user)
       .subscribe({
-        next: (notifications: any) => this.notifications = notifications.content,
+        next: (notifications: any) => {
+          this.notifications = notifications.content;
+          this.notifications = this.notifications.sort((n1, n2) => (n2.read ? 0 : 1) - (n1.read ? 0 : 1));
+        },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch notifications')
       })
   }
@@ -43,6 +49,23 @@ export class InboxComponent implements OnInit {
 
   onAll() {
 
+  }
+
+  onFilter(filter: number) {
+    this.filter = filter;
+  }
+
+  onWatchNotification(notification: Notification) {
+    this.watchSubject = notification;
+    this.isOnWatch = true;
+  }
+
+  onBackToInbox() {
+    this.isOnWatch = false;
+  }
+
+  isFilterOn(filter: number): boolean {
+    return this.filter == filter;
   }
 
   getAuthorAvatar(notification: Notification) {
