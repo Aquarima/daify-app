@@ -1,8 +1,13 @@
 export interface SystemAlert {
-  type: AlertType | AlertType.ERROR,
-  message: string | 'Ugh an error occurred...'
+  type: AlertType | AlertType.ERROR;
+  title: string | 'Oops...';
+  message: string | 'Ugh an error occurred...';
 }
 
 export enum AlertType {
-  INFO = 'info', WARN = 'warn', SUCCESS = 'success', ERROR = 'error'
+  NONE = 0,
+  INFO = 1,
+  WARN = 2,
+  SUCCESS = 3,
+  ERROR = 4
 }

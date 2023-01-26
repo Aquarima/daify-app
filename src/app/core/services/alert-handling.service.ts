@@ -12,8 +12,8 @@ export class AlertHandlingService {
 
   constructor() { }
 
-  throwAlert(type: AlertType, message: string) {
-    this.subject.next({type: type, message: message});
+  throwAlert(type: AlertType, title: string, message: string) {
+    this.subject.next({type: type, title, message: message});
   }
 
   get alert(): Observable<SystemAlert> {

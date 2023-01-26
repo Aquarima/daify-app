@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
 import {SystemAlert} from "../../../core";
+import {AlertType} from "../../../core/models/system-alert";
 
 @Component({
   selector: 'dfy-alert-box',
@@ -10,7 +11,7 @@ export class AlertBoxComponent implements OnInit, AfterViewInit {
 
   @Output('closeEvent') closeEvent: EventEmitter<void> = new EventEmitter();
 
-  alert: SystemAlert = {} as SystemAlert;
+  alert: SystemAlert = {type: AlertType.NONE, title: '', message: ''};
 
   constructor(private ref: ElementRef) {
   }
@@ -20,14 +21,26 @@ export class AlertBoxComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.ref.nativeElement.classList.add(`alert-${this.alert.type}`)
+    //this.ref.nativeElement.classList.add(`alert-${this.alert.type}`)
   }
 
   onClose() {
     this.closeEvent.emit();
   }
-}
 
-export enum AlertType {
-  INFO, WARN, ERROR
+  isInfo() {
+    return this.alert.type === AlertType.INFO;
+  }
+
+  isSuccess() {
+    return this.alert.type === AlertType.SUCCESS;
+  }
+
+  isWarn() {
+    return this.alert.type === AlertType.WARN;
+  }
+
+  isError() {
+    return this.alert.type === AlertType.ERROR;
+  }
 }

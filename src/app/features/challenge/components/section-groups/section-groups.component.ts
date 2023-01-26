@@ -31,7 +31,7 @@ export class SectionGroupsComponent implements OnInit {
     this.section.subscribe(val => {
       this.groupService.getGroupsByChallenge(this.challenge.id).subscribe({
         next: (data: any) => this.groups = data.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch groups'),
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
       })
     })
   }

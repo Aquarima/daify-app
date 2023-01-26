@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           cRef.destroy();
           this.isAlertDisplayed = false;
-        }, 16000);
+        }, 20000);
         this.isAlertDisplayed = true;
       })
     const loggedUserId = localStorage.getItem('logged_user_id');

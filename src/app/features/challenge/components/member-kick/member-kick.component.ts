@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Member} from "../../../../core/models/challenge/member.model";
 import {FormControl} from "@angular/forms";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'app-member-kick',
@@ -26,8 +27,8 @@ export class MemberKickComponent implements OnInit {
   }
 
   onKick() {
-    this.closeEvent.emit();
     this.kickEvent.emit(this.reason.value);
+    this.closeEvent.emit();
   }
 
   get nickname(): string {
