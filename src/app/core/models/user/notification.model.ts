@@ -5,6 +5,7 @@ export interface Notification {
     sender: Profile;
     title: string;
     message: string;
+    followed: boolean,
     read: boolean;
     sentAt: Date;
 }
