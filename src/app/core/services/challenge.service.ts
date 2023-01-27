@@ -17,6 +17,14 @@ export class ChallengeService {
 
   constructor(private http: HttpClient) { }
 
+  createChallenge(challenge: Challenge) {
+    return this.http.post<any>(`${env.apiUrl}/challenge/create`, challenge);
+  }
+
+  updateChallenge(challenge: Challenge) {
+    return this.http.put<any>(`${env.apiUrl}/challenge/${challenge.id}/update`, challenge);
+  }
+
   getChallenges(page?: number, size?: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge?size=${size  || 32}&page=${page || 0}`);
   }
@@ -31,10 +39,6 @@ export class ChallengeService {
 
   getChallengesById(id: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge/${id}`);
-  }
-
-  createChallenge(challenge: Challenge) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/create`, challenge);
   }
 
   getColorByTag(title: string): string {
