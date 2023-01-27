@@ -1,0 +1,49 @@
+:host {
+  width: 100%;
+
+  > div {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: var(--preset-font-size-small);
+    animation: appears-disappears 20s;
+
+    @keyframes appears-disappears {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0;
+      }
+    }
+  }
+
+  .info {
+    border: 1px solid rgba(var(--color-semantic-info), .7);
+    background-color: rgba(var(--color-semantic-info), .12);
+    color: rgba(var(--color-semantic-info), .7);
+  }
+
+  .warn {
+    border: 1px solid rgba(var(--color-semantic-warn), .7);
+    background-color: rgba(var(--color-semantic-warn), .12);
+    color: rgba(var(--color-semantic-warn), .7);
+  }
+
+  .error {
+    border: 1px solid rgba(var(--color-semantic-error), .7);
+    background-color: rgba(var(--color-semantic-error), .12);
+    color: rgba(var(--color-semantic-error), .7);
+  }
+
+  .success {
+    border: 1px solid rgba(var(--color-semantic-success), .7);
+    background-color: rgba(var(--color-semantic-success), .12);
+    color: rgba(var(--color-semantic-success), .7);
+  }
+}

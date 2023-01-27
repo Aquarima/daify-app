@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {CookieService} from "ngx-cookie";
@@ -12,7 +12,6 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   @ViewChild('login_error') errorMessageLabel!: ElementRef;
-  @ViewChildren("text_input") textInputs!: QueryList<ElementRef>;
 
   loginForm = new FormGroup({
     username: new FormControl(''),

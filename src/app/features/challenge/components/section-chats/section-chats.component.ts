@@ -55,7 +55,7 @@ export class SectionChatsComponent implements OnInit {
             this.onChannelSelected(this.channelCache[0]);
           }
         },
-        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, err),
+        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
       })
   }
 
@@ -106,7 +106,7 @@ export class SectionChatsComponent implements OnInit {
           this.messageCache.set(channel, this.messages = msg.content);
           //this.scrollToNewestMessage();
         },
-        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, err),
+        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
       })
   }
 

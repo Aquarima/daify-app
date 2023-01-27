@@ -20,6 +20,9 @@
   }
 
   .popup-head {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
 
     .popup-head-title {
       font-weight: 600;
@@ -28,7 +31,6 @@
     }
 
     .popup-head-description {
-      margin-top: 16px;
       line-height: 20px;
       font-size: var(--preset-font-size-small);
       color: var(--color-text-alt);

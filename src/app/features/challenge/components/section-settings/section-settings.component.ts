@@ -32,6 +32,7 @@ export class SectionSettingsComponent implements OnInit {
         endAt: new FormControl<Date>(new Date()),
         capacity: new FormControl<number>(2),
         groupSize: new FormControl<number>(2),
+        leaderboardBeforeStart: new FormControl<boolean>(true),
         spectatorsAllowed: new FormControl<boolean>(false),
         depositsMin: new FormControl<number>(1),
         depositsMax: new FormControl<number>(1)
@@ -60,6 +61,7 @@ export class SectionSettingsComponent implements OnInit {
         this.challengeForm.controls['endAt'].setValue(config.endAt);
         this.challengeForm.controls['capacity'].setValue(config.capacity);
         this.challengeForm.controls['groupSize'].setValue(config.groupSize);
+        this.challengeForm.controls['leaderboardBeforeStart'].setValue(config.leaderboardBeforeStart);
         this.challengeForm.controls['spectatorsAllowed'].setValue(config.spectatorsAllowed);
         this.initialChallengeForm = this.challengeForm.value;
     }

@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, OrderByChallengePipe} from './pipes';
-import {AlertBoxComponent, InboxComponent} from "./components";
-import {SelectComponent} from './components/select/select.component';
+import {AlertBoxComponent, CustomSelectComponent, InboxComponent} from "./components";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CustomCheckboxComponent, CustomSliderComponent} from './components';
+import { NotificationPipe } from './pipes/notification.pipe';
+import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
 
 @NgModule({
     declarations: [
@@ -13,9 +14,11 @@ import {CustomCheckboxComponent, CustomSliderComponent} from './components';
         ChallengeFilterPipe,
         InboxComponent,
         AlertBoxComponent,
-        SelectComponent,
+        CustomSelectComponent,
         CustomCheckboxComponent,
-        CustomSliderComponent
+        CustomSliderComponent,
+        NotificationPipe,
+        ValidationMessageComponent
     ],
     imports: [
         CommonModule,
@@ -26,9 +29,10 @@ import {CustomCheckboxComponent, CustomSliderComponent} from './components';
         OrderByChallengePipe,
         InboxComponent,
         AlertBoxComponent,
-        SelectComponent,
+        CustomSelectComponent,
         CustomCheckboxComponent,
-        CustomSliderComponent
+        CustomSliderComponent,
+        ValidationMessageComponent
     ]
 })
 export class SharedModule {

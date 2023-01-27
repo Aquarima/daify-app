@@ -49,7 +49,7 @@ export class ChallengeComponent implements OnInit {
               error: () => alert('Error')
             })
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Could not fetch challenge'),
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
       })
     })
     this.route.paramMap.subscribe(params => {

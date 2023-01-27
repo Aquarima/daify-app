@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl} from "@angular/forms";
 
 @Component({
@@ -6,7 +6,7 @@ import {AbstractControl} from "@angular/forms";
   templateUrl: './custom-slider.component.html',
   styleUrls: ['./custom-slider.component.scss']
 })
-export class CustomSliderComponent implements OnInit {
+export class CustomSliderComponent implements OnInit, AfterViewInit {
 
   @Input() min: number = 1;
   @Input() max: number = 1;
@@ -20,6 +20,10 @@ export class CustomSliderComponent implements OnInit {
 
   ngOnInit() {
     this.control.valueChanges.subscribe(value => this.updateCursorPosition(value ? value : this.min));
+  }
+
+  ngAfterViewInit() {
+    this.updateCursorPosition(this.control.value || this.min);
   }
 
   @HostListener('document:mouseup')
@@ -42,14 +46,6 @@ export class CustomSliderComponent implements OnInit {
     const value = this.min + (this.max - this.min) * cursorLeft / (barWidth - cursorWidth);
     this.control.setValue(Math.round(value / this.step) * this.step);
     cursor.style.left = cursorLeft + 'px';
-  }
-
-  private calculateCursorPosition(value: number) {
-    const cursor = this.cursorNode.nativeElement;
-    const bar = this.barNode.nativeElement;
-    const barWidth = bar.offsetWidth;
-    const cursorWidth = cursor.offsetWidth;
-    return this.clamp((value - this.min) * (barWidth - cursorWidth) / (this.max - this.min), 0, barWidth - cursorWidth);
   }
 
   startMove(event: MouseEvent) {

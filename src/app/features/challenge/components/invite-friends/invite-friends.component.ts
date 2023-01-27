@@ -66,7 +66,7 @@ export class InviteFriendsComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   onCopyInvite() {
-    navigator.clipboard.writeText(this.invite).then(r => this.alertHandlingService.throwAlert(AlertType.SUCCESS, 'Invite link copied!'));
+    navigator.clipboard.writeText(this.invite).then(r => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``));
   }
 
   onInviteJoinType(joinType: JoinType) {
