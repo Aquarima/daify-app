@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
+import {AccessType, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
@@ -27,6 +27,7 @@ export class SectionSettingsComponent implements OnInit {
         title: new FormControl<string>(''),
         description: new FormControl<string>(''),
         theme: new FormControl<string>(''),
+        accessType: new FormControl<AccessType>(AccessType.FREE),
         startAt: new FormControl<Date>(new Date()),
         endAt: new FormControl<Date>(new Date()),
         capacity: new FormControl<number>(2),
@@ -54,6 +55,7 @@ export class SectionSettingsComponent implements OnInit {
         this.challengeForm.controls['title'].setValue(challenge.title);
         this.challengeForm.controls['description'].setValue(challenge.description);
         this.challengeForm.controls['theme'].setValue(challenge.theme);
+        this.challengeForm.controls['accessType'].setValue(config.accessType);
         this.challengeForm.controls['startAt'].setValue(config.startAt);
         this.challengeForm.controls['endAt'].setValue(config.endAt);
         this.challengeForm.controls['capacity'].setValue(config.capacity);
@@ -87,6 +89,7 @@ export class SectionSettingsComponent implements OnInit {
         this.challenge.title = `${this.challengeForm.controls.title.value}`;
         this.challenge.description = `${this.challengeForm.controls.description.value}`;
         this.challenge.theme = `${this.challengeForm.controls.theme.value}`;
+        this.challenge.config.accessType = this.challengeForm.controls.accessType.value || AccessType.FREE;
         this.challenge.config.startAt = new Date(`${this.challengeForm.controls.startAt.value}`);
         this.challenge.config.endAt = new Date(`${this.challengeForm.controls.endAt.value}`);
         this.challenge.config.capacity = this.challengeForm.controls.capacity.value || 2;
@@ -143,7 +146,10 @@ export class SectionSettingsComponent implements OnInit {
         return this.currentSection === index;
     }
 
-    get controls() {
-        return this.challengeForm.controls;
+    get accessTypes(): { key: string, value: any }[] {
+        return [{key: 'FREE', value: AccessType.FREE},
+            {key: 'ON REQUEST', value: AccessType.ON_REQUEST},
+            {key: 'FRIENDS ONLY', value: AccessType.FRIENDS_ONLY},
+            {key: 'CODE', value: AccessType.CODE}];
     }
 }

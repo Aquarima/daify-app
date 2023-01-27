@@ -1,0 +1,11 @@
+<div class="user-input user-input-active">
+    <div class="user-input-box">
+        <label>{{label}}</label>
+        <p class="selection" (click)="setOptionsVisible(!optionsVisible)">{{selection}}</p>
+        <ul class="select-options" #sections *ngIf="optionsVisible">
+            <li *ngFor="let item of data">
+                <span (mousedown)="onItemSelected(item)" *ngIf="isNotSelected(item.key)">{{item.key}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
