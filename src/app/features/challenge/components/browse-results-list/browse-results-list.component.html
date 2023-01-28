@@ -1,6 +1,6 @@
 <div class="content" #winref>
   <div class="found-themes">
-    <span #found_tag [ngClass]="{'tag-selected': theme === filterTag}"
+    <span #found_tag [ngClass]="{'theme-selected': theme === filterTag}"
           [ngStyle]="{'background-color': getThemeColor(theme)}"
           *ngFor="let theme of challenges | challengeThemesCollector" (click)="onThemeSelected(theme)">#{{theme}}</span>
   </div>
