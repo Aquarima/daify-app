@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService, ChallengeService, Friend, Profile} from 'src/app/core';
 import {FriendService} from 'src/app/core/services/friend.service';
@@ -11,6 +11,8 @@ import {AlertHandlingService} from "../../../../core/services/alert-handling.ser
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+  @ViewChild('sections') sections!: ElementRef;
 
   profile: Profile | undefined;
   friends: Profile[] = [];
@@ -37,6 +39,14 @@ export class ProfileComponent implements OnInit {
         });
     })
   }
+  onMenuLeft() {
+    this.sections.nativeElement.scrollLeft -= 100;
+  }
+
+  onMenuRight() {
+    this.sections.nativeElement.scrollLeft += 100;
+  }
+
 
   onAbout() {
     this.section = 0;
@@ -112,7 +122,7 @@ export class ProfileComponent implements OnInit {
   }
 
   get banner(): string {
-    return this.profile?.bannerUrl || '/assets/challenge_cover_placeholder.svg';
+    return this.profile?.bannerUrl || '/assets/user_banner_placeholder.svg';
   }
 
   get avatar(): string | undefined {

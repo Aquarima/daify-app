@@ -158,7 +158,7 @@
       }
 
       .center {
-        margin: 64px 0;
+        margin: 32px 0;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -168,10 +168,34 @@
         .profile-sections {
           width: 100%;
           height: 80px;
+          display: flex;
+          justify-content: space-between;
           overflow: hidden;
           box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
           border-radius: 16px;
           background-color: #FFF;
+
+          .profile-sections-nav-scroll-btn {
+            width: 32px;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+
+            &:hover {
+
+              svg {
+                fill: var(--color-text-alt);
+              }
+            }
+
+            svg {
+              fill: var(--color-text-alt-2);
+            }
+          }
 
           ul {
             width: 94%;
