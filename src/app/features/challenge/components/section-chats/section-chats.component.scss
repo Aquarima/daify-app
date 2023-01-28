@@ -49,7 +49,7 @@
     background-color: #FFF;
 
     .chat-box-messages {
-      margin:  16px 8px 8px 8px;
+      margin: 16px 8px 8px 8px;
       height: 100%;
       overflow: hidden;
       border: 1px solid rgba(222, 222, 234, .5);
@@ -74,6 +74,16 @@
         align-items: center;
         gap: 16px;
         border-radius: 8px;
+
+        &:hover {
+
+          .message-head {
+
+            .message-head-options {
+              opacity: 1;
+            }
+          }
+        }
 
         > div {
           display: flex;
@@ -146,6 +156,36 @@
             font-size: var(--preset-font-size-small);
             color: var(--color-text-alt);
           }
+
+          .message-head-options {
+            display: flex;
+            column-gap: 4px;
+            opacity: 0;
+
+            button {
+              margin-bottom: 2px;
+              width: 16px;
+              height: 16px;
+              border: none;
+              background-color: transparent;
+              cursor: pointer;
+
+              svg {
+                width: 16px;
+                height: 16px;
+                fill: #DEDEEA;
+                transition: fill .8s;
+              }
+            }
+
+            .message-head-options-delete svg:hover {
+              fill: rgb(var(--color-semantic-error));
+            }
+
+            .message-head-options-report svg:hover {
+              fill: rgb(var(--color-semantic-warn));
+            }
+          }
         }
 
         .message-content {
@@ -189,6 +229,10 @@
 
         .message-head {
           justify-content: flex-end;
+
+          .message-head-options {
+            margin-right: 4px;
+          }
         }
 
         .message-content {
