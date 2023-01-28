@@ -14,6 +14,10 @@ export class MessageService {
     return this.http.post<any>(`${env.apiUrl}/challenge/channel/${channelId}/message/send`, message);
   }
 
+  deleteMessage(message: Message) {
+    return this.http.delete<any>(`${env.apiUrl}/challenge/channel/message/${message.id}/delete`);
+  }
+
   getMessagesByChannel(channelId: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge/channel/${channelId}/message?order=desc`);
   }
