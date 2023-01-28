@@ -87,6 +87,18 @@ export class SectionChatsComponent implements OnInit {
     })
   }
 
+  onDeleteMessage(message: Message) {
+    this.messageService.deleteMessage(message)
+      .subscribe({
+        next: () => this.messages.splice(this.messages.indexOf(message), 1),
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+      })
+  }
+
+  onReportMessage(message: Message) {
+    // TODO
+  }
+
   private scrollToNewestMessage() {
     this.messagesNode.nativeElement.scrollIntoView({
       behavior: "smooth",
