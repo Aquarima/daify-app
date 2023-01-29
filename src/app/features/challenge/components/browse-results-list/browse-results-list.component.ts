@@ -73,4 +73,8 @@ export class BrowseResultsListComponent implements OnInit {
       }, 1000);
     }
   }
+
+  getThemeCount(theme: string): number {
+    return this.challenges.filter(challenge => challenge.theme === theme).length;
+  }
 }
