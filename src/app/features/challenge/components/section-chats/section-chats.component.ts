@@ -20,7 +20,7 @@ export class SectionChatsComponent implements OnInit {
 
   @ViewChild('messages_node') messagesNode!: ElementRef;
 
-  @Input() section!: Observable<number>;
+  @Input() section!: Observable<string>;
   @Input() challenge!: Challenge;
   @Input() selfMember: Member | undefined;
 

@@ -56,10 +56,32 @@
 
         .challenge-preview-info-short-title {
           margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          column-gap: 8px;
           line-height: 20px;
           font-weight: 600;
           font-size: var(--preset-font-size-normal);
           color: var(--color-text);
+
+          .challenge-preview-share {
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;
+
+            &:hover {
+              background-color: rgba(#000000, .050);
+            }
+
+            svg {
+              width: 100%;
+              height: 100%;
+              fill: var(--color-text);
+            }
+          }
         }
 
         .challenge-preview-info-short-author {

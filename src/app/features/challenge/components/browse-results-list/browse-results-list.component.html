@@ -1,8 +1,8 @@
 <div class="content" #winref>
   <div class="found-themes">
-    <span #found_tag [ngClass]="{'theme-selected': theme === filterTag}"
+    <p #found_tag [ngClass]="{'theme-selected': theme === filterTag}"
           [ngStyle]="{'background-color': getThemeColor(theme)}"
-          *ngFor="let theme of challenges | challengeThemesCollector" (click)="onThemeSelected(theme)">#{{theme}} ({{getThemeCount(theme)}})</span>
+          *ngFor="let theme of challenges | challengeThemesCollector" (click)="onThemeSelected(theme)">#{{theme}} <span class="theme-selected-count">({{getThemeCount(theme)}})</span></p>
   </div>
   <div class="items display-{{displayMode}}">
     <dfy-challenge-card class="{{displayMode}}-cell"

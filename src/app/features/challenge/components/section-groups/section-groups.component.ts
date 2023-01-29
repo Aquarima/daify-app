@@ -15,7 +15,7 @@ import {Member} from "../../../../core/models/challenge/member.model";
 })
 export class SectionGroupsComponent implements OnInit {
 
-  @Input() section!: Observable<number>;
+  @Input() section!: Observable<string>;
   @Input() challenge!: Challenge;
   @Input() members!: Member[];
 

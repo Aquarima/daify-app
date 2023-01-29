@@ -24,17 +24,22 @@
         filter: brightness(90%);
       }
 
-      span {
+      p {
         padding: 8px 12px;
         display: flex;
         justify-content: center;
         align-items: center;
+        column-gap: 4px;
         border-radius: 4px;
         background-color: var(--color-tertiary);
         font-weight: 500;
         font-size: var(--preset-font-size-small);
         color: #FFF;
         cursor: pointer;
+
+        .theme-selected-count {
+          font-size: var(--preset-font-size-tiny);
+        }
       }
     }
 
