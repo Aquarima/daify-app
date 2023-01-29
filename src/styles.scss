@@ -249,8 +249,8 @@ html {
     position: absolute;
     top: -100%;
     left: 50%;
-    transform: translate(-50%, -8px);
-    z-index: 1;
+    transform: translate(-50%, 0);
+    z-index: 99;
     display: none;
     border-radius: 8px;
     background-color: #353536;
