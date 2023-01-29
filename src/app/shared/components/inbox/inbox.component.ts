@@ -4,6 +4,7 @@ import {AuthService, Notification, Profile} from "../../../core";
 import {AlertHandlingService} from "../../../core/services/alert-handling.service";
 import {AlertType} from "../../../core/models/system-alert";
 import {DomSanitizer} from "@angular/platform-browser";
+import {TimeHelper} from "../../../core/helpers";
 
 @Component({
     selector: 'dfy-inbox',
@@ -22,7 +23,7 @@ export class InboxComponent implements OnInit {
 
     constructor(private alertHandlingService: AlertHandlingService,
                 private authService: AuthService,
-                private notificationService: NotificationService, public san: DomSanitizer) {
+                private notificationService: NotificationService, public san: DomSanitizer, private timeHelper: TimeHelper) {
     }
 
     ngOnInit(): void {
@@ -109,25 +110,6 @@ export class InboxComponent implements OnInit {
     }
 
     getTimeSince(notification: Notification): string {
-        const date = new Date(notification.sentAt);
-        const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-
-        const intervals = [
-            {label: "y", amount: 31536000},
-            {label: "m", amount: 2592000},
-            {label: "w", amount: 604800},
-            {label: "d", amount: 86400},
-            {label: "h", amount: 3600},
-            {label: "m", amount: 60},
-            {label: "s", amount: 1}
-        ];
-
-        for (let i = 0; i < intervals.length; i++) {
-            const interval = Math.floor(seconds / intervals[i].amount);
-            if (interval >= 1) {
-                return interval + intervals[i].label;
-            }
-        }
-        return "just now";
+        return this.timeHelper.getTimeSince(new Date(notification.sentAt));
     }
 }
