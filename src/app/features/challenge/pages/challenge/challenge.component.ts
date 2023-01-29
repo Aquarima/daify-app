@@ -3,9 +3,10 @@ import {AuthService, Challenge, ChallengeService} from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, forkJoin, of, switchMap} from "rxjs";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
+import {ChallengeShareComponent} from "../../components";
 
 @Component({
   selector: 'app-challenge',
@@ -18,7 +19,7 @@ export class ChallengeComponent implements OnInit {
   @ViewChild('messages_box') messagesBox!: ElementRef;
   @ViewChild('challenge_box') challengeBox!: ElementRef;
 
-  section: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  section: BehaviorSubject<string> = new BehaviorSubject<string>('overview');
   challenge: Challenge = {} as Challenge;
   members: Member[] = [];
   selfMember: Member | undefined = undefined;
@@ -35,39 +36,31 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.challengeService.getChallengesById(params['id']).subscribe({
-        next: data => {
-          this.challenge = data;
-          this.memberService.getMemberByProfileId(this.challenge, this.authService.user.profile)
-            .subscribe({
-              next: (member: any) => this.selfMember = member
-            })
-          this.memberService.getMembersByChallenge(this.challenge)
-            .subscribe({
-              next: (members: any) => this.members = members.content,
-              error: () => alert('Error')
-            })
-        },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
-      })
-    })
-    this.route.paramMap.subscribe(params => {
-      switch (params.get('tab')) {
-        case 'chats':
-          this.onChats();
-          break;
-        case 'groups':
-          this.onGroups();
-          break;
-        case 'leaderboard':
-          this.onLeaderboard();
-          break;
-        case 'settings':
-          this.onSettings();
-          break;
-      }
+    this.route.params.pipe(
+      switchMap(params => this.challengeService.getChallengesById(params['id'])),
+      switchMap(challenge =>
+        forkJoin([
+          of(challenge),
+          this.memberService.getMemberByProfileId(challenge, this.authService.user.profile),
+          this.memberService.getMembersByChallenge(challenge)
+        ])
+      )
+    ).subscribe({
+      next: ([challenge, selfMember, membersResponse]) => {
+        this.challenge = challenge;
+        this.selfMember = selfMember;
+        this.members = membersResponse.content;
+      },
+      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
     });
+    this.route.paramMap.subscribe(params => this.isOnSection(params.get('tab') || 'overview'));
+  }
+
+  onShare() {
+    const componentRef = this.viewContainerRef.createComponent(ChallengeShareComponent);
+    const instance = componentRef.instance;
+    instance.challenge = this.challenge;
+    instance.closeEvent.subscribe(_ => componentRef.destroy());
   }
 
   onMenuLeft() {
@@ -78,32 +71,32 @@ export class ChallengeComponent implements OnInit {
     this.sections.nativeElement.scrollLeft += 100;
   }
 
-  onNavigate(section: number, tab: string) {
+  onNavigate(section: string) {
     this.section.next(section);
-    this.router.navigate(['/app/challenge', this.challenge.id, tab]);
+    this.router.navigate(['/app/challenge', this.challenge.id, section]);
   }
 
   onOverview() {
-    this.onNavigate(0, 'overview');
+    this.onNavigate('overview');
   }
 
   onChats() {
-    this.onNavigate(1, 'chats');
+    this.onNavigate('chats');
   }
 
   onGroups() {
-    this.onNavigate(2, 'groups');
+    this.onNavigate('groups');
   }
 
   onLeaderboard() {
-    this.onNavigate(3, 'leaderboard');
+    this.onNavigate('leaderboard');
   }
 
   onSettings() {
-    this.onNavigate(4, 'settings');
+    this.onNavigate('settings');
   }
 
-  isOnSection(section: number) {
+  isOnSection(section: string) {
     return this.section.value === section;
   }
 

@@ -20,6 +20,7 @@ import {CoreModule} from 'src/app/core/core.module';
 import {SharedModule} from 'src/app/shared/shared.module';
 import {CreateGroupComponent} from './components/create-group/create-group.component';
 import { MemberKickComponent } from './components/member-kick/member-kick.component';
+import { ChallengeShareComponent } from './components/challenge-share/challenge-share.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MemberKickComponent } from './components/member-kick/member-kick.compon
     SectionChatsComponent,
     SectionLeaderboardComponent,
     SectionSettingsComponent,
-    MemberKickComponent
+    MemberKickComponent,
+    ChallengeShareComponent
   ],
   imports: [
     CommonModule,
