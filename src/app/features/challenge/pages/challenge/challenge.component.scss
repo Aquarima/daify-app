@@ -50,12 +50,13 @@
       }
 
       .challenge-preview-info-short {
-        margin: 0 0 0 24px;
+        margin: 0 24px;
         width: fit-content;
         position: relative;
 
         .challenge-preview-info-short-title {
           margin-bottom: 8px;
+          line-height: 20px;
           font-weight: 600;
           font-size: var(--preset-font-size-normal);
           color: var(--color-text);

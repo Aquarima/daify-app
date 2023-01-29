@@ -1,9 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService, ChallengeService, Friend, Profile} from 'src/app/core';
+import {AuthService, Challenge, ChallengeService, Friend, Profile, Search} from 'src/app/core';
 import {FriendService} from 'src/app/core/services/friend.service';
 import {ProfileService} from 'src/app/core/services/profile.service';
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {TimeHelper} from "../../../../core/helpers";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'dfy-profile',
@@ -13,6 +15,8 @@ import {AlertHandlingService} from "../../../../core/services/alert-handling.ser
 export class ProfileComponent implements OnInit {
 
   @ViewChild('sections') sections!: ElementRef;
+
+  searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
 
   profile: Profile | undefined;
   friends: Profile[] = [];
@@ -25,7 +29,7 @@ export class ProfileComponent implements OnInit {
     private challengeService: ChallengeService,
     private friendService: FriendService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private timeHelper: TimeHelper) {
   }
 
   ngOnInit(): void {
@@ -39,6 +43,7 @@ export class ProfileComponent implements OnInit {
         });
     })
   }
+
   onMenuLeft() {
     this.sections.nativeElement.scrollLeft -= 100;
   }
@@ -60,11 +65,16 @@ export class ProfileComponent implements OnInit {
   }
 
   onChallenges() {
-    this.section = 2;
+    this.section = 2
+    if (!this.profile) return;
   }
 
   onBadges() {
     this.section = 3;
+  }
+
+  isOnSection(section: number) {
+    return this.section === section;
   }
 
   isSelfProfile(): boolean {
@@ -83,49 +93,17 @@ export class ProfileComponent implements OnInit {
     return new Intl.DisplayNames(['en'], {type: 'region'}).of(name || '') || '';
   }
 
-  toLiteralDelayFrom(from?: Date) {
-    if (!from) return;
-    const now = new Date();
-    const date = new Date(from);
-    const time = date.getTime();
-    const dateRef = new Date();
-
-    dateRef.setUTCHours(0, 0, 0);
-    if (dateRef.getTime() <= time) return 'Today';
-
-    dateRef.setUTCDate(dateRef.getUTCDate() - 1);
-    if (dateRef.getTime() <= time) return 'Yesterday';
-
-    const day = 24 * 60 * 60 * 1000;
-
-    dateRef.setUTCDate(dateRef.getUTCDate() - 6);
-    if (dateRef.getTime() <= time) return `${7 - Math.floor((time - dateRef.getTime()) / day)}d ago`;
-
-    const daySinceMonday = (now.getUTCDay() + 6) % 7;
-    dateRef.setUTCDate(dateRef.getUTCDate() - daySinceMonday);
-    if (dateRef.getTime() <= time) return 'Last week';
-
-    dateRef.setUTCDate(dateRef.getUTCDate() - 7 * 3);
-    if (dateRef.getTime() <= time) return `${4 - Math.floor((time - dateRef.getTime()) / (day * 7))} weeks ago`;
-
-    const refMonth = now.getUTCMonth();
-    const refYear = now.getUTCFullYear();
-
-    dateRef.setUTCFullYear(refYear, refMonth - 1, 1);
-    if (dateRef.getTime() <= time) return 'Last month';
-
-    const dateMonth = date.getUTCMonth();
-    const dateYear = date.getUTCFullYear();
-    const monthAgo = (dateYear - refYear) * 12 - (dateMonth - refMonth) - 1;
-
-    return `${monthAgo} month${monthAgo > 1 ? 's' : ''} ago`;
+  getTimeSince(date?: Date) {
+    if (!date) return 'now';
+    console.log(this.timeHelper.getTimeSince(new Date(date)));
+    return this.timeHelper.getTimeSince(new Date(date), true);
   }
 
   get banner(): string {
     return this.profile?.bannerUrl || '/assets/user_banner_placeholder.svg';
   }
 
-  get avatar(): string | undefined {
+  get avatar(): string {
     return this.profile?.avatarUrl || '/assets/avatar_placeholder.svg';
   }
 

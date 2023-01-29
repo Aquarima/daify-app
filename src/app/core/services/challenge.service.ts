@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
-import {Challenge} from "../models";
+import {Challenge, Profile} from "../models";
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class ChallengeService {
     return this.http.get<any>(`${env.apiUrl}/challenge/title/${title}`);
   }
 
-  getChallengesByUser(userId: number, page?: number, size?: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/author/${userId}?size=${size  || 32}&page=${page || 0}`);
+  getChallengesByProfile(profile: Profile, page?: number, size?: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/author/${profile.id}?size=${size  || 32}&page=${page || 0}`);
   }
 
   getChallengesById(id: number) {

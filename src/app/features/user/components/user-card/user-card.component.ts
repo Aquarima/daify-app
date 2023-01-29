@@ -22,13 +22,11 @@ export class UserCardComponent implements OnInit {
     return this.profile?.socials[name] || '';
   }
 
-  getBanner(): string | undefined {
-    const banner = this.profile?.bannerUrl;
-    return banner === null ? '/assets/challenge_cover_placeholder.svg' : banner;
+  get banner(): string {
+    return this.profile?.bannerUrl || '/assets/user_banner_placeholder.svg';
   }
 
-  getAvatar(): string | undefined {
-    const avatar = this.profile?.avatarUrl;
-    return avatar === null ? '/assets/avatar_placeholder.svg' : avatar;
+  get avatar(): string {
+    return this.profile?.avatarUrl || '/assets/avatar_placeholder.svg';
   }
 }

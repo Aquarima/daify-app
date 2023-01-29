@@ -14,9 +14,9 @@ import {MemberService} from "../../../../core/services/member.service";
 })
 export class ChallengeComponent implements OnInit {
 
+  @ViewChild('sections') sections!: ElementRef;
   @ViewChild('messages_box') messagesBox!: ElementRef;
   @ViewChild('challenge_box') challengeBox!: ElementRef;
-  @ViewChild('sections') sections!: ElementRef;
 
   section: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   challenge: Challenge = {} as Challenge;
