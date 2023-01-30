@@ -1,0 +1,24 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="popup">
+    <div class="popup-head">
+        <h1 class="popup-head-title">Report this user ?</h1>
+        <p class="popup-head-description"></p>
+    </div>
+    <form [formGroup]="reportForm">
+        <dfy-custom-select [control]="reportForm.controls.reportType" [label]="'Report Type'" [data]="reportTypes"></dfy-custom-select>
+        <div class="parameter">
+            <p class="parameter-name">Reason</p>
+            <p class="parameter-description"></p>
+            <div class="user-input">
+                <div class="user-input-box">
+                    <label for="details">Reason</label>
+                    <textarea id="details" class="form-control" rows="5" cols="33" formControlName="details" [customFocus]="'user-input-active'"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="popup-foot">
+        <button (click)="onClose()">Cancel</button>
+        <button (click)="onSend()">Kick</button>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, NgZone, OnInit, ViewChild,} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild, ViewContainerRef,} from '@angular/core';
 import {AuthService, Challenge} from "../../../../core";
 import {ChannelService} from "../../../../core/services/channel.service";
 import {MessageService} from "../../../../core/services/message.service";
@@ -10,6 +10,7 @@ import {Member} from "../../../../core/models/challenge/member.model";
 import {Observable, timer} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
+import {MemberReportComponent} from "../member-report/member-report.component";
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -40,6 +41,7 @@ export class SectionChatsComponent implements OnInit {
   constructor(
     private ngZone: NgZone,
     private route: ActivatedRoute,
+    private viewContainerRef: ViewContainerRef,
     private alertHandlingService: AlertHandlingService,
     private authService: AuthService,
     private channelService: ChannelService,
@@ -96,7 +98,8 @@ export class SectionChatsComponent implements OnInit {
   }
 
   onReportMessage(message: Message) {
-    // TODO
+    const componentRef = this.viewContainerRef.createComponent(MemberReportComponent);
+    componentRef.instance.closeEvent.subscribe(_ => componentRef.destroy());
   }
 
   private scrollToNewestMessage() {

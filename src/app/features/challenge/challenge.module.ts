@@ -21,6 +21,7 @@ import {SharedModule} from 'src/app/shared/shared.module';
 import {CreateGroupComponent} from './components/create-group/create-group.component';
 import { MemberKickComponent } from './components/member-kick/member-kick.component';
 import { ChallengeShareComponent } from './components/challenge-share/challenge-share.component';
+import { MemberReportComponent } from './components/member-report/member-report.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ChallengeShareComponent } from './components/challenge-share/challenge-
     SectionLeaderboardComponent,
     SectionSettingsComponent,
     MemberKickComponent,
-    ChallengeShareComponent
+    ChallengeShareComponent,
+    MemberReportComponent
   ],
   imports: [
     CommonModule,
