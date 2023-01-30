@@ -1,10 +1,13 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'dfy-custom-select',
   templateUrl: './custom-select.component.html',
-  styleUrls: ['./custom-select.component.scss']
+  styleUrls: ['./custom-select.component.scss'],
+  host: {
+    '[class.unfolded]': 'optionsVisible == true'
+  }
 })
 export class CustomSelectComponent implements OnInit {
 
@@ -37,6 +40,12 @@ export class CustomSelectComponent implements OnInit {
   isNotSelected(key: string) {
     return this.selection !== key;
   }
+
+  @HostListener('click', ['$event'])
+  onSelectMenu(event: MouseEvent) {
+    this.setOptionsVisible(!this.optionsVisible);
+  }
+
 
   setOptionsVisible(visible: boolean) {
     this.optionsVisible = visible;
