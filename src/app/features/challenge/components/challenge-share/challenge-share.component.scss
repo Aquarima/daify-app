@@ -87,6 +87,19 @@
     }
   }
 
+  .invite-link-reset-btn {
+    margin-left: 4px;
+    border: none;
+    background-color: transparent;
+    font-size: var(--preset-font-size-tiny);
+    color: var(--color-primary-hover);
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .popup-foot {
     display: flex;
     justify-content: center;

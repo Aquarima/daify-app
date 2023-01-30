@@ -25,6 +25,10 @@ export class ChallengeService {
     return this.http.put<any>(`${env.apiUrl}/challenge/${challenge.id}/update`, challenge);
   }
 
+  refreshChallengeInvite(challenge: Challenge) {
+    return this.http.get(`${env.apiUrl}/challenge/${challenge.id}/invite/refresh`);
+  }
+
   getChallenges(page?: number, size?: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge?size=${size  || 32}&page=${page || 0}`);
   }
