@@ -415,3 +415,13 @@
     }
   }
 }
+
+@media all and (max-width: 1300px) {
+
+  :host {
+
+    .public-info-box {
+      width: 100% !important;
+    }
+  }
+}
