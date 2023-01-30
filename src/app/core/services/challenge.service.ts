@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
 import {Challenge, Profile} from "../models";
+import {Member} from "../models/challenge/member.model";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class ChallengeService {
 
   refreshChallengeInvite(challenge: Challenge) {
     return this.http.get(`${env.apiUrl}/challenge/${challenge.id}/invite/refresh`);
+  }
+
+  transferChallengeOwnership(challenge: Challenge, to: Member) {
+    return this.http.put(`${env.apiUrl}/challenge/${challenge.id}/transfer/${to.id}`, {});
   }
 
   getChallenges(page?: number, size?: number) {
