@@ -53,7 +53,7 @@ export class ChallengeComponent implements OnInit {
       },
       error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
     });
-    this.route.paramMap.subscribe(params => this.isOnSection(params.get('tab') || 'overview'));
+    this.route.paramMap.subscribe(params => this.onNavigate(params.get('tab') || 'overview'));
   }
 
   onShare() {

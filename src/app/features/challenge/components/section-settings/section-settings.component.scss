@@ -138,7 +138,7 @@
         }
 
         .number-input-box {
-          width: 156px!important;
+          width: 156px !important;
         }
 
         .user-input-box {
@@ -169,27 +169,6 @@
             border-radius: 50%;
           }
 
-          button {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            border-radius: 50%;
-            background-color: transparent;
-            cursor: pointer;
-
-            &:hover {
-              background-color: rgba(var(--color-semantic-error), .1);
-            }
-
-            svg {
-              width: 20px;
-              height: 20px;
-            }
-          }
-
           .section-members-list-item-names {
             display: flex;
             flex-direction: column;
@@ -214,6 +193,27 @@
 
           .section-members-list-item-actions {
 
+            button {
+              width: 24px;
+              height: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: none;
+              border-radius: 50%;
+              background-color: transparent;
+              cursor: pointer;
+
+              &:hover {
+                background-color: rgba(var(--color-semantic-error), .1);
+              }
+
+              svg {
+                width: 18px;
+                height: 18px;
+              }
+            }
+
             .section-members-list-item-actions-ban svg {
               fill: none;
               stroke: rgb(var(--color-semantic-error));
@@ -221,6 +221,17 @@
 
             .section-members-list-item-actions-kick svg {
               fill: rgb(var(--color-semantic-error));
+            }
+
+            .section-members-list-item-actions-transfer {
+
+              &:hover {
+                background-color: rgba(var(--color-semantic-warning), .1);
+              }
+
+              svg {
+                fill: rgb(var(--color-semantic-warning));
+              }
             }
           }
         }
