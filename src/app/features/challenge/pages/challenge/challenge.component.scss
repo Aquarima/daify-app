@@ -125,6 +125,7 @@
         align-items: center;
         background-color: #F3CB48;
         color: #FFF;
+        user-select: none;
       }
     }
 
@@ -289,7 +290,7 @@
 
       .challenge-preview {
         width: 100%;
-        height: 180px;
+        height: 220px;
 
         .challenge-preview-banner {
           margin-bottom: 24px;

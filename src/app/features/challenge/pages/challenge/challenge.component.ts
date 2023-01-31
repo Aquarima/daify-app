@@ -3,7 +3,7 @@ import {AuthService, Challenge, ChallengeService} from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {BehaviorSubject, forkJoin, of, switchMap} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {ChallengeShareComponent} from "../../components";
@@ -24,7 +24,6 @@ export class ChallengeComponent implements OnInit {
   members: Member[] = [];
   selfMember: Member | undefined = undefined;
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,23 +35,23 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      switchMap(params => this.challengeService.getChallengesById(params['id'])),
-      switchMap(challenge =>
-        forkJoin([
-          of(challenge),
-          this.memberService.getMemberByProfileId(challenge, this.authService.user.profile),
-          this.memberService.getMembersByChallenge(challenge)
-        ])
-      )
-    ).subscribe({
-      next: ([challenge, selfMember, membersResponse]) => {
-        this.challenge = challenge;
-        this.selfMember = selfMember;
-        this.members = membersResponse.content;
-      },
-      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
-    });
+    this.route.params.subscribe(params => {
+      this.challengeService.getChallengesById(params['id']).subscribe({
+        next: data => {
+          this.challenge = data;
+          this.memberService.getMemberByProfileId(this.challenge, this.authService.user.profile)
+            .subscribe({
+              next: (member: any) => this.selfMember = member
+            })
+          this.memberService.getMembersByChallenge(this.challenge)
+            .subscribe({
+              next: (members: any) => this.members = members.content,
+              error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+            })
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
+      })
+    })
     this.route.paramMap.subscribe(params => this.onNavigate(params.get('tab') || 'overview'));
   }
 

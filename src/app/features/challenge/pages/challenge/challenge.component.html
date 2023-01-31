@@ -21,12 +21,11 @@
         <div class="challenge-preview-info-short-author">
           <img [src]="authorAvatarUrl" alt="">
           <p>By <span class="challenge-preview-info-short-author-username"
-                      [routerLink]="['/app/user/', challenge.author.username]">{{challenge.author.username}}</span></p>
+                      [routerLink]="['/app/user/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
+          </p>
         </div>
       </div>
-      <ng-template>
-        <span class="overview-mode-message" *ngIf="!isMember()">This is an overview</span>
-      </ng-template>
+      <span class="overview-mode-message" *ngIf="!isMember()">This is an overview</span>
       <!--<div class="challenge-preview-info">
          <div class="challenge-preview-info-state">
            <div class="challenge-preview-info-state-access">
