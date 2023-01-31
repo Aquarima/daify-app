@@ -3,7 +3,7 @@ import {AuthService, Challenge, ChallengeService} from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, forkJoin} from "rxjs";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {ChallengeShareComponent} from "../../components";
@@ -35,24 +35,26 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.challengeService.getChallengesById(params['id']).subscribe({
-        next: data => {
-          this.challenge = data;
-          this.memberService.getMemberByProfileId(this.challenge, this.authService.user.profile)
-            .subscribe({
-              next: (member: any) => this.selfMember = member
-            })
-          this.memberService.getMembersByChallenge(this.challenge)
-            .subscribe({
-              next: (members: any) => this.members = members.content,
-              error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-            })
+
+    this.route.paramMap.subscribe(params => {
+
+      const target = params.get('id');
+      if (!target) return;
+      const challengeId: number = parseInt(target);
+
+      forkJoin([
+        this.challengeService.getChallengesById(challengeId),
+        this.memberService.getMembersByChallenge(challengeId)
+      ]).subscribe({
+        next: ([challenge, members]) => {
+          this.challenge = challenge;
+          this.members = members.content;
+          this.selfMember = this.members.filter((m) => m.profile.id === this.authService.user.profile.id)[0];
+          this.onNavigate(params.get('tab') || 'overview');
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
-      })
-    })
-    this.route.paramMap.subscribe(params => this.onNavigate(params.get('tab') || 'overview'));
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
+    });
   }
 
   onShare() {

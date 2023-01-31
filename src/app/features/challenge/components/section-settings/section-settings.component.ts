@@ -7,6 +7,7 @@ import {AlertHandlingService} from "../../../../core/services/alert-handling.ser
 import {AlertType} from "../../../../core/models/system-alert";
 import {MemberKickComponent} from "../member-kick/member-kick.component";
 import {MemberBanishComponent} from "../member-banish/member-banish.component";
+import {ConfirmBoxComponent} from "../../../../shared/components/confirm-box/confirm-box.component";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -84,11 +85,22 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   onTransferOwnership(to: Member) {
-    this.challengeService.transferChallengeOwnership(this.challenge, to)
-      .subscribe({
-        next: () => this.challenge.author = to.profile,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-      })
+    const componentRef = this.viewContainerRef.createComponent(ConfirmBoxComponent);
+    const instance = componentRef.instance;
+    instance.title = `Transfer Ownership to ${this.getMemberNickname(to)} ?`;
+    instance.message = `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)} ? This action cannot be undo.`;
+    instance.cancelEvent.subscribe(() => componentRef.destroy());
+    instance.confirmEvent.subscribe(() => {
+      this.challengeService.transferChallengeOwnership(this.challenge, to)
+        .subscribe({
+          next: () => {
+            this.challenge.author = to.profile;
+            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
+          },
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        })
+      componentRef.destroy();
+    });
   }
 
   onKickMember(member: Member) {

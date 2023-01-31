@@ -1,22 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment as env} from '../../../environments/environment';
 import {HttpClient} from "@angular/common/http";
 import {Member} from "../models/challenge/member.model";
-import {Challenge, Profile} from "../models";
+import {Profile} from "../models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberService {
 
-  constructor(private http: HttpClient) { }
-
-  getMemberByProfileId(challenge: Challenge, profile: Profile) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/member/profile/${profile.id}`);
+  constructor(private http: HttpClient) {
   }
 
-  getMembersByChallenge(challenge: Challenge) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/member`);
+  getMemberByProfileId(challengeId: number, profile: Profile) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member/profile/${profile.id}`);
+  }
+
+  getMembersByChallenge(challengeId: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member`);
   }
 
   banishMember(member: Member, permanent: boolean) {

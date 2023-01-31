@@ -22,6 +22,7 @@ import {CreateGroupComponent} from './components/create-group/create-group.compo
 import { MemberKickComponent } from './components/member-kick/member-kick.component';
 import { ChallengeShareComponent } from './components/challenge-share/challenge-share.component';
 import { MemberReportComponent } from './components/member-report/member-report.component';
+import { MemberBanishComponent } from './components/member-banish/member-banish.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MemberReportComponent } from './components/member-report/member-report.
     SectionSettingsComponent,
     MemberKickComponent,
     ChallengeShareComponent,
-    MemberReportComponent
+    MemberReportComponent,
+    MemberBanishComponent
   ],
   imports: [
     CommonModule,

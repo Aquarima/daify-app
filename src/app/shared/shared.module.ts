@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CustomCheckboxComponent, CustomSliderComponent} from './components';
 import { NotificationPipe } from './pipes/notification.pipe';
 import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
+import { ConfirmBoxComponent } from './components/confirm-box/confirm-box.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { ValidationMessageComponent } from './components/validation-message/vali
         CustomCheckboxComponent,
         CustomSliderComponent,
         NotificationPipe,
-        ValidationMessageComponent
+        ValidationMessageComponent,
+        ConfirmBoxComponent
     ],
     imports: [
         CommonModule,

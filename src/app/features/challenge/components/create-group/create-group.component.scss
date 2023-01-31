@@ -129,25 +129,33 @@
       }
     }
 
-    .finalize {
+    .popup-foot {
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 32px;
 
       button {
-        width: 120px;
-        height: 32px;
+        width: 150px;
+        height: 40px;
         border: none;
         border-radius: 8px;
-        background-color: var(--color-secondary);
-        font-weight: 500;
-        color: #FFF;
+        font-size: var(--preset-font-size-normal);
         cursor: pointer;
+      }
+
+      button:nth-child(2) {
+        background-color: var(--color-primary);
+        color: #FFF;
 
         &:hover {
-          background-color: var(--color-secondary-hover);
+          background-color: var(--color-primary-hover);
         }
+      }
+
+      button:nth-child(1) {
+        border: 1px solid #DEDEEA;
+        background-color: transparent;
+        color: var(--color-text);
       }
     }
   }
