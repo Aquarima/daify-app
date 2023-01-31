@@ -65,7 +65,8 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onLeaderboard()">
+          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onLeaderboard()"
+              *ngIf="isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -73,7 +74,7 @@
             </svg>
           </li>
           <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''" (click)="onSettings()"
-              *ngIf="isMember()">
+              *ngIf="isSelfMemberAuthor()">
             <span class="challenge-sections-name">Settings</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
@@ -99,9 +100,9 @@
         <dfy-challenge-groups [section]="section" [challenge]="challenge" [members]="members"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
-                                   *ngIf="isOnSection('leaderboard')"></dfy-challenge-leaderboard>
+                                   *ngIf="(isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
         <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember"
-                                *ngIf="isOnSection('settings')"></dfy-challenge-settings>
+                                *ngIf="isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>
       </div>
     </div>
   </div>

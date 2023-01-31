@@ -105,6 +105,11 @@ export class ChallengeComponent implements OnInit {
     return !!this.selfMember;
   }
 
+  isSelfMemberAuthor(): boolean {
+    if (!this.selfMember) return false;
+    return this.selfMember.id === this.challenge.author.id;
+  }
+
   hasAccess(access: any) {
     return this.challenge.config.accessType === access;
   }

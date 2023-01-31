@@ -8,6 +8,7 @@ import {AlertType} from "../../../../core/models/system-alert";
 import {MemberKickComponent} from "../member-kick/member-kick.component";
 import {MemberBanishComponent} from "../member-banish/member-banish.component";
 import {ConfirmBoxComponent} from "../../../../shared/components/confirm-box/confirm-box.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -41,6 +42,8 @@ export class SectionSettingsComponent implements OnInit {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
+    private route: ActivatedRoute,
+    private router: Router,
     private alertHandlingService: AlertHandlingService,
     private challengeService: ChallengeService,
     private memberService: MemberService) {
@@ -93,6 +96,7 @@ export class SectionSettingsComponent implements OnInit {
         .subscribe({
           next: () => {
             this.challenge.author = to.profile;
+            this.router.navigate(['../overview'], {relativeTo: this.route});
             this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
           },
           error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
