@@ -123,7 +123,7 @@
                 <a [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
               </div>
             </div>
-            <div class="section-members-list-item-actions" *ngIf="!isSelfMember(member)">
+            <div class="section-members-list-item-actions" *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
               <button class="section-members-list-item-actions-transfer tooltip-owner"
                       (click)="onTransferOwnership(member)">
                 <span class="tooltip">Transfer Ownership</span>

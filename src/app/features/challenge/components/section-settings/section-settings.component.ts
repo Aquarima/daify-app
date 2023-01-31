@@ -165,12 +165,16 @@ export class SectionSettingsComponent implements OnInit {
     return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
   }
 
+  isOnSection(index: number) {
+    return this.currentSection === index;
+  }
+
   isSelfMember(member: Member) {
     return this.selfMember?.id === member.id;
   }
 
-  isOnSection(index: number) {
-    return this.currentSection === index;
+  isSelfMemberAuthor(): boolean {
+    return this.selfMember?.id === this.challenge.author.id;
   }
 
   get accessTypes(): { key: string, value: any }[] {

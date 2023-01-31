@@ -111,7 +111,7 @@
           <p>{{member.group.name}}</p>
         </div>
       </div>
-      <button class="members-kick-btn tooltip-owner" (click)="showKickMemberModal(member)"
+      <button class="members-kick-btn tooltip-owner" (click)="onKickMember(member)"
               *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
         <span class="tooltip">Kick</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">

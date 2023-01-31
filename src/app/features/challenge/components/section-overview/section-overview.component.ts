@@ -25,7 +25,7 @@ export class SectionOverviewComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    showKickMemberModal(member: Member) {
+    onKickMember(member: Member) {
         const componentRef = this.viewContainerRef.createComponent(MemberKickComponent);
         const instance = componentRef.instance;
         instance.member = member;
