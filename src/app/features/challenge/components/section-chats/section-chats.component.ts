@@ -144,6 +144,10 @@ export class SectionChatsComponent implements OnInit {
     return member.profile.id == this.authService.user.profile.id;
   }
 
+  isSelfMemberAuthor(): boolean {
+    return this.selfMember?.id === this.challenge.author.id;
+  }
+
   isChannelMaintainer(member: Member): boolean {
     return member.id === this.channel?.maintainer.id;
   }

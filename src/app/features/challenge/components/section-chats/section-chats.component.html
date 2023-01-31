@@ -25,7 +25,7 @@
                    [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
                 <p class="timestamp">{{message.sentAt | date:'MMM d \'at\' H:mm'}}</p>
                 <div class="message-head-options">
-                  <button class="message-head-options-delete tooltip-owner" (click)="onDeleteMessage(message)">
+                  <button class="message-head-options-delete tooltip-owner" (click)="onDeleteMessage(message)" *ngIf="isSelfMemberAuthor()">
                     <span class="tooltip">Delete</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                       <path
