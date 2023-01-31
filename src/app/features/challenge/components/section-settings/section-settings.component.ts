@@ -6,6 +6,7 @@ import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 import {MemberKickComponent} from "../member-kick/member-kick.component";
+import {MemberBanishComponent} from "../member-banish/member-banish.component";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -96,6 +97,22 @@ export class SectionSettingsComponent implements OnInit {
     componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
     componentRef.instance.kickEvent.subscribe((message: string) => {
       this.memberService.kickMember(member)
+        .subscribe({
+          next: () => {
+            this.members.splice(this.members.indexOf(member), 1);
+            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+          },
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+        })
+    });
+  }
+
+  onBanishMember(member: Member) {
+    const componentRef = this.viewContainerRef.createComponent(MemberBanishComponent);
+    componentRef.instance.member = member;
+    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
+    componentRef.instance.banishEvent.subscribe((message: string) => {
+      this.memberService.banishMember(member, false)
         .subscribe({
           next: () => {
             this.members.splice(this.members.indexOf(member), 1);

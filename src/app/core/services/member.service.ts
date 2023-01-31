@@ -19,6 +19,10 @@ export class MemberService {
     return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/member`);
   }
 
+  banishMember(member: Member, permanent: boolean) {
+    return this.http.delete<any>(`${env.apiUrl}/challenge/member/${member.id}/banish?permanent${permanent}`);
+  }
+
   kickMember(member: Member) {
     return this.http.delete<any>(`${env.apiUrl}/challenge/member/${member.id}/kick`);
   }
