@@ -22,7 +22,6 @@ export class SectionSettingsComponent implements OnInit {
 
   currentSection: number = 0;
   hasBeenUpdated: boolean = false;
-
   initialChallengeForm: any | undefined;
 
   challengeForm = new FormGroup({
@@ -40,10 +39,11 @@ export class SectionSettingsComponent implements OnInit {
     depositsMax: new FormControl<number>(1)
   })
 
-  constructor(private viewContainerRef: ViewContainerRef,
-              private alertHandlingService: AlertHandlingService,
-              private challengeService: ChallengeService,
-              private memberService: MemberService) {
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private alertHandlingService: AlertHandlingService,
+    private challengeService: ChallengeService,
+    private memberService: MemberService) {
   }
 
   ngOnInit(): void {
@@ -55,16 +55,14 @@ export class SectionSettingsComponent implements OnInit {
 
   private initChallengeForm(challenge: Challenge) {
     const config: ChallengeConfig = challenge.config;
-    this.challengeForm.controls['title'].setValue(challenge.title);
-    this.challengeForm.controls['description'].setValue(challenge.description);
-    this.challengeForm.controls['theme'].setValue(challenge.theme);
-    this.challengeForm.controls['accessType'].setValue(config.accessType);
-    this.challengeForm.controls['startAt'].setValue(config.startAt);
-    this.challengeForm.controls['endAt'].setValue(config.endAt);
-    this.challengeForm.controls['capacity'].setValue(config.capacity);
-    this.challengeForm.controls['groupSize'].setValue(config.groupSize);
-    this.challengeForm.controls['leaderboardBeforeStart'].setValue(config.leaderboardBeforeStart);
-    this.challengeForm.controls['spectatorsAllowed'].setValue(config.spectatorsAllowed);
+    for (let controlsKey in this.challengeForm.controls) {
+      let control = this.challengeForm.get(controlsKey);
+      if (control) {
+        const name: string = controlsKey;
+        const value = (challenge as any)[name];
+        control.setValue(value ? value : (challenge.config as any)[name]);
+      }
+    }
     this.initialChallengeForm = this.challengeForm.value;
   }
 
