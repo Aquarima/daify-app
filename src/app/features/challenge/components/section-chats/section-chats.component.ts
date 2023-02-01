@@ -10,7 +10,7 @@ import {Member} from "../../../../core/models/challenge/member.model";
 import {Observable, timer} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
-import {MemberReportComponent} from "../member-report/member-report.component";
+import {UserReportComponent} from "../../../user";
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -98,7 +98,7 @@ export class SectionChatsComponent implements OnInit {
   }
 
   onReportMessage(message: Message) {
-    const componentRef = this.viewContainerRef.createComponent(MemberReportComponent);
+    const componentRef = this.viewContainerRef.createComponent(UserReportComponent);
     componentRef.instance.closeEvent.subscribe(_ => componentRef.destroy());
   }
 
