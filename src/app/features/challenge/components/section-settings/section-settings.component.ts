@@ -57,13 +57,11 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   private initChallengeForm(challenge: Challenge) {
-    const config: ChallengeConfig = challenge.config;
     for (let controlsKey in this.challengeForm.controls) {
       let control = this.challengeForm.get(controlsKey);
       if (control) {
-        const name: string = controlsKey;
-        const value = (challenge as any)[name];
-        control.setValue(value ? value : (challenge.config as any)[name]);
+        const value = (challenge as any)[controlsKey];
+        control.setValue(value ? value : (challenge.config as any)[controlsKey]);
       }
     }
     this.initialChallengeForm = this.challengeForm.value;
@@ -89,7 +87,7 @@ export class SectionSettingsComponent implements OnInit {
     const componentRef = this.viewContainerRef.createComponent(ConfirmBoxComponent);
     const instance = componentRef.instance;
     instance.title = `Transfer Ownership to ${this.getMemberNickname(to)} ?`;
-    instance.message = `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)} ? This action cannot be undo.`;
+    instance.message = `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undo.`;
     instance.cancelEvent.subscribe(() => componentRef.destroy());
     instance.confirmEvent.subscribe(() => {
       this.challengeService.transferChallengeOwnership(this.challenge, to)
@@ -142,16 +140,11 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   onSave() {
-    //if (this.challengeForm.invalid) return;
-    this.challenge.title = `${this.challengeForm.controls.title.value}`;
-    this.challenge.description = `${this.challengeForm.controls.description.value}`;
-    this.challenge.theme = `${this.challengeForm.controls.theme.value}`;
-    this.challenge.config.accessType = this.challengeForm.controls.accessType.value || AccessType.FREE;
-    this.challenge.config.startAt = new Date(`${this.challengeForm.controls.startAt.value}`);
-    this.challenge.config.endAt = new Date(`${this.challengeForm.controls.endAt.value}`);
-    this.challenge.config.capacity = this.challengeForm.controls.capacity.value || 2;
-    this.challenge.config.groupSize = this.challengeForm.controls.groupSize.value || 1;
-    this.challenge.config.spectatorsAllowed = !!this.challengeForm.controls.spectatorsAllowed.value;
+    if (this.challengeForm.invalid) return;
+    for (let controlsKey in this.challengeForm.controls) {
+      const control = this.challengeForm.get(controlsKey);
+      if (control) (this.challenge as any)[controlsKey] = control.value;
+    }
     this.challengeService.updateChallenge(this.challenge)
       .subscribe({
         next: (challenge: any) => {
