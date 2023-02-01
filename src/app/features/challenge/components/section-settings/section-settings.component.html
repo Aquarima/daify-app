@@ -13,7 +13,7 @@
     </li>
   </ul>
   <div class="current-section">
-    <div *ngIf="isOnSection(0)">
+    <ng-container *ngIf="isOnSection(0)">
       <div class="current-section-header">
         <h3>Overview</h3>
       </div>
@@ -53,8 +53,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div *ngIf="isOnSection(1)">
+    </ng-container>
+    <ng-container *ngIf="isOnSection(1)">
       <div class="current-section-header">
         <h3>Schedule</h3>
       </div>
@@ -84,8 +84,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div *ngIf="isOnSection(2)">
+    </ng-container>
+    <ng-container *ngIf="isOnSection(2)">
       <div class="current-section-header">
         <h3>Members</h3>
       </div>
@@ -159,8 +159,8 @@
           view the challenge and its progress.</p>
         <dfy-custom-checkbox [control]="challengeForm.controls.spectatorsAllowed"></dfy-custom-checkbox>
       </div>
-    </div>
-    <div *ngIf="isOnSection(3)">
+    </ng-container>
+    <ng-container *ngIf="isOnSection(3)">
       <div class="current-section-header">
         <h3>Deposits</h3>
       </div>
@@ -184,6 +184,6 @@
           completion of the challenge.</p>
         <dfy-custom-checkbox [control]="challengeForm.controls.leaderboardBeforeStart"></dfy-custom-checkbox>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>

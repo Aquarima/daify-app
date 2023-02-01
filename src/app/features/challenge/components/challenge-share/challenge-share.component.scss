@@ -108,16 +108,11 @@
     button {
       width: 150px;
       height: 40px;
-      border: none;
+      border: 1px solid #DEDEEA;
       border-radius: 8px;
-      background-color: var(--color-primary);
-      font-size: var(--preset-font-size-normal);
-      color: #FFF;
+      background-color: transparent;
+      color: var(--color-text);
       cursor: pointer;
-
-      &:hover {
-        background-color: var(--color-primary-hover);
-      }
     }
   }
 

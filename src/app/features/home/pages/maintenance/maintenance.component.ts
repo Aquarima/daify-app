@@ -15,7 +15,7 @@ export class MaintenanceComponent implements OnInit, AfterViewInit {
   endDate: Date | undefined;
 
   ngOnInit(): void {
-    this.endDate = new Date('08/27/2022 22:00'); // Example
+    this.endDate = new Date(Date.now() + 100000); // Example
     this.passed = this.timeBeforeEnd < 0;
   }
 
