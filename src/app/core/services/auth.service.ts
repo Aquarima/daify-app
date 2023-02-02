@@ -4,8 +4,11 @@ import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment as env} from '../../../environments/environment';
-import {User} from '../models';
+import {Profile, User} from '../models';
 import {UserService} from "./user.service";
+import {ProfileService} from "./profile.service";
+import {AlertHandlingService} from "./alert-handling.service";
+import {AlertType} from "../models/system-alert";
 
 export const ACCESS_TOKEN: string = 'access_token';
 export const REFRESH_TOKEN: string = 'refresh_token';
@@ -26,25 +29,15 @@ export class AuthService {
         private router: Router,
         private cookies: CookieService,
         private http: HttpClient,
+        private alertHandlingService: AlertHandlingService,
         private userService: UserService,
+        private profileService: ProfileService
     ) {
         this.user$.subscribe(user => this.user = user);
     }
 
     ngOnInit() {
 
-    }
-
-    isAccessTokenExpired(): boolean {
-        return Date.now() > this.accessTokenExpiry.getTime();
-    }
-
-    isRefreshTokenExpired(): boolean {
-        return Date.now() > this.refreshTokenExpiry.getTime();
-    }
-
-    isSessionActive(): boolean {
-        return !this.isAccessTokenExpired() || !this.isRefreshTokenExpired();
     }
 
     login(form: { username?: string, email?: string, password: string }): string {
@@ -83,6 +76,30 @@ export class AuthService {
 
     register(username: string, email: string, password: string) {
 
+    }
+
+    setOnlineStatus(online: boolean) {
+        const profile: Profile = this.user.profile;
+        profile.online = online;
+        this.profileService.updateProfile(profile).subscribe({
+            next: (profile: any) => {
+                this.user.profile = profile;
+                this.user$.next(this.user);
+            },
+            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        })
+    }
+
+    isAccessTokenExpired(): boolean {
+        return Date.now() > this.accessTokenExpiry.getTime();
+    }
+
+    isRefreshTokenExpired(): boolean {
+        return Date.now() > this.refreshTokenExpiry.getTime();
+    }
+
+    isSessionActive(): boolean {
+        return !this.isAccessTokenExpired() || !this.isRefreshTokenExpired();
     }
 
     setAccessToken(token: string, expiresAt: Date) {

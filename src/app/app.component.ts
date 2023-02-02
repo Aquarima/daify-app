@@ -7,6 +7,7 @@ import {Subscription} from "rxjs";
 import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
 import {UserService} from "./core/services/user.service";
+import {AlertType} from "./core/models/system-alert";
 
 @Component({
   selector: 'app-root',
@@ -49,8 +50,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     this.userService.getUserById(Number.parseInt(loggedUserId))
       .subscribe({
-        next: (user: any) => this.authService.user$.next(user),
-        error: () => {}
+        next: (user: any) => {
+          this.authService.user$.next(user);
+          this.authService.setOnlineStatus(true);
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       })
   }
 
@@ -63,6 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.authService.setOnlineStatus(true);
     this.alertSubscription.unsubscribe();
   }
 }
