@@ -86,7 +86,7 @@ export class SectionSettingsComponent implements OnInit {
   onTransferOwnership(to: Member) {
     const componentRef = this.viewContainerRef.createComponent(ConfirmBoxComponent);
     const instance = componentRef.instance;
-    instance.title = `Transfer Ownership to ${this.getMemberNickname(to)} ?`;
+    instance.title = `Transfer ownership to ${this.getMemberNickname(to)} ?`;
     instance.message = `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undo.`;
     instance.cancelEvent.subscribe(() => componentRef.destroy());
     instance.confirmEvent.subscribe(() => {

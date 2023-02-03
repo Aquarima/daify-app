@@ -3,6 +3,7 @@ import {CookieService} from 'ngx-cookie';
 import {User} from 'src/app/core/models';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {InboxComponent} from 'src/app/shared/components';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'dfy-header',
@@ -14,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
   loggedUser: User | undefined;
 
+  darkMode = new FormControl(false);
+
   constructor(
     private viewContainerRef: ViewContainerRef,
     private cookies: CookieService,
@@ -22,11 +25,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => this.loggedUser = user);
-  }
-
-  getCurrentLanguage(): string {
-    const current = this.cookies.get('lang');
-    return current ? current.toUpperCase() : 'EN';
+    this.darkMode.setValue(JSON.parse(localStorage.getItem('darkMode') || 'false'))
+    this.darkMode.registerOnChange((value: boolean) => localStorage.setItem('darkMode', `${value}`));
   }
 
   onInbox() {
@@ -55,5 +55,10 @@ export class HeaderComponent implements OnInit {
   get profileAvatar(): string {
     if (!this.loggedUser || !this.loggedUser.profile) return '/assets/avatar_placeholder.svg';
     return this.loggedUser.profile.avatarUrl;
+  }
+
+  get currentLanguage(): string {
+    const current = this.cookies.get('lang');
+    return current ? current.toUpperCase() : 'EN';
   }
 }

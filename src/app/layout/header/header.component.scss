@@ -349,6 +349,14 @@
             }
           }
 
+          .menu-options-language {
+
+            .menu-options-language-name {
+              font-size: var(--preset-font-size-small);
+              color: var(--color-text-alt-2);
+            }
+          }
+
           .menu-options-logout {
             height: 40px;
             display: flex;
