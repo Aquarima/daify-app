@@ -1,61 +1,115 @@
 <dfy-header></dfy-header>
 <main class="main-content">
-  <div class="profile-header">
-    <div class="profile-header-banner" [style.background-image]="'url(' + banner + ')'">
-      <div class="profile-header-avatar">
-        <img [src]="avatar" alt="">
-      </div>
-    </div>
-    <div class="profile-header-bottom">
-      <div>
-        <div class="profile-header-bottom-username">
-          <p class="profile-header-bottom-username-raw">{{profile?.username}}</p>
-          <p class="profile-header-bottom-username-tag">@{{profile?.username}}</p>
+    <div class="profile-header">
+        <div class="profile-header-banner" [style.background-image]="'url(' + banner + ')'">
+            <div class="profile-header-avatar">
+                <img [src]="avatar" alt="">
+            </div>
         </div>
-        <div class="profile-header-bottom-country">
-          <svg class="profile-header-bottom-country-flag" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36">
-            <path fill="#ED2939" d="M36 27a4 4 0 0 1-4 4h-8V5h8a4 4 0 0 1 4 4v18z"/>
-            <path fill="#002495" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5H4z"/>
-            <path fill="#EEE" d="M12 5h12v26H12z"/>
-          </svg>
-          <p  class="profile-header-bottom-country-name">France</p>
+        <div class="profile-header-bottom">
+            <div>
+                <div class="profile-header-bottom-username">
+                    <p class="profile-header-bottom-username-raw">{{profile?.username}}</p>
+                    <p class="profile-header-bottom-username-tag">@{{profile?.username}}</p>
+                </div>
+                <div class="profile-header-bottom-country">
+                    <svg class="profile-header-bottom-country-flag" xmlns="http://www.w3.org/2000/svg" width="32"
+                         height="32" viewBox="0 0 36 36">
+                        <path fill="#ED2939" d="M36 27a4 4 0 0 1-4 4h-8V5h8a4 4 0 0 1 4 4v18z"/>
+                        <path fill="#002495" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5H4z"/>
+                        <path fill="#EEE" d="M12 5h12v26H12z"/>
+                    </svg>
+                    <p class="profile-header-bottom-country-name">France</p>
+                </div>
+            </div>
+            <div class="profile-header-bottom-status">
+                <div class="profile-header-bottom-status-mark profile-header-bottom-status-mark-offline"
+                     [class.profile-header-bottom-status-mark-online]="profile?.online"></div>
+                <span class="profile-header-bottom-status-name">{{profile?.online ? 'Online' : 'Offline'}}</span>
+            </div>
         </div>
-      </div>
-      <div class="profile-header-bottom-status">
-        <div class="profile-header-bottom-status-mark profile-header-bottom-status-mark-offline" [class.profile-header-bottom-status-mark-online]="profile?.online"></div>
-        <span class="profile-header-bottom-status-name">{{profile?.online ? 'Online' : 'Offline'}}</span>
-      </div>
     </div>
-  </div>
-  <nav class="profile-sections">
-    <button class="profile-sections-nav-scroll-btn" (click)="onMenuLeft()">
-      <svg width="32" height="32" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
-    </button>
-    <ul #sections>
-      <li (click)="onAbout()" [class.profile-sections-selected]="isOnSection(0)">
-        <span class="profile-sections-name">About</span>
-        <svg width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke-width="1.5" d="M3 17.4V6.6a.6.6 0 0 1 .6-.6h13.079c.2 0 .388.1.5.267l3.6 5.4a.6.6 0 0 1 0 .666l-3.6 5.4a.6.6 0 0 1-.5.267H3.6a.6.6 0 0 1-.6-.6Z"/></svg>
-      </li>
-      <li (click)="onFriends()" [class.profile-sections-selected]="isOnSection(1)">
-        <span class="profile-sections-name">Friends</span>
-        <svg width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-width="1.5"><path d="M1 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1"/><path d="M13 14v0a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v.5"/><path stroke-linejoin="round" d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm10-3a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/></g></svg>
-      </li>
-      <li (click)="onChallenges()" [class.profile-sections-selected]="isOnSection(2)">
-        <span class="profile-sections-name">Challenges</span>
-        <svg width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18v-6m0 0V3.41a.6.6 0 0 1 .836-.552l8.444 3.62a.6.6 0 0 1 .022 1.093L12 12Zm0 10c3.866 0 7-1.567 7-3.5S15.866 15 12 15s-7 1.567-7 3.5S8.134 22 12 22Z"/></svg>
-      </li>
-      <li (click)="onBadges()" [class.profile-sections-selected]="isOnSection(3)">
-        <span class="profile-sections-name">Badges</span>
-        <svg width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.272 10.445L18 2m-8.684 8.632L5 2m7.761 8.048L8.835 2m5.525 0l-1.04 2.5M6 16a6 6 0 1 0 12 0a6 6 0 0 0-12 0Z"/></svg>
-      </li>
-    </ul>
-    <button class="profile-sections-nav-scroll-btn" (click)="onMenuRight()">
-      <svg width="32" height="32" viewBox="0 0 24 24"><path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/></svg>
-    </button>
-  </nav>
-  <div class="profile-sections-current">
-    <dfy-user-list [profiles]="friends" *ngIf="isOnSection(1)"></dfy-user-list>
-    <dfy-browse-results-list [searchSubject]="searchSubject" *ngIf="isOnSection(2)"></dfy-browse-results-list>
-  </div>
+    <nav class="profile-sections">
+        <button class="profile-sections-nav-scroll-btn" (click)="onMenuLeft()">
+            <svg width="32" height="32" viewBox="0 0 24 24">
+                <path d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/>
+            </svg>
+        </button>
+        <ul #sections>
+            <li (click)="onAbout()" [class.profile-sections-selected]="isOnSection(0)">
+                <span class="profile-sections-name">About</span>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="none" stroke-width="1.5"
+                          d="M3 17.4V6.6a.6.6 0 0 1 .6-.6h13.079c.2 0 .388.1.5.267l3.6 5.4a.6.6 0 0 1 0 .666l-3.6 5.4a.6.6 0 0 1-.5.267H3.6a.6.6 0 0 1-.6-.6Z"/>
+                </svg>
+            </li>
+            <li (click)="onFriends()" [class.profile-sections-selected]="isOnSection(1)">
+                <span class="profile-sections-name">Friends</span>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <g fill="none" stroke-linecap="round" stroke-width="1.5">
+                        <path d="M1 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1"/>
+                        <path d="M13 14v0a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v.5"/>
+                        <path stroke-linejoin="round"
+                              d="M8 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm10-3a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"/>
+                    </g>
+                </svg>
+            </li>
+            <li (click)="onChallenges()" [class.profile-sections-selected]="isOnSection(2)">
+                <span class="profile-sections-name">Challenges</span>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M12 18v-6m0 0V3.41a.6.6 0 0 1 .836-.552l8.444 3.62a.6.6 0 0 1 .022 1.093L12 12Zm0 10c3.866 0 7-1.567 7-3.5S15.866 15 12 15s-7 1.567-7 3.5S8.134 22 12 22Z"/>
+                </svg>
+            </li>
+            <li (click)="onBadges()" [class.profile-sections-selected]="isOnSection(3)">
+                <span class="profile-sections-name">Badges</span>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M14.272 10.445L18 2m-8.684 8.632L5 2m7.761 8.048L8.835 2m5.525 0l-1.04 2.5M6 16a6 6 0 1 0 12 0a6 6 0 0 0-12 0Z"/>
+                </svg>
+            </li>
+        </ul>
+        <button class="profile-sections-nav-scroll-btn" (click)="onMenuRight()">
+            <svg width="32" height="32" viewBox="0 0 24 24">
+                <path d="M9.29 15.88L13.17 12L9.29 8.12a.996.996 0 1 1 1.41-1.41l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3a.996.996 0 0 1-1.41 0c-.38-.39-.39-1.03 0-1.42z"/>
+            </svg>
+        </button>
+    </nav>
+    <div class="profile-sections-current">
+        <div class="profile-section-about" *ngIf="isOnSection(0)">
+            <div class="profile-section-about-block profile-section-about-block-column">
+                <p class="profile-section-about-block-title">About Me</p>
+                <p class="profile-section-about-block-description">{{profile?.about}}</p>
+            </div>
+            <div class="profile-section-about-block profile-section-about-block-column">
+                <div class="profile-section-about-block">
+                    <p class="profile-section-about-block-title">First name: </p>
+                    <p class="profile-section-about-block-description">{{profile?.firstName}}</p>
+                </div>
+                <div class="profile-section-about-block">
+                    <p class="profile-section-about-block-title">Last name: </p>
+                    <p class="profile-section-about-block-description">{{profile?.lastName}}</p>
+                </div>
+                <div class="profile-section-about-block">
+                    <p class="profile-section-about-block-title">Profession: </p>
+                    <p class="profile-section-about-block-description">{{profile?.profession}}</p>
+                </div>
+                <div class="profile-section-about-block">
+                    <p class="profile-section-about-block-title">Birthdate: </p>
+                    <p class="profile-section-about-block-description">{{profile?.birthdate}}</p>
+                </div>
+            </div>
+            <div class="profile-section-about-block">
+                <p class="profile-section-about-block-title">Socials</p>
+                <div class="profile-section-about-block-socials">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <dfy-user-list [profiles]="friends" *ngIf="isOnSection(1)"></dfy-user-list>
+        <dfy-browse-results-list [searchSubject]="searchSubject" *ngIf="isOnSection(2)"></dfy-browse-results-list>
+    </div>
 </main>
 <dfy-footer></dfy-footer>
