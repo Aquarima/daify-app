@@ -322,24 +322,33 @@
           box-sizing: border-box;
 
           li {
-            padding: 0 8px;
             width: 100%;
-            height: 32px;
             display: flex;
             align-items: center;
-            column-gap: 8px;
+            row-gap: 8px;
             box-sizing: border-box;
-            border-radius: 8px;
-            color: var(--color-text-alt);
-            cursor: pointer;
 
-            &:hover {
-              background-color: rgba(0, 0, 0, .040);
+            > div {
+              padding: 0 8px;
+              width: 100%;
+              height: 32px;
+              display: flex;
+              align-items: center;
+              column-gap: 8px;
+              box-sizing: border-box;
+              border-radius: 8px;
+              color: var(--color-text-alt);
+              cursor: pointer;
+
+              &:hover {
+                background-color: rgba(0, 0, 0, .040);
+              }
             }
 
             svg {
               width: 20px;
               height: 20px;
+              transition: transform .5s;
               fill: var(--color-text-alt);
             }
 
@@ -350,23 +359,69 @@
           }
 
           .menu-options-language {
+            display: flex;
+            flex-direction: column;
+
+            .unfold-arrow {
+              transform: rotate(360deg);
+            }
 
             .menu-options-language-name {
               font-size: var(--preset-font-size-small);
               color: var(--color-text-alt-2);
             }
+
+            .menu-options-language-list {
+              padding: 8px;
+              width: 100%;
+              max-height: 120px;
+              display: none;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              row-gap: 8px;
+              overflow-y: auto;
+              box-sizing: border-box;
+              border-radius: 8px;
+              background-color: rgba(#000000, .020);
+
+              li {
+                width: fit-content;
+                height: 24px;
+                color: var(--color-text-alt-2);
+                cursor: pointer;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+
+          .menu-options-language-active {
+
+            .unfold-arrow {
+              transform: rotate(90deg);
+            }
+
+            .menu-options-language-list {
+              display: flex;
+            }
           }
 
           .menu-options-logout {
             height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #DEDEEA;
             color: var(--color-text);
 
-            &:hover {
-              background-color: transparent;
+            > div {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: 1px solid #DEDEEA;
+
+              &:hover {
+                background-color: transparent;
+              }
             }
           }
         }

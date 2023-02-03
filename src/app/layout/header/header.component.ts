@@ -6,59 +6,69 @@ import {InboxComponent} from 'src/app/shared/components';
 import {FormControl} from "@angular/forms";
 
 @Component({
-  selector: 'dfy-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'dfy-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 
 export class HeaderComponent implements OnInit {
 
-  loggedUser: User | undefined;
+    loggedUser: User | undefined;
 
-  darkMode = new FormControl(false);
+    displayLanguageList: boolean = false;
+    availableLanguages: { key: string, full: string }[] = [
+        {key: 'EN', full: 'English'},
+        {key: 'ES', full: 'Español'},
+        {key: 'FR', full: 'Français'},
+    ];
+    darkMode = new FormControl(false);
 
-  constructor(
-    private viewContainerRef: ViewContainerRef,
-    private cookies: CookieService,
-    public authService: AuthService) {
-  }
+    constructor(
+        private viewContainerRef: ViewContainerRef,
+        private cookies: CookieService,
+        public authService: AuthService) {
+    }
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe(user => this.loggedUser = user);
-    this.darkMode.setValue(JSON.parse(localStorage.getItem('darkMode') || 'false'))
-    this.darkMode.registerOnChange((value: boolean) => localStorage.setItem('darkMode', `${value}`));
-  }
+    ngOnInit(): void {
+        this.authService.user$.subscribe(user => this.loggedUser = user);
+        this.darkMode.setValue(JSON.parse(localStorage.getItem('darkMode') || 'false'))
+        this.darkMode.registerOnChange((value: boolean) => localStorage.setItem('darkMode', `${value}`));
+    }
 
-  onInbox() {
-    const componentRef = this.viewContainerRef.createComponent(InboxComponent);
-    componentRef.instance.closeEvent.subscribe(() => this.viewContainerRef.clear());
-  }
+    onInbox() {
+        const componentRef = this.viewContainerRef.createComponent(InboxComponent);
+        componentRef.instance.closeEvent.subscribe(() => this.viewContainerRef.clear());
+    }
 
-  onNews() {
+    onNews() {
 
-  }
+    }
 
-  onLogout() {
-    this.authService.signOut();
-  }
+    onDisplayLanguageList() {
+        this.displayLanguageList = !this.displayLanguageList;
+    }
 
-  setGlobalLanguage(language: string) {
-    this.cookies.put('lang', language);
-    window.location.reload();
-  }
+    onLogout() {
+        this.authService.signOut();
+    }
 
-  get profileUsername(): string {
-    if (!this.loggedUser || !this.loggedUser.profile) return '...';
-    return this.loggedUser.profile.username;
-  }
+    onSelectLanguage(lang: {key: string, full: string}) {
+        this.cookies.put('lang', JSON.stringify(lang));
+        window.location.reload();
+    }
 
-  get profileAvatar(): string {
-    if (!this.loggedUser || !this.loggedUser.profile) return '/assets/avatar_placeholder.svg';
-    return this.loggedUser.profile.avatarUrl;
-  }
+    get profileUsername(): string {
+        if (!this.loggedUser || !this.loggedUser.profile) return '...';
+        return this.loggedUser.profile.username;
+    }
 
-  get currentLanguage(): string {
-    const current = this.cookies.get('lang');
-    return current ? current.toUpperCase() : 'EN';
-  }
+    get profileAvatar(): string {
+        if (!this.loggedUser || !this.loggedUser.profile) return '/assets/avatar_placeholder.svg';
+        return this.loggedUser.profile.avatarUrl;
+    }
+
+    get currentLanguage(): {key: 'EN', full: 'English'} {
+        const lang = this.cookies.get('lang');
+        return lang ? JSON.parse(lang) : {key: 'EN', full: 'English'};
+    }
 }
