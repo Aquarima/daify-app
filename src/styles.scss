@@ -136,6 +136,7 @@ html {
         position: absolute;
         top: 50%;
         left: 24px;
+        z-index: 0;
         transform: translateY(-50%);
         transition: top ease .3s, font-size ease .3s;
         display: block;
@@ -144,6 +145,17 @@ html {
         color: var(--color-text-alt-2);
         cursor: text;
         pointer-events: none;
+        opacity: 0;
+        animation: moveLabel 1.5s forwards;
+      }
+
+      @keyframes moveLabel {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
 
       .form-control, select {

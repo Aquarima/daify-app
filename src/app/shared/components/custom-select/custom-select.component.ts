@@ -25,7 +25,7 @@ export class CustomSelectComponent implements OnInit {
   ngOnInit() {
     this.control.registerOnChange((val: any) => {
       if (this.data.length === 0) return;
-      const dataRef = this.data.find(item => item.value === val);
+      const dataRef = this.data.find(item => item.value.toUpperCase() === val);
       this.selection = dataRef ? dataRef.key : this.data[0].key;
     })
     this.selection = this.control.value;
