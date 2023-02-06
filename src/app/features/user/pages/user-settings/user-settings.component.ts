@@ -18,7 +18,9 @@ export class UserSettingsComponent implements OnInit {
     about: new FormControl(''),
     profession: new FormControl(''),
     country: new FormControl(''),
-  })
+  });
+
+  initialUserSettingsForm: any;
 
   user: User = {} as User;
   section: string = 'profile';
@@ -46,6 +48,7 @@ export class UserSettingsComponent implements OnInit {
       profession: user.profile.profession,
       country: user.profile.country,
     });
+    this.initialUserSettingsForm = this.userSettingsForm.value;
   }
 
   onSection(section: string) {
@@ -54,6 +57,10 @@ export class UserSettingsComponent implements OnInit {
 
   isOnSection(section: string) {
     return this.section === section;
+  }
+
+  isUserSettingsFormChanged(): boolean {
+    return JSON.stringify(this.userSettingsForm.value) !== JSON.stringify(this.initialUserSettingsForm);
   }
 
   private fetchCountries() {

@@ -88,6 +88,10 @@ button, input {
   font-family: $font-family;
 }
 
+button {
+  cursor: pointer;
+}
+
 // End of CSS Reset
 
 html {
