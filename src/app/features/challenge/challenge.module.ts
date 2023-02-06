@@ -53,7 +53,8 @@ import {MemberBanishComponent} from './components/member-banish/member-banish.co
     ],
     exports: [
         BrowseResultsListComponent,
-        ChallengeCardComponent
+        ChallengeCardComponent,
+        SectionSettingsComponent
     ]
 })
 export class ChallengeModule {

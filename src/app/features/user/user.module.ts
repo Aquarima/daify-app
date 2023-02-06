@@ -10,13 +10,15 @@ import { UserReportComponent } from './components/user-report/user-report.compon
 import {SharedModule} from "../../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "../../core/core.module";
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     UserCardComponent,
     UserListComponent,
-    UserReportComponent
+    UserReportComponent,
+    UserSettingsComponent
   ],
     imports: [
         CommonModule,

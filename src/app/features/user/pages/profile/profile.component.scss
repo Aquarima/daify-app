@@ -52,6 +52,7 @@
       .profile-header-bottom {
         padding: 32px 64px;
         height: 40%;
+        position: relative;
         display: flex;
         align-items: center;
         box-sizing: border-box;
@@ -103,7 +104,7 @@
           align-items: center;
           column-gap: 4px;
           border-radius: 16px;
-          background-color: rgba(#000000, .050);
+          background-color: rgba(#000, .050);
 
           .profile-header-bottom-status-mark {
             width: 8px;
@@ -123,6 +124,23 @@
             font-size: var(--preset-font-size-small);
             color: var(--color-text-alt);
           }
+        }
+
+        .profile-header-bottom-edit {
+          padding: 0 16px;
+          min-width: 80px;
+          height: 32px;
+          position: absolute;
+          right: 64px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: none;
+          border-radius: 16px;
+          background-color: var(--color-secondary);
+          text-decoration: none;
+          color: #FFF;
+          cursor: pointer;
         }
       }
     }
