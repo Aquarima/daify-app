@@ -1,4 +1,5 @@
 import {AfterViewInit, Directive, ElementRef, HostListener, Input} from '@angular/core';
+import {Observable} from "rxjs";
 
 @Directive({
   selector: '[customFocus]'
@@ -11,9 +12,19 @@ export class CustomInputFocusDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const value = this.el.nativeElement.value.trim();
-    if (value.length === 0) return;
-    this.el.nativeElement.parentNode.classList.add(this.class);
+    const valueObservable = new Observable(observer => {
+      const intervalId = setInterval(() => {
+        if (this.el.nativeElement.value) {
+          observer.next(this.el.nativeElement.value);
+          observer.complete();
+          clearInterval(intervalId);
+        }
+      }, 10);
+    });
+    valueObservable.subscribe((value: any) => {
+      if (value.trim().length === 0) return;
+      this.el.nativeElement.parentNode.classList.add(this.class);
+    });
   }
 
   @HostListener('focus')
@@ -24,7 +35,7 @@ export class CustomInputFocusDirective implements AfterViewInit {
   @HostListener('blur')
   removeClass() {
     const value = this.el.nativeElement.value.trim();
-    if (value.length !== 0 || this.el.nativeElement.type.contains('date')) return;
+    if (value.length !== 0) return;
     this.el.nativeElement.parentNode.classList.remove(this.class);
   }
 }
