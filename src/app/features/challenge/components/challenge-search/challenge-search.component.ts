@@ -1,54 +1,49 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Search} from 'src/app/core/models';
+import {ChallengeGroupBy, Search} from 'src/app/core/models';
 import {SearchService} from 'src/app/core/services/search.service';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
-  selector: 'dfy-challenge-search',
-  templateUrl: './challenge-search.component.html',
-  styleUrls: ['./challenge-search.component.scss']
+    selector: 'dfy-challenge-search',
+    templateUrl: './challenge-search.component.html',
+    styleUrls: ['./challenge-search.component.scss']
 })
 export class ChallengeSearchComponent implements OnInit {
 
-  @Input() searchSubject!: BehaviorSubject<Search>;
+    @Input() searchSubject!: BehaviorSubject<Search>;
 
-  @Output() orderByEvent: EventEmitter<any> = new EventEmitter();
-  @Output() displayModeEvent: EventEmitter<any> = new EventEmitter();
+    @ViewChild('backdrop') backdropNode!: ElementRef;
+    @ViewChild('search_history') searchHistoryNode!: ElementRef;
+    @ViewChild('name') searchInputNode!: ElementRef;
 
-  @ViewChild('backdrop') backdropNode!: ElementRef;
-  @ViewChild('search_history') searchHistoryNode!: ElementRef;
-  @ViewChild('name') searchInputNode!: ElementRef;
+    searchForm = new FormGroup({
+        'groupType': new FormControl(ChallengeGroupBy.ALPHABETICAL),
+        'title': new FormControl(''),
+    })
 
-  searchForm = new FormGroup({
-    'title': new FormControl(''),
-    'sortType': new FormControl(''),
-  })
+    history = this.searchService.fetchHistory('challenges');
 
-  displayMode: any = 'grid';
-  history = this.searchService.fetchHistory('challenges');
-
-  constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) {
-  }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const searchQuery = params.get('search_query');
-      if (!searchQuery) return;
-      this.searchForm.controls.title.setValue(searchQuery);
-      this.searchSubject.next({title: `${params.get('search_query')}`});
-    });
-  }
-
-  onSearch() {
-    const title = this.searchForm.value.title;
-    if (title) {
-      this.router.navigate(['/app/explore/', title]);
-      this.searchSubject.next({title: `${title}`});
-      return;
+    constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) {
     }
-    this.router.navigate(['/app/explore']);
-    this.searchSubject.next({});
-  }
+
+    ngOnInit() {
+        this.route.paramMap.subscribe(params => {
+
+        });
+    }
+
+    onSearch() {
+
+    }
+
+    get groupByTypes(): { key: string, value: ChallengeGroupBy }[] {
+        return [
+            {key: 'Alphabetical', value: ChallengeGroupBy.ALPHABETICAL},
+            {key: 'Duration', value: ChallengeGroupBy.DURATION},
+            {key: 'Starts At', value: ChallengeGroupBy.STARTS_AT},
+            {key: 'Ends At', value: ChallengeGroupBy.ENDS_AT},
+        ]
+    }
 }

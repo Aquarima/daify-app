@@ -4,10 +4,10 @@
           [ngStyle]="{'background-color': getThemeColor(theme)}"
           *ngFor="let theme of challenges | challengeThemesCollector" (click)="onThemeSelected(theme)">#{{theme}} <span class="theme-selected-count">({{getThemeCount(theme)}})</span></p>
   </div>
-  <div class="items display-{{displayMode}}">
-    <dfy-challenge-card class="{{displayMode}}-cell"
+  <div class="items display-grid">
+    <dfy-challenge-card class="grid-cell"
                         [challenge]="challenge"
-                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:groupBy">
+                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:search.groupBy">
     </dfy-challenge-card>
   </div>
 </div>

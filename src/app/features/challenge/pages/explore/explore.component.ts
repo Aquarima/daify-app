@@ -10,17 +10,7 @@ import {BehaviorSubject} from "rxjs";
 export class ExploreComponent implements OnInit {
 
   searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
-  groupBy: string = 'alphabetical';
-  displayMode: string = 'grid';
 
   ngOnInit(): void {
-  }
-
-  onGroupBySelected(option: any) {
-    this.groupBy = option;
-  }
-
-  onDisplayModeSelected(mode: any) {
-    this.displayMode = mode;
   }
 }

@@ -9,15 +9,11 @@
             </div>
         </div>
         <dfy-challenge-search
-                [searchSubject]="searchSubject"
-                (orderByEvent)="onGroupBySelected($event)"
-                (displayModeEvent)="onDisplayModeSelected($event)">
+                [searchSubject]="searchSubject">
         </dfy-challenge-search>
         <div class="item-list">
             <dfy-browse-results-list
-                    [searchSubject]="searchSubject"
-                    [displayMode]="displayMode"
-                    [groupBy]="groupBy">
+                    [searchSubject]="searchSubject">
             </dfy-browse-results-list>
         </div>
     </div>
