@@ -383,7 +383,7 @@
               overflow-y: auto;
               box-sizing: border-box;
               border-radius: 8px;
-              background-color: rgba(#000000, .020);
+              background-color: rgba(#000, .020);
 
               li {
                 width: fit-content;
@@ -391,8 +391,9 @@
                 color: var(--color-text-alt-2);
                 cursor: pointer;
 
-                &:hover {
-                  text-decoration: underline;
+                &:hover::before {
+                  margin-right: 4px;
+                  content: '•';
                 }
               }
             }
@@ -410,10 +411,10 @@
           }
 
           .menu-options-logout {
-            height: 40px;
             color: var(--color-text);
 
             > div {
+              height: 40px;
               display: flex;
               justify-content: center;
               align-items: center;
