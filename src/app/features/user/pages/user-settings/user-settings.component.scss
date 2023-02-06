@@ -139,46 +139,46 @@
           display: flex;
           flex-direction: column;
           row-gap: 16px;
+        }
 
-          .form-parameter {
-            display: flex;
-            flex-direction: column;
-            row-gap: 8px;
+        .form-parameter {
+          display: flex;
+          flex-direction: column;
+          row-gap: 8px;
 
-            .form-parameter-name {
-              font-weight: 500;
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text);
-            }
-
-            .form-parameter-description {
-              line-height: 16px;
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text-alt-2);
-            }
-
-            .form-parameter-value {
-              color: var(--color-text-alt);
-            }
-
-            .user-input-box {
-              width: 50%;
-            }
-
-            textarea {
-              padding: 8px;
-              height: 80px;
-              resize: none;
-            }
+          .form-parameter-name {
+            font-weight: 500;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text);
           }
 
-          .form-double-parameters {
-            display: flex;
-            column-gap: 32px;
+          .form-parameter-description {
+            line-height: 16px;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text-alt-2);
+          }
 
-            .user-input-box {
-              width: 100%;
-            }
+          .form-parameter-value {
+            color: var(--color-text-alt);
+          }
+
+          .user-input-box {
+            width: 50%;
+          }
+
+          textarea {
+            padding: 8px;
+            height: 80px;
+            resize: none;
+          }
+        }
+
+        .form-double-parameters {
+          display: flex;
+          column-gap: 32px;
+
+          .user-input-box {
+            width: 100%;
           }
         }
 
@@ -275,7 +275,6 @@
               }
             }
 
-
             .settings-section-profile-header-bottom {
               padding: 32px;
               height: 60%;
@@ -292,8 +291,8 @@
                 color: var(--color-text);
 
                 svg {
-                  width: 20px;
-                  height: 20px;
+                  width: 16px;
+                  height: 16px;
                   fill: var(--color-text);
                 }
               }
