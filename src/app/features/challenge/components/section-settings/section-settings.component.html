@@ -1,189 +1,45 @@
 <h1>Settings</h1>
-<div class="inner-box" [formGroup]="challengeForm">
-  <ul class="sections">
-    <li (click)="showSection(0)">Overview</li>
-    <li (click)="showSection(1)">Schedule</li>
-    <li (click)="showSection(2)">Members</li>
-    <li (click)="showSection(3)">Deposits</li>
-    <li class="settings-action" *ngIf="hasBeenUpdated" (click)="onCancel()">
-      <button class="settings-action-cancel-btn">Cancel</button>
-    </li>
-    <li class="settings-action" *ngIf="hasBeenUpdated" (click)="onSave()">
-      <button class="settings-action-save-btn" type="submit">Save</button>
-    </li>
-  </ul>
-  <div class="current-section">
-    <ng-container *ngIf="isOnSection(0)">
-      <div class="current-section-header">
-        <h3>Overview</h3>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Title</p>
-        <p class="current-section-parameter-description">Set the title for the challenge, it should be a brief
-          and descriptive name.</p>
-        <div class="user-input">
-          <div class="user-input-box">
-            <label for="title">Title</label>
-            <input id="title" class="form-control" type="text" name="title" formControlName="title"
-                   [customFocus]="'user-input-active'">
-          </div>
-        </div>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Description</p>
-        <p class="current-section-parameter-description">Sets the description for the challenge, it should
-          provide more information about the challenge and its objectives.</p>
-        <div class="user-input">
-          <div class="user-input-box">
-            <label for="description">Description</label>
-            <textarea id="description" class="form-control" name="description" cols="30" rows="10"
-                      formControlName="description" [customFocus]="'user-input-active'"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Theme</p>
-        <p class="current-section-parameter-description">Set the theme for the challenge. This can be used to
-          categorize it and make it easier to find among all others.</p>
-        <div class="user-input">
-          <div class="user-input-box">
-            <label for="theme">Theme</label>
-            <input id="theme" class="form-control" name="theme" type="text" formControlName="theme"
-                   [customFocus]="'user-input-active'">
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="isOnSection(1)">
-      <div class="current-section-header">
-        <h3>Schedule</h3>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Start Date</p>
-        <p class="current-section-parameter-description">Set the date and time when the challenge will
-          officially begin. This ensures that teams are aware of when the challenge starts and can plan
-          accordingly.</p>
-        <div class="user-input">
-          <div class="user-input-box user-input-active">
-            <label for="start-date">Start Date</label>
-            <input id="start-date" class="form-control" name="startAt" type="datetime-local"
-                   formControlName="startAt"
-                   [customFocus]="'user-input-active'">
-          </div>
-        </div>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">End Date</p>
-        <p class="current-section-parameter-description">Set the end date for the challenge. This ensures that
-          teams are aware of when the challenge ends and can plan accordingly.</p>
-        <div class="user-input">
-          <div class="user-input-box user-input-active">
-            <label for="end-date">End Date</label>
-            <input id="end-date" class="form-control" name="endAt" type="datetime-local"
-                   [customFocus]="'user-input-active'">
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="isOnSection(2)">
-      <div class="current-section-header">
-        <h3>Members</h3>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Access Type</p>
-        <p class="current-section-parameter-description">Set the access requirements for joining or viewing the
-          challenge, options include: code entry, friends only, open to all, or request-based approval.</p>
-        <dfy-custom-select [control]="challengeForm.controls.accessType" [label]="'Access Type'"
-                           [data]="accessTypes"></dfy-custom-select>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Capacity</p>
-        <p class="current-section-parameter-description">Set the maximum number of members that can participate
-          to your challenge.</p>
-        <dfy-custom-slider [control]="challengeForm.controls.capacity" [min]="2" [max]="100"
-                           [step]="1"></dfy-custom-slider>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Group Size</p>
-        <p class="current-section-parameter-description">Set the maximum number of members allowed in a
-          group.</p>
-        <dfy-custom-slider [control]="challengeForm.controls.groupSize" [min]="2" [max]="10"
-                           [step]="1"></dfy-custom-slider>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Members Management</p>
-        <p class="current-section-parameter-description">Manage the members including adding and removing
-          members, as well as viewing and editing their information.</p>
-        <ul class="section-members-list">
-          <li class="section-members-list-item" *ngFor="let member of members">
-            <div>
-              <img [src]="getMemberAvatar(member)" alt="">
-              <div class="section-members-list-item-names">
-                <p>{{getMemberNickname(member)}}</p>
-                <a [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
-              </div>
-            </div>
-            <div class="section-members-list-item-actions" *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
-              <button class="section-members-list-item-actions-transfer tooltip-owner"
-                      (click)="onTransferOwnership(member)">
-                <span class="tooltip">Transfer Ownership</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                  <path
-                    d="M17.65 6.35a7.95 7.95 0 0 0-6.48-2.31c-3.67.37-6.69 3.35-7.1 7.02C3.52 15.91 7.27 20 12 20a7.98 7.98 0 0 0 7.21-4.56c.32-.67-.16-1.44-.9-1.44c-.37 0-.72.2-.88.53a5.994 5.994 0 0 1-6.8 3.31c-2.22-.49-4.01-2.3-4.48-4.52A6.002 6.002 0 0 1 12 6c1.66 0 3.14.69 4.22 1.78l-1.51 1.51c-.63.63-.19 1.71.7 1.71H19c.55 0 1-.45 1-1V6.41c0-.89-1.08-1.34-1.71-.71l-.64.65z"/>
-                </svg>
-              </button>
-              <button class="section-members-list-item-actions-kick tooltip-owner"
-                      (click)="onKickMember(member)">
-                <span class="tooltip">Kick</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                  <path
-                    d="M17.5 5.5q-.825 0-1.413-.588Q15.5 4.325 15.5 3.5t.587-1.413Q16.675 1.5 17.5 1.5q.825 0 1.413.587q.587.588.587 1.413q0 .825-.587 1.412q-.588.588-1.413.588ZM11 23l2.8-14.1l-1.8.7V13h-.7l-6.75 7.925q-.025-.025-.287-.225q-.263-.2-.763-.2q-.25 0-.662.15q-.413.15-.688.7l-1.1-.95q-.15-.125-.238-.3q-.087-.175-.112-.375q-.025-.2.038-.388Q.8 19.15.925 19l3.25-3.8q.125-.175.3-.25q.175-.075.375-.1q.2-.025.388.05q.187.075.337.2L7.1 16.4L10 13V8.3l5.05-2.15q.725-.325 1.475-.075q.75.25 1.175.925l1 1.6q.6 1.05 1.738 1.725Q21.575 11 23 11v2q-1.65 0-3.087-.688q-1.438-.687-2.413-1.812l-.6 3l2.1 2V23h-2v-6l-2.1-2l-1.8 8Zm-8.5-1q0-.425.288-.712Q3.075 21 3.5 21t.713.288q.287.287.287.712t-.287.712Q3.925 23 3.5 23t-.712-.288Q2.5 22.425 2.5 22Z"/>
-                </svg>
-              </button>
-              <button class="section-members-list-item-actions-ban tooltip-owner" (click)="onBanishMember(member)">
-                <span class="tooltip">Banish</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                  <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <circle cx="12" cy="12" r="9"/>
-                    <path d="m5.7 5.7l12.6 12.6"/>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Spectator Mode</p>
-        <p class="current-section-parameter-description">Enable or disable the ability for non-participants to
-          view the challenge and its progress.</p>
-        <dfy-custom-checkbox [control]="challengeForm.controls.spectatorsAllowed"></dfy-custom-checkbox>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="isOnSection(3)">
-      <div class="current-section-header">
-        <h3>Deposits</h3>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Minimum Submission Requirement</p>
-        <p class="current-section-parameter-description">Set the minimum number of submissions that a team
-          participating in the challenge must submit before the end of the challenge period.</p>
-        <dfy-custom-slider [control]="challengeForm.controls.depositsMin" [min]="1" [max]="5"
-                           [step]="1"></dfy-custom-slider>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Maximum Submission Requirement</p>
-        <p class="current-section-parameter-description">Set the maximum number of submissions that a challenge
-          team can make before the end of the challenge.</p>
-        <dfy-custom-slider [control]="challengeForm.controls.depositsMax" [min]="1" [max]="5"
-                           [step]="1"></dfy-custom-slider>
-      </div>
-      <div class="current-section-parameter">
-        <p class="current-section-parameter-name">Early Leaderboard Access</p>
-        <p class="current-section-parameter-description">Toggle the visibility of the leaderboard before the
-          completion of the challenge.</p>
-        <dfy-custom-checkbox [control]="challengeForm.controls.leaderboardBeforeStart"></dfy-custom-checkbox>
-      </div>
-    </ng-container>
+<div class="challenge-settings" [formGroup]="challengeForm">
+  <div class="challenge-settings-sections">
+    <ul>
+      <li [class.challenge-settings-sections-active]="isOnSection('overview')" (click)="onSection('overview')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <path
+            d="M30.94 15.66A16.69 16.69 0 0 0 16 5A16.69 16.69 0 0 0 1.06 15.66a1 1 0 0 0 0 .68A16.69 16.69 0 0 0 16 27a16.69 16.69 0 0 0 14.94-10.66a1 1 0 0 0 0-.68ZM16 25c-5.3 0-10.9-3.93-12.93-9C5.1 10.93 10.7 7 16 7s10.9 3.93 12.93 9C26.9 21.07 21.3 25 16 25Z"/>
+          <path d="M16 10a6 6 0 1 0 6 6a6 6 0 0 0-6-6Zm0 10a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z"/>
+        </svg>
+        Overview
+      </li>
+      <li [class.challenge-settings-sections-active]="isOnSection('schedule')" (click)="onSection('schedule')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <path d="M21 30a8 8 0 1 1 8-8a8 8 0 0 1-8 8Zm0-14a6 6 0 1 0 6 6a6 6 0 0 0-6-6Z"/>
+          <path d="M22.59 25L20 22.41V18h2v3.59l2 2L22.59 25z"/>
+          <path
+            d="M28 6a2 2 0 0 0-2-2h-4V2h-2v2h-8V2h-2v2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h4v-2H6V6h4v2h2V6h8v2h2V6h4v6h2Z"/>
+        </svg>
+        Schedule
+      </li>
+      <li [class.challenge-settings-sections-active]="isOnSection('members')" (click)="onSection('members')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <path
+            d="M31 30h-2v-3a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3v3h-2v-3a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5zm-7-18a3 3 0 1 1-3 3a3 3 0 0 1 3-3m0-2a5 5 0 1 0 5 5a5 5 0 0 0-5-5zm-9 12h-2v-3a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v3H1v-3a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5zM8 4a3 3 0 1 1-3 3a3 3 0 0 1 3-3m0-2a5 5 0 1 0 5 5a5 5 0 0 0-5-5z"/>
+        </svg>
+        Members
+      </li>
+      <li [class.challenge-settings-sections-active]="isOnSection('deposits')" (click)="onSection('deposits')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <path
+            d="m25.7 9.3l-7-7c-.2-.2-.4-.3-.7-.3H8c-1.1 0-2 .9-2 2v24c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-.3-.1-.5-.3-.7zM18 4.4l5.6 5.6H18V4.4zM24 28H8V4h8v6c0 1.1.9 2 2 2h6v16z"/>
+          <path d="M10 22h12v2H10zm0-6h12v2H10z"/>
+        </svg>
+        Deposits
+      </li>
+      <li class="settings-action" *ngIf="hasBeenUpdated" (click)="onCancel()">
+        <button class="settings-action-cancel-btn">Cancel</button>
+      </li>
+      <li class="settings-action" *ngIf="hasBeenUpdated" (click)="onSave()">
+        <button class="settings-action-save-btn" type="submit">Save</button>
+      </li>
+    </ul>
   </div>
 </div>

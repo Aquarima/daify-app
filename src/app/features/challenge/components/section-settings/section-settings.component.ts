@@ -21,7 +21,7 @@ export class SectionSettingsComponent implements OnInit {
   @Input() members!: Member[];
   @Input() selfMember: Member | undefined;
 
-  currentSection: number = 0;
+  currentSection: string = 'overview';
   hasBeenUpdated: boolean = false;
   initialChallengeForm: any | undefined;
 
@@ -67,20 +67,8 @@ export class SectionSettingsComponent implements OnInit {
     this.initialChallengeForm = this.challengeForm.value;
   }
 
-  onOverview() {
-    this.showSection(0);
-  }
-
-  onMembers() {
-    this.showSection(1);
-  }
-
-  onDeposits() {
-    this.showSection(2);
-  }
-
-  onSpectators() {
-    this.showSection(3);
+  onSection(section: string) {
+    this.currentSection = section;
   }
 
   onTransferOwnership(to: Member) {
@@ -156,10 +144,6 @@ export class SectionSettingsComponent implements OnInit {
       })
   }
 
-  showSection(index: number) {
-    this.currentSection = index;
-  }
-
   getMemberNickname(member: Member): string {
     return member.nickname ? member.nickname : member.profile.username;
   }
@@ -172,8 +156,8 @@ export class SectionSettingsComponent implements OnInit {
     return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
   }
 
-  isOnSection(index: number) {
-    return this.currentSection === index;
+  isOnSection(section: string) {
+    return this.currentSection === section;
   }
 
   isSelfMember(member: Member) {

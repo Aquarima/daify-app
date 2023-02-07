@@ -1,207 +1,209 @@
 <dfy-header></dfy-header>
 <main class="main-content">
-    <div class="settings">
-        <div class="settings-sections">
-            <h1>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                    <path
-                            d="m18.04 7.99l-.63-1.4l-1.4-.63a.5.5 0 0 1 0-.91l1.4-.63l.63-1.4a.5.5 0 0 1 .91 0l.63 1.4l1.4.63a.5.5 0 0 1 0 .91l-1.4.63l-.63 1.4c-.17.39-.73.39-.91 0zm3.24 4.73l-.32-.72a.5.5 0 0 0-.91 0l-.32.72l-.73.32a.5.5 0 0 0 0 .91l.72.32l.32.73a.5.5 0 0 0 .91 0l.32-.72l.73-.32a.5.5 0 0 0 0-.91l-.72-.33zm-5.04 1.65l1.23.93c.4.3.51.86.26 1.3l-1.62 2.8c-.25.44-.79.62-1.25.42l-1.43-.6c-.2.13-.42.26-.64.37l-.19 1.54c-.06.5-.49.88-.99.88H8.38c-.5 0-.93-.38-.99-.88l-.19-1.54c-.22-.11-.43-.23-.64-.37l-1.43.6c-.46.2-1 .02-1.25-.42l-1.62-2.8c-.25-.44-.14-.99.26-1.3l1.23-.93V14c0-.12 0-.25.01-.37l-1.23-.93c-.4-.3-.51-.86-.26-1.3l1.62-2.8c.25-.44.79-.62 1.25-.42l1.43.6c.2-.13.42-.26.64-.37l.19-1.54c.05-.49.48-.87.98-.87h3.23c.5 0 .93.38.99.88l.19 1.54c.22.11.43.23.64.37l1.43-.6c.46-.2 1-.02 1.25.42l1.62 2.8c.25.44.14.99-.26 1.3l-1.23.93c.01.12.01.24.01.37s0 .24-.01.36zM13 14c0-1.66-1.34-3-3-3s-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3z"/>
-                </svg>
-                Settings
-            </h1>
-            <ul>
-                <li [class.settings-sections-active]="isOnSection('profile')" (click)="onSection('profile')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <path
-                                d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7zm10 28h-2v-5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v5H2v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7zm0-26h10v2H22zm0 5h10v2H22zm0 5h7v2h-7z"/>
-                    </svg>
-                    My Profile
-                </li>
-                <li [class.settings-sections-active]="isOnSection('subscription')" (click)="onSection('subscription')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <path
-                                d="M26 10h-2.762A4.487 4.487 0 0 0 16 4.707A4.487 4.487 0 0 0 8.762 10H6a2.002 2.002 0 0 0-2 2v4a2.002 2.002 0 0 0 2 2v10a2.002 2.002 0 0 0 2 2h16a2.002 2.002 0 0 0 2-2V18a2.002 2.002 0 0 0 2-2v-4a2.002 2.002 0 0 0-2-2Zm-9-2.5a2.5 2.5 0 1 1 2.5 2.5H17ZM12.5 5A2.503 2.503 0 0 1 15 7.5V10h-2.5a2.5 2.5 0 0 1 0-5ZM6 12h9v4H6Zm2 6h7v10H8Zm16.001 10H17V18h7ZM17 16v-4h9l.001 4Z"/>
-                    </svg>
-                    Subscription
-                </li>
-                <li [class.settings-sections-active]="isOnSection('security')" (click)="onSection('security')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <path
-                                d="M11 11v6.468a5.022 5.022 0 0 0 2.861 4.52L16 23l2.139-1.013A5.022 5.022 0 0 0 21 17.467V11Zm8 6.468a3.012 3.012 0 0 1-1.717 2.71L16 20.787l-1.283-.607A3.012 3.012 0 0 1 13 17.468V13h6Z"/>
-                        <path
-                                d="M30.414 17.414a2 2 0 0 0 0-2.828l-5.787-5.787l2.9-2.862a2.002 2.002 0 1 0-1.44-1.388l-2.874 2.836l-5.799-5.8a2 2 0 0 0-2.828 0L8.799 7.374L5.937 4.472A2.002 2.002 0 1 0 4.55 5.914l2.835 2.873l-5.8 5.799a2 2 0 0 0 0 2.828l5.8 5.799l-2.835 2.873a1.998 1.998 0 1 0 1.387 1.442l2.862-2.9l5.787 5.786a2 2 0 0 0 2.828 0l5.8-5.799l2.872 2.836a1.998 1.998 0 1 0 1.442-1.387l-2.9-2.863ZM16 29L3 16L16 3l13 13Z"/>
-                    </svg>
-                    Security
-                </li>
-                <li [class.settings-sections-active]="isOnSection('integrations')" (click)="onSection('integrations')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <path
-                                d="M11.61 29.92a1 1 0 0 1-.6-1.07L12.83 17H8a1 1 0 0 1-1-1.23l3-13A1 1 0 0 1 11 2h10a1 1 0 0 1 .78.37a1 1 0 0 1 .2.85L20.25 11H25a1 1 0 0 1 .9.56a1 1 0 0 1-.11 1l-13 17A1 1 0 0 1 12 30a1.09 1.09 0 0 1-.39-.08ZM17.75 13l2-9H11.8L9.26 15h5.91l-1.59 10.28L23 13Z"/>
-                    </svg>
-                    Integrations
-                </li>
-            </ul>
-            <!--<button class="settings-sections-logout">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                <path fill="currentColor"
-                      d="M6 30h12a2.002 2.002 0 0 0 2-2v-3h-2v3H6V4h12v3h2V4a2.002 2.002 0 0 0-2-2H6a2.002 2.002 0 0 0-2 2v24a2.002 2.002 0 0 0 2 2Z"/>
-                <path d="M20.586 20.586L24.172 17H10v-2h14.172l-3.586-3.586L22 10l6 6l-6 6l-1.414-1.414z"/>
-              </svg>
-              Logout
-            </button>-->
-        </div>
-        <div class="settings-section" [formGroup]="userSettingsForm">
-            <div class="settings-section-profile" *ngIf="isOnSection('profile')">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                        <path
-                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    My Profile
-                </h2>
-                <p class="settings-section-profile-info">Manage your profile settings.</p>
-                <div class="settings-section-profile-header">
-                    <div class="settings-section-profile-header-banner"
-                         [style.background-image]="'url(' + banner + ')'">
-                        <div class="settings-section-profile-header-banner-edit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                <path d="M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z"/>
-                                <path
-                                        d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z"/>
-                            </svg>
-                        </div>
-                        <div class="settings-section-profile-header-avatar">
-                            <div class="settings-section-profile-header-avatar-edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                    <path d="M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z"/>
-                                    <path
-                                            d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z"/>
-                                </svg>
-                            </div>
-                            <img [src]="avatar" alt="">
-                        </div>
-                    </div>
-                    <div class="settings-section-profile-header-bottom">
-                        <div class="form-parameter">
-                            <p class="form-parameter-name">Username</p>
-                            <p class="settings-section-profile-header-bottom-username">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                    <path
-                                            d="M20 9c0-.55-.45-1-1-1h-3V5c0-.55-.45-1-1-1s-1 .45-1 1v3h-4V5c0-.55-.45-1-1-1s-1 .45-1 1v3H5c-.55 0-1 .45-1 1s.45 1 1 1h3v4H5c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3v-4h3c.55 0 1-.45 1-1zm-6 5h-4v-4h4v4z"/>
-                                </svg>
-                                {{user.profile.username}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="editable-parameters">
-                    <div class="form-double-parameters">
-                        <div class="form-parameter">
-                            <p class="form-parameter-name">First name</p>
-                            <div class="user-input">
-                                <div class="user-input-box">
-                                    <label for="first-name">First name</label>
-                                    <input id="first-name" class="form-control" name="firstName" type="text"
-                                           formControlName="firstName"
-                                           [customFocus]="'user-input-active'">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-parameter">
-                            <p class="form-parameter-name">Last name</p>
-                            <div class="user-input">
-                                <div class="user-input-box">
-                                    <label for="last-name">Last name</label>
-                                    <input id="last-name" class="form-control" name="lastName" type="text"
-                                           formControlName="lastName"
-                                           [customFocus]="'user-input-active'">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-parameter">
-                        <p class="form-parameter-name">Email</p>
-                        <div class="user-input">
-                            <div class="user-input-box">
-                                <label for="email">Email</label>
-                                <input id="email" class="form-control" name="email" type="text" formControlName="email"
-                                       [customFocus]="'user-input-active'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-parameter">
-                        <p class="form-parameter-name">About me</p>
-                        <div class="user-input">
-                            <div class="user-input-box">
-                                <label for="about">About me</label>
-                                <textarea id="about" class="form-control" name="about" formControlName="about"
-                                          [customFocus]="'user-input-active'" cols="30" rows="10"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-parameter">
-                        <p class="form-parameter-name">Birthdate</p>
-                        <p class="form-parameter-value">{{user.profile.birthdate | date: "MMMM, dd yyyy"}}</p>
-                    </div>
-                    <div class="form-parameter">
-                        <p class="form-parameter-name">Profession</p>
-                        <div class="user-input">
-                            <div class="user-input-box">
-                                <label for="about">Profession</label>
-                                <input id="profession" class="form-control" name="profession" type="text"
-                                       formControlName="profession"
-                                       [customFocus]="'user-input-active'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-parameter">
-                        <p class="form-parameter-name">Country</p>
-                        <dfy-custom-select [label]="'Country'" [control]="userSettingsForm.controls.country"
-                                           [data]="countries"></dfy-custom-select>
-                    </div>
-                </div>
-            </div>
-            <div class="settings-section-subscription"
-                 *ngIf="isOnSection('subscription')">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                        <path d="M4 17h16v2H4zm13-6.17L15.38 12L12 7.4L8.62 12L7 10.83L9.08 8H4v6h16V8h-5.08z"
-                              opacity=".3"/>
-                        <path
-                                d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67l-.5-.68C10.96 2.54 10.05 2 9 2C7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83L8.62 12L12 7.4l3.38 4.6L17 10.83L14.92 8H20v6z"/>
-                    </svg>
-                    Subscription
-                </h2>
-                <p class="settings-section-profile-info">Manage your subscription.</p>
-            </div>
-            <div class="settings-section-security" *ngIf="isOnSection('security')">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                        <path
-                                d="m11.19 1.36l-7 3.11C3.47 4.79 3 5.51 3 6.3V11c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V6.3c0-.79-.47-1.51-1.19-1.83l-7-3.11c-.51-.23-1.11-.23-1.62 0zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-                    </svg>
-                    Security
-                </h2>
-                <p class="settings-section-profile-info">Manage your account security settings.</p>
-                <div class="editable-parameters">
-                </div>
-            </div>
-            <div class="settings-section-integrations"
-                 *ngIf="isOnSection('integrations')">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                        <path
-                                d="M10.3 14.85q.275-.275.275-.7q0-.425-.275-.725L8.85 12l1.475-1.475q.275-.275.275-.7q0-.425-.275-.725q-.3-.275-.725-.275t-.7.275l-2.2 2.2q-.275.275-.275.7q0 .425.275.7l2.175 2.175q.275.275.7.275q.425 0 .725-.3Zm3.4.025q.3.3.725.3t.7-.275l2.175-2.175q.275-.275.275-.7q0-.425-.275-.7l-2.2-2.2q-.275-.275-.7-.275q-.425 0-.725.275q-.275.3-.275.725t.275.7l1.475 1.475l-1.45 1.425q-.275.3-.275.725t.275.7ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h4.2q.325-.9 1.088-1.45Q11.05 1 12 1t1.713.55Q14.475 2.1 14.8 3H19q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm7-16.75q.325 0 .538-.213q.212-.212.212-.537q0-.325-.212-.538q-.213-.212-.538-.212q-.325 0-.537.212q-.213.213-.213.538q0 .325.213.537q.212.213.537.213Z"/>
-                    </svg>
-                    Integrations
-                </h2>
-                <p class="settings-section-profile-info">Manage integrations related to your account.</p>
-            </div>
-            <div class="settings-unsaved" *ngIf="isUserSettingsFormChanged()">
-                <button class="settings-unsaved-reset">Reset</button>
-                <button type="submit" class="settings-unsaved-save">Save</button>
-            </div>
-        </div>
+  <div class="settings">
+    <div class="settings-sections">
+      <h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+          <path
+            d="m18.04 7.99l-.63-1.4l-1.4-.63a.5.5 0 0 1 0-.91l1.4-.63l.63-1.4a.5.5 0 0 1 .91 0l.63 1.4l1.4.63a.5.5 0 0 1 0 .91l-1.4.63l-.63 1.4c-.17.39-.73.39-.91 0zm3.24 4.73l-.32-.72a.5.5 0 0 0-.91 0l-.32.72l-.73.32a.5.5 0 0 0 0 .91l.72.32l.32.73a.5.5 0 0 0 .91 0l.32-.72l.73-.32a.5.5 0 0 0 0-.91l-.72-.33zm-5.04 1.65l1.23.93c.4.3.51.86.26 1.3l-1.62 2.8c-.25.44-.79.62-1.25.42l-1.43-.6c-.2.13-.42.26-.64.37l-.19 1.54c-.06.5-.49.88-.99.88H8.38c-.5 0-.93-.38-.99-.88l-.19-1.54c-.22-.11-.43-.23-.64-.37l-1.43.6c-.46.2-1 .02-1.25-.42l-1.62-2.8c-.25-.44-.14-.99.26-1.3l1.23-.93V14c0-.12 0-.25.01-.37l-1.23-.93c-.4-.3-.51-.86-.26-1.3l1.62-2.8c.25-.44.79-.62 1.25-.42l1.43.6c.2-.13.42-.26.64-.37l.19-1.54c.05-.49.48-.87.98-.87h3.23c.5 0 .93.38.99.88l.19 1.54c.22.11.43.23.64.37l1.43-.6c.46-.2 1-.02 1.25.42l1.62 2.8c.25.44.14.99-.26 1.3l-1.23.93c.01.12.01.24.01.37s0 .24-.01.36zM13 14c0-1.66-1.34-3-3-3s-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3z"/>
+        </svg>
+        Settings
+      </h1>
+      <ul>
+        <li [class.settings-sections-active]="isOnSection('profile')" (click)="onSection('profile')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <path
+              d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7zm10 28h-2v-5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v5H2v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7zm0-26h10v2H22zm0 5h10v2H22zm0 5h7v2h-7z"/>
+          </svg>
+          My Profile
+        </li>
+        <li [class.settings-sections-active]="isOnSection('subscription')" (click)="onSection('subscription')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <path
+              d="M26 10h-2.762A4.487 4.487 0 0 0 16 4.707A4.487 4.487 0 0 0 8.762 10H6a2.002 2.002 0 0 0-2 2v4a2.002 2.002 0 0 0 2 2v10a2.002 2.002 0 0 0 2 2h16a2.002 2.002 0 0 0 2-2V18a2.002 2.002 0 0 0 2-2v-4a2.002 2.002 0 0 0-2-2Zm-9-2.5a2.5 2.5 0 1 1 2.5 2.5H17ZM12.5 5A2.503 2.503 0 0 1 15 7.5V10h-2.5a2.5 2.5 0 0 1 0-5ZM6 12h9v4H6Zm2 6h7v10H8Zm16.001 10H17V18h7ZM17 16v-4h9l.001 4Z"/>
+          </svg>
+          Subscription
+        </li>
+        <li [class.settings-sections-active]="isOnSection('security')" (click)="onSection('security')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <path
+              d="M11 11v6.468a5.022 5.022 0 0 0 2.861 4.52L16 23l2.139-1.013A5.022 5.022 0 0 0 21 17.467V11Zm8 6.468a3.012 3.012 0 0 1-1.717 2.71L16 20.787l-1.283-.607A3.012 3.012 0 0 1 13 17.468V13h6Z"/>
+            <path
+              d="M30.414 17.414a2 2 0 0 0 0-2.828l-5.787-5.787l2.9-2.862a2.002 2.002 0 1 0-1.44-1.388l-2.874 2.836l-5.799-5.8a2 2 0 0 0-2.828 0L8.799 7.374L5.937 4.472A2.002 2.002 0 1 0 4.55 5.914l2.835 2.873l-5.8 5.799a2 2 0 0 0 0 2.828l5.8 5.799l-2.835 2.873a1.998 1.998 0 1 0 1.387 1.442l2.862-2.9l5.787 5.786a2 2 0 0 0 2.828 0l5.8-5.799l2.872 2.836a1.998 1.998 0 1 0 1.442-1.387l-2.9-2.863ZM16 29L3 16L16 3l13 13Z"/>
+          </svg>
+          Security
+        </li>
+        <li [class.settings-sections-active]="isOnSection('integrations')" (click)="onSection('integrations')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <path
+              d="M11.61 29.92a1 1 0 0 1-.6-1.07L12.83 17H8a1 1 0 0 1-1-1.23l3-13A1 1 0 0 1 11 2h10a1 1 0 0 1 .78.37a1 1 0 0 1 .2.85L20.25 11H25a1 1 0 0 1 .9.56a1 1 0 0 1-.11 1l-13 17A1 1 0 0 1 12 30a1.09 1.09 0 0 1-.39-.08ZM17.75 13l2-9H11.8L9.26 15h5.91l-1.59 10.28L23 13Z"/>
+          </svg>
+          Integrations
+        </li>
+      </ul>
+      <!--<button class="settings-sections-logout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <path fill="currentColor"
+                d="M6 30h12a2.002 2.002 0 0 0 2-2v-3h-2v3H6V4h12v3h2V4a2.002 2.002 0 0 0-2-2H6a2.002 2.002 0 0 0-2 2v24a2.002 2.002 0 0 0 2 2Z"/>
+          <path d="M20.586 20.586L24.172 17H10v-2h14.172l-3.586-3.586L22 10l6 6l-6 6l-1.414-1.414z"/>
+        </svg>
+        Logout
+      </button>-->
     </div>
+    <div class="settings-section" [formGroup]="userSettingsForm">
+      <div>
+        <div class="settings-section-profile" *ngIf="isOnSection('profile')">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            My Profile
+          </h2>
+          <p class="settings-section-profile-info">Manage your profile settings.</p>
+          <div class="settings-section-profile-header">
+            <div class="settings-section-profile-header-banner"
+                 [style.background-image]="'url(' + banner + ')'">
+              <div class="settings-section-profile-header-banner-edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <path d="M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z"/>
+                  <path
+                    d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z"/>
+                </svg>
+              </div>
+              <div class="settings-section-profile-header-avatar">
+                <div class="settings-section-profile-header-avatar-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <path d="M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z"/>
+                    <path
+                      d="M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z"/>
+                  </svg>
+                </div>
+                <img [src]="avatar" alt="">
+              </div>
+            </div>
+            <div class="settings-section-profile-header-bottom">
+              <div class="form-parameter">
+                <p class="form-parameter-name">Username</p>
+                <p class="settings-section-profile-header-bottom-username">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      d="M20 9c0-.55-.45-1-1-1h-3V5c0-.55-.45-1-1-1s-1 .45-1 1v3h-4V5c0-.55-.45-1-1-1s-1 .45-1 1v3H5c-.55 0-1 .45-1 1s.45 1 1 1h3v4H5c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h3c.55 0 1-.45 1-1s-.45-1-1-1h-3v-4h3c.55 0 1-.45 1-1zm-6 5h-4v-4h4v4z"/>
+                  </svg>
+                  {{user.profile.username}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="editable-parameters">
+            <div class="form-double-parameters">
+              <div class="form-parameter">
+                <p class="form-parameter-name">First name</p>
+                <div class="user-input">
+                  <div class="user-input-box">
+                    <label for="first-name">First name</label>
+                    <input id="first-name" class="form-control" name="firstName" type="text"
+                           formControlName="firstName"
+                           [customFocus]="'user-input-active'">
+                  </div>
+                </div>
+              </div>
+              <div class="form-parameter">
+                <p class="form-parameter-name">Last name</p>
+                <div class="user-input">
+                  <div class="user-input-box">
+                    <label for="last-name">Last name</label>
+                    <input id="last-name" class="form-control" name="lastName" type="text"
+                           formControlName="lastName"
+                           [customFocus]="'user-input-active'">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-parameter">
+              <p class="form-parameter-name">Email</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="email">Email</label>
+                  <input id="email" class="form-control" name="email" type="text" formControlName="email"
+                         [customFocus]="'user-input-active'">
+                </div>
+              </div>
+            </div>
+            <div class="form-parameter">
+              <p class="form-parameter-name">About me</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="about">About me</label>
+                  <textarea id="about" class="form-control" name="about" formControlName="about"
+                            [customFocus]="'user-input-active'" cols="30" rows="10"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="form-parameter">
+              <p class="form-parameter-name">Birthdate</p>
+              <p class="form-parameter-value">{{user.profile.birthdate | date: "MMMM, dd yyyy"}}</p>
+            </div>
+            <div class="form-parameter">
+              <p class="form-parameter-name">Profession</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="about">Profession</label>
+                  <input id="profession" class="form-control" name="profession" type="text"
+                         formControlName="profession"
+                         [customFocus]="'user-input-active'">
+                </div>
+              </div>
+            </div>
+            <div class="form-parameter">
+              <p class="form-parameter-name">Country</p>
+              <dfy-custom-select [label]="'Country'" [control]="userSettingsForm.controls.country"
+                                 [data]="countries"></dfy-custom-select>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section-subscription"
+             *ngIf="isOnSection('subscription')">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path d="M4 17h16v2H4zm13-6.17L15.38 12L12 7.4L8.62 12L7 10.83L9.08 8H4v6h16V8h-5.08z"
+                    opacity=".3"/>
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67l-.5-.68C10.96 2.54 10.05 2 9 2C7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83L8.62 12L12 7.4l3.38 4.6L17 10.83L14.92 8H20v6z"/>
+            </svg>
+            Subscription
+          </h2>
+          <p class="settings-section-profile-info">Manage your subscription.</p>
+        </div>
+        <div class="settings-section-security" *ngIf="isOnSection('security')">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="m11.19 1.36l-7 3.11C3.47 4.79 3 5.51 3 6.3V11c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V6.3c0-.79-.47-1.51-1.19-1.83l-7-3.11c-.51-.23-1.11-.23-1.62 0zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            </svg>
+            Security
+          </h2>
+          <p class="settings-section-profile-info">Manage your account security settings.</p>
+          <div class="editable-parameters">
+          </div>
+        </div>
+        <div class="settings-section-integrations"
+             *ngIf="isOnSection('integrations')">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="M10.3 14.85q.275-.275.275-.7q0-.425-.275-.725L8.85 12l1.475-1.475q.275-.275.275-.7q0-.425-.275-.725q-.3-.275-.725-.275t-.7.275l-2.2 2.2q-.275.275-.275.7q0 .425.275.7l2.175 2.175q.275.275.7.275q.425 0 .725-.3Zm3.4.025q.3.3.725.3t.7-.275l2.175-2.175q.275-.275.275-.7q0-.425-.275-.7l-2.2-2.2q-.275-.275-.7-.275q-.425 0-.725.275q-.275.3-.275.725t.275.7l1.475 1.475l-1.45 1.425q-.275.3-.275.725t.275.7ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h4.2q.325-.9 1.088-1.45Q11.05 1 12 1t1.713.55Q14.475 2.1 14.8 3H19q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm7-16.75q.325 0 .538-.213q.212-.212.212-.537q0-.325-.212-.538q-.213-.212-.538-.212q-.325 0-.537.212q-.213.213-.213.538q0 .325.213.537q.212.213.537.213Z"/>
+            </svg>
+            Integrations
+          </h2>
+          <p class="settings-section-profile-info">Manage integrations related to your account.</p>
+        </div>
+      </div>
+      <div class="settings-unsaved" *ngIf="isUserSettingsFormChanged()">
+        <button class="settings-unsaved-reset">Reset</button>
+        <button type="submit" class="settings-unsaved-save">Save</button>
+      </div>
+    </div>
+  </div>
 </main>
 <dfy-footer></dfy-footer>
