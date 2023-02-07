@@ -1,4 +1,4 @@
-import {ChallengeGroupBy} from "./challenge-group-by";
+import {ChallengeGroupBy} from "./challenge-order-by";
 
 export interface Search {
     options: SearchOptions;

@@ -1,3 +1,5 @@
+@import './assets/styles/_config.scss';
+
 @font-face {
   font-family: 'Sora';
   src: url('/assets/fonts/Sora.ttf');
@@ -6,10 +8,13 @@
 $font-family: 'Sora';
 
 :root {
+  --color-primary-2: #F8F8FB;
+  --color-text: #3E3F5E;
+  --color-text-alt: #7D7E9E;
+  --color-text-alt-2: #ADAFCA;
   --color-primary-rgb: 84, 101, 255;
   --color-primary: #5465FF;
   --color-primary-hover: #4355FF;
-  --color-primary-2: #F8F8FB;
   --color-secondary: #50D8D7;
   --color-secondary-hover: #43D5D4;
   --color-tertiary: #F46197;
@@ -20,9 +25,6 @@ $font-family: 'Sora';
   --color-semantic-warning: 253, 218, 13;
   --color-semantic-success: 76, 175, 80;
   --color-semantic-error: 255, 82, 82;
-  --color-text: #3E3F5E;
-  --color-text-alt: #7D7E9E;
-  --color-text-alt-2: #ADAFCA;
   --preset-font-size-tiny: .8em;
   --preset-font-size-small: .9em;
   --preset-font-size-normal: 1em;
@@ -30,6 +32,13 @@ $font-family: 'Sora';
   --preset-font-size-large: 1.8em;
   --preset-font-size-x-large: 2.3em;
 }
+
+/*body.theme-dark {
+  --color-primary-2: #121212;
+  --color-text: #3E3F5E;
+  --color-text-alt: #7D7E9E;
+  --color-text-alt-2: #ADAFCA;
+}*/
 
 // CSS Reset
 

@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
-import {AuthService, SystemAlert} from './core';
+import {Component, Inject, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
+import {AuthService, SystemAlert, Theme} from './core';
 import {ProfileService} from './core/services/profile.service';
 import {AlertHandlingService} from "./core/services/alert-handling.service";
 import {AlertBoxComponent} from "./shared";
@@ -8,6 +8,8 @@ import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
 import {UserService} from "./core/services/user.service";
 import {AlertType} from "./core/models/system-alert";
+import {ThemeService} from "./core/services/theme.service";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -24,12 +26,19 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private viewContainerRef: ViewContainerRef,
     private alertHandlingService: AlertHandlingService,
+    private themeService: ThemeService,
     private authService: AuthService,
     private userService: UserService,
-    private profileService: ProfileService) {
+    private profileService: ProfileService,
+    @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit(): void {
+    this.themeService.change.subscribe((theme) => {
+      if (theme === Theme.DARK) this.document.body.classList.add('theme-dark');
+      else this.document.body.classList.remove('theme-dark');
+    });
+    this.themeService.updateTheme(Theme.DARK);
     setTimeout(() => {
       this.showSplashScreen = false;
     }, 3000);

@@ -3,7 +3,7 @@
   <div class="user-input">
     <div class="user-input-box">
       <label for="search">Search</label>
-      <input id="search" class="form-control" type="text" autocomplete="off" maxlength="18" #name
+      <input id="search" class="form-control" type="text" autocomplete="off" #name
              formControlName="title" [customFocus]="'user-input-active'">
       <button class="submit-btn" type="submit" (click)="onSearch()">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-  <dfy-custom-select class="select-order-by" [label]="'Order By'" [control]="searchForm.controls.groupType" [data]="groupByTypes"></dfy-custom-select>
+  <dfy-custom-select class="select-order-by" [label]="'Order By'" [control]="searchForm.controls.orderBy" [data]="orderByTypes"></dfy-custom-select>
   <div class="display-modes">
     <button [class.display-mode-selected]="true">
       <svg width="32" height="32" viewBox="0 0 24 24">

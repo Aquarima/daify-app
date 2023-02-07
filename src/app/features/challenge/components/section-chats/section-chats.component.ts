@@ -10,7 +10,7 @@ import {Member} from "../../../../core/models/challenge/member.model";
 import {Observable, timer} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
-import {UserReportComponent} from "../../../user";
+import {UserReportComponent} from "../../../user/components/user-report/user-report.component";
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -99,7 +99,7 @@ export class SectionChatsComponent implements OnInit {
 
   onReportMessage(message: Message) {
     const componentRef = this.viewContainerRef.createComponent(UserReportComponent);
-    componentRef.instance.closeEvent.subscribe(_ => componentRef.destroy());
+    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
   }
 
   private scrollToNewestMessage() {
