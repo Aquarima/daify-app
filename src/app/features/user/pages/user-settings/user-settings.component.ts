@@ -51,9 +51,13 @@ export class UserSettingsComponent implements OnInit {
     this.initialUserSettingsForm = this.userSettingsForm.value;
   }
 
-  onSection(section: string) {
-    this.section = section;
-  }
+    onSection(section: string) {
+        if (!this.availableSections.includes(section)) {
+            section = this.availableSections[0];
+            this.router.navigate([`../${section}`], {relativeTo: this.route});
+        }
+        this.section = section;
+    }
 
   isOnSection(section: string) {
     return this.section === section;
