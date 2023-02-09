@@ -106,7 +106,7 @@
       .editable-parameters {
         display: flex;
         flex-direction: column;
-        row-gap: 16px;
+        row-gap: 24px;
       }
 
       .form-parameter {
@@ -144,7 +144,7 @@
       .challenge-settings-members {
 
         .challenge-settings-members-item {
-          padding: 8px 16px;
+          padding: 8px 32px 8px 16px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -172,8 +172,13 @@
             }
 
             a {
+              text-decoration: none;
               font-size: var(--preset-font-size-small);
               color: var(--color-text-alt);
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
 
@@ -220,6 +225,40 @@
                 fill: rgb(var(--color-semantic-warning));
               }
             }
+          }
+        }
+      }
+
+      .challenge-settings-unsaved {
+        width: 90%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 32px;
+        border-radius: 8px;
+
+        button {
+          min-width: 100px;
+          height: 32px;
+          border: none;
+          border-radius: 8px;
+          color: #FFF;
+        }
+
+        .challenge-settings-unsaved-reset {
+          background-color: var(--color-tertiary);
+
+          &:hover {
+            background-color: var(--color-tertiary-hover);
+          }
+        }
+
+        .challenge-settings-unsaved-save {
+          background-color: var(--color-secondary);
+
+          &:hover {
+            background-color: var(--color-secondary-hover);
           }
         }
       }
