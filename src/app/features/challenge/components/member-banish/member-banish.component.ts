@@ -11,8 +11,8 @@ export class MemberBanishComponent implements OnInit {
 
   @Input() member!: Member;
 
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
-  @Output() banishEvent: EventEmitter<any> = new EventEmitter();
+  @Output() cancelEvent: EventEmitter<any> = new EventEmitter();
+  @Output() confirmEvent: EventEmitter<any> = new EventEmitter();
 
   banishForm = new FormGroup({
     reason: new FormControl<string>(''),
@@ -25,7 +25,7 @@ export class MemberBanishComponent implements OnInit {
   }
 
   onCancel() {
-    this.closeEvent.emit();
+    this.cancelEvent.emit();
   }
 
   onBanish() {

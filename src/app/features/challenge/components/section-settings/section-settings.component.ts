@@ -1,14 +1,12 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {AccessType, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
+import {AccessType, Challenge, ChallengeService} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {MemberKickComponent} from "../member-kick/member-kick.component";
-import {MemberBanishComponent} from "../member-banish/member-banish.component";
-import {ConfirmBoxComponent} from "../../../../shared/components/confirm-box/confirm-box.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {PopupService} from "../../../../core/services/popup.service";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -21,7 +19,8 @@ export class SectionSettingsComponent implements OnInit {
   @Input() members!: Member[];
   @Input() selfMember: Member | undefined;
 
-  currentSection: string = 'overview';
+  availableSections: string[] = ['overview', 'members', 'deposits'];
+  currentSection: string = this.availableSections[0];
   hasBeenUpdated: boolean = false;
   initialChallengeForm: any | undefined;
 
@@ -38,18 +37,21 @@ export class SectionSettingsComponent implements OnInit {
     spectatorsAllowed: new FormControl<boolean>(false),
     depositsMin: new FormControl<number>(1),
     depositsMax: new FormControl<number>(1)
-  })
+  });
 
   constructor(
     private viewContainerRef: ViewContainerRef,
     private route: ActivatedRoute,
     private router: Router,
     private alertHandlingService: AlertHandlingService,
+    private popupService: PopupService,
     private challengeService: ChallengeService,
     private memberService: MemberService) {
+    this.popupService.viewContainerRef = viewContainerRef;
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => this.onSection(`${params.get('settingsTab')}`));
     this.initChallengeForm(this.challenge);
     this.challengeForm.valueChanges.subscribe(() => {
       this.hasBeenUpdated = JSON.stringify(this.initialChallengeForm) !== JSON.stringify(this.challengeForm.value);
@@ -68,59 +70,24 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   onSection(section: string) {
+    if (!this.availableSections.includes(section)) section = this.availableSections[0];
+    this.router.navigate([`/app/challenge/${this.challenge.id}/settings/${section}`]);
     this.currentSection = section;
   }
 
   onTransferOwnership(to: Member) {
-    const componentRef = this.viewContainerRef.createComponent(ConfirmBoxComponent);
-    const instance = componentRef.instance;
-    instance.title = `Transfer ownership to ${this.getMemberNickname(to)} ?`;
-    instance.message = `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undo.`;
-    instance.cancelEvent.subscribe(() => componentRef.destroy());
-    instance.confirmEvent.subscribe(() => {
-      this.challengeService.transferChallengeOwnership(this.challenge, to)
-        .subscribe({
-          next: () => {
-            this.challenge.author = to.profile;
-            this.router.navigate(['../overview'], {relativeTo: this.route});
-            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
-          },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-        })
-      componentRef.destroy();
-    });
+    this.popupService.createConfirmModal(
+      `Transfer ownership to ${this.getMemberNickname(to)} ?`,
+      `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undo.`,
+      () => this.transferOwnership(to));
   }
 
   onKickMember(member: Member) {
-    const componentRef = this.viewContainerRef.createComponent(MemberKickComponent);
-    componentRef.instance.member = member;
-    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
-    componentRef.instance.kickEvent.subscribe((message: string) => {
-      this.memberService.kickMember(member)
-        .subscribe({
-          next: () => {
-            this.members.splice(this.members.indexOf(member), 1);
-            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
-          },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-        })
-    });
+    this.popupService.createKickModal(member, () => this.kickMember(member));
   }
 
   onBanishMember(member: Member) {
-    const componentRef = this.viewContainerRef.createComponent(MemberBanishComponent);
-    componentRef.instance.member = member;
-    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
-    componentRef.instance.banishEvent.subscribe((message: string) => {
-      this.memberService.banishMember(member, false)
-        .subscribe({
-          next: () => {
-            this.members.splice(this.members.indexOf(member), 1);
-            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
-          },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-        })
-    });
+    this.popupService.createBanModal(member, () => this.banMember(member));
   }
 
   onCancel() {
@@ -142,6 +109,40 @@ export class SectionSettingsComponent implements OnInit {
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
       })
+  }
+
+  private kickMember(member: Member) {
+    this.memberService.kickMember(member)
+      .subscribe({
+        next: () => {
+          this.members.splice(this.members.indexOf(member), 1);
+          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+      });
+  }
+
+  private banMember(member: Member) {
+    this.memberService.banishMember(member, false)
+      .subscribe({
+        next: () => {
+          this.members.splice(this.members.indexOf(member), 1);
+          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+      });
+  }
+
+  private transferOwnership(to: Member) {
+    this.challengeService.transferChallengeOwnership(this.challenge, to)
+      .subscribe({
+        next: () => {
+          this.challenge.author = to.profile;
+          this.router.navigate(['../overview'], {relativeTo: this.route});
+          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
   }
 
   getMemberNickname(member: Member): string {

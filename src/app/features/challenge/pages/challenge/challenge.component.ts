@@ -19,7 +19,10 @@ export class ChallengeComponent implements OnInit {
   @ViewChild('messages_box') messagesBox!: ElementRef;
   @ViewChild('challenge_box') challengeBox!: ElementRef;
 
-  section: BehaviorSubject<string> = new BehaviorSubject<string>('overview');
+
+  section$: BehaviorSubject<string> = new BehaviorSubject<string>('overview');
+  availableSections: string[] = ['overview', 'chats', 'groups', 'leaderboard', 'settings'];
+  currentSection = this.availableSections[0];
   challenge: Challenge = {} as Challenge;
   members: Member[] = [];
   selfMember: Member | undefined = undefined;
@@ -35,13 +38,11 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.section$.subscribe(section => this.currentSection = section);
     this.route.paramMap.subscribe(params => {
-
       const target = params.get('id');
       if (!target) return;
       const challengeId: number = parseInt(target);
-
       forkJoin([
         this.challengeService.getChallengesById(challengeId),
         this.memberService.getMembersByChallenge(challengeId)
@@ -50,7 +51,6 @@ export class ChallengeComponent implements OnInit {
           this.challenge = challenge;
           this.members = members.content;
           this.selfMember = this.members.filter((m) => m.profile.id === this.authService.user.profile.id)[0];
-          this.onNavigate(params.get('tab') || 'overview');
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       });
@@ -72,33 +72,14 @@ export class ChallengeComponent implements OnInit {
     this.sections.nativeElement.scrollLeft += 100;
   }
 
-  onNavigate(section: string) {
-    this.section.next(section);
+  onSection(section: string) {
+    if (!this.availableSections.includes(section)) section = this.availableSections[0];
+    this.section$.next(section);
     this.router.navigate(['/app/challenge', this.challenge.id, section]);
   }
 
-  onOverview() {
-    this.onNavigate('overview');
-  }
-
-  onChats() {
-    this.onNavigate('chats');
-  }
-
-  onGroups() {
-    this.onNavigate('groups');
-  }
-
-  onLeaderboard() {
-    this.onNavigate('leaderboard');
-  }
-
-  onSettings() {
-    this.onNavigate('settings');
-  }
-
   isOnSection(section: string) {
-    return this.section.value === section;
+    return this.currentSection === section;
   }
 
   isMember(): boolean {

@@ -36,14 +36,14 @@
           </svg>
         </button>
         <ul #sections>
-          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''" (click)="onOverview()">
+          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''" (click)="onSection('overview')">
             <span class="challenge-sections-name">Overview</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-width="1.5"
                     d="M3 9.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Zm11 11v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6h-5.8a.6.6 0 0 1-.6-.6Zm-11 0v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('chats') ? 'challenge-sections-selected' : ''" (click)="onChats()"
+          <li [ngClass]="isOnSection('chats') ? 'challenge-sections-selected' : ''" (click)="onSection('chats')"
               *ngIf="isMember()">
             <span class="challenge-sections-name">Chats</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('groups') ? 'challenge-sections-selected' : ''" (click)="onGroups()"
+          <li [ngClass]="isOnSection('groups') ? 'challenge-sections-selected' : ''" (click)="onSection('groups')"
               *ngIf="isMember()">
             <span class="challenge-sections-name">Groups</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onLeaderboard()"
+          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onSection('leaderboard')"
               *ngIf="isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@
                     d="M15 21H9v-8.4a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6V21Zm5.4 0H15v-2.9a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6v2.3a.6.6 0 0 1-.6.6ZM9 21v-4.9a.6.6 0 0 0-.6-.6H3.6a.6.6 0 0 0-.6.6v4.3a.6.6 0 0 0 .6.6H9Zm1.806-15.887l.909-1.927a.312.312 0 0 1 .57 0l.91 1.927l2.032.311c.261.04.365.376.176.568l-1.47 1.5l.347 2.118c.044.272-.228.48-.462.351l-1.818-1l-1.818 1c-.233.128-.506-.079-.462-.351l.347-2.118l-1.47-1.5c-.19-.192-.085-.528.175-.568l2.034-.31Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''" (click)="onSettings()"
+          <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''" (click)="onSection('settings')"
               *ngIf="isSelfMemberAuthor()">
             <span class="challenge-sections-name">Settings</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
@@ -95,9 +95,9 @@
       <div #challenge_box class="challenge-box">
         <dfy-challenge-overview [challenge]="challenge" [members]="members" [selfMember]="selfMember"
                                 *ngIf="isOnSection('overview')"></dfy-challenge-overview>
-        <dfy-challenge-chats [section]="section" [challenge]="challenge" [selfMember]="selfMember"
+        <dfy-challenge-chats [section]="section$" [challenge]="challenge" [selfMember]="selfMember"
                              *ngIf="isOnSection('chats')"></dfy-challenge-chats>
-        <dfy-challenge-groups [section]="section" [challenge]="challenge" [members]="members"
+        <dfy-challenge-groups [section]="section$" [challenge]="challenge" [members]="members"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>

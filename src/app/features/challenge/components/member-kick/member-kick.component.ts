@@ -12,8 +12,8 @@ export class MemberKickComponent implements OnInit {
 
   @Input() member!: Member;
 
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
-  @Output() kickEvent: EventEmitter<string> = new EventEmitter();
+  @Output() cancelEvent: EventEmitter<any> = new EventEmitter();
+  @Output() confirmEvent: EventEmitter<string> = new EventEmitter();
 
   reason: FormControl = new FormControl();
 
@@ -23,12 +23,12 @@ export class MemberKickComponent implements OnInit {
   }
 
   onCancel() {
-    this.closeEvent.emit();
+    this.cancelEvent.emit();
   }
 
   onKick() {
-    this.kickEvent.emit(this.reason.value);
-    this.closeEvent.emit();
+    this.confirmEvent.emit(this.reason.value);
+    this.cancelEvent.emit();
   }
 
   get nickname(): string {

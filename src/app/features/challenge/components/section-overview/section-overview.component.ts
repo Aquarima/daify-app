@@ -3,75 +3,71 @@ import {Challenge} from "../../../../core";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
-import {MemberKickComponent} from "../member-kick/member-kick.component";
 import {AlertType} from "../../../../core/models/system-alert";
+import {PopupService} from "../../../../core/services/popup.service";
+import {TimeHelper} from "../../../../core/helpers";
 
 @Component({
-    selector: 'dfy-challenge-overview',
-    templateUrl: './section-overview.component.html',
-    styleUrls: ['./section-overview.component.scss']
+  selector: 'dfy-challenge-overview',
+  templateUrl: './section-overview.component.html',
+  styleUrls: ['./section-overview.component.scss']
 })
 export class SectionOverviewComponent implements OnInit {
 
-    @Input() challenge!: Challenge;
-    @Input() members!: Member[];
-    @Input() selfMember: Member | undefined;
+  @Input() challenge!: Challenge;
+  @Input() members!: Member[];
+  @Input() selfMember: Member | undefined;
 
-    constructor(private viewContainerRef: ViewContainerRef,
-                private alertHandlingService: AlertHandlingService,
-                private memberService: MemberService) {
-    }
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private alertHandlingService: AlertHandlingService,
+    private popupService: PopupService,
+    private memberService: MemberService,
+    private timeHelper: TimeHelper) {
+    this.popupService.viewContainerRef = viewContainerRef;
+  }
 
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
 
-    onKickMember(member: Member) {
-        const componentRef = this.viewContainerRef.createComponent(MemberKickComponent);
-        const instance = componentRef.instance;
-        instance.member = member;
-        instance.closeEvent.subscribe(() => componentRef.destroy());
-        instance.kickEvent.subscribe((message: string) => {
-            this.memberService.kickMember(member)
-                .subscribe({
-                    next: () => {
-                        this.members.splice(this.members.indexOf(member), 1);
-                        componentRef.destroy();
-                    },
-                    error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-                })
-        });
-    }
+  onKickMember(member: Member) {
+    this.popupService.createKickModal(member, () => this.kickMember(member));
+  }
 
-    getMemberNickname(member: Member): string {
-        return member.nickname ? member.nickname : member.profile.username;
-    }
+  private kickMember(member: Member) {
+    this.memberService.kickMember(member)
+      .subscribe({
+        next: () => {
+          this.members.splice(this.members.indexOf(member), 1);
+          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+      });
+  }
 
-    getMemberRole(member: Member): string {
-        return member.role ? member.role : member.profile.profession;
-    }
+  getMemberNickname(member: Member): string {
+    return member.nickname ? member.nickname : member.profile.username;
+  }
 
-    getMemberAvatar(member: Member): string {
-        return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
-    }
+  getMemberRole(member: Member): string {
+    return member.role ? member.role : member.profile.profession;
+  }
 
-    isSelfMember(member: Member) {
-        return this.selfMember?.id === member.id;
-    }
+  getMemberAvatar(member: Member): string {
+    return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+  }
 
-    isSelfMemberAuthor(): boolean {
-        return this.selfMember?.id === this.challenge.author.id;
-    }
+  isSelfMember(member: Member) {
+    return this.selfMember?.id === member.id;
+  }
 
-    get duration() {
-        let d1: Date = new Date(this.challenge.config.startAt);
-        let d2: Date = new Date(this.challenge.config.endAt);
-        const time = d2.getTime() - d1.getTime();
-        const days = time / (24 * 60 * 60 * 1000);
-        const hours = time / (1000 * 60 * 60);
-        const minutes = time / 1000 / 60;
-        if (days >= 1) return `${Math.round(days)}d`;
-        if (hours >= 1) return `${Math.round(hours)}h`;
-        if (minutes >= 1) return `${Math.round(minutes)}m`;
-        return 'Unknown';
-    }
+  isSelfMemberAuthor(): boolean {
+    return this.selfMember?.id === this.challenge.author.id;
+  }
+
+  get duration() {
+    let start: Date = new Date(this.challenge.config.startAt);
+    let end: Date = new Date(this.challenge.config.endAt);
+    return this.timeHelper.getTimeSince(start, end);
+  }
 }

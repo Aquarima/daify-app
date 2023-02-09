@@ -7,6 +7,7 @@ import {ProfileService} from './services/profile.service';
 import {FriendService} from './services/friend.service';
 import {AlertHandlingService} from "./services/alert-handling.service";
 import { CustomInputFocusDirective } from './helpers';
+import {PopupService} from "./services/popup.service";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CustomInputFocusDirective } from './helpers';
     FriendService,
     SearchService,
     AlertHandlingService,
+    PopupService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   imports: [

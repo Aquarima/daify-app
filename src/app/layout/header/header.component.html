@@ -170,10 +170,10 @@
                                 <path fill="currentColor"
                                       d="M16 22a6 6 0 1 1 6-6a5.94 5.94 0 0 1-6 6Zm0-10a3.91 3.91 0 0 0-4 4a3.91 3.91 0 0 0 4 4a3.91 3.91 0 0 0 4-4a3.91 3.91 0 0 0-4-4Z"/>
                             </svg>
-                            <a [routerLink]="['']">Settings</a>
+                            <a [routerLink]="['/app/user/settings/profile']">Settings</a>
                         </div>
                     </li>
-                    <li>
+                    <li [routerLink]="['/app/user/settings/integrations']">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                 <path

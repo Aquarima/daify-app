@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeHelper {
 
-  getTimeSince(date: Date, full: boolean = false) {
-    const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+  getTimeSince(from: Date, to: Date, full: boolean = false) {
+    const seconds = Math.floor((from.getTime() - to.getTime()) / 1000);
 
     const intervals = [
       {label: full ? "year" : "y", amount: 31536000},
