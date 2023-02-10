@@ -57,6 +57,14 @@ export class ChallengeComponent implements OnInit {
     });
   }
 
+  onJoinAsMember() {
+
+  }
+
+  onJoinAsSpectator() {
+
+  }
+
   onShare() {
     const componentRef = this.viewContainerRef.createComponent(ChallengeShareComponent);
     const instance = componentRef.instance;

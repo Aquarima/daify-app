@@ -129,6 +129,56 @@
       }
     }
 
+    .challenge-overview-overlay {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px 16px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid rgba(var(--color-primary-rgb), .4);
+      background-color: rgba(var(--color-primary-rgb), .050);
+
+      p {
+        font-weight: 500;
+        font-size: var(--preset-font-size-medium);
+        color: var(--color-text);
+      }
+
+      .challenge-overview-overlay-join {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        button {
+          padding: 0 16px;
+          height: 32px;
+          border: none;
+          border-radius: 8px;
+          color: #FFF;
+
+          &:nth-child(1) {
+            background-color: var(--color-tertiary);
+
+            &:hover {
+              background-color: var(--color-tertiary-hover);
+            }
+          }
+
+          &:nth-child(2) {
+            background-color: var(--color-secondary);
+
+            &:hover {
+              background-color: var(--color-secondary-hover);
+            }
+          }
+        }
+      }
+    }
+
     .challenge-sections {
       width: 70%;
       display: flex;

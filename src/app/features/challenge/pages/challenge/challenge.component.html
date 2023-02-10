@@ -1,6 +1,13 @@
 <dfy-header></dfy-header>
 <main class="main-content">
   <div class="content">
+    <div class="challenge-overview-overlay" *ngIf="!isMember()">
+      <p>You are currently in overview mode</p>
+      <div class="challenge-overview-overlay-join">
+        <button (click)="onJoinAsMember()">Join as challenger</button>
+        <button (click)="onJoinAsSpectator()">Join as spectator</button>
+      </div>
+    </div>
     <div class="challenge-preview">
       <div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ bannerUrl +')'}">
         <div class="challenge-preview-icon">
@@ -66,7 +73,7 @@
             </svg>
           </li>
           <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onSection('leaderboard')"
-              *ngIf="isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart">
+              *ngIf="isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -100,7 +107,7 @@
         <dfy-challenge-groups [section]="section$" [challenge]="challenge" [members]="members"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
-                                   *ngIf="(isSelfMemberAuthor() || challenge.config.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
+                                   *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
         <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember"
                                 *ngIf="isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>
       </div>
