@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {AccessType, Challenge, ChallengeService} from "../../../../core";
+import {AccessType, Challenge, ChallengeService, Member} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
-import {Member} from "../../../../core/models/challenge/member.model";
 import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
@@ -19,9 +18,14 @@ export class SectionSettingsComponent implements OnInit {
   @Input() members!: Member[];
   @Input() selfMember: Member | undefined;
 
-  availableSections: string[] = ['overview', 'members', 'deposits'];
-  currentSection: string = this.availableSections[0];
-  hasBeenUpdated: boolean = false;
+  sections = {
+    'overview': () => this.onGoToOverview(),
+    'schedule': () => this.onGoToSchedule(),
+    'members': () => this.onGoToMembers(),
+    'deposits': () => this.onGoToDeposits(),
+  };
+
+  currentSection: string = 'overview';
   initialChallengeForm: any | undefined;
 
   challengeForm = new FormGroup({
@@ -51,28 +55,34 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => this.onSection(`${params.get('settingsTab')}`));
-    this.initChallengeForm(this.challenge);
-    this.challengeForm.valueChanges.subscribe(() => {
-      this.hasBeenUpdated = JSON.stringify(this.initialChallengeForm) !== JSON.stringify(this.challengeForm.value);
-    });
-  }
-
-  private initChallengeForm(challenge: Challenge) {
     for (let controlsKey in this.challengeForm.controls) {
       let control = this.challengeForm.get(controlsKey);
       if (control) {
-        const value = (challenge as any)[controlsKey];
-        control.setValue(value ? value : (challenge.config as any)[controlsKey]);
+        const value = (this.challenge as any)[controlsKey];
+        control.setValue(value ? value : (this.challenge.config as any)[controlsKey]);
       }
     }
     this.initialChallengeForm = this.challengeForm.value;
   }
 
   onSection(section: string) {
-    if (!this.availableSections.includes(section)) section = this.availableSections[0];
-    this.router.navigate([`/app/challenge/${this.challenge.id}/settings/${section}`]);
     this.currentSection = section;
+  }
+
+  onGoToOverview() {
+    this.onSection('overview');
+  }
+
+  onGoToSchedule() {
+    this.onSection('schedule');
+  }
+
+  onGoToMembers() {
+    this.onSection('members');
+  }
+
+  onGoToDeposits() {
+    this.onSection('deposits');
   }
 
   onTransferOwnership(to: Member) {
@@ -90,25 +100,29 @@ export class SectionSettingsComponent implements OnInit {
     this.popupService.createBanModal(member, () => this.banMember(member));
   }
 
-  onCancel() {
-    this.initChallengeForm(this.challenge);
+  onReset() {
+    this.challengeForm.setValue(this.initialChallengeForm);
   }
 
   onSave() {
     if (this.challengeForm.invalid) return;
-    for (let controlsKey in this.challengeForm.controls) {
-      const control = this.challengeForm.get(controlsKey);
-      if (control) (this.challenge as any)[controlsKey] = control.value;
-    }
+    Object.entries(this.challengeForm.controls)
+      .forEach(([controlsKey, control]: [string, FormControl]) => {
+        (this.challenge as any)[controlsKey] = control.value;
+      });
+    this.initialChallengeForm = this.challengeForm.value;
+    this.updateChallenge();
+  }
+
+  private updateChallenge() {
     this.challengeService.updateChallenge(this.challenge)
       .subscribe({
         next: (challenge: any) => {
           this.challenge = challenge;
-          this.hasBeenUpdated = false;
           this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-      })
+      });
   }
 
   private kickMember(member: Member) {
@@ -143,6 +157,10 @@ export class SectionSettingsComponent implements OnInit {
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       });
+  }
+
+  isFormChanged(): boolean {
+    return JSON.stringify(this.initialChallengeForm) !== JSON.stringify(this.challengeForm.value);
   }
 
   getMemberNickname(member: Member): string {

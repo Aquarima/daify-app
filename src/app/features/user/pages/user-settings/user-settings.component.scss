@@ -155,16 +155,18 @@
         .form-parameter {
           display: flex;
           flex-direction: column;
-          row-gap: 8px;
 
           .form-parameter-name {
+            margin-bottom: 8px;
             font-weight: 500;
             font-size: var(--preset-font-size-small);
             color: var(--color-text);
           }
 
           .form-parameter-description {
-            line-height: 16px;
+            margin-bottom: 16px;
+            width: 60%;
+            line-height: 20px;
             font-size: var(--preset-font-size-small);
             color: var(--color-text-alt-2);
           }

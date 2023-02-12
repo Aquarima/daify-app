@@ -7,7 +7,7 @@ import {Channel} from "../../../../core/models/challenge/channel.model";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {Message} from "../../../../core/models/challenge/message.model";
 import {Member} from "../../../../core/models/challenge/member.model";
-import {Observable, timer} from "rxjs";
+import {timer} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
 import {UserReportComponent} from "../../../user/components/user-report/user-report.component";
@@ -21,7 +21,6 @@ export class SectionChatsComponent implements OnInit {
 
   @ViewChild('messages_node') messagesNode!: ElementRef;
 
-  @Input() section!: Observable<string>;
   @Input() challenge!: Challenge;
   @Input() selfMember: Member | undefined;
 

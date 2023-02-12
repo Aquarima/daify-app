@@ -15,3 +15,24 @@ export interface Profile {
   lastTimeOnline: Date;
   createdAt: Date;
 }
+
+export function defaultProfile(): Profile {
+  return {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    username: '',
+    avatarUrl: '',
+    bannerUrl: '',
+    country: '',
+    languages: [],
+    birthdate: new Date(),
+    online: false,
+    socials: {},
+    about: '',
+    profession: '',
+    lastTimeOnline: new Date(),
+    createdAt: new Date()
+  } as Profile;
+}
+

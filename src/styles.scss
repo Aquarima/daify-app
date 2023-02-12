@@ -67,7 +67,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1;
 }
 
@@ -181,7 +181,7 @@ html {
         background-color: #FFF;
         outline: none;
         font-weight: 500;
-        font-size: var(--preset-font-size-small);
+        font-size: var(--preset-font-size-normal);
         font-family: $font-family;
         color: var(--color-text);
 

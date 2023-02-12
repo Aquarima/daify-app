@@ -1,32 +1,39 @@
 <dfy-header></dfy-header>
 <main class="main-content">
   <div class="content">
-    <div class="challenge-overview-overlay" *ngIf="!isMember()">
-      <p>You are currently in overview mode</p>
-      <div class="challenge-overview-overlay-join">
-        <button (click)="onJoinAsMember()">Join as challenger</button>
-        <button (click)="onJoinAsSpectator()">Join as spectator</button>
-      </div>
-    </div>
     <div class="challenge-preview">
-      <div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ bannerUrl +')'}">
+      <div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ getCoverUrl() +')'}">
         <div class="challenge-preview-icon">
-          <img [src]="iconUrl" alt="">
+          <img [src]="getIconUrl()" alt="">
         </div>
       </div>
       <div class="challenge-preview-info-short">
-        <p class="challenge-preview-info-short-title">
+        <div class="challenge-preview-info-short-title">
           {{challenge.title}}
-          <button class="challenge-preview-share tooltip-owner" (click)="onShare()">
-            <span class="tooltip">Share</span>
+          <div class="challenge-preview-short-actions">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
               <path
-                d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                d="M8.12 9.29L12 13.17l3.88-3.88a.996.996 0 1 1 1.41 1.41l-4.59 4.59a.996.996 0 0 1-1.41 0L6.7 10.7a.996.996 0 0 1 0-1.41c.39-.38 1.03-.39 1.42 0z"/>
             </svg>
-          </button>
-        </p>
+            <ul>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <path
+                    d="M23 20a5 5 0 0 0-3.89 1.89l-7.31-4.57a4.46 4.46 0 0 0 0-2.64l7.31-4.57A5 5 0 1 0 18 7a4.79 4.79 0 0 0 .2 1.32l-7.31 4.57a5 5 0 1 0 0 6.22l7.31 4.57A4.79 4.79 0 0 0 18 25a5 5 0 1 0 5-5Zm0-16a3 3 0 1 1-3 3a3 3 0 0 1 3-3ZM7 19a3 3 0 1 1 3-3a3 3 0 0 1-3 3Zm16 9a3 3 0 1 1 3-3a3 3 0 0 1-3 3Z"/>
+                </svg>
+                Share
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <path d="M26 4h2v24h-2zM11.414 20.586L7.828 17H22v-2H7.828l3.586-3.586L10 10l-6 6l6 6l1.414-1.414z"/>
+                </svg>
+                Leave
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="challenge-preview-info-short-author">
-          <img [src]="authorAvatarUrl" alt="">
+          <img [src]="getAuthorAvatarUrl()" alt="">
           <p>By <span class="challenge-preview-info-short-author-username"
                       [routerLink]="['/app/user/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
           </p>
@@ -42,16 +49,16 @@
               d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/>
           </svg>
         </button>
-        <ul #sections>
-          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''" (click)="onSection('overview')">
+        <ul #sectionsNode>
+          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''" (click)="onGoToSection(sections.overview)">
             <span class="challenge-sections-name">Overview</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-width="1.5"
                     d="M3 9.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Zm11 11v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6h-5.8a.6.6 0 0 1-.6-.6Zm-11 0v-5.8a.6.6 0 0 1 .6-.6h5.8a.6.6 0 0 1 .6.6v5.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('chats') ? 'challenge-sections-selected' : ''" (click)="onSection('chats')"
-              *ngIf="isMember()">
+          <li [ngClass]="isOnSection('chats') ? 'challenge-sections-selected' : ''"
+              *ngIf="!isAnonymous()" (click)="onGoToSection(sections.chats)">
             <span class="challenge-sections-name">Chats</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-width="1.5">
@@ -61,8 +68,8 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('groups') ? 'challenge-sections-selected' : ''" (click)="onSection('groups')"
-              *ngIf="isMember()">
+          <li [ngClass]="isOnSection('groups') ? 'challenge-sections-selected' : ''"
+              *ngIf="!isAnonymous()" (click)="onGoToSection(sections.groups)">
             <span class="challenge-sections-name">Groups</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-width="1.5">
@@ -72,16 +79,16 @@
               </g>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''" (click)="onSection('leaderboard')"
-              *ngIf="isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart">
+          <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''"
+              *ngIf="isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart" (click)="onGoToSection(sections.leaderboard)">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M15 21H9v-8.4a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6V21Zm5.4 0H15v-2.9a.6.6 0 0 1 .6-.6h4.8a.6.6 0 0 1 .6.6v2.3a.6.6 0 0 1-.6.6ZM9 21v-4.9a.6.6 0 0 0-.6-.6H3.6a.6.6 0 0 0-.6.6v4.3a.6.6 0 0 0 .6.6H9Zm1.806-15.887l.909-1.927a.312.312 0 0 1 .57 0l.91 1.927l2.032.311c.261.04.365.376.176.568l-1.47 1.5l.347 2.118c.044.272-.228.48-.462.351l-1.818-1l-1.818 1c-.233.128-.506-.079-.462-.351l.347-2.118l-1.47-1.5c-.19-.192-.085-.528.175-.568l2.034-.31Z"/>
             </svg>
           </li>
-          <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''" (click)="onSection('settings')"
-              *ngIf="isSelfMemberAuthor()">
+          <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''"
+              *ngIf="isSelfMemberAuthor()" (click)="onGoToSection(sections.settings)">
             <span class="challenge-sections-name">Settings</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
@@ -99,12 +106,19 @@
           </svg>
         </button>
       </nav>
+      <div class="challenge-overview-overlay" *ngIf="isDataLoaded && isAnonymous()">
+        <p>You are currently in overview mode</p>
+        <div class="challenge-overview-overlay-join">
+          <button (click)="onJoin(false)">Join as challenger</button>
+          <button (click)="onJoin(true)">Join as spectator</button>
+        </div>
+      </div>
       <div #challenge_box class="challenge-box">
         <dfy-challenge-overview [challenge]="challenge" [members]="members" [selfMember]="selfMember"
                                 *ngIf="isOnSection('overview')"></dfy-challenge-overview>
-        <dfy-challenge-chats [section]="section$" [challenge]="challenge" [selfMember]="selfMember"
+        <dfy-challenge-chats [challenge]="challenge" [selfMember]="selfMember"
                              *ngIf="isOnSection('chats')"></dfy-challenge-chats>
-        <dfy-challenge-groups [section]="section$" [challenge]="challenge" [members]="members"
+        <dfy-challenge-groups [challenge]="challenge" [members]="members" [groups]="groups"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>

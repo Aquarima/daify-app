@@ -68,7 +68,7 @@
 
       .chat-box-messages-item {
         padding: 8px 0 8px 8px;
-        max-width: 100%;
+        max-width: 50%;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -189,7 +189,6 @@
         }
 
         .message-content {
-          font-size: var(--preset-font-size-normal);
           color: var(--color-text-alt-2);
         }
       }
@@ -224,6 +223,7 @@
       }
 
       .current-member-message {
+        margin-left: 50%;
         padding: 8px 8px 8px 0;
         justify-content: flex-end;
 

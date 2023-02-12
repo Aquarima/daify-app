@@ -1,5 +1,7 @@
-import {Profile} from "../user";
-import {ChallengeConfig} from "./challenge-config.model";
+import {defaultProfile, Profile} from "../user";
+import {ChallengeConfig, defaultChallengeConfig} from "./challenge-config.model";
+import {Member} from "./member.model";
+import {Group} from "./group.model";
 
 export interface Challenge {
   id: number;
@@ -13,6 +15,22 @@ export interface Challenge {
   config: ChallengeConfig;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export function defaultChallenge(): Challenge {
+  return {
+    id: 0,
+    author: defaultProfile(),
+    title: '',
+    description: '',
+    theme: '',
+    coverUrl: '/assets/user_banner_placeholder.svg',
+    iconUrl: '/assets/challenge_icon_placeholder.svg',
+    invite: '',
+    config: defaultChallengeConfig(),
+    createdAt: new Date(),
+    updatedAt: new Date()
+  } as Challenge;
 }
 
 export function getDuration(challenge: Challenge) {

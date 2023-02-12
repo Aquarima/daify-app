@@ -110,19 +110,19 @@
       }
 
       .form-parameter {
+        width: 60%;
         display: flex;
         flex-direction: column;
-        row-gap: 8px;
 
         .form-parameter-name {
+          margin-bottom: 8px;
           font-weight: 500;
-          font-size: var(--preset-font-size-small);
           color: var(--color-text);
         }
 
         .form-parameter-description {
-          line-height: 16px;
-          font-size: var(--preset-font-size-small);
+          margin-bottom: 16px;
+          line-height: 20px;
           color: var(--color-text-alt-2);
         }
 
@@ -131,7 +131,7 @@
         }
 
         .user-input-box {
-          width: 60%;
+
         }
 
         textarea {
@@ -164,11 +164,22 @@
           .challenge-settings-members-item-username {
             display: flex;
             flex-direction: column;
-            gap: 4px;
 
-            p {
+            .challenge-settings-members-item-nickname {
+              margin-bottom: 4px;
               font-weight: 500;
               color: var(--color-text);
+            }
+
+            .challenge-settings-members-item-tag {
+              margin-bottom: 8px;
+              font-size: var(--preset-font-size-small);
+              color: var(--color-text-alt);
+            }
+
+            .challenge-settings-members-item-profession {
+              font-size: var(--preset-font-size-small);
+              color: var(--color-text-alt-2);
             }
 
             a {
@@ -179,6 +190,10 @@
               &:hover {
                 text-decoration: underline;
               }
+            }
+
+            .challenge-settings-members-item-profession {
+
             }
           }
 

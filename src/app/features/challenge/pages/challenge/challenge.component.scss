@@ -6,25 +6,23 @@
   .content {
     width: 65%;
     height: 100%;
-    display: flex;
-    gap: 64px;
+    flex-direction: column;
+    row-gap: 32px;
     box-sizing: border-box;
 
     .challenge-preview {
-      width: 30%;
-      min-width: 180px;
-      height: 400px;
+      width: 100%;
+      height: 250px;
       position: relative;
       box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
       border-radius: 16px;
-      overflow: hidden;
       background-color: #FFF;
 
       .challenge-preview-banner {
-        margin-bottom: 56px;
         width: 100%;
-        height: 80px;
+        height: 50%;
         position: relative;
+        border-radius: 16px 16px 0 0;
         background-size: cover;
         background-color: #E6E6EF;
 
@@ -32,7 +30,7 @@
           width: 100px;
           height: 100px;
           position: absolute;
-          top: calc(50% - 16px);
+          top: calc(50% + 8px);
           left: 50%;
           transform: translateX(-50%);
           border-radius: 50%;
@@ -50,9 +48,11 @@
       }
 
       .challenge-preview-info-short {
-        margin: 0 24px;
-        width: fit-content;
+        padding: 32px;
+        width: 100%;
+        height: 50%;
         position: relative;
+        box-sizing: border-box;
 
         .challenge-preview-info-short-title {
           margin-bottom: 8px;
@@ -63,26 +63,69 @@
           font-weight: 600;
           font-size: var(--preset-font-size-normal);
           color: var(--color-text);
+        }
 
-          .challenge-preview-share {
-            width: 24px;
-            height: 24px;
-            border: none;
-            border-radius: 50%;
-            background-color: transparent;
-            cursor: pointer;
+        .challenge-preview-short-actions {
+          width: fit-content;
+          position: relative;
 
-            &:hover {
+          &:hover {
+
+            > svg {
               background-color: rgba(#000, .050);
             }
 
-            svg {
-              width: 100%;
-              height: 100%;
-              fill: var(--color-text);
+            ul {
+              opacity: 1;
+            }
+          }
+
+          > svg {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            border-radius: 50%;
+            fill: var(--color-text);
+            cursor: pointer;
+          }
+
+          ul {
+            padding: 12px 8px;
+            width: 80px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 16px;
+            opacity: 0;
+            border: 1px solid #DEDEEA;
+            border-radius: 8px;
+            background-color: white;
+            color: var(--color-text);
+            transition: opacity 0.3s ease-in-out;
+
+            li {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              column-gap: 4px;
+              font-size: var(--preset-font-size-small);
+              cursor: pointer;
+
+              svg {
+                width: 16px;
+                height: 16px;
+              }
             }
           }
         }
+
 
         .challenge-preview-info-short-author {
           display: flex;
@@ -130,6 +173,7 @@
     }
 
     .challenge-overview-overlay {
+      margin-top: 32px;
       padding: 32px;
       display: flex;
       flex-direction: column;
@@ -154,8 +198,7 @@
         gap: 32px;
 
         button {
-          padding: 0 16px;
-          height: 32px;
+          padding: 8px 16px;
           border: none;
           border-radius: 8px;
           color: #FFF;
@@ -180,11 +223,12 @@
     }
 
     .challenge-sections {
-      width: 70%;
+      width: 100%;
       display: flex;
       flex-direction: column;
 
       .challenge-sections-nav {
+        margin-top: 32px;
         width: 100%;
         height: 80px;
         display: flex;
@@ -326,34 +370,6 @@
 
     .challenge-box {
       width: 100%;
-    }
-  }
-}
-
-@media all and (max-width: 1300px) {
-
-  :host {
-
-    .content {
-      flex-direction: column;
-      row-gap: 32px;
-
-      .challenge-preview {
-        width: 100%;
-        height: 220px;
-
-        .challenge-preview-banner {
-          margin-bottom: 24px;
-        }
-
-        .challenge-preview-info-short {
-          margin: 0 0 0 62px;
-        }
-      }
-
-      .challenge-sections {
-        width: 100%;
-      }
     }
   }
 }

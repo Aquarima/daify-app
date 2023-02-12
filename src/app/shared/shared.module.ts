@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, OrderByChallengePipe} from './pipes';
+import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, MembersFilterPipe, OrderByChallengePipe} from './pipes';
 import {AlertBoxComponent, CustomSelectComponent, InboxComponent} from "./components";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CustomCheckboxComponent, CustomSliderComponent} from './components';
 import { NotificationPipe } from './pipes/notification.pipe';
-import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
+import { ValidationMessageComponent } from './components';
 import { ConfirmBoxComponent } from './components/confirm-box/confirm-box.component';
 
 @NgModule({
@@ -20,22 +20,24 @@ import { ConfirmBoxComponent } from './components/confirm-box/confirm-box.compon
         CustomSliderComponent,
         NotificationPipe,
         ValidationMessageComponent,
-        ConfirmBoxComponent
+        ConfirmBoxComponent,
+        MembersFilterPipe
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule
     ], exports: [
-        ChallengeThemesCollectorPipe,
-        ChallengeFilterPipe,
-        OrderByChallengePipe,
-        InboxComponent,
-        AlertBoxComponent,
-        CustomSelectComponent,
-        CustomCheckboxComponent,
-        CustomSliderComponent,
-        ValidationMessageComponent
-    ]
+    ChallengeThemesCollectorPipe,
+    ChallengeFilterPipe,
+    OrderByChallengePipe,
+    InboxComponent,
+    AlertBoxComponent,
+    CustomSelectComponent,
+    CustomCheckboxComponent,
+    CustomSliderComponent,
+    ValidationMessageComponent,
+    MembersFilterPipe
+  ]
 })
 export class SharedModule {
 }

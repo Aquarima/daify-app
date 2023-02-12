@@ -1,12 +1,21 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {AuthService, Challenge, ChallengeService} from "../../../../core";
+import {
+  AuthService,
+  Challenge,
+  ChallengeService,
+  defaultChallenge,
+  defaultMember,
+  defaultProfile,
+  Group,
+  Member
+} from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {BehaviorSubject, forkJoin} from "rxjs";
-import {Member} from "../../../../core/models/challenge/member.model";
+import {forkJoin} from "rxjs";
 import {MemberService} from "../../../../core/services/member.service";
 import {ChallengeShareComponent} from "../../components";
+import {GroupService} from "../../../../core/services/group.service";
 
 @Component({
   selector: 'app-challenge',
@@ -15,17 +24,24 @@ import {ChallengeShareComponent} from "../../components";
 })
 export class ChallengeComponent implements OnInit {
 
-  @ViewChild('sections') sections!: ElementRef;
+  @ViewChild('sectionsNode') sectionsNode!: ElementRef;
   @ViewChild('messages_box') messagesBox!: ElementRef;
   @ViewChild('challenge_box') challengeBox!: ElementRef;
 
+  sections = {
+    overview: 'overview',
+    chats: 'chats',
+    groups: 'groups',
+    leaderboard: 'leaderboard',
+    settings: 'settings'
+  };
 
-  section$: BehaviorSubject<string> = new BehaviorSubject<string>('overview');
-  availableSections: string[] = ['overview', 'chats', 'groups', 'leaderboard', 'settings'];
-  currentSection = this.availableSections[0];
-  challenge: Challenge = {} as Challenge;
+  currentSection = 'overview';
+  challenge: Challenge = defaultChallenge();
+  selfMember: Member = defaultMember();
   members: Member[] = [];
-  selfMember: Member | undefined = undefined;
+  groups: Group[] = [];
+  isDataLoaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,34 +50,46 @@ export class ChallengeComponent implements OnInit {
     private alertHandlingService: AlertHandlingService,
     private authService: AuthService,
     private challengeService: ChallengeService,
-    private memberService: MemberService) {
+    private memberService: MemberService,
+    private groupService: GroupService) {
   }
 
   ngOnInit(): void {
-    this.section$.subscribe(section => this.currentSection = section);
     this.route.paramMap.subscribe(params => {
       const target = params.get('id');
       if (!target) return;
       const challengeId: number = parseInt(target);
-      forkJoin([
-        this.challengeService.getChallengesById(challengeId),
-        this.memberService.getMembersByChallenge(challengeId)
-      ]).subscribe({
-        next: ([challenge, members]) => {
-          this.challenge = challenge;
-          this.members = members.content;
-          this.selfMember = this.members.filter((m) => m.profile.id === this.authService.user.profile.id)[0];
-        },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-      });
+      if (this.challenge?.id === challengeId) {
+        this.onGoToSection(`${params.get('tab')}`);
+        return;
+      }
+      this.fetchChallengeData(challengeId, `${params.get('tab')}`);
     });
   }
 
-  onJoinAsMember() {
-
+  private fetchChallengeData(challengeId: number, redirectTo: string) {
+    if (this.challenge.id === challengeId) return;
+    forkJoin([
+      this.challengeService.getChallengesById(challengeId),
+      this.memberService.getMembersByChallenge(challengeId)
+    ]).subscribe({
+      next: ([challenge, members]) => {
+        this.challenge = challenge;
+        this.members = members.content;
+        this.selfMember = this.members.filter((m) => m.profile.id === this.authService.user.profile.id)[0];
+        this.isDataLoaded = true;
+        this.onGoToSection(redirectTo);
+      },
+      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+    });
   }
 
-  onJoinAsSpectator() {
+  onGoToSection(section: string) {
+    this.router.navigate([`/app/challenge/${this.challenge.id}/${section}`]);
+    this.currentSection = section;
+  }
+
+  onJoin(spectator: boolean) {
 
   }
 
@@ -73,25 +101,19 @@ export class ChallengeComponent implements OnInit {
   }
 
   onMenuLeft() {
-    this.sections.nativeElement.scrollLeft -= 100;
+    this.sectionsNode.nativeElement.scrollLeft -= 100;
   }
 
   onMenuRight() {
-    this.sections.nativeElement.scrollLeft += 100;
-  }
-
-  onSection(section: string) {
-    if (!this.availableSections.includes(section)) section = this.availableSections[0];
-    this.section$.next(section);
-    this.router.navigate(['/app/challenge', this.challenge.id, section]);
+    this.sectionsNode.nativeElement.scrollLeft += 100;
   }
 
   isOnSection(section: string) {
     return this.currentSection === section;
   }
 
-  isMember(): boolean {
-    return !!this.selfMember;
+  isAnonymous(): boolean {
+    return !this.selfMember;
   }
 
   isSelfMemberAuthor(): boolean {
@@ -99,19 +121,15 @@ export class ChallengeComponent implements OnInit {
     return this.selfMember.id === this.challenge.author.id;
   }
 
-  hasAccess(access: any) {
-    return this.challenge.config.accessType === access;
+  getIconUrl(): string {
+    return this.challenge.iconUrl || defaultChallenge().iconUrl;
   }
 
-  get iconUrl(): string {
-    return this.challenge?.iconUrl || '/assets/challenge_icon_placeholder.svg';
+  getCoverUrl(): string {
+    return this.challenge.coverUrl || defaultChallenge().coverUrl;
   }
 
-  get bannerUrl(): string {
-    return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
-  }
-
-  get authorAvatarUrl(): string {
-    return this.challenge.author?.avatarUrl || '/assets/avatar_placeholder.svg';
+  getAuthorAvatarUrl(): string {
+    return this.challenge.author.avatarUrl || defaultProfile().avatarUrl;
   }
 }

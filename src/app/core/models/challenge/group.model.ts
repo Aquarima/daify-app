@@ -4,6 +4,14 @@ export interface Group {
   createdAt: Date;
 }
 
+export function defaultGroup(): Group {
+  return {
+    id: 0,
+    name: '',
+    createdAt: new Date()
+  } as Group;
+}
+
 export enum GroupJoinType {
   FREE, ASK
 }
