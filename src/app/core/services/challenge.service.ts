@@ -34,6 +34,10 @@ export class ChallengeService {
     return this.http.put(`${env.apiUrl}/challenge/${challenge.id}/transfer/${to.id}`, {});
   }
 
+  joinChallenge(challenge: Challenge, profile: Profile) {
+    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/join/${profile.id}`, {});
+  }
+
   getChallenges(page?: number, size?: number) {
     return this.http.get<any>(`${env.apiUrl}/challenge?size=${size  || 32}&page=${page || 0}`);
   }

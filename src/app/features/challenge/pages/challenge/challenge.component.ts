@@ -16,6 +16,7 @@ import {forkJoin} from "rxjs";
 import {MemberService} from "../../../../core/services/member.service";
 import {ChallengeShareComponent} from "../../components";
 import {GroupService} from "../../../../core/services/group.service";
+import {PopupService} from "../../../../core/services/popup.service";
 
 @Component({
   selector: 'app-challenge',
@@ -48,6 +49,7 @@ export class ChallengeComponent implements OnInit {
     private router: Router,
     private viewContainerRef: ViewContainerRef,
     private alertHandlingService: AlertHandlingService,
+    private popupService: PopupService,
     private authService: AuthService,
     private challengeService: ChallengeService,
     private memberService: MemberService,
@@ -90,7 +92,14 @@ export class ChallengeComponent implements OnInit {
   }
 
   onJoin(spectator: boolean) {
-
+    this.challengeService.joinChallenge(this.challenge, this.authService.user.profile)
+      .subscribe({
+        next: (member: any) => {
+          this.selfMember = member;
+          this.members.push(member);
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
   }
 
   onShare() {

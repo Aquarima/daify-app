@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {Challenge} from "../../../../core";
-import {Member} from "../../../../core/models/challenge/member.model";
+import {Challenge, Member} from "../../../../core";
 import {MemberService} from "../../../../core/services/member.service";
 import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";

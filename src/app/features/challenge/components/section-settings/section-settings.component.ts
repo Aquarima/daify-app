@@ -21,6 +21,7 @@ export class SectionSettingsComponent implements OnInit {
   sections = {
     'overview': () => this.onGoToOverview(),
     'schedule': () => this.onGoToSchedule(),
+    'banishment': () => this.onGoToBanishment(),
     'members': () => this.onGoToMembers(),
     'deposits': () => this.onGoToDeposits(),
   };
@@ -75,6 +76,10 @@ export class SectionSettingsComponent implements OnInit {
 
   onGoToSchedule() {
     this.onSection('schedule');
+  }
+
+  onGoToBanishment() {
+    this.onSection('banishment');
   }
 
   onGoToMembers() {

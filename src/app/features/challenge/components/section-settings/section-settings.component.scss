@@ -18,7 +18,6 @@
     .challenge-settings-sections {
       padding: 0 32px 0 0;
       width: 200px;
-      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -226,6 +225,10 @@
               stroke: rgb(var(--color-semantic-error));
             }
 
+            .challenge-settings-members-item-actions-unban svg {
+              fill: rgb(var(--color-semantic-error));
+            }
+
             .challenge-settings-members-item-actions-kick svg {
               fill: rgb(var(--color-semantic-error));
             }
@@ -240,6 +243,28 @@
                 fill: rgb(var(--color-semantic-warning));
               }
             }
+          }
+        }
+      }
+
+      .challenge-settings-unban-all {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+
+        button {
+          padding: 0 16px;
+          width: fit-content;
+          min-width: 100px;
+          height: 32px;
+          box-sizing: border-box;
+          border-radius: 8px;
+          border: none;
+          background-color: rgb(var(--color-semantic-error));
+          color: #FFF;
+
+          &:hover {
+            filter: brightness(95%);
           }
         }
       }
