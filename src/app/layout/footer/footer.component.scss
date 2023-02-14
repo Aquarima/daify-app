@@ -1,117 +1,92 @@
-@font-face { font-family: 'Inter'; src: url('/assets/fonts/Inter.ttf'); }
-
-$font-family: 'Inter';
-
 :host {
-    margin-top: auto;
-    padding: 60px 60px 25px 60px;
-    background-color: #252526;
-    font-family: $font-family;
+  margin-top: 64px;
+  padding: 48px 0 24px 0;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
+  background-color: #FFF;
 
-    .footer-head {
+  .content {
+
+    .social-items {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+
+      a {
+        transition: transform ease .3s;
+
+        &:hover {
+          transform: translate(0, -3px);
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+
+  .lower-content {
+    margin: 32px auto 0 auto;
+    padding-top: 24px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 32px;
+    border-top: 1px solid #E6E6EF;
+    font-weight: 500;
+    font-size: var(--preset-font-size-normal);
+    color: var(--color-text);
+
+    ul {
+      display: flex;
+      gap: 16px;
+      list-style-type: none;
+
+      a {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 50px;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+        color: var(--color-text);
 
-        .app-info {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-
-            .logo {
-                width: 80px;
-            }
-
-            .tagline {
-                margin: 0;
-                font-size: 1.1em;
-                color: #FFFFFF;
-            }
+        &:hover {
+          text-decoration: underline;
         }
-
-        .socials {
-            height: fit-content;
-
-            h3 {
-                margin: 0 0 20px 0;
-                font-size: 1em;
-                color: #FFFFFF;
-            }
-
-            .links {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                gap: 20px;
-                list-style-type: none;
-                                
-                svg {
-                    width: 28px;
-                    height: 28px;
-                    fill: #BEBEBE;
-                }
-            }
-        }
+      }
     }
-    
-    .footer-foot {
-        margin: 25px 0 0 0;
-        padding: 25px 25px 0 25px;
-        display: flex;
-        justify-content: space-between;
-        box-sizing: border-box;
-        border-top: 1px solid #BEBEBE;
-
-        .copyright {
-            margin: 0;
-            font-size: 0.9em;
-            color: #BEBEBE;
-        }
-        
-        .privacy-and-terms {
-            margin: 0;
-            padding: 0;
-            height: fit-content;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            list-style-type: none;
-
-            li {
-                padding: 0;
-                width: fit-content;
-            }
-
-            li a {
-                display: block;
-                text-align: center;
-                text-decoration: none;
-                font-size: 1em;
-                color: #BEBEBE;
-            }
-        }
-    }
+  }
 }
 
-@media screen and (max-width: 768px) {
+/*@media all and (min-width: 1024px) and (max-width: 1280px) { }
 
-    .footer-head {
-        flex-direction: column;
-        align-items: center;
+@media all and (min-width: 768px) and (max-width: 1024px) { }*/
 
-        .app-info {
-            align-items: center;
-        }
+@media all and (min-width: 480px) and (max-width: 768px) {
 
-        .socials h3 {
-            text-align: center;
-        }
+  .lower-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+@media all and (max-width: 480px) {
+
+  .lower-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    ul {
+      flex-direction: column;
+      gap: 24px!important;
     }
-    
-    .footer-foot {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
+  }
 }

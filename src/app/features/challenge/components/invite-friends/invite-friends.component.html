@@ -1,0 +1,109 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">Invite some members</h1>
+    <p class="popup-head-description">Your new challenge has been created. Invite members to start the battle.</p>
+  </div>
+  <div class="invite-link">
+    <p>Invite link</p>
+    <div class="invite-link-box">
+      <input class="invite-link-value" type="text"
+             value="{{invite}}"
+             disabled>
+      <button class="invite-link-format-btn" (click)="onToggleInviteFormat()">
+        <svg width="32" height="32" viewBox="0 0 16 16">
+          <path d="m9 11.5l1.5 1.5l5-5l-5-5L9 4.5L12.5 8zm-2-7L5.5 3l-5 5l5 5L7 11.5L3.5 8z"/>
+        </svg>
+        {{displayInviteAsEmbed ? 'Embed' : 'Raw'}}
+      </button>
+      <button class="invite-link-copy-btn" (click)="onCopyInvite()">
+        <svg width="32" height="32" viewBox="0 0 24 24">
+          <path
+            d="M9 18q-.825 0-1.412-.587Q7 16.825 7 16V4q0-.825.588-1.413Q8.175 2 9 2h9q.825 0 1.413.587Q20 3.175 20 4v12q0 .825-.587 1.413Q18.825 18 18 18Zm0-2h9V4H9v12Zm-4 6q-.825 0-1.413-.587Q3 20.825 3 20V7q0-.425.288-.713Q3.575 6 4 6t.713.287Q5 6.575 5 7v13h10q.425 0 .713.288q.287.287.287.712t-.287.712Q15.425 22 15 22ZM9 4v12V4Z"/>
+        </svg>
+        Copy
+      </button>
+    </div>
+    <div class="invite-link-access" *ngIf="isChallengeOwner()">
+      <div class="invite-link-access-icon">
+        <svg width="32" height="32" viewBox="0 0 256 256">
+          <path
+            d="M225.3 82.7a51.8 51.8 0 0 1-15.3 36.8l-28.3 28.3a52 52 0 0 1-73.5 0a8 8 0 1 1 11.3-11.3a36.1 36.1 0 0 0 50.9 0l28.3-28.3a36 36 0 1 0-50.9-50.9L128 77.1a8 8 0 0 1-11.3-11.3L136.5 46a52.1 52.1 0 0 1 88.8 36.7ZM128 178.9l-19.8 19.8a36 36 0 0 1-50.9-50.9l28.3-28.3a36.1 36.1 0 0 1 50.9 0a8 8 0 0 0 11.3-11.3a52 52 0 0 0-73.5 0L46 136.5a52 52 0 1 0 73.5 73.5l19.8-19.8a8 8 0 0 0-11.3-11.3Z"/>
+        </svg>
+      </div>
+      <div class="invite-link-join-type-select">
+        <p>Anyone with the link can join as</p>
+        <div class="invite-link-join-type-select-options">
+          <button>
+            {{inviteJoinType}}
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="M8.12 14.71L12 10.83l3.88 3.88a.996.996 0 1 0 1.41-1.41L12.7 8.71a.996.996 0 0 0-1.41 0L6.7 13.3a.996.996 0 0 0 0 1.41c.39.38 1.03.39 1.42 0z"/>
+            </svg>
+          </button>
+          <ul>
+            <li *ngFor="let joinType of getJoinTypes()" (click)="onInviteJoinType(joinType)">{{joinType}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="friends">
+    <div class="friends-search">
+      <div class="search-bar user-input-box">
+        <label>Search Friend</label>
+        <input class="form-control" type="text" #text_input (keyup)="onSearch(text_input.value || '')">
+        <button class="submit-btn fake-btn" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+               role="img" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+            <path
+                    d="m18.9 20.3l-5.6-5.6q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l5.625 5.625q.275.275.275.675t-.3.7q-.275.275-.7.275q-.425 0-.7-.275ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <ul class="friends-list">
+      <li class="friends-list-cell" *ngFor="let friend of friends">
+        <div>
+          <div class="friends-list-cell-avatar">
+            <img src="{{friend.avatarUrl}}" alt="">
+            <div class="friends-list-cell-status"
+                 [ngClass]="friend.online ? 'friends-list-cell-status-online' : 'friends-list-cell-status-offline'">
+              <span></span>
+            </div>
+          </div>
+          <div>
+            <p class="friends-list-cell-username">{{friend.username}}</p>
+            <p class="friends-list-cell-profession">{{friend.profession}}</p>
+          </div>
+        </div>
+        <div>
+          <div class="invite-link-join-type-select" *ngIf="isInviteSent(friend)">
+            <div class="invite-link-join-type-select-options">
+              <button>
+                {{invites.get(friend)}}
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                  <path
+                          d="M8.12 14.71L12 10.83l3.88 3.88a.996.996 0 1 0 1.41-1.41L12.7 8.71a.996.996 0 0 0-1.41 0L6.7 13.3a.996.996 0 0 0 0 1.41c.39.38 1.03.39 1.42 0z"/>
+                </svg>
+              </button>
+              <ul>
+                <li *ngFor="let joinType of getJoinTypes()" (click)="onProfileJoinType(friend, joinType)">{{joinType}}</li>
+              </ul>
+            </div>
+          </div>
+          <button class="friends-list-cell-revoke-btn" (click)="onCancelInvite(friend)"
+                  *ngIf="isInviteSent(friend)">Cancel
+          </button>
+          <button class="friends-list-cell-invite-btn" (click)="onSendInvite(friend)"
+                  *ngIf="!isInviteSent(friend)">Invite
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="popup-foot">
+    <button (click)="onCancel()">Close</button>
+    <button (click)="onSend()">Send</button>
+  </div>
+</div>

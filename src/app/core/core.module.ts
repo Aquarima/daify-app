@@ -1,10 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthService, ChallengeService, SearchService} from './services';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {JwtInterceptor} from './helpers';
+import {ProfileService} from './services/profile.service';
+import {FriendService} from './services/friend.service';
+import {AlertHandlingService} from "./services/alert-handling.service";
+import { CustomInputFocusDirective } from './helpers';
+import {PopupService} from "./services/popup.service";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CustomInputFocusDirective,
+  ],
+  providers: [
+    AuthService,
+    ChallengeService,
+    ProfileService,
+    FriendService,
+    SearchService,
+    AlertHandlingService,
+    PopupService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   imports: [
     CommonModule,
+  ],
+  exports: [
+    CustomInputFocusDirective
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

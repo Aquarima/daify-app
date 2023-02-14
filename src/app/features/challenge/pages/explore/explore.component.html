@@ -1,38 +1,20 @@
-<router-outlet></router-outlet>
-<app-header></app-header>
-<main class="main-content">
-    <div class="browse">
-        <div class="top">
-            <h1>Explore community challenges</h1>
-            <p class="about">Find all created and joined challenges</p>
-            <div class="actions-bar">
-                <div class="container">
-                    <challenge-search></challenge-search>          
-                </div>
-            </div>
-        </div>
-        <div class="item-list">
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-            <challenge-card></challenge-card>
-        </div>
+<dfy-header></dfy-header>
+<main class="main-content" #height_ref>
+  <div class="browse">
+    <div class="section-banner">
+      <div class="details">
+        <h1>Explore</h1>
+        <p class="about">Browse challenges created by the community</p>
+      </div>
     </div>
+    <dfy-challenge-search class="search"
+                          [searchSubject]="searchSubject">
+    </dfy-challenge-search>
+    <div class="item-list">
+      <dfy-browse-results-list
+        [searchSubject]="searchSubject">
+      </dfy-browse-results-list>
+    </div>
+  </div>
 </main>
-<app-footer></app-footer>
+<dfy-footer></dfy-footer>

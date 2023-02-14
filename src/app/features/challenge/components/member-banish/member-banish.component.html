@@ -1,0 +1,28 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">Banish {{nickname}} ?</h1>
+    <p class="popup-head-description">Are you sure you want to ban {{nickname}} from the challenge? This means he will no longer be able to participate in the conversations and activities."</p>
+  </div>
+  <form>
+    <div class="parameter">
+      <p class="parameter-name">Reason</p>
+      <p class="parameter-description">Tell to {{nickname}} the reason why he/she got banned from the challenge.</p>
+      <div class="user-input">
+        <div class="user-input-box">
+          <label for="reason">Reason</label>
+          <textarea id="reason" class="form-control" rows="5" cols="33" [formControl]="banishForm.controls.reason" [customFocus]="'user-input-active'"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="parameter">
+      <p class="parameter-name">Permanent Banishment</p>
+      <p class="parameter-description">If you enable this option {{nickname}} will not be able to join any of your future challenges.</p>
+      <dfy-custom-checkbox [control]="banishForm.controls.permanent"></dfy-custom-checkbox>
+    </div>
+  </form>
+  <div class="popup-foot">
+    <button (click)="onCancel()">Cancel</button>
+    <button (click)="onBanish()">Banish</button>
+  </div>
+</div>

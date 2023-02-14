@@ -1,0 +1,172 @@
+<dfy-header></dfy-header>
+<main class="main-content">
+  <div class="econtent">
+    <div class="section-banner">
+      <div class="banner-details">
+        <p class="banner-details-title">Challenge creation</p>
+        <p class="banner-details-description">Create your own challenge and share it to your friends</p>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div class="challenge-preview-banner">
+          <input type="file" class="file-upload" accept="image/png, image/jpeg"
+                 (change)="onPreviewCoverSelected($event)"  [customFocus]="'user-input-active'">
+          <div class="placeholder" *ngIf="!selectedCoverFile">
+            <svg width="32" height="32" viewBox="0 0 24 24">
+              <path
+                d="M18 15v4c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h3.02c.55 0 1-.45 1-1s-.45-1-1-1H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5c0-.55-.45-1-1-1s-1 .45-1 1zm-2.5 3H6.52c-.42 0-.65-.48-.39-.81l1.74-2.23a.5.5 0 0 1 .78-.01l1.56 1.88l2.35-3.02c.2-.26.6-.26.79.01l2.55 3.39c.25.32.01.79-.4.79zm3.8-9.11c.48-.77.75-1.67.69-2.66c-.13-2.15-1.84-3.97-3.97-4.2A4.5 4.5 0 0 0 11 6.5c0 2.49 2.01 4.5 4.49 4.5c.88 0 1.7-.26 2.39-.7l2.41 2.41c.39.39 1.03.39 1.42 0c.39-.39.39-1.03 0-1.42l-2.41-2.4zM15.5 9a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5z"/>
+            </svg>
+            <p>Click to choose a cover image that makes your challenge shine!</p>
+          </div>
+          <img [src]="previewCover" alt="" *ngIf="selectedCoverFile">
+        </div>
+        <div class="edit-zone">
+          <form [formGroup]="challengeInfoForm">
+            <div class="attr align-center">
+              <p class="attr-key">Preview Icon</p>
+              <p class="attr-description">The challenge's preview icon</p>
+              <div class="challenge-preview-icon">
+                <input type="file" class="file-upload" accept="image/png, image/jpeg"
+                       (change)="onPreviewIconSelected($event)" [customFocus]="'user-input-active'">
+                <img [src]="previewIcon" alt="" *ngIf="selectedIconFile">
+                <img src="assets/challenge_icon_placeholder.svg" alt="" *ngIf="!selectedIconFile">
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Title</p>
+              <p class="attr-description">The challenge's title</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="title">Title</label>
+                  <input id="title" class="form-control" name="title" type="text" #text_input
+                         formControlName="title"  [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('required')">
+                  Title is required</p>
+                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('minlength')">
+                  Title must be 2 or more characters</p>
+                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('maxlength')">
+                  Title must be 24 or less characters</p>
+                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('pattern')">
+                  Please enter a valid title</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Description</p>
+              <p class="attr-description">The challenge's description</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="description">Description</label>
+                  <textarea id="description" class="form-control" name="description" #text_input
+                            rows="5" cols="33" formControlName="description" [customFocus]="'user-input-active'"></textarea>
+                </div>
+                <p class="user-input-error"
+                   *ngIf="challengeInfoForm.get('description')?.hasError('maxlength')">Description must be
+                  128 or less characters</p>
+                <p class="user-input-error"
+                   *ngIf="challengeInfoForm.get('description')?.hasError('pattern')">Please enter a valid
+                  description</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Theme</p>
+              <p class="attr-description">The challenge's theme</p>
+              <div class="user-input">
+                <div class="user-input-box">
+                  <label for="theme">Theme</label>
+                  <input id="theme" class="form-control" type="text" name="theme" #text_input
+                         formControlName="theme" [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeInfoForm.get('theme')?.hasError('required')">
+                  Theme is required</p>
+              </div>
+            </div>
+          </form>
+          <form [formGroup]="challengeConfigForm">
+            <div class="attr">
+              <p class="attr-key">Access Type</p>
+              <p class="attr-description">The way users will be allowed to join your challenge</p>
+              <dfy-custom-select></dfy-custom-select>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Start date</p>
+              <p class="attr-description">The challenge's start date</p>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="startAt">Start date</label>
+                  <input id="startAt" class="form-control" name="startAt" type="datetime-local" formControlName="startAt" [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('start')?.hasError('required')">
+                  Start date is required</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">End date</p>
+              <p class="attr-description">The challenge's end date</p>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="endAt">End date</label>
+                  <input id="endAt" class="form-control" name="endAt" type="datetime-local" formControlName="endAt" [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('endAt')?.hasError('required')">End
+                  date is required</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Members limit</p>
+              <p class="attr-description">The challenge's maximum members count</p>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="members-capacity">Members limit</label>
+                  <input id="members-capacity" class="form-control" name="members-capacity" type="number"
+                         value="2" min="2" max="30" formControlName="capacity" [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('capacity')?.hasError('required')">
+                  Members limit is required</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('capacity')?.hasError('minlength')">
+                  Members limit must be 2 or more members</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('capacity')?.hasError('maxlength')">
+                  Members limit must be 60 or less members</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('capacity')?.hasError('pattern')">
+                  Please enter a valid number</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Group size</p>
+              <p class="attr-description">The challenge's maximum members in a group</p>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="group-size">Group size</label>
+                  <input id="group-size" class="form-control" name="group-size" type="number"
+                         value="1" min="1" max="8" formControlName="groupSize" [customFocus]="'user-input-active'">
+                </div>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('groupSize')?.hasError('required')">
+                  Group size is required</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('groupSize')?.hasError('minlength')">
+                  Group size must be 2 or more members</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('groupSize')?.hasError('maxlength')">
+                  Group size  must be 60 or less members</p>
+                <p class="user-input-error" *ngIf="challengeConfigForm.get('groupSize')?.hasError('pattern')">
+                  Please enter a valid number</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Allow spectators</p>
+              <p class="attr-description">
+                Allow users to join as spectator
+                <input id="allow-spectators" class="form-control" name="allow-spectators"
+                       type="checkbox" formControlName="spectatorsAllowed" [customFocus]="'user-input-active'">
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="action-bar">
+        <a class="cancel-challenge-btn" [routerLink]="['/']">Back to home</a>
+        <input class="create-challenge-btn" type="submit" value="Create" (click)="onSubmit()" [customFocus]="'user-input-active'">
+      </div>
+    </div>
+  </div>
+</main>
+<dfy-footer></dfy-footer>

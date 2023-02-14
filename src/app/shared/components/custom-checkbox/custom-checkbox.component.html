@@ -1,0 +1,2 @@
+<div class="input" [ngClass]="control.value ? 'input-true' : 'input-false'" (click)="onToggle()"></div>
+<label id="checkbox" (click)="onToggle()" *ngIf="label">{{label}}</label>

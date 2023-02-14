@@ -1,0 +1,129 @@
+:host {
+  position: relative;
+  overflow: hidden;
+
+  .popup {
+    padding: 32px;
+    width: 520px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #FFF;
+    overflow-x: auto;
+  }
+
+  .popup-head {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    .popup-head-title {
+      font-weight: 600;
+      font-size: calc(var(--preset-font-size-normal) + 3px);
+      color: var(--color-text);
+    }
+
+    .popup-head-description {
+      line-height: 20px;
+      font-size: var(--preset-font-size-small);
+      color: var(--color-text-alt);
+    }
+  }
+
+  .user-input-box {
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  .invite-link-btn {
+    padding: 0 8px;
+    max-width: 90px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: var(--preset-font-size-tiny);
+    cursor: pointer;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .invite-link-format-btn {
+    border: none;
+    background-color: rgba(var(--color-primary-rgb), .2);
+    color: var(--color-primary);
+
+    &:hover {
+      background-color: rgba(var(--color-primary-rgb), .22);
+    }
+
+    svg {
+      fill: var(--color-primary);
+    }
+  }
+
+  .invite-link-copy-btn {
+    background-color: transparent;
+    border: 1px solid #DEDEEA;
+    color: var(--color-text-alt);
+
+    svg {
+      fill: var(--color-text-alt);
+    }
+  }
+
+  .invite-link-reset-btn {
+    margin-left: 4px;
+    border: none;
+    background-color: transparent;
+    font-size: var(--preset-font-size-tiny);
+    color: var(--color-primary-hover);
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .popup-foot {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+
+    button {
+      width: 150px;
+      height: 40px;
+      border: 1px solid #DEDEEA;
+      border-radius: 8px;
+      background-color: transparent;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+  }
+
+  .user-input-active {
+
+    label {
+      padding: 0 4px;
+      top: 0;
+      left: 16px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+      font-size: .75em;
+    }
+  }
+}

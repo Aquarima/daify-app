@@ -1,0 +1,11 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">{{title}}</h1>
+    <p class="popup-head-description">{{message}}</p>
+  </div>
+  <div class="popup-foot">
+    <button (click)="onCancel()">Cancel</button>
+    <button (click)="onConfirm()">Confirm</button>
+  </div>
+</div>

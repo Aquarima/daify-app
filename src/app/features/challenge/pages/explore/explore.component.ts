@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
-const colors = {"a": "red", "b": "blue", "e": "green"};
+import {Component, OnInit,} from '@angular/core';
+import {Search} from 'src/app/core/models/challenge';
+import {BehaviorSubject} from "rxjs";
 
 @Component({
-  selector: 'app-explore',
+  selector: 'dfy-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
 
-  constructor() { }
+  searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 }

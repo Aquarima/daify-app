@@ -1,0 +1,216 @@
+:host {
+  margin: 0 auto;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+  border-radius: 8px;
+  background-color: #FFF;
+
+  .search-form {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px;
+
+    .select-order-by {
+      width: 30%;
+      height: 48px;
+    }
+
+    .user-input {
+      width: 30%;
+    }
+
+    .active {
+
+      label {
+        padding: 0 4px;
+        top: 0;
+        left: 16px;
+        font-size: var(--preset-font-size-tiny);
+      }
+    }
+
+    .search-history-disabled {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .search-history {
+      padding: 16px 0;
+      width: 100%;
+      height: fit-content;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translate(-50%, 0);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+      transition: visibility 0s, opacity .2s linear;
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+      border-radius: 8px;
+      background-color: #FFF;
+
+      .section {
+        width: 100%;
+
+        .name {
+          margin: 0 0 12px 16px;
+          display: block;
+          font-weight: 500;
+          font-size: var(--preset-font-size-tiny);
+          color: var(--color-text-alt);
+        }
+
+        .history-empty {
+          margin: 0 0 16px 16px;
+          display: flex;
+          font-weight: 500;
+          font-size: var(--preset-font-size-small);
+          color: var(--color-text);
+        }
+
+        .search-item {
+          padding: 0 16px 0 0;
+          height: 35px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #F5F5F5;
+
+            .tag {
+              background-color: #FFF;
+            }
+          }
+
+          .label {
+            margin: 0;
+            padding-left: 16px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: var(--preset-font-size-small);
+            color: #252526;
+          }
+
+          .remove {
+            padding: 0;
+            position: relative;
+            top: 2.5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+
+            svg {
+              width: 20px;
+              height: 20px;
+              fill: #252526;
+              stroke: #252526;
+            }
+          }
+        }
+      }
+    }
+
+    .user-input-active {
+
+      label {
+        padding: 0 4px;
+        top: 0;
+        left: 16px;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+        font-size: .75em;
+      }
+    }
+  }
+
+  .display-modes {
+    width: 80px;
+    display: flex;
+    gap: 16px;
+
+    button {
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        transition: fill .3s;
+        fill: var(--color-text-alt-2);
+
+        &:hover {
+          fill: var(--color-text-alt);
+        }
+      }
+    }
+
+    .display-mode-selected {
+      svg {
+        fill: var(--color-text);
+      }
+    }
+  }
+
+}
+
+.create-new-btn {
+  padding: 0 12px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  font-weight: 600;
+  font-size: var(--preset-font-size-small);
+  color: #FFF;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary-hover);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #FFF;
+  }
+}
+
+.backdrop {
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 1050px) {
+
+  .search-form {
+    flex-direction: column;
+
+    .input-box {
+      width: 100% !important;
+    }
+  }
+}

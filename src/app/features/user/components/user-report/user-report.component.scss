@@ -1,0 +1,114 @@
+:host {
+  position: relative;
+  overflow: hidden;
+
+  .popup {
+    padding: 32px;
+    width: 520px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #FFF;
+    overflow-x: auto;
+  }
+
+  .popup-head {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    .popup-head-title {
+      font-weight: 600;
+      font-size: calc(var(--preset-font-size-normal) + 3px);
+      color: var(--color-text);
+    }
+
+    .popup-head-description {
+      line-height: 20px;
+      font-size: var(--preset-font-size-small);
+      color: var(--color-text-alt);
+    }
+  }
+
+  .parameter {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .parameter-name {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .parameter-description {
+      margin-bottom: 4px;
+      font-size: var(--preset-font-size-small);
+      color: var(--color-text-alt-2);
+    }
+  }
+
+  form {
+
+    display: flex;
+    flex-direction: column;
+
+    p {
+
+    }
+  }
+
+  #details {
+    padding: 12px 8px;
+    height: 64px;
+    box-sizing: border-box;
+    resize: none;
+  }
+
+  .popup-foot {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+
+    button {
+      width: 150px;
+      height: 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: var(--preset-font-size-normal);
+      cursor: pointer;
+    }
+
+    button:nth-child(2) {
+      background-color: var(--color-primary);
+      color: #FFF;
+
+      &:hover {
+        background-color: var(--color-primary-hover);
+      }
+    }
+
+    button:nth-child(1) {
+      border: 1px solid #DEDEEA;
+      background-color: transparent;
+      color: var(--color-text);
+    }
+  }
+
+  .user-input-active {
+
+    label {
+      padding: 0 4px;
+      top: 0;
+      left: 16px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+      font-size: .75em;
+    }
+  }
+}

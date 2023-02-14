@@ -1,0 +1,150 @@
+/*@keyframes popup-anim {
+  0% {
+    right: -100%;
+  }
+  10% {
+    right: 0
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}*/
+
+@keyframes alert-anim {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+:host {
+  padding: 16px;
+  width: 300px;
+  height: 40px;
+  position: fixed;
+  left: 32px;
+  bottom: 64px;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
+  border-radius: 8px;
+  background-color: #FFF;
+  animation: alert-anim 20s;
+  user-select: none;
+
+  .alert {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 16px;
+
+    .alert-bar {
+      min-width: 4px;
+      height: 100%;
+      border-radius: 8px;
+      background-color: var(--color-text-alt-2);
+    }
+
+    .alert-icon {
+      min-width: 24px;
+      min-height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+
+      svg {
+        width: 80%;
+        height: 80%;
+        fill: #FFF;
+      }
+    }
+
+    .alert-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      .alert-info-title {
+        font-weight: 600;
+        color: var(--color-text);
+      }
+
+      .alert-info-message {
+        color: var(--color-text-alt-2);
+      }
+    }
+
+    .alert-close {
+      margin-top: 2px;
+      min-width: 16px;
+      min-height: 16px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--color-text-alt);
+      }
+    }
+  }
+
+  .info {
+
+    .alert-bar {
+      background-color: rgb(var(--color-semantic-info));
+    }
+
+    .alert-icon {
+      background-color: rgb(var(--color-semantic-info));
+    }
+  }
+
+  .success {
+
+    .alert-bar {
+      background-color: rgb(var(--color-semantic-success));
+    }
+
+    .alert-icon {
+      background-color: rgb(var(--color-semantic-success));
+    }
+  }
+
+  .warn {
+
+    .alert-bar {
+      background-color: rgb(var(--color-semantic-warning));
+    }
+
+    .alert-icon {
+      background-color: rgb(var(--color-semantic-warning));
+    }
+  }
+
+  .error {
+
+    .alert-bar {
+      background-color: rgb(var(--color-semantic-error));
+    }
+
+    .alert-icon {
+      background-color: rgb(var(--color-semantic-error));
+    }
+  }
+}
