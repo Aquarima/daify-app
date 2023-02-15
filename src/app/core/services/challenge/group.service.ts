@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment as env} from "../../../environments/environment";
-import {Group} from "../models/challenge/group.model";
+import {environment as env} from "../../../../environments/environment";
+import {Group} from "../../models/challenge/group.model";
 
 @Injectable({
   providedIn: 'root'

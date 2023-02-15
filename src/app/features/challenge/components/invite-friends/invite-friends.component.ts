@@ -11,9 +11,9 @@ import {
   ViewChild
 } from '@angular/core';
 import {AuthService, Challenge, Friend, Profile} from "../../../../core";
-import {FriendService} from "../../../../core/services/friend.service";
+import {FriendService} from "../../../../core/services/user/friend.service";
 import {DOCUMENT} from "@angular/common";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {GroupService} from "../../../../core/services/group.service";
+import {GroupService} from "../../../../core/services/challenge/group.service";
 import {Challenge, Group, Member} from "../../../../core";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {CreateGroupComponent} from "../create-group/create-group.component";
 
 @Component({

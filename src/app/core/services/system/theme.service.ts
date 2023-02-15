@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, OnInit, Output} from '@angular/core';
-import {Theme} from "../models";
+import {Theme} from "../../models";
 
 @Injectable({
   providedIn: 'root'

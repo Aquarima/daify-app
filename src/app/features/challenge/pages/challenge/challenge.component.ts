@@ -10,13 +10,13 @@ import {
   Member
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 import {forkJoin} from "rxjs";
-import {MemberService} from "../../../../core/services/member.service";
+import {MemberService} from "../../../../core/services/challenge/member.service";
 import {ChallengeShareComponent} from "../../components";
-import {GroupService} from "../../../../core/services/group.service";
-import {PopupService} from "../../../../core/services/popup.service";
+import {GroupService} from "../../../../core/services/challenge/group.service";
+import {PopupService} from "../../../../core/services/system/popup.service";
 
 @Component({
   selector: 'app-challenge',

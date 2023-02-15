@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, ReplaySubject} from "rxjs";
-import {SystemAlert} from "../models";
-import {AlertType} from "../models/system-alert";
+import {SystemAlert} from "../../models";
+import {AlertType} from "../../models/system-alert";
 
 @Injectable({
   providedIn: 'root'

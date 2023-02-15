@@ -142,20 +142,17 @@
             <p class="form-parameter-name">Banned Members</p>
             <p class="form-parameter-description">Users that got banned from this challenges.</p>
             <ul class="challenge-settings-members">
-              <li class="challenge-settings-members-item" *ngFor="let member of members">
+              <li class="challenge-settings-members-item" *ngFor="let banishment of banishment">
                 <div>
-                  <img [src]="getMemberAvatar(member)" alt="">
+                  <img [src]="banishment.profile.avatarUrl" alt="">
                   <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-nickname">{{getMemberNickname(member)}}</p>
+                    <p class="challenge-settings-members-item-username">{{banishment.profile.username}}</p>
                     <a class="challenge-settings-members-item-tag"
-                       [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
-                    <p class="challenge-settings-members-item-profession">{{getMemberRole(member)}}</p>
+                       [routerLink]="['/app/user/', challenge.author.username]">@{{banishment.profile.username}}</a>
                   </div>
                 </div>
-                <div class="challenge-settings-members-item-actions"
-                     *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
-                  <button class="challenge-settings-members-item-actions-unban tooltip-owner"
-                          (click)="onBanishMember(member)">
+                <div class="challenge-settings-members-item-actions">
+                  <button class="challenge-settings-members-item-actions-unban tooltip-owner">
                     <span class="tooltip">Revoke</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                       <path
@@ -178,7 +175,7 @@
                 <div>
                   <img [src]="getMemberAvatar(member)" alt="">
                   <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-nickname">{{getMemberNickname(member)}}</p>
+                    <p class="challenge-settings-members-item-username">{{getMemberNickname(member)}}</p>
                     <a class="challenge-settings-members-item-tag"
                        [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
                     <p class="challenge-settings-members-item-profession">{{getMemberRole(member)}}</p>
@@ -246,7 +243,7 @@
                 <div>
                   <img [src]="getMemberAvatar(member)" alt="">
                   <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-nickname">{{getMemberNickname(member)}}</p>
+                    <p class="challenge-settings-members-item-username">{{getMemberNickname(member)}}</p>
                     <a class="challenge-settings-members-item-tag"
                        [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
                     <p class="challenge-settings-members-item-profession">{{getMemberRole(member)}}</p>

@@ -1,14 +1,14 @@
 import {Component, Inject, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {AuthService, SystemAlert, Theme} from './core';
-import {ProfileService} from './core/services/profile.service';
-import {AlertHandlingService} from "./core/services/alert-handling.service";
+import {ProfileService} from './core/services/user/profile.service';
+import {AlertHandlingService} from "./core/services/system/alert-handling.service";
 import {AlertBoxComponent} from "./shared";
 import {Subscription} from "rxjs";
 import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
-import {UserService} from "./core/services/user.service";
+import {UserService} from "./core/services/user/user.service";
 import {AlertType} from "./core/models/system-alert";
-import {ThemeService} from "./core/services/theme.service";
+import {ThemeService} from "./core/services/system/theme.service";
 import {DOCUMENT} from "@angular/common";
 
 @Component({

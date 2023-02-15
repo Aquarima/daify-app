@@ -1,8 +1,8 @@
 import {ComponentRef, Injectable, ViewContainerRef} from '@angular/core';
-import {ConfirmBoxComponent} from "../../shared/components/confirm-box/confirm-box.component";
-import {Member} from "../models/challenge/member.model";
-import {MemberKickComponent} from "../../features/challenge/components";
-import {MemberBanishComponent} from "../../features/challenge/components/member-banish/member-banish.component";
+import {ConfirmBoxComponent} from "../../../shared/components/confirm-box/confirm-box.component";
+import {Member} from "../../models/challenge/member.model";
+import {MemberKickComponent} from "../../../features/challenge/components";
+import {MemberBanishComponent} from "../../../features/challenge/components/member-banish/member-banish.component";
 
 @Injectable({
   providedIn: 'root'

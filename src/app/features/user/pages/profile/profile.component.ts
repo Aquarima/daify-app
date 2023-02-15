@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService, Challenge, ChallengeService, Friend, Profile, Search} from 'src/app/core';
-import {FriendService} from 'src/app/core/services/friend.service';
-import {ProfileService} from 'src/app/core/services/profile.service';
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {FriendService} from 'src/app/core/services/user/friend.service';
+import {ProfileService} from 'src/app/core/services/user/profile.service';
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {TimeHelper} from "../../../../core/helpers";
 import {BehaviorSubject} from "rxjs";
 

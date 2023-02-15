@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {Challenge, Member} from "../../../../core";
-import {MemberService} from "../../../../core/services/member.service";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {MemberService} from "../../../../core/services/challenge/member.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
-import {PopupService} from "../../../../core/services/popup.service";
+import {PopupService} from "../../../../core/services/system/popup.service";
 import {TimeHelper} from "../../../../core/helpers";
 
 @Component({

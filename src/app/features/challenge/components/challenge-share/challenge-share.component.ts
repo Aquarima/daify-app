@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Challenge, ChallengeService} from "../../../../core";
 import {AlertType} from "../../../../core/models/system-alert";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 
 @Component({
     selector: 'app-challenge-share',

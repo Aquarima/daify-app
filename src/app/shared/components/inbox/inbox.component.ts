@@ -1,7 +1,7 @@
 import {Component, EventEmitter, HostListener, OnInit, Output, ViewEncapsulation,} from '@angular/core';
-import {NotificationService} from "../../../core/services/notification.service";
+import {NotificationService} from "../../../core/services/user/notification.service";
 import {AuthService, Notification, Profile} from "../../../core";
-import {AlertHandlingService} from "../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../core/models/system-alert";
 import {DomSanitizer} from "@angular/platform-browser";
 import {TimeHelper} from "../../../core/helpers";

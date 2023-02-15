@@ -5,9 +5,9 @@ import {CookieService} from 'ngx-cookie';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment as env} from '../../../environments/environment';
 import {Profile, User} from '../models';
-import {UserService} from "./user.service";
-import {ProfileService} from "./profile.service";
-import {AlertHandlingService} from "./alert-handling.service";
+import {UserService} from "./user/user.service";
+import {ProfileService} from "./user/profile.service";
+import {AlertHandlingService} from "./system/alert-handling.service";
 import {AlertType} from "../models/system-alert";
 
 export const ACCESS_TOKEN: string = 'access_token';

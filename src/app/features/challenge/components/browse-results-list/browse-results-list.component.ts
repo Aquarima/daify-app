@@ -12,7 +12,7 @@ import {
 import {Challenge, ChallengeService, Search} from 'src/app/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({

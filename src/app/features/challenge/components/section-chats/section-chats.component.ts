@@ -1,10 +1,10 @@
 import {Component, ElementRef, Input, NgZone, OnInit, ViewChild, ViewContainerRef,} from '@angular/core';
 import {AuthService, Challenge} from "../../../../core";
-import {ChannelService} from "../../../../core/services/channel.service";
-import {MessageService} from "../../../../core/services/message.service";
+import {ChannelService} from "../../../../core/services/challenge/channel.service";
+import {MessageService} from "../../../../core/services/challenge/message.service";
 import {AlertType} from "../../../../core/models/system-alert";
 import {Channel} from "../../../../core/models/challenge/channel.model";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {Message} from "../../../../core/models/challenge/message.model";
 import {Member} from "../../../../core/models/challenge/member.model";
 import {timer} from "rxjs";

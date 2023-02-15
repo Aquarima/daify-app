@@ -1,11 +1,13 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {AccessType, Challenge, ChallengeService, Member} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
-import {MemberService} from "../../../../core/services/member.service";
-import {AlertHandlingService} from "../../../../core/services/alert-handling.service";
+import {MemberService} from "../../../../core/services/challenge/member.service";
+import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PopupService} from "../../../../core/services/popup.service";
+import {PopupService} from "../../../../core/services/system/popup.service";
+import {Banishment} from "../../../../core/models/challenge/banishment.model";
+import {BanishmentService} from "../../../../core/services/challenge/banishment.service";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -28,6 +30,7 @@ export class SectionSettingsComponent implements OnInit {
 
   currentSection: string = 'overview';
   initialChallengeForm: any | undefined;
+  banishment: Banishment[] = [];
 
   challengeForm = new FormGroup({
     title: new FormControl<string>(''),
@@ -51,7 +54,8 @@ export class SectionSettingsComponent implements OnInit {
     private alertHandlingService: AlertHandlingService,
     private popupService: PopupService,
     private challengeService: ChallengeService,
-    private memberService: MemberService) {
+    private memberService: MemberService,
+    private banishmentService: BanishmentService) {
     this.popupService.viewContainerRef = viewContainerRef;
   }
 
@@ -79,6 +83,11 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   onGoToBanishment() {
+    this.banishmentService.getBanishmentByChallenge(this.challenge)
+      .subscribe({
+        next: (banishment: any) => this.banishment = banishment.content,
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
     this.onSection('banishment');
   }
 
