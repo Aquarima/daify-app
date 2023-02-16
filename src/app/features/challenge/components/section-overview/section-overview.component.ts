@@ -56,6 +56,10 @@ export class SectionOverviewComponent implements OnInit {
     return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
   }
 
+  isAuthor(member: Member): boolean {
+    return member.id === this.challenge.author.id;
+  }
+
   isSelfMember(member: Member) {
     return this.selfMember?.id === member.id;
   }

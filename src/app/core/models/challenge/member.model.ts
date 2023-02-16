@@ -8,7 +8,7 @@ export interface Member {
     nickname: string;
     role: string;
     spectator: boolean;
-    joined_at: Date;
+    joinedAt: Date;
 }
 
 export function defaultMember(): Member {
@@ -19,6 +19,6 @@ export function defaultMember(): Member {
     nickname: '',
     role: '',
     spectator: false,
-    joined_at: new Date()
+    joinedAt: new Date()
   } as Member;
 }

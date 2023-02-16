@@ -180,10 +180,9 @@ html {
         border-radius: 8px;
         background-color: #FFF;
         outline: none;
-        font-weight: 500;
         font-size: var(--preset-font-size-normal);
         font-family: $font-family;
-        color: var(--color-text);
+        color: var(--color-text-alt);
 
         &:focus {
           border-color: var(--color-primary);
@@ -266,22 +265,20 @@ html {
 .tooltip-owner {
   position: relative;
 
-  &:hover .tooltip {
-    display: block;
-  }
-
   .tooltip {
     padding: 5px 8px;
     position: absolute;
-    top: -100%;
+    top: calc(-100% - 16px);
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 99;
-    display: none;
+    opacity: 0;
     border-radius: 8px;
     background-color: #353536;
     font-size: var(--preset-font-size-small);
     color: #FFF;
+    transition: opacity 0.2s ease-out;
+    pointer-events: none;
   }
 }
 

@@ -141,28 +141,34 @@
           <div class="form-parameter">
             <p class="form-parameter-name">Banned Members</p>
             <p class="form-parameter-description">Users that got banned from this challenges.</p>
-            <ul class="challenge-settings-members">
-              <li class="challenge-settings-members-item" *ngFor="let banishment of banishment">
-                <div>
-                  <img [src]="banishment.profile.avatarUrl" alt="">
-                  <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-username">{{banishment.profile.username}}</p>
-                    <a class="challenge-settings-members-item-tag"
-                       [routerLink]="['/app/user/', challenge.author.username]">@{{banishment.profile.username}}</a>
+            <div class="challenge-settings-members">
+              <div class="challenge-settings-members-head">
+                <div>User</div>
+                <div>Reason</div>
+                <div>Banned At</div>
+                <div>Actions</div>
+              </div>
+              <div class="challenge-settings-members-item" *ngFor="let ban of banishment">
+                <div class="challenge-settings-members-item-head">
+                  <img [src]="ban.profile.avatarUrl" alt="">
+                  <div class="challenge-settings-members-item-head-username">
+                    <p>{{ban.profile.username}}</p>
+                    <a
+                      [routerLink]="['/app/user/profile/', ban.profile.username]">@{{ban.profile.username}}</a>
                   </div>
                 </div>
+                <div class="challenge-settings-members-item-profession">{{ban.reason}}</div>
+                <div class="challenge-settings-members-item-joined">{{ban.createdAt | date:'MMM d \'at\' H:mm'}}</div>
                 <div class="challenge-settings-members-item-actions">
-                  <button class="challenge-settings-members-item-actions-unban tooltip-owner">
-                    <span class="tooltip">Revoke</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                      <path
-                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"/>
-                    </svg>
+                  <button class="challenge-settings-members-item-actions-ban"
+                          (click)="onRevokeBanishment(ban)" *ngIf="isSelfMemberAuthor()"
+                          tooltip="Revoke">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/></svg>
                   </button>
                 </div>
-              </li>
-            </ul>
-            <div class="challenge-settings-unban-all">
+              </div>
+            </div>
+            <div class="challenge-settings-unban-all" *ngIf="banishment.length > 0">
               <button>Revoke All</button>
             </div>
           </div>
@@ -171,21 +177,19 @@
             <p class="form-parameter-description">Users that are banned from all {{challenge.author.username}}'s
               challenges.</p>
             <ul class="challenge-settings-members">
-              <li class="challenge-settings-members-item" *ngFor="let member of members">
+              <li class="challenge-settings-members-item" *ngFor="let ban of banishment">
                 <div>
-                  <img [src]="getMemberAvatar(member)" alt="">
+                  <img [src]="" alt="">
                   <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-username">{{getMemberNickname(member)}}</p>
+                    <p class="challenge-settings-members-item-username"></p>
                     <a class="challenge-settings-members-item-tag"
-                       [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
-                    <p class="challenge-settings-members-item-profession">{{getMemberRole(member)}}</p>
+                       [routerLink]="['/app/user/profile/', challenge.author.username]"></a>
+                    <p class="challenge-settings-members-item-profession"></p>
                   </div>
                 </div>
-                <div class="challenge-settings-members-item-actions "
-                     *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
-                  <button class="challenge-settings-members-item-actions-unban tooltip-owner"
-                          (click)="onBanishMember(member)">
-                    <span class="tooltip">Revoke</span>
+                <div class="challenge-settings-members-item-actions">
+                  <button class="challenge-settings-members-item-actions-unban"
+                          (click)="onRevokeBanishment(ban)" tooltip="Revoke">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                       <path
                         d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2z"/>
@@ -194,7 +198,7 @@
                 </div>
               </li>
             </ul>
-            <div class="challenge-settings-unban-all">
+            <div class="challenge-settings-unban-all" *ngIf="banishment.length > 0">
               <button>Revoke All</button>
             </div>
           </div>
@@ -238,40 +242,46 @@
             <p class="form-parameter-name">Members Management</p>
             <p class="form-parameter-description">Manage the members including adding and removing
               members, as well as viewing and editing their information.</p>
-            <ul class="challenge-settings-members">
-              <li class="challenge-settings-members-item" *ngFor="let member of members">
-                <div>
+            <div class="challenge-settings-members">
+              <div class="challenge-settings-members-head">
+                <div>Member</div>
+                <div>Profession</div>
+                <div>Joined At</div>
+                <div>Actions</div>
+              </div>
+              <div class="challenge-settings-members-item" *ngFor="let member of members">
+                <div class="challenge-settings-members-item-head">
                   <img [src]="getMemberAvatar(member)" alt="">
-                  <div class="challenge-settings-members-item-username">
-                    <p class="challenge-settings-members-item-username">{{getMemberNickname(member)}}</p>
-                    <a class="challenge-settings-members-item-tag"
-                       [routerLink]="['/app/user/', challenge.author.username]">@{{member.profile.username}}</a>
-                    <p class="challenge-settings-members-item-profession">{{getMemberRole(member)}}</p>
+                  <div class="challenge-settings-members-item-head-username">
+                    <p>{{getMemberNickname(member)}}</p>
+                    <a
+                      [routerLink]="['/app/user/profile/', challenge.author.username]">@{{member.profile.username}}</a>
                   </div>
                 </div>
-                <div class="challenge-settings-members-item-actions"
-                     *ngIf="!isSelfMember(member) && isSelfMemberAuthor()">
-                  <button class="challenge-settings-members-item-actions-transfer tooltip-owner"
-                          (click)="onTransferOwnership(member)">
-                    <span class="tooltip">Transfer Ownership</span>
+                <div class="challenge-settings-members-item-profession">{{member.profile.profession}}</div>
+                <div class="challenge-settings-members-item-joined">{{member.joinedAt | date:'MMM d \'at\' H:mm'}}</div>
+                <div class="challenge-settings-members-item-actions">
+                  <button class="challenge-settings-members-item-actions-transfer"
+                          (click)="onTransferOwnership(member)" *ngIf="!isSelfMember(member) && isSelfMemberAuthor()"
+                          tooltip="Transfer Ownership">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                          viewBox="0 0 24 24">
                       <path
                         d="M17.65 6.35a7.95 7.95 0 0 0-6.48-2.31c-3.67.37-6.69 3.35-7.1 7.02C3.52 15.91 7.27 20 12 20a7.98 7.98 0 0 0 7.21-4.56c.32-.67-.16-1.44-.9-1.44c-.37 0-.72.2-.88.53a5.994 5.994 0 0 1-6.8 3.31c-2.22-.49-4.01-2.3-4.48-4.52A6.002 6.002 0 0 1 12 6c1.66 0 3.14.69 4.22 1.78l-1.51 1.51c-.63.63-.19 1.71.7 1.71H19c.55 0 1-.45 1-1V6.41c0-.89-1.08-1.34-1.71-.71l-.64.65z"/>
                     </svg>
                   </button>
-                  <button class="challenge-settings-members-item-actions-kick tooltip-owner"
-                          (click)="onKickMember(member)">
-                    <span class="tooltip">Kick</span>
+                  <button class="challenge-settings-members-item-actions-kick"
+                          (click)="onKickMember(member)" *ngIf="!isSelfMember(member) && isSelfMemberAuthor()"
+                          tooltip="Kick">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                          viewBox="0 0 24 24">
                       <path
                         d="M17.5 5.5q-.825 0-1.413-.588Q15.5 4.325 15.5 3.5t.587-1.413Q16.675 1.5 17.5 1.5q.825 0 1.413.587q.587.588.587 1.413q0 .825-.587 1.412q-.588.588-1.413.588ZM11 23l2.8-14.1l-1.8.7V13h-.7l-6.75 7.925q-.025-.025-.287-.225q-.263-.2-.763-.2q-.25 0-.662.15q-.413.15-.688.7l-1.1-.95q-.15-.125-.238-.3q-.087-.175-.112-.375q-.025-.2.038-.388Q.8 19.15.925 19l3.25-3.8q.125-.175.3-.25q.175-.075.375-.1q.2-.025.388.05q.187.075.337.2L7.1 16.4L10 13V8.3l5.05-2.15q.725-.325 1.475-.075q.75.25 1.175.925l1 1.6q.6 1.05 1.738 1.725Q21.575 11 23 11v2q-1.65 0-3.087-.688q-1.438-.687-2.413-1.812l-.6 3l2.1 2V23h-2v-6l-2.1-2l-1.8 8Zm-8.5-1q0-.425.288-.712Q3.075 21 3.5 21t.713.288q.287.287.287.712t-.287.712Q3.925 23 3.5 23t-.712-.288Q2.5 22.425 2.5 22Z"/>
                     </svg>
                   </button>
-                  <button class="challenge-settings-members-item-actions-ban tooltip-owner"
-                          (click)="onBanishMember(member)">
-                    <span class="tooltip">Banish</span>
+                  <button class="challenge-settings-members-item-actions-ban"
+                          (click)="onBanishMember(member)" *ngIf="!isSelfMember(member) && isSelfMemberAuthor()"
+                          tooltip="Banish">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                          viewBox="0 0 24 24">
                       <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -281,8 +291,8 @@
                     </svg>
                   </button>
                 </div>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
           <div class="form-parameter">
             <p class="form-parameter-name">Spectator Mode</p>

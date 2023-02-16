@@ -114,6 +114,19 @@ export class SectionSettingsComponent implements OnInit {
     this.popupService.createBanModal(member, () => this.banMember(member));
   }
 
+  onRevokeBanishment(banishment: Banishment) {
+    this.popupService.createConfirmModal(
+      `Unban ${banishment.profile.username}`,
+      'Are you sure that you want to unban this user? He will be allowed to join this challenge again.',
+      () => {
+        this.banishmentService.unban(banishment)
+          .subscribe({
+            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
+            complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
+          });
+      });
+  }
+
   onReset() {
     this.challengeForm.setValue(this.initialChallengeForm);
   }

@@ -103,13 +103,13 @@
       }
 
       .editable-parameters {
+        width: 80%;
         display: flex;
         flex-direction: column;
-        row-gap: 24px;
+        row-gap: 32px;
       }
 
       .form-parameter {
-        width: 60%;
         display: flex;
         flex-direction: column;
 
@@ -130,7 +130,7 @@
         }
 
         .user-input-box {
-
+          width: 60%;
         }
 
         textarea {
@@ -141,15 +141,47 @@
       }
 
       .challenge-settings-members {
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, .10);
+        border-radius: 16px;
+        //background-color: rgba(var(--color-primary-rgb), .030);
+
+        .challenge-settings-members-head {
+          padding: 0 32px;
+          width: 100%;
+          height: 48px;
+          display: flex;
+          box-sizing: border-box;
+          border-bottom: 1px solid rgba(0, 0, 0, .080);
+          border-radius: 16px 16px 0 0;
+          background-color: rgba(0, 0, 0, .030);
+
+          div {
+            width: calc(100% / 4);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text);
+          }
+        }
 
         .challenge-settings-members-item {
-          padding: 8px 32px 8px 16px;
+          padding: 16px 32px;
+          height: 64px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          border-bottom: 1px solid #F2F2F2;
+          box-sizing: border-box;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, .080);
+          }
 
           > div {
+            width: calc(100% / 4);
+            height: 80px;
             display: flex;
             gap: 16px;
           }
@@ -160,47 +192,58 @@
             border-radius: 50%;
           }
 
-          .challenge-settings-members-item-username {
+          .challenge-settings-members-item-head {
             display: flex;
-            flex-direction: column;
+            align-items: center;
 
-            .challenge-settings-members-item-username {
-              margin-bottom: 4px;
-              font-weight: 500;
-              color: var(--color-text);
-            }
+            .challenge-settings-members-item-head-username {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              row-gap: 8px;
 
-            .challenge-settings-members-item-tag {
-              margin-bottom: 8px;
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text-alt);
-            }
-
-            .challenge-settings-members-item-profession {
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text-alt-2);
-            }
-
-            a {
-              text-decoration: none;
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text-alt);
-
-              &:hover {
-                text-decoration: underline;
+              p {
+                font-weight: 500;
+                color: var(--color-text);
               }
-            }
 
-            .challenge-settings-members-item-profession {
+              a {
+                text-decoration: none;
+                font-size: var(--preset-font-size-small);
+                color: var(--color-text-alt);
 
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
             }
           }
 
+          .challenge-settings-members-item-profession {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text-alt-2);
+          }
+
+          .challenge-settings-members-item-joined {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text-alt-2);
+          }
+
           .challenge-settings-members-item-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             button {
-              width: 24px;
-              height: 24px;
+              width: 32px;
+              height: 32px;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -214,8 +257,8 @@
               }
 
               svg {
-                width: 18px;
-                height: 18px;
+                width: 70%;
+                height: 70%;
               }
 
             }
