@@ -1,13 +1,10 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {AccessType, Challenge, ChallengeService, Member} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
-import {MemberService} from "../../../../core/services/challenge/member.service";
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
+import {AlertHandlingService, PopupService, MemberService, BanishmentService} from "../../../../core";
 import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PopupService} from "../../../../core/services/system/popup.service";
 import {Banishment} from "../../../../core/models/challenge/banishment.model";
-import {BanishmentService} from "../../../../core/services/challenge/banishment.service";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -114,13 +111,14 @@ export class SectionSettingsComponent implements OnInit {
     this.popupService.createBanModal(member, () => this.banMember(member));
   }
 
-  onRevokeBanishment(banishment: Banishment) {
+  onRevokeBanishment(ban: Banishment) {
     this.popupService.createConfirmModal(
-      `Unban ${banishment.profile.username}`,
+      `Unban ${ban.profile.username}`,
       'Are you sure that you want to unban this user? He will be allowed to join this challenge again.',
       () => {
-        this.banishmentService.unban(banishment)
+        this.banishmentService.unban(ban)
           .subscribe({
+            next: () => this.banishment.splice(this.banishment.indexOf(ban), 1),
             error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
