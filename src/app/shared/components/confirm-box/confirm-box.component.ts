@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-confirm-box',
+  selector: 'dfy-confirm-box',
   templateUrl: './confirm-box.component.html',
   styleUrls: ['./confirm-box.component.scss']
 })

@@ -14,7 +14,9 @@ export class ChallengeCardComponent implements OnInit {
 
   @ViewChild('tag_list') tagList!: ElementRef;
 
-  constructor(private router: Router, private challengeService: ChallengeService) {
+  constructor(
+    private router: Router,
+    private challengeService: ChallengeService) {
   }
 
   ngOnInit(): void {

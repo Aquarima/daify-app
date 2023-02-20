@@ -8,4 +8,6 @@ export {SectionLeaderboardComponent} from './section-leaderboard/section-leaderb
 export {SectionOverviewComponent} from './section-overview/section-overview.component';
 export {SectionSettingsComponent} from './section-settings/section-settings.component';
 export {MemberKickComponent} from './member-kick/member-kick.component';
+export {MemberBanishComponent} from './member-banish/member-banish.component';
 export {ChallengeShareComponent} from './challenge-share/challenge-share.component';
+export {BanishmentViewComponent} from './banishment-view/banishment-view.component';

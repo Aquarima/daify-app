@@ -23,7 +23,7 @@ export class SectionOverviewComponent implements OnInit {
     private popupService: PopupService,
     private memberService: MemberService,
     private timeHelper: TimeHelper) {
-    this.popupService.viewContainerRef = viewContainerRef;
+    this.popupService.setViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
@@ -71,6 +71,6 @@ export class SectionOverviewComponent implements OnInit {
   get duration() {
     let start: Date = new Date(this.challenge.config.startAt);
     let end: Date = new Date(this.challenge.config.endAt);
-    return this.timeHelper.getTimeSince(end, start);
+    return this.timeHelper.getTimeSince(end, start, true);
   }
 }

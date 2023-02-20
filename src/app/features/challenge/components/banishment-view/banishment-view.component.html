@@ -1,0 +1,20 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">You cannot participate in this challenge</h1>
+    <p class="popup-head-description">You are banned from the '{{challenge.title}}' challenge</p>
+  </div>
+  <form>
+    <div class="parameter">
+      <p class="parameter-name">Banned At:</p>
+      <p class="parameter-description">{{banishment.createdAt | date:'MMM d \'at\' H:mm'}}</p>
+    </div>
+    <div class="parameter">
+      <p class="parameter-name">Reason:</p>
+      <p class="parameter-description">{{banishment.reason}}</p>
+    </div>
+  </form>
+  <div class="popup-foot">
+    <button (click)="onCancel()">Close</button>
+  </div>
+</div>

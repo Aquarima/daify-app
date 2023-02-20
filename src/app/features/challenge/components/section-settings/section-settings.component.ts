@@ -1,10 +1,21 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {AccessType, Challenge, ChallengeService, Member} from "../../../../core";
+import {
+  AccessType,
+  AlertHandlingService,
+  AuthService,
+  BanishmentService,
+  Challenge,
+  ChallengeService,
+  Member,
+  MemberService,
+  PopupService
+} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
-import {AlertHandlingService, PopupService, MemberService, BanishmentService} from "../../../../core";
 import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Banishment} from "../../../../core/models/challenge/banishment.model";
+import {BlacklistedMember} from "../../../../core/models/challenge/blacklisted-member.model";
+import {BlacklistService} from "../../../../core/services/challenge/blacklist.service";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -28,6 +39,7 @@ export class SectionSettingsComponent implements OnInit {
   currentSection: string = 'overview';
   initialChallengeForm: any | undefined;
   banishment: Banishment[] = [];
+  blacklist: BlacklistedMember[] = [];
 
   challengeForm = new FormGroup({
     title: new FormControl<string>(''),
@@ -50,10 +62,12 @@ export class SectionSettingsComponent implements OnInit {
     private router: Router,
     private alertHandlingService: AlertHandlingService,
     private popupService: PopupService,
+    private authService: AuthService,
     private challengeService: ChallengeService,
     private memberService: MemberService,
-    private banishmentService: BanishmentService) {
-    this.popupService.viewContainerRef = viewContainerRef;
+    private banishmentService: BanishmentService,
+    private blacklistService: BlacklistService) {
+    this.popupService.setViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
@@ -85,6 +99,11 @@ export class SectionSettingsComponent implements OnInit {
         next: (banishment: any) => this.banishment = banishment.content,
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       });
+    this.blacklistService.getBlacklistedMembersByAuthor(this.authService.user.profile)
+      .subscribe({
+        next: (blacklist: any) => this.blacklist = blacklist.content,
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
     this.onSection('banishment');
   }
 
@@ -99,16 +118,54 @@ export class SectionSettingsComponent implements OnInit {
   onTransferOwnership(to: Member) {
     this.popupService.createConfirmModal(
       `Transfer ownership to ${this.getMemberNickname(to)} ?`,
-      `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undo.`,
-      () => this.transferOwnership(to));
+      `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undone.`,
+      () => {
+        this.challengeService.transferChallengeOwnership(this.challenge, to)
+          .subscribe({
+            next: () => {
+              this.challenge.author = to.profile;
+              this.router.navigate(['../overview'], {relativeTo: this.route});
+              this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
+            },
+            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+          });
+      });
   }
 
   onKickMember(member: Member) {
-    this.popupService.createKickModal(member, () => this.kickMember(member));
+    this.popupService.createKickModal(member, () => {
+      this.memberService.kickMember(member)
+        .subscribe({
+          next: () => {
+            this.members.splice(this.members.indexOf(member), 1);
+            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+          },
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+        });
+    });
   }
 
   onBanishMember(member: Member) {
-    this.popupService.createBanModal(member, () => this.banMember(member));
+    this.popupService.createBanModal(member, (reason: string, blacklist: boolean) => {
+      this.banishmentService.ban(this.challenge, member, reason)
+        .subscribe({
+          next: () => {
+            this.members.splice(this.members.indexOf(member), 1);
+            this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+            if (blacklist) {
+              this.blacklistService.blacklist(member, reason)
+                .subscribe({
+                  next: () => {
+                    this.members = this.members.filter((m) => m !== member);
+                    this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
+                  },
+                  error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+                });
+            }
+          },
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
+        });
+    });
   }
 
   onRevokeBanishment(ban: Banishment) {
@@ -119,6 +176,20 @@ export class SectionSettingsComponent implements OnInit {
         this.banishmentService.unban(ban)
           .subscribe({
             next: () => this.banishment.splice(this.banishment.indexOf(ban), 1),
+            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
+            complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
+          });
+      });
+  }
+
+  onRevokeBlacklist(blacklistedMember: BlacklistedMember) {
+    this.popupService.createConfirmModal(
+      `Remove ${blacklistedMember.profile.username} from your blacklist`,
+      'Are you sure that you want to remove this user from your blacklist? He will be allowed to join your further challenges.',
+      () => {
+        this.blacklistService.remove(blacklistedMember)
+          .subscribe({
+            next: () => this.blacklist = this.blacklist.filter((bl) => bl.id !== blacklistedMember.id),
             error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
@@ -147,40 +218,6 @@ export class SectionSettingsComponent implements OnInit {
           this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-      });
-  }
-
-  private kickMember(member: Member) {
-    this.memberService.kickMember(member)
-      .subscribe({
-        next: () => {
-          this.members.splice(this.members.indexOf(member), 1);
-          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
-        },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-      });
-  }
-
-  private banMember(member: Member) {
-    this.memberService.banishMember(member, false)
-      .subscribe({
-        next: () => {
-          this.members.splice(this.members.indexOf(member), 1);
-          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
-        },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-      });
-  }
-
-  private transferOwnership(to: Member) {
-    this.challengeService.transferChallengeOwnership(this.challenge, to)
-      .subscribe({
-        next: () => {
-          this.challenge.author = to.profile;
-          this.router.navigate(['../overview'], {relativeTo: this.route});
-          this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
-        },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       });
   }
 

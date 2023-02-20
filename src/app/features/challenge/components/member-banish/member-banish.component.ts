@@ -16,7 +16,7 @@ export class MemberBanishComponent implements OnInit {
 
   banishForm = new FormGroup({
     reason: new FormControl<string>(''),
-    permanent: new FormControl<boolean>(true)
+    blacklist: new FormControl<boolean>(true)
   });
 
   constructor() { }
@@ -29,7 +29,7 @@ export class MemberBanishComponent implements OnInit {
   }
 
   onBanish() {
-
+    this.confirmEvent.next(this.banishForm.value);
   }
 
   get nickname(): string {

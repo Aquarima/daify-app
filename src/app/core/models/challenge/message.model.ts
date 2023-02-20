@@ -1,9 +1,9 @@
 import {Member} from "./member.model";
 
 export interface Message {
-    id: number;
+    id?: number;
     sender: Member;
     content: string;
-    sentAt: Date;
+    sentAt?: Date;
     isFailed?: boolean;
 }

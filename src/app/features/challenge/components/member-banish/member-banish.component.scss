@@ -25,13 +25,12 @@
 
     .popup-head-title {
       font-weight: 600;
-      font-size: calc(var(--preset-font-size-normal) + 3px);
+      font-size: calc(var(--preset-font-size-normal) + .3em);
       color: var(--color-text);
     }
 
     .popup-head-description {
       line-height: 20px;
-      font-size: var(--preset-font-size-small);
       color: var(--color-text-alt);
     }
   }
@@ -49,7 +48,6 @@
     .parameter-description {
       margin-bottom: 4px;
       line-height: 20px;
-      font-size: var(--preset-font-size-small);
       color: var(--color-text-alt-2);
     }
   }
@@ -75,10 +73,9 @@
 
     button {
       width: 150px;
-      height: 32px;
+      height: 40px;
       border: none;
       border-radius: 8px;
-      font-size: var(--preset-font-size-normal);
       cursor: pointer;
     }
 

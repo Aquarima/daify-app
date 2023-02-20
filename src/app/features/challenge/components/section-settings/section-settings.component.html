@@ -163,7 +163,10 @@
                   <button class="challenge-settings-members-item-actions-ban"
                           (click)="onRevokeBanishment(ban)" *ngIf="isSelfMemberAuthor()"
                           tooltip="Revoke">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/>
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -183,22 +186,25 @@
                 <div>Banned At</div>
                 <div>Actions</div>
               </div>
-              <div class="challenge-settings-members-item" *ngFor="let ban of banishment">
+              <div class="challenge-settings-members-item" *ngFor="let blacklistedMember of blacklist">
                 <div class="challenge-settings-members-item-head">
-                  <img [src]="ban.profile.avatarUrl" alt="">
+                  <img [src]="blacklistedMember.profile.avatarUrl" alt="">
                   <div class="challenge-settings-members-item-head-username">
-                    <p>{{ban.profile.username}}</p>
+                    <p>{{blacklistedMember.profile.username}}</p>
                     <a
-                            [routerLink]="['/app/user/profile/', ban.profile.username]">@{{ban.profile.username}}</a>
+                      [routerLink]="['/app/user/profile/', blacklistedMember.profile.username]">@{{blacklistedMember.profile.username}}</a>
                   </div>
                 </div>
-                <div class="challenge-settings-members-item-profession">{{ban.reason}}</div>
-                <div class="challenge-settings-members-item-joined">{{ban.createdAt | date:'MMM d \'at\' H:mm'}}</div>
-                <div class="challenge-settings-members-item-actions">
+                <div class="challenge-settings-members-item-profession">{{blacklistedMember.reason}}</div>
+                <div
+                  class="challenge-settings-members-item-joined">{{blacklistedMember.createdAt | date:'MMM d \'at\' H:mm'}}</div>
+                <div class="challenge-settings-members-item-actions" *ngIf="isSelfMemberAuthor()">
                   <button class="challenge-settings-members-item-actions-ban"
-                          (click)="onRevokeBanishment(ban)" *ngIf="isSelfMemberAuthor()"
-                          tooltip="Revoke">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/></svg>
+                          tooltip="Revoke" (click)="onRevokeBlacklist(blacklistedMember)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="m11.25 4.75l-6.5 6.5m0-6.5l6.5 6.5"/>
+                    </svg>
                   </button>
                 </div>
               </div>

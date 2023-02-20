@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {ReportType} from "../../../../core";
 
 @Component({
   selector: 'app-user-report',
@@ -11,7 +12,7 @@ export class UserReportComponent implements OnInit {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
 
   reportForm = new FormGroup({
-    reportType: new FormControl(),
+    reportType: new FormControl<ReportType>(ReportType.INSULT),
     details: new FormControl<string>('')
   })
 
@@ -30,6 +31,6 @@ export class UserReportComponent implements OnInit {
   }
 
   get reportTypes(): {key: string, value: any}[] {
-    return [{key: 'Insult', value: ''}];
+    return [{key: 'Insult', value: ReportType.INSULT}, {key: 'Harassment', value: ''}];
   }
 }

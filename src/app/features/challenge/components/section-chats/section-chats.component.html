@@ -1,11 +1,11 @@
 <h1>Chats</h1>
 <div>
   <div class="chat-box" *ngIf="channelCache.length > 0">
-    <ul class="challenge-box-chats-list" *ngIf="channelCache.length > 0">
+    <!--<ul class="challenge-box-chats-list" *ngIf="channelCache.length > 0">
       <li *ngFor="let channel of channelCache" (click)="onChannelSelected(channel)">{{channel.name}}</li>
-    </ul>
-    <div class="chat-box-messages" #messages_node>
-      <div>
+    </ul>-->
+    <div class="chat-box-messages">
+      <div #messageList>
         <div class="chat-box-messages-item"
              [class.current-member-message]="isSelfMember(message.sender)"
              [class.maintainer-member-message]="isChannelMaintainer(message.sender)"
@@ -22,7 +22,7 @@
             <div>
               <div class="message-head">
                 <a class="sender-username"
-                   [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
+                   [routerLink]="['/app/user/profile/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
                 <p class="timestamp">{{message.sentAt | date:'MMM d \'at\' H:mm'}}</p>
                 <div class="message-head-options">
                   <button class="message-head-options-report" (click)="onReportMessage(message)" tooltip="Report">
@@ -35,7 +35,12 @@
                   </button>
                 </div>
               </div>
-              <p class="message-content">{{message.content}}</p>
+              <p class="message-content">
+                <svg class="message-content-mark" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+                  <path d="m10 5l8 10H2z"/>
+                </svg>
+                {{message.content}}
+              </p>
             </div>
           </ng-container>
           <ng-container *ngIf="isSelfMember(message.sender)">
@@ -50,10 +55,15 @@
                   </button>
                 </div>
                 <a class="sender-username"
-                   [routerLink]="['/app/user/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
+                   [routerLink]="['/app/user/profile/', message.sender.profile.username]">{{message.sender.profile.username}}</a>
                 <p class="timestamp">{{message.sentAt | date:'MMM d \'at\' H:mm'}}</p>
               </div>
-              <p class="message-content">{{message.content}}</p>
+              <p class="message-content">
+                <svg class="message-content-mark" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+                  <path d="m10 5l8 10H2z"/>
+                </svg>
+                {{message.content}}
+              </p>
             </div>
             <div class="sender-avatar" *ngIf="isSelfMember(message.sender)">
               <img [src]="message.sender.profile.avatarUrl" alt="">
@@ -66,7 +76,7 @@
         </div>
       </div>
     </div>
-    <div class="user-input send-message" [formGroup]="userInputForm" (ngSubmit)="onSendMessage()">
+    <div class="user-input send-message" [formGroup]="messageForm" (ngSubmit)="onSendMessage()">
       <div class="user-input-box">
         <label for="message">Send message</label>
         <input id="message" class="form-control" type="text" name="message" formControlName="message"

@@ -1,22 +1,29 @@
 import {ComponentRef, Injectable, ViewContainerRef} from '@angular/core';
-import {ConfirmBoxComponent} from "../../../shared/components/confirm-box/confirm-box.component";
-import {Member} from "../../models/challenge/member.model";
-import {MemberKickComponent} from "../../../features/challenge/components";
-import {MemberBanishComponent} from "../../../features/challenge/components/member-banish/member-banish.component";
+import {ConfirmBoxComponent} from "../../../shared";
+import {Banishment, Challenge, Member,} from "../../models";
+import {
+  BanishmentViewComponent,
+  MemberBanishComponent,
+  MemberKickComponent
+} from "../../../features/challenge/components";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PopupService {
 
-  viewContainerRef: ViewContainerRef | undefined;
+  private viewContainerRef: ViewContainerRef | undefined;
 
   constructor() {
   }
 
+  setViewContainerRef(viewContainerRef: ViewContainerRef) {
+    this.viewContainerRef = viewContainerRef;
+  }
+
   createConfirmModal(title: string, message: string, confirmCallBack: Function = () => {}, cancelCallback: Function = () => {}) {
     if (!this.viewContainerRef) return;
-    const componentRef: ComponentRef<ConfirmBoxComponent> = this.viewContainerRef?.createComponent(ConfirmBoxComponent);
+    const componentRef: ComponentRef<ConfirmBoxComponent> = this.viewContainerRef.createComponent(ConfirmBoxComponent);
     const instance = componentRef.instance;
     instance.title = title;
     instance.message = message;
@@ -31,7 +38,7 @@ export class PopupService {
     return componentRef;
   }
 
-  createKickModal(target: Member, confirmCallBack: Function = () => {}, cancelCallback: Function = () => {})  {
+  createKickModal(target: Member, confirmCallBack: Function = () => {}, cancelCallback: Function = () => {}) {
     if (!this.viewContainerRef) return;
     const componentRef: ComponentRef<MemberKickComponent> = this.viewContainerRef.createComponent(MemberKickComponent);
     const instance = componentRef.instance;
@@ -47,7 +54,7 @@ export class PopupService {
     return componentRef;
   }
 
-  createBanModal(target: Member, confirmCallBack: Function = () => {}, cancelCallback: Function = () => {}) {
+  createBanModal(target: Member, confirmCallBack: Function = (reason: string, blacklist: boolean) => {}, cancelCallback: Function = () => {}) {
     if (!this.viewContainerRef) return;
     const componentRef: ComponentRef<MemberBanishComponent> = this.viewContainerRef.createComponent(MemberBanishComponent);
     const instance = componentRef.instance;
@@ -56,10 +63,23 @@ export class PopupService {
       cancelCallback();
       componentRef.destroy();
     });
-    instance.confirmEvent.subscribe(() => {
-      confirmCallBack();
+    instance.confirmEvent.subscribe(({reason, blacklist}) => {
+      confirmCallBack(reason, blacklist);
       componentRef.destroy();
     });
-    return componentRef;
+    return;
+  }
+
+  createBanishmentViewModal(challenge: Challenge, banishment: Banishment, cancelCallback: Function = () => {}) {
+    if (!this.viewContainerRef) return;
+    const componentRef: ComponentRef<BanishmentViewComponent> = this.viewContainerRef.createComponent(BanishmentViewComponent);
+    const instance = componentRef.instance;
+    instance.banishment = banishment;
+    instance.challenge = challenge;
+    instance.cancelEvent.subscribe(() => {
+      cancelCallback();
+      componentRef.destroy();
+    });
+    return;
   }
 }

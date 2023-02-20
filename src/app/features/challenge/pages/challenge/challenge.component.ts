@@ -1,22 +1,26 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {
+  AlertHandlingService,
   AuthService,
+  BanishmentService,
   Challenge,
   ChallengeService,
   defaultChallenge,
   defaultMember,
   defaultProfile,
   Group,
-  Member
+  GroupService,
+  Member,
+  MemberService,
+  PopupService,
+  Profile
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
 import {forkJoin} from "rxjs";
-import {MemberService} from "../../../../core/services/challenge/member.service";
 import {ChallengeShareComponent} from "../../components";
-import {GroupService} from "../../../../core/services/challenge/group.service";
-import {PopupService} from "../../../../core/services/system/popup.service";
+import {HttpStatusCode} from "@angular/common/http";
+import {Banishment} from "../../../../core/models/challenge/banishment.model";
 
 @Component({
   selector: 'app-challenge',
@@ -53,7 +57,8 @@ export class ChallengeComponent implements OnInit {
     private authService: AuthService,
     private challengeService: ChallengeService,
     private memberService: MemberService,
-    private groupService: GroupService) {
+    private groupService: GroupService,
+    private banishmentService: BanishmentService) {
   }
 
   ngOnInit(): void {
@@ -89,16 +94,23 @@ export class ChallengeComponent implements OnInit {
   onGoToSection(section: string) {
     this.router.navigate([`/app/challenge/${this.challenge.id}/${section}`]);
     this.currentSection = section;
+    this.challengeBox.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   onJoin(spectator: boolean) {
-    this.challengeService.joinChallenge(this.challenge, this.authService.user.profile)
+    const profile: Profile = this.authService.user.profile;
+    this.challengeService.joinChallenge(this.challenge, profile)
       .subscribe({
-        next: (member: any) => {
+        next: (member: Member) => {
           this.selfMember = member;
           this.members.push(member);
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => {
+          if (err.status === HttpStatusCode.Forbidden) {
+            this.banishmentService.getBanishmentByChallengeAndProfile(this.challenge, profile)
+              .subscribe((banishment: Banishment) => this.popupService.createBanishmentViewModal(this.challenge, banishment));
+          }
+        }
       });
   }
 

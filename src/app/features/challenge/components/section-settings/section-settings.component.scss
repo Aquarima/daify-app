@@ -142,7 +142,7 @@
 
       .challenge-settings-members {
         overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, .10);
+        border: 1px solid rgba(#000000, .10);
         border-radius: 16px;
         //background-color: rgba(var(--color-primary-rgb), .030);
 
@@ -153,9 +153,9 @@
           display: flex;
           column-gap: 16px;
           box-sizing: border-box;
-          border-bottom: 1px solid rgba(0, 0, 0, .080);
+          border-bottom: 1px solid rgba(#000000, .080);
           border-radius: 16px 16px 0 0;
-          background-color: rgba(0, 0, 0, .030);
+          background-color: rgba(#000000, .030);
 
           div {
             width: calc(100% / 4);
@@ -178,7 +178,7 @@
           box-sizing: border-box;
 
           &:not(:last-child) {
-            border-bottom: 1px solid rgba(0, 0, 0, .080);
+            border-bottom: 1px solid rgba(#000000, .080);
           }
 
           > div {

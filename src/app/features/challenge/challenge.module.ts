@@ -21,6 +21,7 @@ import {SharedModule} from 'src/app/shared/shared.module';
 import {CreateGroupComponent} from './components/create-group/create-group.component';
 import {MemberKickComponent, ChallengeShareComponent} from './components';
 import {MemberBanishComponent} from './components/member-banish/member-banish.component';
+import { BanishmentViewComponent } from './components/banishment-view/banishment-view.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import {MemberBanishComponent} from './components/member-banish/member-banish.co
         SectionSettingsComponent,
         MemberKickComponent,
         ChallengeShareComponent,
-        MemberBanishComponent
+        MemberBanishComponent,
+        BanishmentViewComponent
     ],
     imports: [
         CommonModule,

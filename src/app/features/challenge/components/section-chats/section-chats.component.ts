@@ -1,16 +1,18 @@
 import {Component, ElementRef, Input, NgZone, OnInit, ViewChild, ViewContainerRef,} from '@angular/core';
-import {AuthService, Challenge} from "../../../../core";
-import {ChannelService} from "../../../../core/services/challenge/channel.service";
-import {MessageService} from "../../../../core/services/challenge/message.service";
-import {AlertType} from "../../../../core/models/system-alert";
-import {Channel} from "../../../../core/models/challenge/channel.model";
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
-import {Message} from "../../../../core/models/challenge/message.model";
-import {Member} from "../../../../core/models/challenge/member.model";
-import {timer} from "rxjs";
+import {
+  AlertHandlingService,
+  AuthService,
+  Challenge,
+  Channel,
+  ChannelService,
+  Member,
+  Message,
+  MessageService,
+  PopupService
+} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
-import {UserReportComponent} from "../../../user/components/user-report/user-report.component";
+import {tap, timer} from "rxjs";
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -19,16 +21,16 @@ import {UserReportComponent} from "../../../user/components/user-report/user-rep
 })
 export class SectionChatsComponent implements OnInit {
 
-  @ViewChild('messages_node') messagesNode!: ElementRef;
+  @ViewChild('messageList', {static: false}) messagesNode!: ElementRef;
 
   @Input() challenge!: Challenge;
   @Input() selfMember: Member | undefined;
 
   MESSAGE_TIMEOUT: number = 5;
 
-  userInputForm = new FormGroup({
+  messageForm = new FormGroup({
     message: new FormControl(''),
-  })
+  });
 
   channelCache: Channel[] = [];
   messageCache: Map<Channel, Message[]> = new Map();
@@ -42,96 +44,82 @@ export class SectionChatsComponent implements OnInit {
     private route: ActivatedRoute,
     private viewContainerRef: ViewContainerRef,
     private alertHandlingService: AlertHandlingService,
+    private popupService: PopupService,
     private authService: AuthService,
     private channelService: ChannelService,
     private messageService: MessageService) {
+    this.popupService.setViewContainerRef(viewContainerRef);
   }
 
-  ngOnInit(): void {
-    this.channelService.getChannelsByChallenge(this.challenge.id)
+  ngOnInit() {
+    this.channelService.getChannelsByChallenge(this.challenge)
       .subscribe({
         next: (channels: any) => {
           this.channelCache = channels.content;
           if (!this.channel && this.channelCache.length > 0) {
             this.onChannelSelected(this.channelCache[0]);
           }
-        },
-        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
-      })
+        }
+      });
   }
 
   onChannelSelected(channel: Channel) {
     this.channel = channel;
-    this.loadChat(channel);
-    //this.scrollToNewestMessage();
-  }
-
-  onSendMessage() {
-    if (!this.canSendMessage) {
-      this.displayTimeoutMessage = true;
-      return;
-    }
-    if (!this.channel || !this.selfMember) return;
-    const messageToSend: Message = {
-      id: 0,
-      sender: this.selfMember,
-      content: `${this.userInputForm.value.message}`,
-      sentAt: new Date()
-    };
-    this.userInputForm.reset({message: undefined});
-    this.messageService.sendMessage(this.channel.id, messageToSend).subscribe({
-      next: (message: Message) => {
-        this.addMessageToChat(this.channel || {} as Channel, message);
-        this.startMessageTimeout();
-      },
-      error: () => this.addMessageToChat(this.channel || {} as Channel, messageToSend, true)
-    })
-  }
-
-  onDeleteMessage(message: Message) {
-    this.messageService.deleteMessage(message)
-      .subscribe({
-        next: () => this.messages.splice(this.messages.indexOf(message), 1),
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
-      })
+    this.fetchChannelMessages(channel);
+    this.scrollToNewestMessage();
   }
 
   onReportMessage(message: Message) {
-    const componentRef = this.viewContainerRef.createComponent(UserReportComponent);
-    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
+
   }
 
-  private scrollToNewestMessage() {
-    this.messagesNode.nativeElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    });
+  onDeleteMessage(message: Message) {
+    this.popupService.createConfirmModal(
+      'Delete this message?',
+      'Are you sure that you want to delete this action cannot be undone.',
+      () => {
+        this.messageService.deleteMessage(message)
+          .subscribe(() => this.messages = this.messages.filter((m) => m.id !== message.id));
+      });
   }
 
-  loadChat(channel: Channel) {
+  onSendMessage() {
+    const inputValue = this.messageForm.controls.message.value;
+    if (inputValue && this.selfMember && this.channel) {
+      const message: Message = {sender: this.selfMember, content: inputValue}
+      this.messageService.sendMessage(this.channel, message)
+        .subscribe({
+          next: (data: Message) => {
+            this.messages.push(data);
+            //setTimeout(() => this.scrollToNewestMessage(), 50);
+          },
+          error: () => {
+            message.isFailed = true;
+            this.messages.push(message);
+          }
+        });
+    }
+    this.startMessageTimeout();
+    this.clearMessageInput();
+  }
+
+  private fetchChannelMessages(channel: Channel) {
     if (this.messageCache.has(channel)) {
       this.messages = this.messageCache.get(channel) || [];
       return;
     }
     this.messageService.getMessagesByChannel(channel.id)
-      .subscribe({
-        next: (msg: any) => {
-          this.messageCache.set(channel, this.messages = msg.content);
-          //this.scrollToNewestMessage();
-        },
-        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
-      })
+      .pipe(tap(messages => {
+        this.messages = messages.content;
+        this.messageCache.set(channel, messages);
+      })).subscribe();
   }
 
-  addMessageToChat(channel: Channel, message: Message, isFailed?: boolean) {
-    const chat: Message[] | undefined = this.messageCache.get(channel);
-    if (!chat) return;
-    if (isFailed) message.isFailed = true;
-    chat.unshift(message);
+  private clearMessageInput() {
+    this.messageForm.controls.message.setValue(null);
   }
 
-  startMessageTimeout() {
+  private startMessageTimeout() {
     this.canSendMessage = false;
     timer(this.MESSAGE_TIMEOUT * 1000).subscribe(() => {
       this.canSendMessage = true;
@@ -139,12 +127,17 @@ export class SectionChatsComponent implements OnInit {
     });
   }
 
-  isSelfMember(member: Member): boolean {
-    return member.profile.id == this.authService.user.profile.id;
+  private scrollToNewestMessage() {
+    const scrollOptions: ScrollIntoViewOptions = {behavior: "smooth", block: "end", inline: "nearest"};
+    if (this.messagesNode) {
+      this.messagesNode.nativeElement.scrollIntoView(scrollOptions);
+      return;
+    }
+    setTimeout(() => this.messagesNode.nativeElement.scrollIntoView(scrollOptions), 100);
   }
 
-  isSelfMemberAuthor(): boolean {
-    return this.selfMember?.id === this.challenge.author.id;
+  isSelfMember(member: Member): boolean {
+    return member.profile.id == this.authService.user.profile.id;
   }
 
   isChannelMaintainer(member: Member): boolean {

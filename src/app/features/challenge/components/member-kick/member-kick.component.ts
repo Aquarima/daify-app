@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Member} from "../../../../core/models/challenge/member.model";
+import {Member} from "../../../../core";
 import {FormControl} from "@angular/forms";
-import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'app-member-kick',

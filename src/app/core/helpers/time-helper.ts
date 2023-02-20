@@ -21,9 +21,12 @@ export class TimeHelper {
     for (let i = 0; i < intervals.length; i++) {
       const interval = Math.floor(seconds / intervals[i].amount);
       if (interval >= 1) {
-        return interval === 1 && full ? "last " + intervals[i].label : interval + " " + intervals[i].label;
+        const label = interval === 1 && full ? "last " + intervals[i].label : intervals[i].label;
+        const pluralLabel = interval > 1 ? label + "s" : label;
+        return interval + " " + pluralLabel;
       }
     }
+
     return "just now";
   }
 }
