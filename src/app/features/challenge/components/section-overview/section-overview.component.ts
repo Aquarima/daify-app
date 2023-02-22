@@ -57,7 +57,7 @@ export class SectionOverviewComponent implements OnInit {
   }
 
   isAuthor(member: Member): boolean {
-    return member.id === this.challenge.author.id;
+    return member.profile.id === this.challenge.author.id;
   }
 
   isSelfMember(member: Member) {
@@ -65,7 +65,7 @@ export class SectionOverviewComponent implements OnInit {
   }
 
   isSelfMemberAuthor(): boolean {
-    return this.selfMember?.id === this.challenge.author.id;
+    return this.selfMember?.profile.id === this.challenge.author.id;
   }
 
   get duration() {
