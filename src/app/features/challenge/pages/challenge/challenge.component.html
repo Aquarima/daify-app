@@ -50,7 +50,8 @@
           </svg>
         </button>
         <ul #sectionsNode>
-          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''" (click)="onGoToSection(sections.overview)">
+          <li [ngClass]="isOnSection('overview') ? 'challenge-sections-selected' : ''"
+              (click)="onGoToSection(sections.overview)">
             <span class="challenge-sections-name">Overview</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-width="1.5"
@@ -80,7 +81,8 @@
             </svg>
           </li>
           <li [ngClass]="isOnSection('leaderboard') ? 'challenge-sections-selected' : ''"
-              *ngIf="isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart" (click)="onGoToSection(sections.leaderboard)">
+              *ngIf="isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart"
+              (click)="onGoToSection(sections.leaderboard)">
             <span class="challenge-sections-name">Leaderboard</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -114,15 +116,15 @@
         </div>
       </div>
       <div #challenge_box class="challenge-box">
-        <dfy-challenge-overview [challenge]="challenge" [members]="members" [selfMember]="selfMember"
+        <dfy-challenge-overview [challenge]="challenge" [selfMember]="selfMember" [members]="members"
                                 *ngIf="isOnSection('overview')"></dfy-challenge-overview>
         <dfy-challenge-chats [challenge]="challenge" [selfMember]="selfMember"
                              *ngIf="isOnSection('chats')"></dfy-challenge-chats>
-        <dfy-challenge-groups [challenge]="challenge" [members]="members" [groups]="groups"
+        <dfy-challenge-groups [challenge]="challenge" [selfMember]="selfMember" [members]="members" [groups]="groups"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
-        <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember"
+        <dfy-challenge-settings [challenge]="challenge" [selfMember]="selfMember" [members]="members"
                                 *ngIf="isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>
       </div>
     </div>

@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angul
 import {
   AlertHandlingService,
   AuthService,
+  Banishment,
   BanishmentService,
   Challenge,
   ChallengeService,
@@ -20,7 +21,6 @@ import {AlertType} from "../../../../core/models/system-alert";
 import {forkJoin} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
-import {Banishment} from "../../../../core/models/challenge/banishment.model";
 
 @Component({
   selector: 'app-challenge',
@@ -87,14 +87,25 @@ export class ChallengeComponent implements OnInit {
         this.isDataLoaded = true;
         this.onGoToSection(redirectTo);
       },
-      error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      error: (err) => {
+        if (err.status === HttpStatusCode.NotFound) {
+          this.router.navigate(['/app/explore']);
+        }
+      }
     });
   }
 
   onGoToSection(section: string) {
+    if (section === this.sections.groups) {
+      this.groupService.getGroupsByChallenge(this.challenge)
+        .subscribe({
+          next: (groups: any) => this.groups = groups.content,
+          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        });
+    }
     this.router.navigate([`/app/challenge/${this.challenge.id}/${section}`]);
     this.currentSection = section;
-    this.challengeBox.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.challengeBox.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
   onJoin(spectator: boolean) {
