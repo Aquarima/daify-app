@@ -1,11 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {AuthService, Challenge, ChallengeService, Friend, Profile, Search} from 'src/app/core';
 import {FriendService} from 'src/app/core/services/user/friend.service';
 import {ProfileService} from 'src/app/core/services/user/profile.service';
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
+import {AlertHandlingService} from "../../../../core";
 import {TimeHelper} from "../../../../core/helpers";
 import {BehaviorSubject} from "rxjs";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'dfy-profile',
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
 
   @ViewChild('sections') sections!: ElementRef;
 
+  challenges: Challenge[] = [];
   searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
 
   profile: Profile | undefined;
@@ -23,12 +25,13 @@ export class ProfileComponent implements OnInit {
   section: number = 0;
 
   constructor(
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
     private alertHandlingService: AlertHandlingService,
     private authService: AuthService,
     private profileService: ProfileService,
     private challengeService: ChallengeService,
     private friendService: FriendService,
-    private route: ActivatedRoute,
     private timeHelper: TimeHelper) {
   }
 
@@ -52,7 +55,6 @@ export class ProfileComponent implements OnInit {
     this.sections.nativeElement.scrollLeft += 100;
   }
 
-
   onAbout() {
     this.section = 0;
   }
@@ -61,12 +63,20 @@ export class ProfileComponent implements OnInit {
     this.section = 1;
     this.friendService.getFriendsByUserId(this.profile?.id || 1).subscribe(data => {
       this.friends = data.content.map((friend: Friend) => friend.profile);
-    })
+    });
   }
 
   onChallenges() {
     this.section = 2
     if (!this.profile) return;
+    this.challengeService.getChallengesByAuthor(this.profile)
+      .subscribe({
+        next: (challenges: any) => {
+          this.challenges = challenges.content;
+          this.cdr.detectChanges();
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
   }
 
   onBadges() {

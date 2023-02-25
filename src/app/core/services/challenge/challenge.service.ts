@@ -43,15 +43,19 @@ export class ChallengeService {
   }
 
   getChallenges(page?: number, size?: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge?size=${size  || 32}&page=${page || 0}`);
+    return this.http.get<any>(`${env.apiUrl}/challenge?size=${size || 32}&page=${page || 0}`);
   }
 
   getChallengesByTitle(title: string) {
     return this.http.get<any>(`${env.apiUrl}/challenge/title/${title}`);
   }
 
+  getChallengesByAuthor(profile: Profile, page?: number, size?: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/author/${profile.id}?size=${size || 32}&page=${page || 0}`);
+  }
+
   getPersonalChallenges(page?: number, size?: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/personal?size=${size  || 32}&page=${page || 0}`);
+    return this.http.get<any>(`${env.apiUrl}/challenge/personal?size=${size || 32}&page=${page || 0}`);
   }
 
   getChallengesById(id: number) {

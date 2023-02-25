@@ -110,7 +110,7 @@
             </div>
         </div>
         <dfy-user-list [profiles]="friends" *ngIf="isOnSection(1)"></dfy-user-list>
-        <dfy-browse-results-list [searchSubject]="searchSubject" *ngIf="isOnSection(2)"></dfy-browse-results-list>
+        <dfy-browse-results-list [challenges]="challenges" [searchSubject]="searchSubject" *ngIf="isOnSection(2)"></dfy-browse-results-list>
     </div>
 </main>
 <dfy-footer></dfy-footer>
