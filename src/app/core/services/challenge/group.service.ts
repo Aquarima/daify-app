@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment as env} from "../../../../environments/environment";
 import {Group} from "../../models/challenge/group.model";
+import {Challenge} from "../../models";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class GroupService {
     return this.http.post<any>(`${env.apiUrl}/challenge/${challengeId}/group/create`, group);
   }
 
-  getGroupsByChallenge(challengeId: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/group`);
+  getGroupsByChallenge(challenge: Challenge) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/group`);
   }
 }

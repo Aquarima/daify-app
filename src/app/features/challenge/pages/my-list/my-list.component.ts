@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Search} from 'src/app/core/models/challenge';
-import {AuthService, ChallengeService} from 'src/app/core/services';
+import {Challenge, Search} from 'src/app/core/models/challenge';
+import {AlertHandlingService, AuthService, ChallengeService} from 'src/app/core/services';
 import {BehaviorSubject} from "rxjs";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'app-my-list',
@@ -10,12 +11,28 @@ import {BehaviorSubject} from "rxjs";
 })
 export class MyListComponent implements OnInit {
 
+  challenges: Challenge[] = [];
   searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
-  groupBy: string = 'alphabetical';
 
-  constructor(private challengeService: ChallengeService, private authService: AuthService) {
+  constructor(
+    private alertHandlingService: AlertHandlingService,
+    private authService: AuthService,
+    private challengeService: ChallengeService) {
   }
 
   ngOnInit(): void {
+    this.fetchPersonalList();
+  }
+
+  onSearch(search: Search) {
+    this.searchSubject.next(search);
+  }
+
+  fetchPersonalList() {
+    this.challengeService.getPersonalChallenges()
+      .subscribe({
+        next: (challenges: any) => this.challenges = challenges.content,
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
   }
 }

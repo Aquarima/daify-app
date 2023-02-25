@@ -33,11 +33,10 @@ export class AuthService {
         private userService: UserService,
         private profileService: ProfileService
     ) {
-        this.user$.subscribe(user => this.user = user);
+        this.user$.subscribe((user: User) => this.user = user);
     }
 
     ngOnInit() {
-
     }
 
     login(form: { username?: string, email?: string, password: string }): string {

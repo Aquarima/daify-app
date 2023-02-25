@@ -95,13 +95,12 @@
         }
 
         .members-item-role {
-          font-size: var(--preset-font-size-small);
+          font-size: var(--preset-font-size-tiny);
           color: var(--color-text-alt-2);
         }
 
         .members-item-group {
           display: flex;
-          justify-content: center;
           align-items: center;
           column-gap: 8px;
 
@@ -150,10 +149,6 @@
           cursor: pointer;
         }
       }
-    }
-
-    .members-item-spectator {
-
     }
   }
 }

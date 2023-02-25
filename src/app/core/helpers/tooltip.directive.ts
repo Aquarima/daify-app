@@ -6,6 +6,7 @@ import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core'
 export class TooltipDirective implements OnInit {
 
   @Input('tooltip') tooltipText: string = '';
+  @Input('tooltipEnabled') tooltipEnabled: boolean = true;
 
   private tooltipElement: HTMLElement | undefined;
 
@@ -27,7 +28,7 @@ export class TooltipDirective implements OnInit {
   }
 
   private createTooltip() {
-    if (!this.tooltipElement) {
+    if (!this.tooltipElement && this.tooltipEnabled) {
       this.tooltipElement = document.createElement('div');
       this.tooltipElement.classList.add('tooltip');
       this.tooltipElement.textContent = this.tooltipText;

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -9,11 +10,10 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Challenge, ChallengeService, Search} from 'src/app/core';
+import {AuthService, Challenge, ChallengeService, Search} from 'src/app/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
-import {AlertType} from "../../../../core/models/system-alert";
+import {AlertHandlingService} from "../../../../core";
 
 @Component({
   selector: 'dfy-browse-results-list',
@@ -25,47 +25,27 @@ export class BrowseResultsListComponent implements OnInit {
   @ViewChild('winref') winRef!: ElementRef;
   @ViewChildren('found_tag') tagNodes!: QueryList<ElementRef>;
 
+  @Input() challenges: Challenge[] = [];
   @Input() searchSubject!: BehaviorSubject<Search>;
 
   search: Search = {} as Search;
-  challenges: Challenge[] = [];
   filterTag: string = '';
   scrollLoaderTimeout: null | ReturnType<typeof setTimeout> = null;
 
   constructor(
-    private alertHandlingService: AlertHandlingService,
-    private http: HttpClient,
+    private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
+    private http: HttpClient,
+    private alertHandlingService: AlertHandlingService,
+    private authService: AuthService,
     private challengeService: ChallengeService) {
   }
 
   ngOnInit(): void {
     this.searchSubject.subscribe(search => {
-      if (search.options.fetch) {
-        if (search.title) {
-          this.fetchChallengesByTitle(search.title);
-          return;
-        }
-        this.fetchChallenges();
-      }
       this.search = search;
+      this.cdr.detectChanges();
     });
-  }
-
-  fetchChallenges() {
-    this.challengeService.getChallenges()
-      .subscribe({
-        next: (data: any) => Array.prototype.push.apply(this.challenges, data.content),
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-      });
-  }
-
-  fetchChallengesByTitle(title: string) {
-    this.challengeService.getChallengesByTitle(title)
-      .subscribe({
-        next: (data: any) => this.challenges = data.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
-      })
   }
 
   getThemeColor(title: string) {

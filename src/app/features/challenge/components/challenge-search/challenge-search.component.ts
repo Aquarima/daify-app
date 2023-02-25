@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChallengeGroupBy, Search} from 'src/app/core/models';
@@ -14,6 +14,8 @@ export class ChallengeSearchComponent implements OnInit {
 
   @Input() searchSubject!: BehaviorSubject<Search>;
 
+  @Output() searchEvent: EventEmitter<Search> = new EventEmitter();
+
   @ViewChild('backdrop') backdropNode!: ElementRef;
   @ViewChild('search_history') searchHistoryNode!: ElementRef;
   @ViewChild('name') searchInputNode!: ElementRef;
@@ -21,11 +23,14 @@ export class ChallengeSearchComponent implements OnInit {
   searchForm = new FormGroup({
     'orderBy': new FormControl(ChallengeGroupBy.ALPHABETICAL),
     'title': new FormControl(''),
-  })
+  });
 
   history = this.searchService.fetchHistory('challenges');
 
-  constructor(private route: ActivatedRoute, private router: Router, public searchService: SearchService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private searchService: SearchService) {
   }
 
   ngOnInit() {
@@ -41,7 +46,7 @@ export class ChallengeSearchComponent implements OnInit {
   }
 
   onSearch(fetch = true) {
-    this.searchSubject.next({
+    this.searchEvent.emit({
       options: {fetch: fetch},
       groupBy: this.searchForm.controls.orderBy.value || ChallengeGroupBy.ALPHABETICAL,
       title: `${this.searchForm.controls.title.value}`

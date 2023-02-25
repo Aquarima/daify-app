@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit {
 
   getTimeSince(date?: Date) {
     if (!date) return 'now';
-    return this.timeHelper.getTimeSince(new Date(), new Date(date), true);
+    return this.timeHelper.getTimeSince(new Date(), new Date(date), {full: false, last: true});
   }
 
   get banner(): string {

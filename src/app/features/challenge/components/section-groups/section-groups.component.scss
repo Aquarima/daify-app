@@ -6,42 +6,51 @@
     color: var(--color-text);
   }
 
+  .challenge-groups-mygroup {
+    height: 300px;
+    box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+    border-radius: 16px;
+    background-color: #FFF;
+  }
+
   .challenge-box-groups-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
     gap: 32px;
 
     .groups-list-item-new {
+      position: relative;
       transition: all .2s ease;
       border: 1px solid var(--color-secondary);
       cursor: pointer;
+      user-select: none;
+    }
 
-      &:hover {
-        border: 2px solid var(--color-secondary-hover);
-
-        svg {
-          width: 32px;
-          height: 32px;
-          transition: all .2s ease;
-        }
-
-        p {
-          transition: all .2s ease;
-          font-size: calc(var(--preset-font-size-small) + .05em);
-        }
-      }
+    .groups-list-item-new-enabled:hover {
+      border: 2px solid var(--color-secondary-hover);
 
       svg {
-        width: 28px;
-        height: 28px;
-        fill: var(--color-text);
+        width: 32px;
+        height: 32px;
+        transition: all .2s ease;
       }
 
       p {
-        font-weight: 600;
-        font-size: var(--preset-font-size-small);
-        color: var(--color-text);
+        transition: all .2s ease;
+        font-size: calc(var(--preset-font-size-small) + .05em);
       }
+    }
+
+    svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--color-text);
+    }
+
+    p {
+      font-weight: 600;
+      font-size: var(--preset-font-size-small);
+      color: var(--color-text);
     }
 
     .groups-list-item {
@@ -64,7 +73,7 @@
       }
 
       .groups-list-item-members-count {
-        padding: 0 8px;
+        padding: 0 12px;
         height: 20px;
         display: flex;
         justify-content: center;

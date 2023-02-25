@@ -21,6 +21,7 @@ import {AlertType} from "../../../../core/models/system-alert";
 import {forkJoin} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
+import {SplashScreenComponent} from "../../../../layout";
 
 @Component({
   selector: 'app-challenge',
@@ -109,16 +110,12 @@ export class ChallengeComponent implements OnInit {
   }
 
   onJoin(spectator: boolean) {
-    const profile: Profile = this.authService.user.profile;
-    this.challengeService.joinChallenge(this.challenge, profile)
+    this.challengeService.joinChallenge(this.challenge)
       .subscribe({
-        next: (member: Member) => {
-          this.selfMember = member;
-          this.members.push(member);
-        },
+        next: (member: Member) => location.reload(),
         error: (err) => {
           if (err.status === HttpStatusCode.Forbidden) {
-            this.banishmentService.getBanishmentByChallengeAndProfile(this.challenge, profile)
+            this.banishmentService.getBanishmentByChallengeAndProfile(this.challenge, this.authService.user.profile)
               .subscribe((banishment: Banishment) => this.popupService.createBanishmentViewModal(this.challenge, banishment));
           }
         }
@@ -130,6 +127,20 @@ export class ChallengeComponent implements OnInit {
     const instance = componentRef.instance;
     instance.challenge = this.challenge;
     instance.closeEvent.subscribe(_ => componentRef.destroy());
+  }
+
+  onLeave() {
+    this.popupService.createConfirmModal(
+      `Leave '${this.challenge.title}' challenge?`,
+      'Are you sure that you want to leave this challenge? This action cannot be undone.',
+      () => {
+        this.challengeService.leaveChallenge(this.challenge)
+          .subscribe({
+            next: () => this.router.navigate(['/app/explore']),
+            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+          });
+      }
+    );
   }
 
   onMenuLeft() {

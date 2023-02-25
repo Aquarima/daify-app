@@ -8,11 +8,11 @@
       </div>
     </div>
     <dfy-challenge-search class="search"
-                          [searchSubject]="searchSubject">
+                          [searchSubject]="searchSubject" (searchEvent)="onSearch($event)">
     </dfy-challenge-search>
     <div class="item-list">
       <dfy-browse-results-list
-        [searchSubject]="searchSubject">
+        [challenges]="challenges" [searchSubject]="searchSubject">
       </dfy-browse-results-list>
     </div>
   </div>

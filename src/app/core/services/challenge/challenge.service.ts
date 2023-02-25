@@ -34,8 +34,12 @@ export class ChallengeService {
     return this.http.put(`${env.apiUrl}/challenge/${challenge.id}/transfer/${to.id}`, {});
   }
 
-  joinChallenge(challenge: Challenge, profile: Profile) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/join/${profile.id}`, {});
+  joinChallenge(challenge: Challenge) {
+    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/join`, {});
+  }
+
+  leaveChallenge(challenge: Challenge) {
+    return this.http.delete(`${env.apiUrl}/challenge/${challenge.id}/leave`);
   }
 
   getChallenges(page?: number, size?: number) {
@@ -46,8 +50,8 @@ export class ChallengeService {
     return this.http.get<any>(`${env.apiUrl}/challenge/title/${title}`);
   }
 
-  getChallengesByProfile(profile: Profile, page?: number, size?: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/author/${profile.id}?size=${size  || 32}&page=${page || 0}`);
+  getPersonalChallenges(page?: number, size?: number) {
+    return this.http.get<any>(`${env.apiUrl}/challenge/personal?size=${size  || 32}&page=${page || 0}`);
   }
 
   getChallengesById(id: number) {

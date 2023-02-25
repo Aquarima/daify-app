@@ -283,10 +283,11 @@
         box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
 
         .menu-header {
-          padding: 16px;
+          padding: 16px 0;
           width: 100%;
           display: flex;
           column-gap: 8px;
+          justify-content: center;
           box-sizing: border-box;
           border-bottom: 1px solid #DEDEEA;
 
@@ -297,17 +298,24 @@
           }
 
           .menu-header-ids {
+            max-width: 160px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             row-gap: 4px;
 
             .menu-header-username {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
               font-weight: 600;
               color: var(--color-text);
             }
 
             .menu-header-email {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
               color: var(--color-text-alt);
             }
           }
@@ -418,11 +426,11 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              background-color: var(--color-tertiary);
+              background-color: var(--color-secondary);
               color: #FFF;
 
               &:hover {
-                background-color: var(--color-tertiary-hover);
+                background-color: var(--color-secondary-hover);
               }
             }
           }

@@ -71,6 +71,6 @@ export class SectionOverviewComponent implements OnInit {
   get duration() {
     let start: Date = new Date(this.challenge.config.startAt);
     let end: Date = new Date(this.challenge.config.endAt);
-    return this.timeHelper.getTimeSince(end, start, true);
+    return this.timeHelper.getTimeSince(end, start, {full: true, last: false});
   }
 }

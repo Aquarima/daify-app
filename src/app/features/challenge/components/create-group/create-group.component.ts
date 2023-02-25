@@ -4,13 +4,14 @@ import {
   EventEmitter,
   HostListener,
   Inject,
+  Input,
   OnInit,
   Output,
   Renderer2
 } from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
-import {Group} from "../../../../core/models/challenge/group.model";
+import {Group, Member} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -20,6 +21,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class CreateGroupComponent implements OnInit, AfterViewInit {
 
+  @Input() selfMember!: Member;
+
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
   @Output() groupCreateEvent: EventEmitter<Group> = new EventEmitter();
 
@@ -27,7 +30,7 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
     name: new FormControl<string>(''),
     join_type_option_free: new FormControl<boolean>(true),
     join_type_option_ask: new FormControl<boolean>(false)
-  })
+  });
 
   errorMessage: string | undefined;
   groups: Group[] = [];
@@ -80,6 +83,7 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
     if (this.isNameAlreadyInUse()) return;
     this.groupCreateEvent.emit({
       id: 0,
+      leader: this.selfMember,
       name: this.groupForm.value.name,
       createdAt: new Date()
     })

@@ -1,5 +1,11 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {AccessType, AuthService, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
+import {
+  AccessType,
+  AuthService,
+  Challenge,
+  ChallengeConfig,
+  ChallengeService
+} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormControl, FormGroup} from "@angular/forms";
 import {InviteFriendsComponent} from "../../components";
@@ -57,24 +63,21 @@ export class ChallengeCreateComponent implements OnInit {
     challenge.config = this.challengeConfigForm.value as ChallengeConfig;
     this.challengeService.createChallenge(challenge)
       .subscribe({
-        next: (challenge: any) => this.showInviteFriendsPopup(challenge),
+        //next: (challenge: any) => this.showInviteFriendsPopup(challenge),
+        next: (challenge: Challenge) => this.router.navigate([`/app/challenge/${challenge.id}/overview`]),
         error: () => alert('Error')
-      })
+      });
   }
 
-  private toAccessType(value: string): string {
-    return value.replace(' ', '_').toUpperCase();
-  }
-
-  private showInviteFriendsPopup(challenge: Challenge) {
+  /*private showInviteFriendsPopup(challenge: Challenge) {
     const componentRef = this.viewContainerRef.createComponent(InviteFriendsComponent);
+    componentRef.instance.challenge = challenge;
     componentRef.instance.closeEvent.subscribe(() => {
       componentRef.destroy();
       this.router.navigate([`/app/challenge/overview/`], {queryParams: {id: challenge.id}})
     });
-    componentRef.instance.challenge = challenge;
     componentRef.changeDetectorRef.detectChanges();
-  }
+  }*/
 
   get defaultStart() {
     const date = new Date();
@@ -84,6 +87,15 @@ export class ChallengeCreateComponent implements OnInit {
 
   get defaultEnd() {
     return new Date(this.defaultStart.getTime() + 24 * 60 * 60 * 1000);
+  }
+
+  get accessTypes(): { key: string, value: AccessType }[] {
+    return [
+      {key: 'Free', value: AccessType.FREE},
+      {key: 'On Request', value: AccessType.ON_REQUEST},
+      {key: 'Friends Only', value: AccessType.FRIENDS_ONLY},
+      {key: 'Code', value: AccessType.CODE},
+    ]
   }
 
   get previewCover() {

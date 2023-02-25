@@ -7,8 +7,41 @@
     width: 65%;
     height: 100%;
     flex-direction: column;
-    row-gap: 32px;
     box-sizing: border-box;
+
+    .challenge-actions {
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+
+      button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+        border: none;
+        border-radius: 50%;
+        background-color: #FFF;
+
+        &:hover {
+
+          svg {
+            width: 55%;
+            height: 55%;
+          }
+        }
+
+        svg {
+          width: 50%;
+          height: 50%;
+          transition: all 500ms;
+          fill: var(--color-text);
+        }
+      }
+    }
 
     .challenge-preview {
       width: 100%;

@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
-import {AuthService, SystemAlert, Theme} from './core';
+import {AuthService, SystemAlert, Theme, User} from './core';
 import {ProfileService} from './core/services/user/profile.service';
 import {AlertHandlingService} from "./core/services/system/alert-handling.service";
 import {AlertBoxComponent} from "./shared";
@@ -59,9 +59,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     this.userService.getUserById(Number.parseInt(loggedUserId))
       .subscribe({
-        next: (user: any) => {
+        next: (user: User) => {
           this.authService.user$.next(user);
-          this.authService.setOnlineStatus(true);
+          //this.authService.setOnlineStatus(true);
         },
         error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
       })

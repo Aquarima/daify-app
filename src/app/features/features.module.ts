@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeModule } from './home/home.module';
-import { ChallengeModule } from './challenge/challenge.module';
-import { AuthModule } from './auth/auth.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CoreModule } from '../core/core.module';
-import { UserModule } from './user/user.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomeModule} from './home/home.module';
+import {ChallengeModule} from './challenge/challenge.module';
+import {AuthModule} from './auth/auth.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CoreModule} from '../core/core.module';
+import {UserModule} from './user/user.module';
 
 @NgModule({
-  declarations: [ ],
+  declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,4 +21,5 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
 })
-export class FeaturesModule { }
+export class FeaturesModule {
+}
