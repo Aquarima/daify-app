@@ -21,11 +21,14 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   onSearch(search: Search) {
     if (search.options.fetch) {
+      if (search.title) {
+        this.fetchChallengesByTitle(search.title);
+        return;
+      }
       this.fetchChallenges();
     }
     this.searchSubject.next(search);

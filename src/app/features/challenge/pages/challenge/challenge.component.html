@@ -21,13 +21,44 @@
           <img [src]="getIconUrl()" alt="">
         </div>
       </div>
-      <div class="challenge-preview-info-short">
-        <div class="challenge-preview-info-short-title">{{challenge.title}}</div>
-        <div class="challenge-preview-info-short-author">
-          <img [src]="getAuthorAvatarUrl()" alt="">
-          <p>By <span class="challenge-preview-info-short-author-username"
-                      [routerLink]="['/app/user/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
-          </p>
+      <div class="challenge-preview-info">
+        <div>
+          <div class="challenge-preview-info-title">{{challenge.title}}</div>
+          <div class="challenge-preview-info-author">
+            <img [src]="getAuthorAvatarUrl()" alt="">
+            <p>By <span class="challenge-preview-info-short-author-username"
+                        [routerLink]="['/app/user/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="challenge-preview-info-countdown">
+          <p>Starts in:</p>
+          <div class="countdown-value">
+            <div class="countdown-value-temporal-unit">
+              <div class="countdown-value-temporal-unit-value">
+                <div *ngFor="let i of extract(countdown.days)">{{i}}</div>
+              </div>
+              <span>Days</span>
+            </div>
+            <div class="countdown-value-temporal-unit">
+              <div class="countdown-value-temporal-unit-value">
+                <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
+              </div>
+              <span>Hours</span>
+            </div>
+            <div class="countdown-value-temporal-unit">
+              <div class="countdown-value-temporal-unit-value">
+                <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
+              </div>
+              <span>Minutes</span>
+            </div>
+            <div class="countdown-value-temporal-unit">
+              <div class="countdown-value-temporal-unit-value">
+                <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
+              </div>
+              <span>Seconds</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -106,11 +137,11 @@
         </div>
       </div>
       <div #challenge_box class="challenge-box">
-        <dfy-challenge-overview [challenge]="challenge" [members]="members" [selfMember]="selfMember"
+        <dfy-challenge-overview [challenge]="challenge" [selfMember]="selfMember" [members]="members"
                                 *ngIf="isOnSection('overview')"></dfy-challenge-overview>
         <dfy-challenge-chats [challenge]="challenge" [selfMember]="selfMember"
                              *ngIf="isOnSection('chats')"></dfy-challenge-chats>
-        <dfy-challenge-groups [challenge]="challenge" [members]="members" [groups]="groups"
+        <dfy-challenge-groups [challenge]="challenge" [selfMember]="selfMember" [members]="members" [groups]="groups"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
         <dfy-challenge-leaderboard [challenge]="challenge"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>

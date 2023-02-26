@@ -13,15 +13,14 @@ import {
   GroupService,
   Member,
   MemberService,
-  PopupService,
-  Profile
+  PopupService
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertType} from "../../../../core/models/system-alert";
-import {forkJoin} from "rxjs";
+import {EMPTY, forkJoin, interval, Observable, Subject} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
-import {SplashScreenComponent} from "../../../../layout";
+import {TimeHelper, TimeLeft} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-challenge',
@@ -48,6 +47,7 @@ export class ChallengeComponent implements OnInit {
   members: Member[] = [];
   groups: Group[] = [];
   isDataLoaded: boolean = false;
+  countdown: TimeLeft = {} as TimeLeft;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,7 +59,8 @@ export class ChallengeComponent implements OnInit {
     private challengeService: ChallengeService,
     private memberService: MemberService,
     private groupService: GroupService,
-    private banishmentService: BanishmentService) {
+    private banishmentService: BanishmentService,
+    private timeHelper: TimeHelper) {
   }
 
   ngOnInit(): void {
@@ -73,6 +74,7 @@ export class ChallengeComponent implements OnInit {
       }
       this.fetchChallengeData(challengeId, `${params.get('tab')}`);
     });
+    interval(1000).subscribe(() => this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt));
   }
 
   private fetchChallengeData(challengeId: number, redirectTo: string) {
@@ -161,7 +163,15 @@ export class ChallengeComponent implements OnInit {
 
   isSelfMemberAuthor(): boolean {
     if (!this.selfMember) return false;
-    return this.selfMember.id === this.challenge.author.id;
+    return this.selfMember.profile.id === this.challenge.author.id;
+  }
+
+  extract(number: number): string[] {
+    console.log(number);
+    if (!number) return [];
+    const res: string[] = number < 10 ? ['0'] : [];
+    `${number}`.split('').forEach(i => res.push(i));
+    return res;
   }
 
   getIconUrl(): string {
