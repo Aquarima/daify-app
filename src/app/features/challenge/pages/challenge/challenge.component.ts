@@ -4,7 +4,7 @@ import {
   AuthService,
   Banishment,
   BanishmentService,
-  Challenge,
+  Challenge, ChallengeConfig,
   ChallengeService,
   defaultChallenge,
   defaultMember,
@@ -17,7 +17,7 @@ import {
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertType} from "../../../../core/models/system-alert";
-import {EMPTY, forkJoin, interval, Observable, Subject} from "rxjs";
+import {EMPTY, forkJoin, interval, Observable, Subject, Subscription} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
 import {TimeHelper, TimeLeft} from "../../../../core/helpers";
@@ -74,7 +74,20 @@ export class ChallengeComponent implements OnInit {
       }
       this.fetchChallengeData(challengeId, `${params.get('tab')}`);
     });
-    interval(1000).subscribe(() => this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt));
+    const sub: Subscription = interval(1000).subscribe(() => {
+      if (!this.isChallengeStarted()) {
+        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt);
+        console.log('1');
+        return;
+      }
+      if (this.isChallengeStarted() && !this.isChallengeEnded()) {
+        console.log('2');
+        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.endAt);
+        return;
+      }
+      console.log('3');
+      sub.unsubscribe();
+    });
   }
 
   private fetchChallengeData(challengeId: number, redirectTo: string) {
@@ -166,9 +179,16 @@ export class ChallengeComponent implements OnInit {
     return this.selfMember.profile.id === this.challenge.author.id;
   }
 
+  isChallengeStarted(): boolean {
+    return new Date(this.challenge.config.startAt).getTime() < Date.now();
+  }
+
+  isChallengeEnded(): boolean {
+    return new Date(this.challenge.config.endAt).getTime() < Date.now();
+  }
+
   extract(number: number): string[] {
-    console.log(number);
-    if (!number) return [];
+    if (!number) return ['0', '0'];
     const res: string[] = number < 10 ? ['0'] : [];
     `${number}`.split('').forEach(i => res.push(i));
     return res;

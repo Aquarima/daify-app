@@ -32,7 +32,9 @@
           </div>
         </div>
         <div class="challenge-preview-info-countdown">
-          <p>Starts in:</p>
+          <p *ngIf="!isChallengeStarted()">Starts in:</p>
+          <p *ngIf="isChallengeStarted() && !isChallengeEnded()">Ends in:</p>
+          <p *ngIf="isChallengeEnded()">Ended</p>
           <div class="countdown-value">
             <div class="countdown-value-temporal-unit">
               <div class="countdown-value-temporal-unit-value">
