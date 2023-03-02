@@ -22,7 +22,7 @@ export function defaultProfile(): Profile {
     firstName: '',
     lastName: '',
     username: '',
-    avatarUrl: '',
+    avatarUrl: 'assets/challenge_icon_placeholder.svg',
     bannerUrl: '',
     country: '',
     languages: [],

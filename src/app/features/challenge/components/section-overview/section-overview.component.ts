@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {Challenge, Member} from "../../../../core";
+import {Challenge, defaultProfile, Member} from "../../../../core";
 import {MemberService} from "../../../../core/services/challenge/member.service";
 import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
 import {AlertType} from "../../../../core/models/system-alert";
@@ -53,7 +53,7 @@ export class SectionOverviewComponent implements OnInit {
   }
 
   getMemberAvatar(member: Member): string {
-    return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+    return member.profile.avatarUrl ? member.profile.avatarUrl : defaultProfile().avatarUrl;
   }
 
   isAuthor(member: Member): boolean {

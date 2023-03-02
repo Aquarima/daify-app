@@ -7,10 +7,93 @@
   }
 
   .challenge-groups-mygroup {
-    height: 300px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
     box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
     border-radius: 16px;
     background-color: #FFF;
+
+    .mygroup-icon {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+    }
+
+    .mygroup-name {
+      font-weight: 600;
+      font-size: var(--preset-font-size-medium);
+      color: var(--color-text);
+    }
+
+    .mygroup-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 260px);
+      align-items: center;
+      gap: 16px;
+
+      .members-item {
+        padding: 16px;
+        height: 80px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        //box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+        border: 1px solid #E6E6EF;
+        border-radius: 8px;
+        background-color: #FFF;
+
+        .members-item-avatar {
+          margin-right: 16px;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+
+        > div {
+          width: 120px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 4px;
+
+          .members-item-username {
+            display: flex;
+            align-items: center;
+            column-gap: 4px;
+            font-weight: 600;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text);
+          }
+
+          .members-item-role {
+            font-size: var(--preset-font-size-tiny);
+            color: var(--color-text-alt-2);
+          }
+
+          .members-item-group {
+            display: flex;
+            align-items: center;
+            column-gap: 8px;
+
+            svg {
+              width: 16px;
+              height: 16px;
+              fill: var(--color-text-alt);
+            }
+
+            p {
+              font-size: var(--preset-font-size-tiny);
+              color: var(--color-text-alt);
+            }
+          }
+        }
+      }
+    }
   }
 
   .challenge-box-groups-list {

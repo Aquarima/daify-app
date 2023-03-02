@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {AlertHandlingService, Challenge, Group, GroupService, Member} from "../../../../core";
+import {AlertHandlingService, Challenge, defaultProfile, Group, GroupService, Member} from "../../../../core";
 import {CreateGroupComponent} from "../create-group/create-group.component";
 import {AlertType} from "../../../../core/models/system-alert";
 
@@ -52,5 +52,17 @@ export class SectionGroupsComponent implements OnInit {
 
   isGroupFull(group: Group): boolean {
     return this.getGroupSize(group) === this.challenge.config.groupSize;
+  }
+
+  getMemberNickname(member: Member): string {
+    return member.nickname ? member.nickname : member.profile.username;
+  }
+
+  getMemberRole(member: Member): string {
+    return member.role ? member.role : member.profile.profession;
+  }
+
+  getMemberAvatar(member: Member): string {
+    return member.profile.avatarUrl ? member.profile.avatarUrl : defaultProfile().avatarUrl;
   }
 }
