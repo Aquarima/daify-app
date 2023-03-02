@@ -4,7 +4,7 @@ import {
   AuthService,
   Banishment,
   BanishmentService,
-  Challenge, ChallengeConfig,
+  Challenge,
   ChallengeService,
   defaultChallenge,
   defaultMember,
@@ -17,7 +17,7 @@ import {
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertType} from "../../../../core/models/system-alert";
-import {EMPTY, forkJoin, interval, Observable, Subject, Subscription} from "rxjs";
+import {forkJoin, interval, Subscription} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
 import {TimeHelper, TimeLeft} from "../../../../core/helpers";
@@ -75,17 +75,15 @@ export class ChallengeComponent implements OnInit {
       this.fetchChallengeData(challengeId, `${params.get('tab')}`);
     });
     const sub: Subscription = interval(1000).subscribe(() => {
+      console.log(this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt));
       if (!this.isChallengeStarted()) {
         this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt);
-        console.log('1');
         return;
       }
       if (this.isChallengeStarted() && !this.isChallengeEnded()) {
-        console.log('2');
         this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.endAt);
         return;
       }
-      console.log('3');
       sub.unsubscribe();
     });
   }
