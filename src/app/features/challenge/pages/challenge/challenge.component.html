@@ -27,7 +27,7 @@
           <div class="challenge-preview-info-author">
             <img [src]="getAuthorAvatarUrl()" alt="">
             <p>By <span class="challenge-preview-info-short-author-username"
-                        [routerLink]="['/app/user/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
+                        [routerLink]="['/app/user/profile/', challenge.author ? challenge.author.username : '']">{{challenge.author ? challenge.author.username : 'Unknown'}}</span>
             </p>
           </div>
         </div>
