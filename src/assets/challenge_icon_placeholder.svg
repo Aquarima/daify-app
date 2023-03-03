@@ -1,14 +1,21 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="128" height="128" fill="#E5E5E5"/>
-<rect x="0.5" y="0.5" width="127" height="127" rx="63.5" fill="#F5F5F5"/>
-<mask id="mask0_0_1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="46" y="46" width="36" height="35">
-<path d="M64 69C69.5225 69 74 64.3917 74 58.7058V47.3333H54V58.7058C54 64.3917 58.4775 69 64 69Z" fill="white" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
-<path d="M54 61.5V53.1667H47.3333C47.3333 58.7225 50.6667 61.5 54 61.5ZM74 61.5V53.1667H80.6667C80.6667 58.7225 77.3333 61.5 74 61.5Z" stroke="white" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M64 70.6667V74" stroke="white" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M56.5 79L59.575 74H68.2017L71.5 79H56.5Z" fill="white" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
+<rect width="128" height="128" fill="#F5F5F5"/>
+<g clip-path="url(#clip0_0_1)">
+<path d="M128 0H0V128H128V0Z" fill="#E5E5E5"/>
+<path d="M127.5 64C127.5 28.9299 99.0701 0.5 64 0.5C28.9299 0.5 0.5 28.9299 0.5 64C0.5 99.0701 28.9299 127.5 64 127.5C99.0701 127.5 127.5 99.0701 127.5 64Z" fill="#50D8D7"/>
+<mask id="mask0_0_1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="45" y="47" width="39" height="34">
+<path d="M64.5 69.5263C70.2986 69.5263 75 65.1606 75 59.7739V49H54V59.7739C54 65.1606 58.7014 69.5263 64.5 69.5263Z" fill="white" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
+<path d="M54 62.4211V54.5264H47C47 59.7898 50.5001 62.4211 54 62.4211ZM75 62.4211V54.5264H82C82 59.7898 78.4999 62.4211 75 62.4211Z" stroke="white" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M64.5 71.1053V74.2632" stroke="white" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M56.625 79L59.8538 74.2632H68.9118L72.375 79H56.625Z" fill="white" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
 </mask>
 <g mask="url(#mask0_0_1)">
-<path d="M44 44H84V84H44V44Z" fill="black" fill-opacity="0.1"/>
+<path d="M43.5 45.8421H85.5V83.7368H43.5V45.8421Z" fill="white"/>
 </g>
-<rect x="0.5" y="0.5" width="127" height="127" rx="63.5" stroke="#50D8D7"/>
+</g>
+<defs>
+<clipPath id="clip0_0_1">
+<rect width="128" height="128" fill="white"/>
+</clipPath>
+</defs>
 </svg>

@@ -16,11 +16,8 @@
       </button>
     </div>
     <div class="challenge-preview">
-      <div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ getCoverUrl() +')'}">
-        <div class="challenge-preview-icon">
-          <img [src]="getIconUrl()" alt="">
-        </div>
-      </div>
+      <img class="challenge-preview-banner" [src]="getCoverUrl()" alt="">
+      <img class="challenge-preview-icon" [src]="getIconUrl()" alt="">
       <div class="challenge-preview-info">
         <div>
           <div class="challenge-preview-info-title">{{challenge.title}}</div>

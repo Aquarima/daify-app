@@ -47,47 +47,42 @@
       width: 100%;
       height: 250px;
       position: relative;
+      overflow: hidden;
       box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
       border-radius: 16px;
-      background-color: #FFF;
 
       .challenge-preview-banner {
-        width: 100%;
-        height: 50%;
-        position: relative;
-        border-radius: 16px 16px 0 0;
-        background-size: cover;
         background-color: #E6E6EF;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-        .challenge-preview-icon {
-          width: 100px;
-          height: 100px;
-          position: absolute;
-          top: calc(50% + 8px);
-          left: 50%;
-          transform: translateX(-50%);
-          border-radius: 50%;
-          background-color: #FFF;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          img {
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-          }
-        }
+      .challenge-preview-icon {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .challenge-preview-info {
         padding: 32px;
         width: 100%;
         height: 50%;
-        position: relative;
+        position: absolute;
+        bottom: 0;
         display: flex;
         justify-content: space-between;
         box-sizing: border-box;
+        border-radius: 32px 32px 0 0;
+        background-color: #FFF;
 
         .challenge-preview-info-title {
           margin-bottom: 8px;
