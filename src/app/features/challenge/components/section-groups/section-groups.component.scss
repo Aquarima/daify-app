@@ -25,73 +25,95 @@
     }
 
     .mygroup-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 4px;
       font-weight: 600;
       font-size: var(--preset-font-size-medium);
       color: var(--color-text);
+
+      svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--color-text);
+      }
     }
 
     .mygroup-members {
+      margin-top: 32px;
+      width: 80%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, 260px);
+      grid-template-columns: repeat(auto-fit, 160px);
+      justify-content: center;
       align-items: center;
       gap: 16px;
 
       .members-item {
-        padding: 16px;
-        height: 80px;
+        height: 160px;
         position: relative;
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        box-sizing: border-box;
-        //box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
-        border: 1px solid #E6E6EF;
+        row-gap: 8px;
         border-radius: 8px;
         background-color: #FFF;
 
         .members-item-avatar {
-          margin-right: 16px;
-          width: 48px;
-          height: 48px;
+          width: 64px;
+          height: 65px;
+          min-width: 64px;
+          min-height: 64px;
           border-radius: 50%;
         }
 
-        > div {
-          width: 120px;
+        .members-item-username {
           display: flex;
-          flex-direction: column;
-          row-gap: 4px;
+          align-items: center;
+          column-gap: 4px;
+          font-weight: 600;
+          font-size: var(--preset-font-size-small);
+          color: var(--color-text);
+        }
 
-          .members-item-username {
-            display: flex;
-            align-items: center;
-            column-gap: 4px;
-            font-weight: 600;
-            font-size: var(--preset-font-size-small);
-            color: var(--color-text);
-          }
+        .members-item-role {
+          font-size: var(--preset-font-size-small);
+          color: var(--color-text-alt-2);
+        }
 
-          .members-item-role {
-            font-size: var(--preset-font-size-tiny);
-            color: var(--color-text-alt-2);
-          }
+        .members-item-remove-btn {
+          padding: 2px 8px;
+          border-radius: 16px;
+          border: 1px solid rgb(var(--color-semantic-error));
+          background-color: #FFF;
+          transition: background-color 400ms;
+          font-size: var(--preset-font-size-tiny);
+          color: rgb(var(--color-semantic-error));
 
-          .members-item-group {
-            display: flex;
-            align-items: center;
-            column-gap: 8px;
-
-            svg {
-              width: 16px;
-              height: 16px;
-              fill: var(--color-text-alt);
-            }
-
-            p {
-              font-size: var(--preset-font-size-tiny);
-              color: var(--color-text-alt);
-            }
+          &:hover {
+            background-color: rgb(var(--color-semantic-error));
+            color: #FFF;
           }
         }
+      }
+    }
+
+    .mygroup-open-chat {
+      padding: 0 24px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 32px;
+      background-color: var(--color-secondary);
+      font-weight: 500;
+      font-size: var(--preset-font-size-small);
+      color: #FFF;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-secondary-hover);
       }
     }
   }
@@ -140,6 +162,7 @@
     .groups-list-item {
       padding: 0 16px;
       min-height: 200px;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -149,6 +172,15 @@
       box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
       border-radius: 16px;
       background-color: #FFF;
+      cursor: pointer;
+
+      &:hover {
+
+        .groups-list-item-members {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
 
       .groups-list-item-icon {
         width: 64px;
@@ -165,6 +197,7 @@
         column-gap: 4px;
         border-radius: 16px;
         background-color: #F2F2F2;
+        cursor: pointer;
 
         svg {
           width: 16px;
@@ -182,6 +215,12 @@
         font-weight: 600;
         font-size: var(--preset-font-size-small);
         color: var(--color-text);
+
+        svg {
+          width: 16px;
+          height: 16px;
+          fill: var(--color-text);
+        }
       }
 
       .groups-list-item-join-btn {
@@ -195,6 +234,62 @@
 
         &:hover {
           background-color: var(--color-secondary-hover);
+        }
+      }
+
+      .groups-list-item-members {
+        padding: 16px 24px;
+        width: 200px;
+        min-height: 200px;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        align-items: center;
+        box-sizing: border-box;
+        border-radius: 16px;
+        background-color: var(--color-primary);
+        visibility: hidden;
+        opacity: 0;
+        transition: all 400ms;
+
+        > p {
+          color: #FFF;
+        }
+
+        .groups-list-item-members-item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          column-gap: 8px;
+
+          img {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #FFF;
+            border-radius: 50%;
+          }
+
+          > div {
+            display: flex;
+            flex-direction: column;
+            row-gap: 4px;
+
+            .groups-list-item-members-nickname {
+              font-weight: 500;
+              font-size: var(--preset-font-size-small);
+              color: #FFF;
+            }
+
+            .groups-list-item-members-role {
+              font-weight: 400;
+              font-size: var(--preset-font-size-tiny);
+              color: #FFF;
+            }
+          }
         }
       }
     }

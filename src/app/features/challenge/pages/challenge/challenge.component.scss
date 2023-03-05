@@ -25,19 +25,19 @@
         border: none;
         border-radius: 50%;
         background-color: #FFF;
+        transition: background-color 400ms;
 
         &:hover {
+          background-color: var(--color-secondary);
 
           svg {
-            width: 55%;
-            height: 55%;
+            fill: #FFF;
           }
         }
 
         svg {
           width: 50%;
           height: 50%;
-          transition: all 500ms;
           fill: var(--color-text);
         }
       }
@@ -70,6 +70,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: #FFF;
+
+        img {
+          width: 85%;
+          height: 85%;
+          border-radius: 50%;
+        }
       }
 
       .challenge-preview-info {
@@ -199,6 +206,8 @@
 
           .countdown-value {
             display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 8px;
 
             .countdown-value-temporal-unit {
@@ -207,26 +216,37 @@
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              row-gap: 8px;
 
               span {
+                margin-top: 4px;
                 font-weight: 500;
-                font-size: var(--preset-font-size-small);
+                font-size: var(--preset-font-size-tiny);
                 color: var(--color-text-alt-2);
               }
 
               .countdown-value-temporal-unit-value {
+                margin-top: 8px;
                 display: flex;
-                gap: 2px;
+                gap: 4px;
 
                 > div {
-                  padding: 4px;
-                  border-radius: 2px;
-                  background-color: rgba(#000000, .050);
+                  padding: 6px;
+                  border-radius: 4px;
+                  background-color: rgba(#000000, .060);
                   font-weight: 600;
+                  font-size: var(--preset-font-size-small);
                   color: var(--color-text);
                 }
               }
+            }
+
+            .countdown-value-temporal-unit-dots {
+              height: fit-content;
+              position: relative;
+              bottom: 6px;
+              font-weight: 600;
+              font-size: var(--preset-font-size-small);
+              color: var(--color-text);
             }
           }
         }

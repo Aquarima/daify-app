@@ -75,7 +75,6 @@ export class ChallengeComponent implements OnInit {
       this.fetchChallengeData(challengeId, `${params.get('tab')}`);
     });
     const sub: Subscription = interval(1000).subscribe(() => {
-      console.log(this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt));
       if (!this.isChallengeStarted()) {
         this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt);
         return;

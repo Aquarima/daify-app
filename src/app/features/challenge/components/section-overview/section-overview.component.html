@@ -122,7 +122,7 @@
 <h2>Challengers</h2>
 <div class="members">
   <div class="members-item"
-       *ngFor="let member of members | membersFilter: false">
+       *ngFor="let member of members | membersFilter : 0 : false">
     <img class="members-item-avatar" [src]="getMemberAvatar(member)" alt="">
     <div>
       <div class="members-item-username">
@@ -155,7 +155,7 @@
 <h2>Spectators</h2>
 <div class="members">
   <div class="members-item" [class.members-item-author]="isAuthor(member)"
-       *ngFor="let member of members | membersFilter: true">
+       *ngFor="let member of members | membersFilter : 0 : true">
     <img class="members-item-avatar" [src]="getMemberAvatar(member)" alt="">
     <div>
       <div class="members-item-username">

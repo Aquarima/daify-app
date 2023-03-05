@@ -42,16 +42,46 @@ export class SectionGroupsComponent implements OnInit {
     })
   }
 
+  onRemoveMember(member: Member) {
+    this.groupService.removeGroupMember(member)
+      .subscribe({
+        next: () => {
+          this.members = this.members.filter(member => member.id === member.id);
+        },
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
+  }
+
+  onJoinGroup(group: Group) {
+    this.groupService.joinGroup(group)
+      .subscribe({
+        next: () => this.selfMember.group = group,
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+      });
+  }
+
   getGroupSize(group: Group): number {
     return this.members.filter(member => member.group.id === group.id).length;
+  }
+
+  isSelfMember(member: Member) {
+    return this.selfMember.id === member.id;
   }
 
   isGroupLeader(): boolean {
     return !!this.groups.find((group: Group) => group.leader.id === this.selfMember.id);
   }
 
+  isGroupLeaderOf(group: Group): boolean {
+    return this.selfMember.profile.id === group.leader.profile.id;
+  }
+
   isGroupFull(group: Group): boolean {
     return this.getGroupSize(group) === this.challenge.config.groupSize;
+  }
+
+  countGroupMembers(group: Group): number {
+    return this.members.filter(member => member.group.id == group.id).length;
   }
 
   getMemberNickname(member: Member): string {

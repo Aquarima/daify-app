@@ -17,7 +17,9 @@
     </div>
     <div class="challenge-preview">
       <img class="challenge-preview-banner" [src]="getCoverUrl()" alt="">
-      <img class="challenge-preview-icon" [src]="getIconUrl()" alt="">
+      <div class="challenge-preview-icon">
+        <img [src]="getIconUrl()" alt="">
+      </div>
       <div class="challenge-preview-info">
         <div>
           <div class="challenge-preview-info-title">{{challenge.title}}</div>
@@ -39,18 +41,21 @@
               </div>
               <span>Days</span>
             </div>
+            <span class="countdown-value-temporal-unit-dots">:</span>
             <div class="countdown-value-temporal-unit">
               <div class="countdown-value-temporal-unit-value">
                 <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
               </div>
               <span>Hours</span>
             </div>
+            <span class="countdown-value-temporal-unit-dots">:</span>
             <div class="countdown-value-temporal-unit">
               <div class="countdown-value-temporal-unit-value">
                 <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
               </div>
               <span>Minutes</span>
             </div>
+            <span class="countdown-value-temporal-unit-dots">:</span>
             <div class="countdown-value-temporal-unit">
               <div class="countdown-value-temporal-unit-value">
                 <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
@@ -110,7 +115,7 @@
             </svg>
           </li>
           <li [ngClass]="isOnSection('settings') ? 'challenge-sections-selected' : ''"
-              *ngIf="isSelfMemberAuthor()" (click)="onGoToSection(sections.settings)">
+              *ngIf="!isChallengeStarted() && isSelfMemberAuthor()" (click)="onGoToSection(sections.settings)">
             <span class="challenge-sections-name">Settings</span>
             <svg width="32" height="32" viewBox="0 0 24 24">
               <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
@@ -145,7 +150,7 @@
         <dfy-challenge-leaderboard [challenge]="challenge"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
         <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember"
-                                *ngIf="isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>
+                                *ngIf="!isChallengeStarted() && isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>
       </div>
     </div>
   </div>
