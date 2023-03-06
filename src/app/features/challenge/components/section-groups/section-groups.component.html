@@ -48,8 +48,8 @@
       <div class="groups-list-item-members-item" *ngFor="let member of members | membersFilter: 1 : group.id">
         <img [src]="getMemberAvatar(member)" alt="">
         <div>
-          <p class="groups-list-item-members-nickname">{{member.nickname}}</p>
-          <p class="groups-list-item-members-role">Test</p>
+          <a class="groups-list-item-members-nickname" [routerLink]="['/app/user/profile', member.profile.username]">{{member.nickname}}</a>
+          <p class="groups-list-item-members-role">{{member.role}}</p>
         </div>
       </div>
     </div>

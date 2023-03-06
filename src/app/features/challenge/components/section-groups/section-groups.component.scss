@@ -279,9 +279,14 @@
             row-gap: 4px;
 
             .groups-list-item-members-nickname {
+              text-decoration: none;
               font-weight: 500;
               font-size: var(--preset-font-size-small);
               color: #FFF;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
 
             .groups-list-item-members-role {
