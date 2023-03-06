@@ -3,7 +3,9 @@ import {
   AccessType,
   AlertHandlingService,
   AuthService,
+  Banishment,
   BanishmentService,
+  BlacklistedMember,
   Challenge,
   ChallengeService,
   Member,
@@ -13,8 +15,6 @@ import {
 import {FormControl, FormGroup} from "@angular/forms";
 import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Banishment} from "../../../../core/models/challenge/banishment.model";
-import {BlacklistedMember} from "../../../../core/models/challenge/blacklisted-member.model";
 import {BlacklistService} from "../../../../core/services/challenge/blacklist.service";
 
 @Component({
