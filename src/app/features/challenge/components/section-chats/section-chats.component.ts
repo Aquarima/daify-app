@@ -70,7 +70,6 @@ export class SectionChatsComponent implements OnInit {
   }
 
   onReportMessage(message: Message) {
-
   }
 
   onDeleteMessage(message: Message) {

@@ -50,11 +50,31 @@
 
     .chat-box-messages {
       height: 100%;
+      position: relative;
       overflow-y: auto;
       box-sizing: border-box;
       border-radius: 8px;
 
-      > div {
+      .chat-box-messages-empty {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 8px;
+        font-weight: 500;
+        color: rgba(#000000, .20);
+
+        svg {
+          width: 40px;
+          height: 40px;
+          fill: rgba(#000000, .20);
+        }
+      }
+
+      .chat-box-messages-list {
         padding: 40px;
         display: flex;
         flex-direction: column;
