@@ -5,7 +5,7 @@
 </div>
 <div class="user-username">
     {{profile.username}}
-    <a class="with-tag" [routerLink]="['/app/user/', profile.username]">{{profile.username}}</a>
+    <a class="with-tag" [routerLink]="['/app/user/profile/', profile.username]">{{profile.username}}</a>
 </div>
 <div class="user-online-status" *ngIf="!profile?.online">
     <div class="indicator offline"></div>

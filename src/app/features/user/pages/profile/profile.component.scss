@@ -271,6 +271,10 @@
             background-color: var(--color-secondary);
           }
 
+          &:hover {
+            background-color: var(--color-secondary-hover);
+          }
+
           .profile-sections-name {
             top: 50%;
             transform: translateY(-50%);
