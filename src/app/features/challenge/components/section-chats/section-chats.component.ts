@@ -5,6 +5,7 @@ import {
   Challenge,
   Channel,
   ChannelService,
+  defaultProfile,
   Member,
   Message,
   MessageService,
@@ -85,16 +86,17 @@ export class SectionChatsComponent implements OnInit {
   onSendMessage() {
     const inputValue = this.messageForm.controls.message.value;
     if (inputValue && this.selfMember && this.channel) {
-      const message: Message = {sender: this.selfMember, content: inputValue}
-      this.messageService.sendMessage(this.channel, message)
+      const messageToSend: Message = {content: inputValue} as Message;
+      this.messageService.sendMessage(this.channel, messageToSend)
         .subscribe({
-          next: (data: Message) => {
-            this.messages.push(data);
+          next: (message: Message) => {
+            this.messages.push(message);
             //setTimeout(() => this.scrollToNewestMessage(), 50);
           },
           error: () => {
-            message.isFailed = true;
-            this.messages.push(message);
+            messageToSend.isFailed = true;
+            if (this.selfMember) messageToSend.sender = this.selfMember;
+            this.messages.push(messageToSend);
           }
         });
     }
@@ -135,11 +137,39 @@ export class SectionChatsComponent implements OnInit {
     setTimeout(() => this.messagesNode.nativeElement.scrollIntoView(scrollOptions), 100);
   }
 
-  isSelfMember(member: Member): boolean {
-    return member.profile.id == this.authService.user.profile.id;
+  isSelfMessage(message: Message): boolean {
+    if (!message.sender) return false;
+    return message.sender.profile && message.sender.profile.id == this.authService.user.profile.id;
   }
 
-  isChannelMaintainer(member: Member): boolean {
-    return member.id === this.channel?.maintainer.id;
+  isMessageSentByMaintainer(message: Message): boolean {
+    if (!message.sender) return false;
+    return message.sender.id === this.channel?.maintainer.id;
+  }
+
+  isSenderOnline(message: Message): boolean {
+    const sender: Member = message.sender;
+    return sender && sender.profile ? sender.profile.online : false;
+  }
+
+  getSenderAvatar(message: Message): string {
+    const sender: Member = message.sender;
+    let avatarUrl = defaultProfile().avatarUrl;
+    if (sender && sender.profile) avatarUrl = sender.profile.avatarUrl;
+    return avatarUrl;
+  }
+
+  getSenderUsername(message: Message) {
+    const sender: Member = message.sender;
+    let username = defaultProfile().username;
+    if (sender && sender.profile) username = sender.profile.username;
+    return username;
+  }
+
+  getSenderNickname(message: Message) {
+    const sender: Member = message.sender;
+    let username = defaultProfile().username;
+    if (sender && sender.profile) username = sender.nickname ? sender.nickname : sender.profile.username;
+    return username;
   }
 }

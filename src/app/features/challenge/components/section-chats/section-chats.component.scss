@@ -209,6 +209,8 @@
           padding: 8px 16px;
           margin-right: auto;
           width: fit-content;
+          min-width: 80px;
+          min-height: 16px;
           position: relative;
           border-radius: 16px;
           background-color: var(--color-secondary);

@@ -19,11 +19,11 @@ export interface Profile {
 export function defaultProfile(): Profile {
   return {
     id: 0,
-    firstName: '',
-    lastName: '',
-    username: '',
-    avatarUrl: 'assets/challenge_icon_placeholder.svg',
-    bannerUrl: '',
+    firstName: 'Deleted User',
+    lastName: 'Deleted User',
+    username: 'Deleted User',
+    avatarUrl: 'assets/avatar_placeholder.svg',
+    bannerUrl: 'user_banner_placeholder.svg',
     country: '',
     languages: [],
     birthdate: new Date(),
