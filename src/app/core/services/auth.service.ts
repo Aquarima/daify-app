@@ -85,7 +85,7 @@ export class AuthService {
                 this.user.profile = profile;
                 this.user$.next(this.user);
             },
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
         })
     }
 

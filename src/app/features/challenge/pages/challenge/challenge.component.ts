@@ -113,7 +113,7 @@ export class ChallengeComponent implements OnInit {
       this.groupService.getGroupsByChallenge(this.challenge)
         .subscribe({
           next: (groups: any) => this.groups = groups.content,
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
         });
     }
     this.router.navigate([`/app/challenge/${this.challenge.id}/${section}`]);
@@ -141,6 +141,16 @@ export class ChallengeComponent implements OnInit {
     instance.closeEvent.subscribe(_ => componentRef.destroy());
   }
 
+  onSwitchToSpectatorMode() {
+    this.popupService.createConfirmModal(
+      `Switch to spectator mode?`,
+      'Are you sure that you want to become a spectator? You will not have the same rights than as a member.',
+      () => {
+
+      }
+    );
+  }
+
   onLeave() {
     this.popupService.createConfirmModal(
       `Leave '${this.challenge.title}' challenge?`,
@@ -149,7 +159,7 @@ export class ChallengeComponent implements OnInit {
         this.challengeService.leaveChallenge(this.challenge)
           .subscribe({
             next: () => this.router.navigate(['/app/explore']),
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
           });
       }
     );

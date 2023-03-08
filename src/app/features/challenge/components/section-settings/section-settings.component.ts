@@ -97,12 +97,12 @@ export class SectionSettingsComponent implements OnInit {
     this.banishmentService.getBanishmentByChallenge(this.challenge)
       .subscribe({
         next: (banishment: any) => this.banishment = banishment.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
     this.blacklistService.getBlacklistedMembersByAuthor(this.authService.user.profile)
       .subscribe({
         next: (blacklist: any) => this.blacklist = blacklist.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
     this.onSection('banishment');
   }
@@ -127,7 +127,7 @@ export class SectionSettingsComponent implements OnInit {
               this.router.navigate(['../overview'], {relativeTo: this.route});
               this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
             },
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
           });
       });
   }
@@ -176,7 +176,7 @@ export class SectionSettingsComponent implements OnInit {
         this.banishmentService.unban(ban)
           .subscribe({
             next: () => this.banishment.splice(this.banishment.indexOf(ban), 1),
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
       });
@@ -190,7 +190,7 @@ export class SectionSettingsComponent implements OnInit {
         this.blacklistService.remove(blacklistedMember)
           .subscribe({
             next: () => this.blacklist = this.blacklist.filter((bl) => bl.id !== blacklistedMember.id),
-            error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``),
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
       });

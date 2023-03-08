@@ -1,5 +1,13 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {AlertHandlingService, Challenge, defaultProfile, Group, GroupService, Member} from "../../../../core";
+import {
+  AlertHandlingService,
+  Challenge, defaultGroup, defaultMember,
+  defaultProfile,
+  Group,
+  GroupService,
+  Member,
+  PopupService
+} from "../../../../core";
 import {CreateGroupComponent} from "../create-group/create-group.component";
 import {AlertType} from "../../../../core/models/system-alert";
 
@@ -18,7 +26,9 @@ export class SectionGroupsComponent implements OnInit {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private alertHandlingService: AlertHandlingService,
+    private popupService: PopupService,
     private groupService: GroupService) {
+    this.popupService.setViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
@@ -37,7 +47,7 @@ export class SectionGroupsComponent implements OnInit {
             this.groups.push(group);
             this.selfMember.group = group;
           },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
         })
     })
   }
@@ -48,7 +58,7 @@ export class SectionGroupsComponent implements OnInit {
         next: () => {
           this.members = this.members.filter(member => member.id === member.id);
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', ``)
       });
   }
 
@@ -56,12 +66,37 @@ export class SectionGroupsComponent implements OnInit {
     this.groupService.joinGroup(group)
       .subscribe({
         next: () => this.selfMember.group = group,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
+    if (!this.members.some(member => member.group.id === group.id)) {
+      this.groups = this.groups.filter(g => g.id !== group.id);
+    }
+  }
+
+  onLeaveGroup() {
+    this.popupService.createConfirmModal(
+      `Leave '${this.selfMember.group.name}'?`,
+      'Are you sure that you want to leave this group?',
+      () => {
+        this.groupService.leaveGroup(this.selfMember.group)
+          .subscribe({
+            next: (group: Group) => this.selfMember.group = group,
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+          });
+      }
+    )
+  }
+
+  getGroupId(group: Group): number {
+    return group && group.id ? group.id : defaultGroup().id;
   }
 
   getGroupSize(group: Group): number {
-    return this.members.filter(member => member.group.id === group.id).length;
+    return this.members.filter(member => this.getGroupId(member.group) === group.id).length;
+  }
+
+  getGroupLeader(group: Group): Member {
+    return group && group.leader ? group.leader : defaultMember();
   }
 
   isSelfMember(member: Member) {
@@ -69,11 +104,11 @@ export class SectionGroupsComponent implements OnInit {
   }
 
   isGroupLeader(): boolean {
-    return !!this.groups.find((group: Group) => group.leader.id === this.selfMember.id);
+    return !!this.groups.find((group: Group) => this.getGroupLeader(group).id === this.selfMember.id);
   }
 
-  isGroupLeaderOf(group: Group): boolean {
-    return this.selfMember.profile.id === group.leader.profile.id;
+  isMemberOfGroup(group: Group): boolean {
+    return this.getGroupId(this.selfMember.group) === group.id;
   }
 
   isGroupFull(group: Group): boolean {
@@ -81,7 +116,7 @@ export class SectionGroupsComponent implements OnInit {
   }
 
   countGroupMembers(group: Group): number {
-    return this.members.filter(member => member.group.id == group.id).length;
+    return this.members.filter(member => this.getGroupId(member.group) == group.id).length;
   }
 
   getMemberNickname(member: Member): string {

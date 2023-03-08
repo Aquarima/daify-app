@@ -40,7 +40,7 @@ export class ChallengeShareComponent implements OnInit {
                     this.challenge.invite = this.invite = invite;
                     this.setInvite(invite);
                 },
-                error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+                error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
             })
     }
 

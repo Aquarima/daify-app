@@ -63,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.authService.user$.next(user);
           //this.authService.setOnlineStatus(true);
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       })
   }
 

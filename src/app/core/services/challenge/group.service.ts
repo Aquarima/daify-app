@@ -19,6 +19,10 @@ export class GroupService {
     return this.http.post<any>(`${env.apiUrl}/challenge/group/${group.id}/join`, {});
   }
 
+  leaveGroup(group: Group) {
+    return this.http.delete<any>(`${env.apiUrl}/challenge/group/${group.id}/leave`, {});
+  }
+
   removeGroupMember(member: Member) {
     return this.http.delete<any>(`${env.apiUrl}/challenge/group/member/${member.id}/remove`);
   }

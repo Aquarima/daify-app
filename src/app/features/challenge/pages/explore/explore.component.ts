@@ -38,7 +38,7 @@ export class ExploreComponent implements OnInit {
     this.challengeService.getChallenges()
       .subscribe({
         next: (data: any) => Array.prototype.push.apply(this.challenges, data.content),
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
   }
 
@@ -46,7 +46,7 @@ export class ExploreComponent implements OnInit {
     this.challengeService.getChallengesByTitle(title)
       .subscribe({
         next: (data: any) => this.challenges = data.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
   }
 }

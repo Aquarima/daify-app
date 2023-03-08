@@ -11,7 +11,7 @@ export function defaultGroup(): Group {
   return {
     id: 0,
     leader: {} as Member,
-    name: '',
+    name: 'Unknown',
     createdAt: new Date()
   } as Group;
 }

@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
           this.challenges = challenges.content;
           this.cdr.detectChanges();
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
   }
 

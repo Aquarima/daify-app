@@ -32,7 +32,7 @@ export class MyListComponent implements OnInit {
     this.challengeService.getPersonalChallenges()
       .subscribe({
         next: (challenges: any) => this.challenges = challenges.content,
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ``)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
       });
   }
 }
