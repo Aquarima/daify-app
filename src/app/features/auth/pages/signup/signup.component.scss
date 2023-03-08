@@ -7,9 +7,28 @@
   align-items: center;
   background-color: #FFF;
 
+  @keyframes panel-forward {
+    0% {
+      right: -100%;
+    }
+    100% {
+      right: 0;
+    }
+  }
+
+  @keyframes auth-box-forward {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 0;
+    }
+  }
+
   .auth-panel {
     width: 40%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,6 +36,7 @@
     gap: 16px;
     border-radius: 32px 0 0 32px;
     background-color: var(--color-primary);
+    animation: panel-forward 1.5s;
 
     svg {
       width: 80px;
@@ -34,10 +54,12 @@
   .auth-box {
     width: 60%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: auth-box-forward 1.5s;
 
     .user-input {
       width: 100%;
@@ -73,6 +95,7 @@
           align-items: center;
           column-gap: 8px;
           user-select: none;
+          line-height: 20px;
 
           label {
             font-size: .9em;
@@ -98,7 +121,6 @@
         }
 
         .confirm {
-          padding: 0;
           width: 100%;
           min-width: 200px;
           height: 46px;

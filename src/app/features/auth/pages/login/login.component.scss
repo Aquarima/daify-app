@@ -52,9 +52,28 @@
     }
   }
 
+  @keyframes panel-forward {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 0;
+    }
+  }
+
+  @keyframes auth-box-forward {
+    0% {
+      right: -100%;
+    }
+    100% {
+      right: 0;
+    }
+  }
+
   .auth-panel {
-    width: 40%;
+    width: 50%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,6 +81,7 @@
     gap: 16px;
     border-radius: 0 32px 32px 0;
     background-color: var(--color-primary);
+    animation: panel-forward 1.5s;
 
     svg {
       width: 80px;
@@ -77,12 +97,14 @@
   }
 
   .auth-box {
-    width: 60%;
+    width: 50%;
     height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: auth-box-forward 1.5s;
 
     .auth-box-header {
       margin-bottom: 32px;
