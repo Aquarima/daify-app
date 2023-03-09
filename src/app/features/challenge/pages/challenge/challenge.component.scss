@@ -1,5 +1,6 @@
 :host {
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -190,64 +191,6 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-          }
-        }
-
-        .challenge-preview-info-countdown {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-
-          p {
-            text-align: center;
-            font-weight: 600;
-            color: var(--color-tertiary-2);
-          }
-
-          .countdown-value {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-
-            .countdown-value-temporal-unit {
-              width: 56px;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-
-              span {
-                margin-top: 4px;
-                font-weight: 500;
-                font-size: var(--preset-font-size-tiny);
-                color: var(--color-text-alt-2);
-              }
-
-              .countdown-value-temporal-unit-value {
-                margin-top: 8px;
-                display: flex;
-                gap: 4px;
-
-                > div {
-                  padding: 6px;
-                  border-radius: 4px;
-                  background-color: rgba(#000000, .060);
-                  font-weight: 600;
-                  font-size: var(--preset-font-size-small);
-                  color: var(--color-text);
-                }
-              }
-            }
-
-            .countdown-value-temporal-unit-dots {
-              height: fit-content;
-              position: relative;
-              bottom: 6px;
-              font-weight: 600;
-              font-size: var(--preset-font-size-small);
-              color: var(--color-text);
-            }
           }
         }
       }
@@ -465,6 +408,74 @@
     .challenge-box {
       width: 100%;
       //min-width: 600px;
+    }
+  }
+
+  .challenge-preview-info-countdown {
+    padding: 16px 32px;
+    min-width: 50%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 32px 32px 0 0;
+    background-color: #FFF;
+
+    p {
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: var(--preset-font-size-medium);
+      color: var(--color-tertiary-2);
+    }
+
+    .countdown-value {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+
+      .countdown-value-temporal-unit {
+        min-width: 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          margin-top: 4px;
+          font-weight: 500;
+          font-size: var(--preset-font-size-tiny);
+          color: var(--color-text-alt-2);
+        }
+
+        .countdown-value-temporal-unit-value {
+          margin-top: 8px;
+          display: flex;
+          gap: 4px;
+
+          > div {
+            padding: 10px;
+            border-radius: 4px;
+            background-color: rgba(#000000, .060);
+            font-weight: 600;
+            font-size: var(--preset-font-size-small);
+            color: var(--color-text);
+          }
+        }
+      }
+
+      .countdown-value-temporal-unit-dots {
+        height: fit-content;
+        position: relative;
+        bottom: 6px;
+        font-weight: 600;
+        font-size: var(--preset-font-size-small);
+        color: var(--color-text);
+      }
     }
   }
 }
