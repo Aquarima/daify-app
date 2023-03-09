@@ -33,7 +33,7 @@ export class InboxComponent implements OnInit {
     this.notificationService.getNotificationsByUser(this.authService.user)
       .subscribe({
         next: (notifications: any) => this.notifications = notifications.content,
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
       })
   }
 
@@ -85,7 +85,7 @@ export class InboxComponent implements OnInit {
   onDeleteNotification(notification: Notification) {
     this.notificationService.deleteNotification(notification)
       .subscribe({
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
       })
     this.notifications.splice(this.notifications.indexOf(notification), 1);
     this.onBackToInbox();

@@ -11,6 +11,7 @@ export class CustomSliderComponent implements OnInit, AfterViewInit {
   @Input() min: number = 1;
   @Input() max: number = 1;
   @Input() step: number = 1;
+  @Input() predicate: boolean = true;
   @Input() control!: AbstractControl<number | null>;
 
   @ViewChild('bar') barNode!: ElementRef;

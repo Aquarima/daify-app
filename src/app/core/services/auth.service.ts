@@ -54,7 +54,7 @@ export class AuthService {
                 localStorage.setItem('logged_user_id', res.body.user.id);
             },
             error: (err: any) => {
-                return err.error;
+                return err.error.message;
             }
         });
         return '';
@@ -85,7 +85,7 @@ export class AuthService {
                 this.user.profile = profile;
                 this.user$.next(this.user);
             },
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
         })
     }
 

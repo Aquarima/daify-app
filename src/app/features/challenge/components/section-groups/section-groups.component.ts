@@ -1,7 +1,9 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {
   AlertHandlingService,
-  Challenge, defaultGroup, defaultMember,
+  Challenge,
+  defaultGroup,
+  defaultMember,
   defaultProfile,
   Group,
   GroupService,
@@ -37,17 +39,19 @@ export class SectionGroupsComponent implements OnInit {
   onNewGroup() {
     if (this.isGroupLeader()) return;
     const componentRef = this.viewContainerRef.createComponent(CreateGroupComponent);
-    componentRef.instance.selfMember = this.selfMember;
-    componentRef.instance.groups = this.groups;
-    componentRef.instance.closeEvent.subscribe(() => componentRef.destroy());
-    componentRef.instance.groupCreateEvent.subscribe(group => {
+    const instance = componentRef.instance;
+    instance.selfMember = this.selfMember;
+    instance.groups = this.groups;
+    instance.closeEvent.subscribe(() => componentRef.destroy());
+    instance.groupCreateEvent.subscribe(group => {
       this.groupService.createGroup(this.challenge.id, group)
         .subscribe({
           next: (group: Group) => {
             this.groups.push(group);
             this.selfMember.group = group;
+            componentRef.destroy();
           },
-          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+          error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
         })
     })
   }
@@ -58,7 +62,7 @@ export class SectionGroupsComponent implements OnInit {
         next: () => {
           this.members = this.members.filter(member => member.id === member.id);
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', ``)
+        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
       });
   }
 
@@ -66,7 +70,7 @@ export class SectionGroupsComponent implements OnInit {
     this.groupService.joinGroup(group)
       .subscribe({
         next: () => this.selfMember.group = group,
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+        error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
       });
     if (!this.members.some(member => member.group.id === group.id)) {
       this.groups = this.groups.filter(g => g.id !== group.id);
@@ -75,13 +79,13 @@ export class SectionGroupsComponent implements OnInit {
 
   onLeaveGroup() {
     this.popupService.createConfirmModal(
-      `Leave '${this.selfMember.group.name}'?`,
+      `Leave '${this.selfMember.group.name}' group?`,
       'Are you sure that you want to leave this group?',
       () => {
         this.groupService.leaveGroup(this.selfMember.group)
           .subscribe({
             next: (group: Group) => this.selfMember.group = group,
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+            error: (err: any) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
           });
       }
     )

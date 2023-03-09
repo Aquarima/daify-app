@@ -113,7 +113,7 @@ export class ChallengeComponent implements OnInit {
       this.groupService.getGroupsByChallenge(this.challenge)
         .subscribe({
           next: (groups: any) => this.groups = groups.content,
-          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
         });
     }
     this.router.navigate([`/app/challenge/${this.challenge.id}/${section}`]);
@@ -152,14 +152,16 @@ export class ChallengeComponent implements OnInit {
   }
 
   onLeave() {
+    const isAuthor: boolean = this.isSelfMemberAuthor();
+    const title: string = isAuthor ? `Delete '${this.challenge.title}' challenge?` : `Leave '${this.challenge.title}' challenge?`;
+    const description: string = isAuthor ? `Are you sure that you want to delete this challenge? By leaving it this challenge is going to get deleted.` : 'Are you sure that you want to leave this challenge? This action cannot be undone.';
     this.popupService.createConfirmModal(
-      `Leave '${this.challenge.title}' challenge?`,
-      'Are you sure that you want to leave this challenge? This action cannot be undone.',
+      title, description,
       () => {
         this.challengeService.leaveChallenge(this.challenge)
           .subscribe({
             next: () => this.router.navigate(['/app/explore']),
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
           });
       }
     );
