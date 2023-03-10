@@ -134,31 +134,39 @@
     <p *ngIf="isChallengeEnded()">Ended</p>
     <div class="countdown-value">
       <div class="countdown-value-temporal-unit">
-        <div class="countdown-value-temporal-unit-value">
-          <div *ngFor="let i of extract(countdown.days)">{{i}}</div>
+        <div>
+          <div class="countdown-value-temporal-unit-value">
+            <div *ngFor="let i of extract(countdown.days)">{{i}}</div>
+          </div>
+          <span>Days</span>
         </div>
-        <span>Days</span>
       </div>
-      <span class="countdown-value-temporal-unit-dots">:</span>
       <div class="countdown-value-temporal-unit">
-        <div class="countdown-value-temporal-unit-value">
-          <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
+        <span class="countdown-value-temporal-unit-dots">:</span>
+        <div>
+          <div class="countdown-value-temporal-unit-value">
+            <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
+          </div>
+          <span>Hours</span>
         </div>
-        <span>Hours</span>
       </div>
-      <span class="countdown-value-temporal-unit-dots">:</span>
       <div class="countdown-value-temporal-unit">
-        <div class="countdown-value-temporal-unit-value">
-          <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
+        <span class="countdown-value-temporal-unit-dots">:</span>
+        <div>
+          <div class="countdown-value-temporal-unit-value">
+            <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
+          </div>
+          <span>Minutes</span>
         </div>
-        <span>Minutes</span>
       </div>
-      <span class="countdown-value-temporal-unit-dots">:</span>
       <div class="countdown-value-temporal-unit">
-        <div class="countdown-value-temporal-unit-value">
-          <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
+        <span class="countdown-value-temporal-unit-dots">:</span>
+        <div>
+          <div class="countdown-value-temporal-unit-value">
+            <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
+          </div>
+          <span>Seconds</span>
         </div>
-        <span>Seconds</span>
       </div>
     </div>
   </div>

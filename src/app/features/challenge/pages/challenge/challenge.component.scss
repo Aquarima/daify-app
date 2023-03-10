@@ -420,7 +420,7 @@
     justify-content: center;
     align-items: center;
     gap: 32px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0 1px 1px, rgba(9, 30, 66, 0.13) 0 0 1px 1px;
     border-radius: 32px 32px 0 0;
     background-color: #FFF;
 
@@ -441,15 +441,30 @@
       .countdown-value-temporal-unit {
         min-width: 56px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
 
         span {
           margin-top: 4px;
           font-weight: 500;
           font-size: var(--preset-font-size-tiny);
           color: var(--color-text-alt);
+        }
+
+        .countdown-value-temporal-unit-dots {
+          margin-right: 8px;
+          height: fit-content;
+          position: relative;
+          bottom: 6px;
+          font-weight: 600;
+          font-size: var(--preset-font-size-small);
+          color: var(--color-text);
         }
 
         .countdown-value-temporal-unit-value {
@@ -467,14 +482,24 @@
           }
         }
       }
+    }
+  }
+}
 
-      .countdown-value-temporal-unit-dots {
-        height: fit-content;
-        position: relative;
-        bottom: 6px;
-        font-weight: 600;
-        font-size: var(--preset-font-size-small);
-        color: var(--color-text);
+@media all and (max-width: 480px) {
+
+  :host {
+
+    .challenge-preview-info-countdown {
+
+      .countdown-value {
+
+        .countdown-value-temporal-unit {
+
+          &:last-child {
+            display: none;
+          }
+        }
       }
     }
   }
