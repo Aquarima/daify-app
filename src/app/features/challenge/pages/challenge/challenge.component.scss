@@ -416,6 +416,7 @@
     min-width: 50%;
     position: fixed;
     bottom: 0;
+    z-index: 99;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -489,6 +490,14 @@
 @media all and (max-width: 480px) {
 
   :host {
+
+    .challenge-preview {
+      height: 300px !important;
+
+      .challenge-preview-info {
+        padding-top: 64px !important;
+      }
+    }
 
     .challenge-preview-info-countdown {
 
