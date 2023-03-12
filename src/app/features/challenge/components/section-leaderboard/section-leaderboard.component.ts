@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Challenge} from "../../../../core";
+import {Challenge, Group} from "../../../../core";
 
 @Component({
   selector: 'dfy-challenge-leaderboard',
@@ -9,6 +9,7 @@ import {Challenge} from "../../../../core";
 export class SectionLeaderboardComponent implements OnInit {
 
   @Input() challenge!: Challenge;
+  @Input() groups: Group[] = [];
 
   constructor() { }
 

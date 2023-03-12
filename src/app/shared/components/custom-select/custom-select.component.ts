@@ -27,8 +27,8 @@ export class CustomSelectComponent implements OnInit {
       if (this.data.length === 0) return;
       const dataRef = this.data.find(item => item.value === val);
       this.selection = dataRef ? dataRef.key : this.data[0].key;
-    })
-    this.selection = this.control.value;
+    });
+    this.selection = this.data.find(d => d.value === this.control.value)?.key;
   }
 
   onItemSelected(item: { key: any; value: any }) {

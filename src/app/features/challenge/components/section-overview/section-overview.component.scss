@@ -13,7 +13,6 @@
   }
 
   .description {
-    text-align: center;
     line-height: 24px;
     font-size: var(--preset-font-size-normal);
     color: var(--color-text-alt);
@@ -157,6 +156,10 @@
 @media all and (max-width: 480px) {
 
   :host {
+
+    .description {
+      text-align: center;
+    }
 
     .configuration, .members {
       justify-content: center;
