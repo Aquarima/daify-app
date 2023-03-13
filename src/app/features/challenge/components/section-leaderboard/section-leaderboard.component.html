@@ -68,7 +68,9 @@
       </div>
       <div class="leaderboard-scores-podium-texture">
         <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V242C200 246.418 196.418 250 192 250H8C3.58173 250 0 246.418 0 242V32Z" fill="#EFEFEF"/>
+          <path
+            d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V242C200 246.418 196.418 250 192 250H8C3.58173 250 0 246.418 0 242V32Z"
+            fill="#D7D7D7"/>
         </svg>
         <span class="leaderboard-scores-podium-tag">2nd</span>
         <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
@@ -80,7 +82,9 @@
       </div>
       <div class="leaderboard-scores-podium-texture">
         <svg width="200" height="300" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V292C200 296.418 196.418 300 192 300H8C3.58173 300 0 296.418 0 292V32Z" fill="#FFEBC2"/>
+          <path
+            d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V292C200 296.418 196.418 300 192 300H8C3.58173 300 0 296.418 0 292V32Z"
+            fill="#FFCE68"/>
         </svg>
         <span class="leaderboard-scores-podium-tag">1st</span>
         <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
@@ -92,14 +96,16 @@
       </div>
       <div class="leaderboard-scores-podium-texture">
         <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V172C200 176.418 196.418 180 192 180H8C3.58173 180 0 176.418 0 172V32Z" fill="#DFD0CC"/>
+          <path
+            d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V172C200 176.418 196.418 180 192 180H8C3.58173 180 0 176.418 0 172V32Z"
+            fill="#BEA098"/>
         </svg>
         <span class="leaderboard-scores-podium-tag">3rd</span>
         <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
       </div>
     </div>
   </div>
-  <div class="leaderboard-scores-time-remaining"  *ngIf="!isChallengeEnded()">
+  <div class="leaderboard-scores-time-remaining" *ngIf="!isChallengeEnded()">
     <p>Ratings have not yet started!</p>
     <p>There is some remaining time before the rating period.</p>
     <div class="leaderboard-scores-time-remaining-countdown">
@@ -186,12 +192,53 @@
     </div>
   </div>
   <div class="leaderboard-scores-grid">
-    <!--<div *ngFor="let group in groups">
-      <div class="group">
-        <div class="group-icon">
-          <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
+    <div class="leaderboard-scores-grid-groups">
+      <ul class="leaderboard-scores-grid-groups-header">
+        <li>Group</li>
+        <li>Rank</li>
+      </ul>
+      <div *ngFor="let group of groups">
+         <div>
+           <div class="group-icon">
+             <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
+           </div>
+           <p class="group-name">{{group.name}}</p>
+         </div>
+        <div class="group-rank">
+          <p>#0</p>
         </div>
       </div>
-    </div>-->
+    </div>
+    <div class="leaderboard-scores-grid-groups-criteria">
+      <ul class="leaderboard-scores-grid-groups-criteria-header">
+        <li>Time</li>
+        <li>Originality</li>
+        <li>Aesthetics</li>
+        <li>Innovation</li>
+        <li>Symbolism</li>
+      </ul>
+      <div *ngFor="let group of groups">
+        <div class="group-criteria-note">
+          <span>1</span>
+          <span>/5</span>
+        </div>
+        <div class="group-criteria-note">
+          <span>1</span>
+          <span>/5</span>
+        </div>
+        <div class="group-criteria-note">
+          <span>1</span>
+          <span>/5</span>
+        </div>
+        <div class="group-criteria-note">
+          <span>1</span>
+          <span>/5</span>
+        </div>
+        <div class="group-criteria-note">
+          <span>1</span>
+          <span>/5</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

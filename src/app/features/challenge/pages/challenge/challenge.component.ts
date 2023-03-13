@@ -109,7 +109,7 @@ export class ChallengeComponent implements OnInit {
   }
 
   onGoToSection(section: string) {
-    if (section === this.sections.groups) {
+    if (section === this.sections.groups || section === this.sections.leaderboard) {
       this.groupService.getGroupsByChallenge(this.challenge)
         .subscribe({
           next: (groups: any) => this.groups = groups.content,
