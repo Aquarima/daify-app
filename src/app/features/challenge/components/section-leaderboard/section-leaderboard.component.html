@@ -61,13 +61,137 @@
 </div>
 <div class="leaderboard-scores">
   <h2>Scores</h2>
+  <div class="leaderboard-scores-podium">
+    <div class="leaderboard-scores-podium-top2">
+      <div class="leaderboard-scores-podium-group-icon">
+        <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
+      </div>
+      <div class="leaderboard-scores-podium-texture">
+        <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V242C200 246.418 196.418 250 192 250H8C3.58173 250 0 246.418 0 242V32Z" fill="#EFEFEF"/>
+        </svg>
+        <span class="leaderboard-scores-podium-tag">2nd</span>
+        <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
+      </div>
+    </div>
+    <div class="leaderboard-scores-podium-top1">
+      <div class="leaderboard-scores-podium-group-icon">
+        <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
+      </div>
+      <div class="leaderboard-scores-podium-texture">
+        <svg width="200" height="300" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V292C200 296.418 196.418 300 192 300H8C3.58173 300 0 296.418 0 292V32Z" fill="#FFEBC2"/>
+        </svg>
+        <span class="leaderboard-scores-podium-tag">1st</span>
+        <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
+      </div>
+    </div>
+    <div class="leaderboard-scores-podium-top3">
+      <div class="leaderboard-scores-podium-group-icon">
+        <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
+      </div>
+      <div class="leaderboard-scores-podium-texture">
+        <svg width="200" height="180" viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 32C0 14.3269 14.3269 0 32 0H168C185.673 0 200 14.3269 200 32V172C200 176.418 196.418 180 192 180H8C3.58173 180 0 176.418 0 172V32Z" fill="#DFD0CC"/>
+        </svg>
+        <span class="leaderboard-scores-podium-tag">3rd</span>
+        <div class="leaderboard-scores-podium-group-score">1000 PTS</div>
+      </div>
+    </div>
+  </div>
+  <div class="leaderboard-scores-time-remaining"  *ngIf="!isChallengeEnded()">
+    <p>Ratings have not yet started!</p>
+    <p>There is some remaining time before the rating period.</p>
+    <div class="leaderboard-scores-time-remaining-countdown">
+      <div class="countdown-value">
+        <div class="countdown-value-temporal-unit">
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.days)">{{i}}</div>
+            </div>
+            <span>Days</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
+            </div>
+            <span>Hours</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
+            </div>
+            <span>Minutes</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
+            </div>
+            <span>Seconds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="leaderboard-scores-time-remaining" *ngIf="isChallengeEnded()">
+    <p>Everything is not done yet!</p>
+    <p>There is some remaining time before the challenge completion.</p>
+    <div class="leaderboard-scores-time-remaining-countdown">
+      <div class="countdown-value">
+        <div class="countdown-value-temporal-unit">
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.days)">{{i}}</div>
+            </div>
+            <span>Days</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.hours)">{{i}}</div>
+            </div>
+            <span>Hours</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.minutes)">{{i}}</div>
+            </div>
+            <span>Minutes</span>
+          </div>
+        </div>
+        <div class="countdown-value-temporal-unit">
+          <span class="countdown-value-temporal-unit-dots">:</span>
+          <div>
+            <div class="countdown-value-temporal-unit-value">
+              <div *ngFor="let i of extract(countdown.seconds)">{{i}}</div>
+            </div>
+            <span>Seconds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="leaderboard-scores-grid">
-    <div *ngFor="let group in groups">
+    <!--<div *ngFor="let group in groups">
       <div class="group">
         <div class="group-icon">
           <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
