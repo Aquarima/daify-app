@@ -104,6 +104,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 32px 0 0 32px;
+    background-color: #FFF;
     animation: auth-box-forward 1.5s;
 
     .auth-box-header {

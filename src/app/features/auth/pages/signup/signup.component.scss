@@ -59,6 +59,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 0 32px 32px 0;
+    background-color: #FFF;
     animation: auth-box-forward 1.5s;
 
     .user-input {
