@@ -39,15 +39,19 @@
         box-sizing: border-box;
         border-radius: 16px;
         background-color: rgba(#000000, .03);
-        color: rgba(#000000, .3);
+        color: rgba(#000000, .4);
 
-        svg {
-          width: 24px;
-          height: 24px;
+        .leaderboard-criteria-about {
           position: absolute;
           top: 16px;
           right: 16px;
-          fill: rgba(#000000, .3);
+
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: rgba(#000000, .4);
+            cursor: pointer;
+          }
         }
 
         .leaderboard-criteria-coefficient {
@@ -71,7 +75,6 @@
         > p {
           height: 88px;
           display: flex;
-          justify-content: center;
           align-items: center;
           font-weight: 500;
         }
@@ -122,7 +125,24 @@
       }
 
       .leaderboard-scores-podium-texture {
+        width: 200px;
         position: relative;
+        display: flex;
+        align-items: flex-end;
+
+        svg {
+          width: 0;
+          height: 0;
+        }
+
+        @keyframes podium-child-display-delay {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
 
         .leaderboard-scores-podium-tag {
           max-width: 60%;
@@ -132,21 +152,80 @@
           transform: translateX(-50%) translateY(-50%);
           font-weight: 600;
           font-size: calc(var(--preset-font-size-normal) + .3em);
-          color: rgba(#000000, .20);
+          color: rgba(#000000, .40);
         }
 
         .leaderboard-scores-podium-group-score {
           padding: 4px 8px;
           max-width: 60%;
           position: absolute;
-          top: calc(50% + 32px);
+          top: calc(50% + 24px);
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
           border-radius: 8px;
-          background-color: rgba(#FFFFFF, .5);
+          //background-color: rgba(#FFFFFF, .6);
           font-weight: 500;
           font-size: var(--preset-font-size-small);
-          color: rgba(#000000, .30);
+          color: rgba(#000000, .40);
+        }
+      }
+
+      @keyframes podium-1st-anim {
+        from {
+          width: 200px;
+          height: 1px;
+        }
+        to {
+          width: 200px;
+          height: 300px;
+        }
+      }
+
+      .leaderboard-scores-podium-1st {
+
+        svg {
+          animation: 1s podium-1st-anim;
+          animation-fill-mode: forwards;
+        }
+      }
+
+      @keyframes podium-2nd-anim {
+        from {
+          width: 200px;
+          height: 1px;
+        }
+        to {
+          width: 200px;
+          height: 250px;
+        }
+      }
+
+      .leaderboard-scores-podium-2nd {
+
+        svg {
+          animation: 1s podium-2nd-anim;
+          animation-fill-mode: forwards;
+          animation-delay: 1s;
+        }
+      }
+
+      @keyframes podium-3rd-anim {
+        from {
+          width: 200px;
+          height: 1px;
+        }
+        to {
+          width: 200px;
+          height: 180px;
+        }
+      }
+
+      .leaderboard-scores-podium-3rd {
+
+        svg {
+          animation: 1s podium-3rd-anim;
+          animation-fill-mode: forwards;
+          animation-delay: 2s;
         }
       }
     }
@@ -230,9 +309,21 @@
       margin: 0 5%;
       display: flex;
       overflow-y: auto;
-      border-radius: 16px;
+
+      .self-group {
+        font-weight: 500;
+        color: var(--color-text) !important;
+
+        span {
+          font-weight: 500;
+          color: var(--color-text) !important;
+        }
+      }
 
       .leaderboard-scores-grid-groups {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
 
         .leaderboard-scores-grid-groups-header {
           height: 64px;
@@ -259,14 +350,15 @@
           padding-left: 16px;
           height: 80px;
           display: flex;
+          border-radius: 16px 0 0 16px;
           color: var(--color-text-alt-2);
 
           &:nth-child(odd) {
-            background-color: rgba(#000000, .02);
+            background-color: rgba(#000000, .03);
           }
 
           &:nth-child(even) {
-            background-color: rgba(#000000, .01);
+            background-color: rgba(#000000, .02);
           }
 
           &:nth-child(2) .group-rank p {
@@ -307,7 +399,7 @@
             align-items: center;
             color: var(--color-text-alt);
 
-            p{
+            p {
               padding: 8px;
               border-radius: 8px;
               font-size: var(--preset-font-size-small);
@@ -320,6 +412,9 @@
 
       .leaderboard-scores-grid-groups-criteria {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
         overflow-x: auto;
 
         .leaderboard-scores-grid-groups-criteria-header {
@@ -338,18 +433,19 @@
         }
 
         > div {
-          padding-right: 16px;
+          //padding-right: 16px;
           width: 100%;
           height: 80px;
           display: flex;
           column-gap: 16px;
+          border-radius: 0 16px 16px 0;
 
           &:nth-child(odd) {
-            background-color: rgba(#000000, .02);
+            background-color: rgba(#000000, .03);
           }
 
           &:nth-child(even) {
-            background-color: rgba(#000000, .01);
+            background-color: rgba(#000000, .02);
           }
 
           .group-criteria-note {

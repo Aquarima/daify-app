@@ -11,3 +11,4 @@ export {MemberKickComponent} from './member-kick/member-kick.component';
 export {MemberBanishComponent} from './member-banish/member-banish.component';
 export {ChallengeShareComponent} from './challenge-share/challenge-share.component';
 export {BanishmentViewComponent} from './banishment-view/banishment-view.component';
+export {RatingCriteriaCreateComponent} from './rating-criteria-create/rating-criteria-create.component';

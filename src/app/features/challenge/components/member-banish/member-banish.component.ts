@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Member} from "../../../../core/models/challenge/member.model";
+import {Member} from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -19,7 +19,8 @@ export class MemberBanishComponent implements OnInit {
     blacklist: new FormControl<boolean>(true)
   });
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

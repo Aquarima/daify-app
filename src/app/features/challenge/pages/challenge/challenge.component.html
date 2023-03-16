@@ -121,7 +121,7 @@
                              *ngIf="isOnSection('chats')"></dfy-challenge-chats>
         <dfy-challenge-groups [challenge]="challenge" [selfMember]="selfMember" [members]="members" [groups]="groups"
                               *ngIf="isOnSection('groups')"></dfy-challenge-groups>
-        <dfy-challenge-leaderboard [challenge]="challenge" [groups]="groups"
+        <dfy-challenge-leaderboard [challenge]="challenge" [selfMember]="selfMember" [groups]="groups"
                                    *ngIf="(isSelfMemberAuthor() || challenge.config?.leaderboardBeforeStart) && isOnSection('leaderboard')"></dfy-challenge-leaderboard>
         <dfy-challenge-settings [challenge]="challenge" [members]="members" [selfMember]="selfMember"
                                 *ngIf="!isChallengeStarted() && isSelfMemberAuthor() && isOnSection('settings')"></dfy-challenge-settings>

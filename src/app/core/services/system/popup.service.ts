@@ -1,10 +1,10 @@
 import {ComponentRef, Injectable, ViewContainerRef} from '@angular/core';
 import {ConfirmBoxComponent} from "../../../shared";
-import {Banishment, Challenge, Member,} from "../../models";
+import {Banishment, Challenge, Member, RatingCriteria,} from "../../models";
 import {
   BanishmentViewComponent,
   MemberBanishComponent,
-  MemberKickComponent
+  MemberKickComponent, RatingCriteriaCreateComponent
 } from "../../../features/challenge/components";
 
 @Injectable({
@@ -78,6 +78,21 @@ export class PopupService {
     instance.challenge = challenge;
     instance.cancelEvent.subscribe(() => {
       cancelCallback();
+      componentRef.destroy();
+    });
+    return;
+  }
+
+  createRatingCriteriaCreateModal(confirmCallBack: Function = (ratingCriteria: RatingCriteria) => {}, cancelCallback: Function = () => {}) {
+    if (!this.viewContainerRef) return;
+    const componentRef: ComponentRef<RatingCriteriaCreateComponent> = this.viewContainerRef.createComponent(RatingCriteriaCreateComponent);
+    const instance = componentRef.instance;
+    instance.closeEvent.subscribe(() => {
+      cancelCallback();
+      componentRef.destroy();
+    });
+    instance.confirmEvent.subscribe(({ratingCriteria}) => {
+      confirmCallBack(ratingCriteria);
       componentRef.destroy();
     });
     return;

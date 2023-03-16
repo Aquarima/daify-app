@@ -10,12 +10,13 @@ import {
   ChallengeService,
   Member,
   MemberService,
-  PopupService
+  PopupService, RatingCriteria
 } from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BlacklistService} from "../../../../core/services/challenge/blacklist.service";
+import {RatingCriteriaService} from "../../../../core/services/challenge/rating-criteria.service";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -65,6 +66,7 @@ export class SectionSettingsComponent implements OnInit {
     private authService: AuthService,
     private challengeService: ChallengeService,
     private memberService: MemberService,
+    private ratingCriteriaService: RatingCriteriaService,
     private banishmentService: BanishmentService,
     private blacklistService: BlacklistService) {
     this.popupService.setViewContainerRef(viewContainerRef);
@@ -113,6 +115,12 @@ export class SectionSettingsComponent implements OnInit {
 
   onGoToDeposits() {
     this.onSection('deposits');
+  }
+
+  onNewRatingCriteria() {
+    this.popupService.createRatingCriteriaCreateModal((ratingCriteria: RatingCriteria) => {
+
+    });
   }
 
   onTransferOwnership(to: Member) {
