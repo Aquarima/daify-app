@@ -433,10 +433,10 @@
         .leaderboard-scores-grid-groups-criteria-header {
           height: 64px;
           display: flex;
-          column-gap: 16px;
+          column-gap: 32px;
 
           li {
-            width: calc(100% / 5);
+            width: calc(100% / 4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -450,7 +450,7 @@
           width: 100%;
           height: 80px;
           display: flex;
-          column-gap: 16px;
+          column-gap: 32px;
           border-radius: 0 16px 16px 0;
 
           &:nth-child(odd) {
@@ -462,7 +462,7 @@
           }
 
           .group-criteria-note {
-            width: calc(100% / 5);
+            width: calc(100% / 4);
             display: flex;
             justify-content: center;
             align-items: center;
