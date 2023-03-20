@@ -18,6 +18,7 @@ $font-family: 'Sora';
   --color-secondary: #50D8D7;
   --color-secondary-hover: #43D5D4;
   --color-tertiary: #F46197;
+  --color-tertiary-rgb: 244, 97, 141;
   --color-tertiary-hover: #F35790;
   --color-tertiary-2: #F6AE2D;
   --color-tertiary-2-hover: #F5A81F;
@@ -67,7 +68,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
 }
 

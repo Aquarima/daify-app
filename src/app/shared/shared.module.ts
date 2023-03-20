@@ -1,32 +1,39 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ChallengeFilterPipe, ChallengeThemesCollectorPipe, MembersFilterPipe, OrderByChallengePipe} from './pipes';
-import {AlertBoxComponent, CustomSelectComponent, InboxComponent} from "./components";
+import {
+  AlertBoxComponent,
+  ConfirmBoxComponent,
+  CustomCheckboxComponent,
+  CustomSelectComponent,
+  CustomSliderComponent,
+  InboxComponent,
+  ValidationMessageComponent
+} from "./components";
 import {ReactiveFormsModule} from "@angular/forms";
-import {CustomCheckboxComponent, CustomSliderComponent} from './components';
-import { NotificationPipe } from './pipes/notification.pipe';
-import { ValidationMessageComponent } from './components';
-import { ConfirmBoxComponent } from './components/confirm-box/confirm-box.component';
+import {NotificationPipe} from './pipes/notification.pipe';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
-    declarations: [
-        OrderByChallengePipe,
-        ChallengeThemesCollectorPipe,
-        ChallengeFilterPipe,
-        InboxComponent,
-        AlertBoxComponent,
-        CustomSelectComponent,
-        CustomCheckboxComponent,
-        CustomSliderComponent,
-        NotificationPipe,
-        ValidationMessageComponent,
-        ConfirmBoxComponent,
-        MembersFilterPipe
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule
-    ], exports: [
+  declarations: [
+    OrderByChallengePipe,
+    ChallengeThemesCollectorPipe,
+    ChallengeFilterPipe,
+    InboxComponent,
+    AlertBoxComponent,
+    CustomSelectComponent,
+    CustomCheckboxComponent,
+    CustomSliderComponent,
+    NotificationPipe,
+    ValidationMessageComponent,
+    ConfirmBoxComponent,
+    MembersFilterPipe,
+    PaginationComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ], exports: [
     ChallengeThemesCollectorPipe,
     ChallengeFilterPipe,
     OrderByChallengePipe,
@@ -36,7 +43,8 @@ import { ConfirmBoxComponent } from './components/confirm-box/confirm-box.compon
     CustomCheckboxComponent,
     CustomSliderComponent,
     ValidationMessageComponent,
-    MembersFilterPipe
+    MembersFilterPipe,
+    PaginationComponent
   ]
 })
 export class SharedModule {

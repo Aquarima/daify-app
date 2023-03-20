@@ -216,7 +216,7 @@
         <li>Group</li>
         <li>Rank</li>
       </ul>
-      <div [class.self-group]="isSelfMemberGroup(group)" *ngFor="let group of groups">
+      <div [class.self-group]="isSelfMemberGroup(group)" *ngFor="let group of displayedGroups">
         <div>
           <div class="group-icon">
             <img [src]="'assets/challenge_group_placeholder.svg'" alt="">
@@ -236,7 +236,7 @@
         <li>Innovation</li>
         <li>Symbolism</li>
       </ul>
-      <div [class.self-group]="isSelfMemberGroup(group)" *ngFor="let group of groups">
+      <div [class.self-group]="isSelfMemberGroup(group)" *ngFor="let group of displayedGroups">
         <div class="group-criteria-note">
           <span>1</span>
           <span>/5</span>
@@ -260,4 +260,5 @@
       </div>
     </div>
   </div>
+  <dfy-pagination [pageSize]="10" [pageCount]="getLeaderboardPageCount()" (page)="onPageChanged($event)"></dfy-pagination>
 </div>

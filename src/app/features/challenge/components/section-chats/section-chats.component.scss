@@ -158,7 +158,6 @@
 
           .sender-username {
             font-weight: 500;
-            font-size: var(--preset-font-size-normal);
             color: var(--color-text);
             text-decoration: none;
             cursor: pointer;
@@ -206,7 +205,7 @@
         }
 
         .message-content {
-          padding: 8px 16px;
+          padding: 12px 16px;
           margin-right: auto;
           width: fit-content;
           min-width: 24px;
@@ -214,7 +213,7 @@
           position: relative;
           border-radius: 16px;
           background-color: var(--color-secondary);
-          line-height: 28px;
+          line-height: 30px;
           color: #FFF;
         }
 

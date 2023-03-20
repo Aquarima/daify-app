@@ -323,16 +323,6 @@
       display: flex;
       overflow-y: auto;
 
-      .self-group {
-        font-weight: 500;
-        color: var(--color-text) !important;
-
-        span {
-          font-weight: 500;
-          color: var(--color-text) !important;
-        }
-      }
-
       .leaderboard-scores-grid-groups {
         display: flex;
         flex-direction: column;

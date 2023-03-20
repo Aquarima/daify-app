@@ -19,6 +19,8 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
   countdownSubscription: Subscription = EMPTY_SUBSCRIPTION;
   countdown: TimeLeft = {days: 7, hours: 0, minutes: 0, seconds: 0} as TimeLeft;
 
+  displayedGroups: Group[] = [];
+
   constructor(
     private timeHelper: TimeHelper,
     private ratingCriteriaService: RatingCriteriaService) {
@@ -34,6 +36,12 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
     this.countdownSubscription.unsubscribe();
   }
 
+  onPageChanged(index: number) {
+    const startIndex = (index - 1) * 10;
+    const endIndex = startIndex + 10;
+    this.displayedGroups = this.groups.slice(startIndex, endIndex);
+  }
+
   extract(number: number): string[] {
     if (!number) return ['0', '0'];
     const res: string[] = number < 10 ? ['0'] : [];
@@ -47,5 +55,9 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
 
   isSelfMemberGroup(group: Group): boolean {
     return this.selfMember.group?.id === group.id;
+  }
+
+  getLeaderboardPageCount(): number {
+    return Math.ceil(this.groups.length / 10);
   }
 }
