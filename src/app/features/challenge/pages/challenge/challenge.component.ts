@@ -48,6 +48,7 @@ export class ChallengeComponent implements OnInit {
   groups: Group[] = [];
   isDataLoaded: boolean = false;
   countdown: TimeLeft = {} as TimeLeft;
+  showCountdown = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,11 +77,11 @@ export class ChallengeComponent implements OnInit {
     });
     const sub: Subscription = interval(1000).subscribe(() => {
       if (!this.isChallengeStarted()) {
-        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startAt);
+        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.startsAt);
         return;
       }
       if (this.isChallengeStarted() && !this.isChallengeEnded()) {
-        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.endAt);
+        this.countdown = this.timeHelper.calculateTimeRemaining(this.challenge.config.endsAt);
         return;
       }
       sub.unsubscribe();
@@ -175,6 +176,10 @@ export class ChallengeComponent implements OnInit {
     this.sectionsNode.nativeElement.scrollLeft += 100;
   }
 
+  onToggleCountdown() {
+    this.showCountdown = !this.showCountdown;
+  }
+
   isOnSection(section: string) {
     return this.currentSection === section;
   }
@@ -189,11 +194,11 @@ export class ChallengeComponent implements OnInit {
   }
 
   isChallengeStarted(): boolean {
-    return new Date(this.challenge.config.startAt).getTime() < Date.now();
+    return new Date(this.challenge.config.startsAt).getTime() < Date.now();
   }
 
   isChallengeEnded(): boolean {
-    return new Date(this.challenge.config.endAt).getTime() < Date.now();
+    return new Date(this.challenge.config.endsAt).getTime() < Date.now();
   }
 
   extract(number: number): string[] {
