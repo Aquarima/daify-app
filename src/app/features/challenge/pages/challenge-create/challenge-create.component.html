@@ -94,8 +94,8 @@
               <p class="attr-description">The challenge's start date</p>
               <div class="user-input user-input-active">
                 <div class="user-input-box">
-                  <label for="startAt">Start date</label>
-                  <input id="startAt" class="form-control" name="startAt" type="datetime-local" formControlName="startAt" [customFocus]="'user-input-active'">
+                  <label for="startsAt">Start date</label>
+                  <input id="startsAt" class="form-control" name="startsAt" type="datetime-local" formControlName="startsAt" [customFocus]="'user-input-active'">
                 </div>
                 <p class="user-input-error" *ngIf="challengeConfigForm.get('start')?.hasError('required')">
                   Start date is required</p>
@@ -106,11 +106,27 @@
               <p class="attr-description">The challenge's end date</p>
               <div class="user-input user-input-active">
                 <div class="user-input-box">
-                  <label for="endAt">End date</label>
-                  <input id="endAt" class="form-control" name="endAt" type="datetime-local" formControlName="endAt" [customFocus]="'user-input-active'">
+                  <label for="endsAt">End date</label>
+                  <input id="endsAt" class="form-control" name="endsAt" type="datetime-local" formControlName="endsAt" [customFocus]="'user-input-active'">
                 </div>
                 <p class="user-input-error" *ngIf="challengeConfigForm.get('endAt')?.hasError('required')">End
                   date is required</p>
+              </div>
+            </div>
+            <div class="attr">
+              <p class="attr-key">Voting period</p>
+              <p class="attr-description">Voting time period, by default start date is equals to the challenge's end date and end date 24 hours after.</p>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="votes-starts-at">Start date</label>
+                  <input id="votes-starts-at" class="form-control" name="votesStartsAt" type="datetime-local" formControlName="votesStartsTime" [customFocus]="'user-input-active'">
+                </div>
+              </div>
+              <div class="user-input user-input-active">
+                <div class="user-input-box">
+                  <label for="votes-ends-at">End date</label>
+                  <input id="votes-ends-at" class="form-control" name="votesEndsAt" type="datetime-local" formControlName="votesEndsTime" [customFocus]="'user-input-active'">
+                </div>
               </div>
             </div>
             <div class="attr">

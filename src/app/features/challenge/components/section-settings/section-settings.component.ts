@@ -47,12 +47,14 @@ export class SectionSettingsComponent implements OnInit {
     description: new FormControl<string>(''),
     theme: new FormControl<string>(''),
     accessType: new FormControl<AccessType>(AccessType.FREE),
-    startAt: new FormControl<Date>(new Date()),
-    endAt: new FormControl<Date>(new Date()),
+    startsAt: new FormControl<Date>(new Date()),
+    endsAt: new FormControl<Date>(new Date()),
     capacity: new FormControl<number>(2),
     groupSize: new FormControl<number>(2),
     leaderboardBeforeStart: new FormControl<boolean>(true),
     spectatorsAllowed: new FormControl<boolean>(false),
+    votesStartsTime: new FormControl<Date>(new Date()),
+    votesEndsTime: new FormControl<Date>(new Date()),
     depositsMin: new FormControl<number>(1),
     depositsMax: new FormControl<number>(1)
   });

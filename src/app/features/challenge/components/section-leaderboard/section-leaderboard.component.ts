@@ -28,7 +28,12 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.countdownSubscription = interval(1000).subscribe(() => {
-      this.countdown = this.timeHelper.calculateTimeRemaining(new Date(Date.now() + 3600000));
+      if (!this.isVotingTimeStarted()) {
+        this.countdown = this.timeHelper.calculateTimeRemaining(new Date(this.challenge.config.votesStartsTime));
+      }
+      if (this.isVotingTimeStarted()) {
+        this.countdown = this.timeHelper.calculateTimeRemaining(new Date(this.challenge.config.votesEndsTime));
+      }
     });
   }
 
@@ -50,7 +55,15 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
   }
 
   isChallengeEnded(): boolean {
-    return new Date(this.challenge.config.endAt).getTime() < Date.now();
+    return new Date(this.challenge.config.endsAt).getTime() <= Date.now();
+  }
+
+  isVotingTimeStarted(): boolean {
+    return new Date(this.challenge.config.votesStartsTime).getTime() <= Date.now();
+  }
+
+  isVotingTimeEnded(): boolean {
+    return new Date(this.challenge.config.votesEndsTime).getTime() >= Date.now();
   }
 
   isSelfMemberGroup(group: Group): boolean {

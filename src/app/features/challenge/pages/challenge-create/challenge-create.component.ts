@@ -8,7 +8,6 @@ import {
 } from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormControl, FormGroup} from "@angular/forms";
-import {InviteFriendsComponent} from "../../components";
 import {Router} from "@angular/router";
 
 @Component({
@@ -26,13 +25,15 @@ export class ChallengeCreateComponent implements OnInit {
 
   challengeConfigForm = new FormGroup({
     accessType: new FormControl<AccessType>(AccessType.FREE),
-    startAt: new FormControl<Date>(new Date(new Date().toISOString().substring(0, new Date().toISOString().length - 1))),
-    endAt: new FormControl<Date>(new Date()),
+    startsAt: new FormControl<Date>(new Date(new Date().toISOString().substring(0, new Date().toISOString().length - 1))),
+    endsAt: new FormControl<Date>(new Date()),
     capacity: new FormControl<number>(2),
     groupSize: new FormControl<number>(1),
     minDeposits: new FormControl<number>(0),
     maxDeposits: new FormControl<number>(0),
-    spectatorsAllowed: new FormControl<boolean>(true)
+    spectatorsAllowed: new FormControl<boolean>(true),
+    votesStartsTime: new FormControl<Date>(new Date()),
+    votesEndsTime: new FormControl<Date>(new Date()),
   })
 
   selectedCoverFile: File | undefined;

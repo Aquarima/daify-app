@@ -71,7 +71,7 @@
 </div>
 <div class="leaderboard-scores">
   <h2>Scores</h2>
-  <div class="leaderboard-scores-podium">
+  <div class="leaderboard-scores-podium" *ngIf="isVotingTimeStarted()">
     <div class="leaderboard-scores-podium-2nd">
       <div class="leaderboard-scores-podium-group">
         <div class="leaderboard-scores-podium-group-icon">
@@ -124,8 +124,8 @@
       </div>
     </div>
   </div>
-  <div class="leaderboard-scores-time-remaining" *ngIf="!isChallengeEnded()">
-    <p>Ratings have not yet started!</p>
+  <div class="leaderboard-scores-time-remaining" *ngIf="!isVotingTimeStarted()">
+    <p>Ratings have not started yet!</p>
     <p>There is some remaining time before the rating period.</p>
     <div class="leaderboard-scores-time-remaining-countdown">
       <div class="countdown-value">
@@ -167,9 +167,9 @@
       </div>
     </div>
   </div>
-  <div class="leaderboard-scores-time-remaining" *ngIf="isChallengeEnded()">
+  <div class="leaderboard-scores-time-remaining" *ngIf="!isVotingTimeEnded()">
     <p>Everything is not done yet!</p>
-    <p>There is some remaining time before the challenge completion.</p>
+    <p>There is some remaining time before the end of rating period.</p>
     <div class="leaderboard-scores-time-remaining-countdown">
       <div class="countdown-value">
         <div class="countdown-value-temporal-unit">
@@ -210,7 +210,7 @@
       </div>
     </div>
   </div>
-  <div class="leaderboard-scores-grid">
+  <div class="leaderboard-scores-grid" *ngIf="isVotingTimeStarted()">
     <div class="leaderboard-scores-grid-groups">
       <ul class="leaderboard-scores-grid-groups-header">
         <li>Group</li>

@@ -17,7 +17,7 @@
           <path
             d="M28 6a2 2 0 0 0-2-2h-4V2h-2v2h-8V2h-2v2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h4v-2H6V6h4v2h2V6h8v2h2V6h4v6h2Z"/>
         </svg>
-        Schedule
+        Scheduling
       </li>
       <li [class.challenge-settings-sections-active]="isOnSection('banishment')" (click)="onGoToBanishment()">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -196,7 +196,7 @@
             <div class="user-input">
               <div class="user-input-box user-input-active">
                 <label for="start-date">Start Date</label>
-                <input id="start-date" class="form-control" name="startAt" type="datetime-local"
+                <input id="start-date" class="form-control" name="startsAt" type="datetime-local"
                        formControlName="startAt"
                        [customFocus]="'user-input-active'">
               </div>
@@ -210,7 +210,27 @@
             <div class="user-input">
               <div class="user-input-box user-input-active">
                 <label for="end-date">End Date</label>
-                <input id="end-date" class="form-control" name="endAt" type="datetime-local"
+                <input id="end-date" class="form-control" name="endsAt" type="datetime-local" formControlName="endsAt"
+                       [customFocus]="'user-input-active'">
+              </div>
+            </div>
+          </div>
+          <div class="form-parameter">
+            <p class="form-parameter-name">Voting period</p>
+            <p class="form-parameter-description">Set the voting time date.</p>
+            <div class="user-input">
+              <div class="user-input-box user-input-active">
+                <label for="votes-starts-time">Start date</label>
+                <input id="votes-starts-time" class="form-control" name="voteStartsTime" type="datetime-local"
+                       formControlName="votesStartsTime"
+                       [customFocus]="'user-input-active'">
+              </div>
+            </div>
+            <div class="user-input">
+              <div class="user-input-box user-input-active">
+                <label for="votes-ends-time">End date</label>
+                <input id="votes-ends-time" class="form-control" name="voteEndsTime" type="datetime-local"
+                       formControlName="votesEndsTime"
                        [customFocus]="'user-input-active'">
               </div>
             </div>

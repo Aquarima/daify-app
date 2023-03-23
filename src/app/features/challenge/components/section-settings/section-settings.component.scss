@@ -199,16 +199,16 @@
       .form-parameter {
         display: flex;
         flex-direction: column;
+        row-gap: 16px;
 
         .form-parameter-name {
-          margin-bottom: 8px;
+          margin-bottom: -8px;
           font-weight: 500;
           color: var(--color-text);
         }
 
         .form-parameter-description {
-          margin-bottom: 16px;
-          line-height: 20px;
+          line-height: 24px;
           color: var(--color-text-alt-2);
         }
 

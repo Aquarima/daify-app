@@ -1,9 +1,6 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {Challenge, defaultProfile, Member} from "../../../../core";
-import {MemberService} from "../../../../core/services/challenge/member.service";
-import {AlertHandlingService} from "../../../../core/services/system/alert-handling.service";
+import {AlertHandlingService, Challenge, defaultProfile, Member, MemberService, PopupService} from "../../../../core";
 import {AlertType} from "../../../../core/models/system-alert";
-import {PopupService} from "../../../../core/services/system/popup.service";
 import {TimeHelper} from "../../../../core/helpers";
 
 @Component({
@@ -69,8 +66,8 @@ export class SectionOverviewComponent implements OnInit {
   }
 
   get duration() {
-    let start: Date = new Date(this.challenge.config.startAt);
-    let end: Date = new Date(this.challenge.config.endAt);
+    let start: Date = new Date(this.challenge.config.startsAt);
+    let end: Date = new Date(this.challenge.config.endsAt);
     return this.timeHelper.getTimeSince(end, start, {full: true, last: false});
   }
 }

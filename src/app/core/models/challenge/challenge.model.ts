@@ -1,7 +1,5 @@
 import {defaultProfile, Profile} from "../user";
 import {ChallengeConfig, defaultChallengeConfig} from "./challenge-config.model";
-import {Member} from "./member.model";
-import {Group} from "./group.model";
 
 export interface Challenge {
   id: number;
@@ -34,7 +32,7 @@ export function defaultChallenge(): Challenge {
 }
 
 export function getDuration(challenge: Challenge) {
-  let start: Date = new Date(challenge.config.startAt);
-  let end: Date = new Date(challenge.config.endAt);
+  let start: Date = new Date(challenge.config.startsAt);
+  let end: Date = new Date(challenge.config.endsAt);
   return end.getTime() - start.getTime();
 }
