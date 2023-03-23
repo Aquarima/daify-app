@@ -30,7 +30,8 @@
 
 :host {
   padding: 16px;
-  width: 300px;
+  min-width: 300px;
+  max-width: 500px;
   min-height: 40px;
   position: fixed;
   left: 32px;

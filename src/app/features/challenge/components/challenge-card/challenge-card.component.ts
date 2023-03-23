@@ -32,8 +32,8 @@ export class ChallengeCardComponent implements OnInit {
   }
 
   get duration() {
-    let d1: Date = new Date(this.challenge.config.startAt);
-    let d2: Date = new Date(this.challenge.config.endAt);
+    let d1: Date = new Date(this.challenge.config.startsAt);
+    let d2: Date = new Date(this.challenge.config.endsAt);
     const time = d2.getTime() - d1.getTime();
     const days = time / (24 * 60 * 60 * 1000);
     const hours = time / (1000 * 60 * 60);

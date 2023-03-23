@@ -76,7 +76,7 @@ export class SectionChatsComponent implements OnInit {
   onDeleteMessage(message: Message) {
     this.popupService.createConfirmModal(
       'Delete this message?',
-      'Are you sure that you want to delete this action cannot be undone.',
+      'Are you sure that you want to delete this message this action cannot be undone.',
       () => {
         this.messageService.deleteMessage(message)
           .subscribe(() => this.messages = this.messages.filter((m) => m.id !== message.id));

@@ -31,14 +31,14 @@ export class OrderByChallengePipe implements PipeTransform {
     }
 
     private compareByStart(a: Challenge, b: Challenge) {
-        let d1: Date = new Date(a.config.startAt);
-        let d2: Date = new Date(b.config.startAt);
+        let d1: Date = new Date(a.config.startsAt);
+        let d2: Date = new Date(b.config.startsAt);
         return d1.getTime() < d2.getTime() ? 1 : 0;
     }
 
     private compareByEnd(a: Challenge, b: Challenge) {
-        let d1: Date = new Date(a.config.endAt);
-        let d2: Date = new Date(b.config.endAt);
+        let d1: Date = new Date(a.config.endsAt);
+        let d2: Date = new Date(b.config.endsAt);
         return d1.getTime() < d2.getTime() ? 1 : 0;
     }
 }
