@@ -30,7 +30,7 @@ export class MemberBanishComponent implements OnInit {
   }
 
   onBanish() {
-    this.confirmEvent.next(this.banishForm.value);
+    this.confirmEvent.emit(this.banishForm.value);
   }
 
   get nickname(): string {

@@ -28,6 +28,7 @@ export class SectionSettingsComponent implements OnInit {
   @Input() challenge!: Challenge;
   @Input() members!: Member[];
   @Input() selfMember: Member | undefined;
+  @Input() ratingCriteria: RatingCriteria[] = [];
 
   sections = {
     'overview': () => this.onGoToOverview(),
@@ -121,7 +122,11 @@ export class SectionSettingsComponent implements OnInit {
 
   onNewRatingCriteria() {
     this.popupService.createRatingCriteriaCreateModal((ratingCriteria: RatingCriteria) => {
-
+      this.ratingCriteriaService.createRatingCriteria(ratingCriteria, this.challenge)
+        .subscribe({
+          next: (ratingCriteria: RatingCriteria) => console.log(ratingCriteria),
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.error)
+        })
     });
   }
 

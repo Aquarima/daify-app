@@ -44,7 +44,7 @@ export class SectionGroupsComponent implements OnInit {
     instance.groups = this.groups;
     instance.closeEvent.subscribe(() => componentRef.destroy());
     instance.groupCreateEvent.subscribe(group => {
-      this.groupService.createGroup(this.challenge.id, group)
+      this.groupService.createGroup(group, this.challenge)
         .subscribe({
           next: (group: Group) => {
             this.groups.push(group);

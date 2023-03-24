@@ -11,8 +11,8 @@ export class GroupService {
   constructor(private http: HttpClient) {
   }
 
-  createGroup(challengeId: number, group: Group) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/${challengeId}/group/create`, group);
+  createGroup(group: Group, challenge: Challenge) {
+    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/group/create`, group);
   }
 
   joinGroup(group: Group) {

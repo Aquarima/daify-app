@@ -25,11 +25,11 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
 
   @Input() challenge!: Challenge;
   @Input() selfMember!: Member;
+  @Input() ratingCriteria: RatingCriteria[] = [];
   @Input() groups: Group[] = [];
 
   countdownSubscription: Subscription = EMPTY_SUBSCRIPTION;
   countdown: TimeLeft = {days: 7, hours: 0, minutes: 0, seconds: 0} as TimeLeft;
-  ratingCriteria: RatingCriteria[] = [];
   groupRatings: GroupRating[] = [];
   rankings: GroupRanking[] = [];
   displayedGroups: Group[] = [];
@@ -43,11 +43,6 @@ export class SectionLeaderboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ratingCriteriaService.getRatingCriteriaByChallenge(this.challenge)
-      .subscribe({
-        next: (ratingCriteria: any) => this.ratingCriteria = ratingCriteria.content,
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
-      });
     this.groupRatingService.getGroupRatingsByChallenge(this.challenge)
       .subscribe({
         next: (groupRatings: any) => this.groupRatings = groupRatings.content,

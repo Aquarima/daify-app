@@ -10,7 +10,7 @@
     </h1>
     <p class="popup-head-description">Add a new criteria for the group rating.</p>
   </div>
-  <form class="popup-body">
+  <form class="popup-body" [formGroup]="ratingCriteriaForm">
     <div class="parameter">
       <p class="parameter-name">Name</p>
       <p class="parameter-description">Name that could match the most for the criteria.</p>

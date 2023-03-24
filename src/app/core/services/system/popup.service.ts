@@ -91,7 +91,7 @@ export class PopupService {
       cancelCallback();
       componentRef.destroy();
     });
-    instance.confirmEvent.subscribe(({ratingCriteria}) => {
+    instance.confirmEvent.subscribe((ratingCriteria) => {
       confirmCallBack(ratingCriteria);
       componentRef.destroy();
     });

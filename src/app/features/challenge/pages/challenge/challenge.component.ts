@@ -13,7 +13,7 @@ import {
   GroupService,
   Member,
   MemberService,
-  PopupService
+  PopupService, RatingCriteria
 } from "../../../../core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AlertType} from "../../../../core/models/system-alert";
@@ -21,6 +21,7 @@ import {forkJoin, interval, Subscription} from "rxjs";
 import {ChallengeShareComponent} from "../../components";
 import {HttpStatusCode} from "@angular/common/http";
 import {TimeHelper, TimeLeft} from "../../../../core/helpers";
+import {RatingCriteriaService} from "../../../../core/services/challenge/rating-criteria.service";
 
 @Component({
   selector: 'app-challenge',
@@ -46,6 +47,7 @@ export class ChallengeComponent implements OnInit {
   selfMember: Member = defaultMember();
   members: Member[] = [];
   groups: Group[] = [];
+  ratingCriteria: RatingCriteria[] = [];
   isDataLoaded: boolean = false;
   countdown: TimeLeft = {} as TimeLeft;
   showCountdown = true;
@@ -61,6 +63,7 @@ export class ChallengeComponent implements OnInit {
     private memberService: MemberService,
     private groupService: GroupService,
     private banishmentService: BanishmentService,
+    private ratingCriteriaService: RatingCriteriaService,
     private timeHelper: TimeHelper) {
   }
 
@@ -92,12 +95,14 @@ export class ChallengeComponent implements OnInit {
     if (this.challenge.id === challengeId) return;
     forkJoin([
       this.challengeService.getChallengesById(challengeId),
-      this.memberService.getMembersByChallenge(challengeId)
+      this.memberService.getMembersByChallenge(challengeId),
+      this.ratingCriteriaService.getRatingCriteriaByChallenge({id: challengeId} as Challenge),
     ]).subscribe({
-      next: ([challenge, members]) => {
+      next: ([challenge, members, ratingCriteria]) => {
         this.challenge = challenge;
         this.members = members.content;
         this.selfMember = this.members.filter((m) => m.profile.id === this.authService.user.profile.id)[0];
+        this.ratingCriteria = ratingCriteria.content;
         this.isDataLoaded = true;
         this.onGoToSection(redirectTo);
       },

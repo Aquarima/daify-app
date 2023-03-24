@@ -86,7 +86,7 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
       leader: this.selfMember,
       name: this.groupForm.value.name,
       createdAt: new Date()
-    })
+    });
   }
 
   get groupIcon() {
