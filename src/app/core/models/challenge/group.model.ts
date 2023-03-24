@@ -13,7 +13,7 @@ export function defaultGroup(): Group {
     leader: {} as Member,
     name: 'Unknown',
     createdAt: new Date()
-  } as Group;
+  };
 }
 
 export enum GroupJoinType {

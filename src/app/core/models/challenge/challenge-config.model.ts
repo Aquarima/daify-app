@@ -27,5 +27,5 @@ export function defaultChallengeConfig(): ChallengeConfig {
     spectatorsAllowed: false,
     votesStartsTime: new Date(),
     votesEndsTime: new Date()
-  } as ChallengeConfig;
+  };
 }

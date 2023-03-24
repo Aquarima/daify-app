@@ -20,5 +20,5 @@ export function defaultMember(): Member {
     role: '',
     spectator: false,
     joinedAt: new Date()
-  } as Member;
+  };
 }

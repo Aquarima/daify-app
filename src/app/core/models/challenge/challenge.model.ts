@@ -28,7 +28,7 @@ export function defaultChallenge(): Challenge {
     config: defaultChallengeConfig(),
     createdAt: new Date(),
     updatedAt: new Date()
-  } as Challenge;
+  };
 }
 
 export function getDuration(challenge: Challenge) {

@@ -10,3 +10,5 @@ export {BlacklistedMember} from './blacklisted-member.model';
 export {AccessType} from './access-type';
 export {ChallengeGroupBy} from './challenge-order-by';
 export {RatingCriteria} from './rating-criteria.model';
+export {GroupRating} from './group-rating.model';
+export {GroupRanking, defaultGroupRanking} from './group-ranking.model';
