@@ -28,7 +28,6 @@
     .leaderboard-criteria-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, 160px);
-      justify-content: center;
       align-items: center;
       gap: 32px;
 
@@ -176,7 +175,6 @@
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
           border-radius: 8px;
-          //background-color: rgba(#FFFFFF, .6);
           font-weight: 500;
           font-size: var(--preset-font-size-small);
           color: rgba(#000000, .40);
@@ -197,7 +195,7 @@
       .leaderboard-scores-podium-1st {
 
         svg {
-          animation: 1s podium-1st-anim;
+          animation: 800ms podium-1st-anim;
           animation-fill-mode: forwards;
         }
       }
@@ -216,9 +214,9 @@
       .leaderboard-scores-podium-2nd {
 
         svg {
-          animation: 1s podium-2nd-anim;
+          animation: 800ms podium-2nd-anim;
           animation-fill-mode: forwards;
-          animation-delay: 1s;
+          animation-delay: 800ms;
         }
       }
 
@@ -236,9 +234,9 @@
       .leaderboard-scores-podium-3rd {
 
         svg {
-          animation: 1s podium-3rd-anim;
+          animation: 800ms podium-3rd-anim;
           animation-fill-mode: forwards;
-          animation-delay: 2s;
+          animation-delay: 1.6s;
         }
       }
     }
@@ -321,7 +319,7 @@
     .leaderboard-scores-grid {
       margin: 0 5%;
       display: flex;
-      overflow-y: auto;
+      //overflow-y: auto;
 
       .leaderboard-scores-grid-groups {
         display: flex;
@@ -418,7 +416,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 8px;
-        overflow-x: auto;
+        //overflow-x: auto;
 
         .leaderboard-scores-grid-groups-criteria-header {
           height: 64px;
@@ -430,8 +428,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            column-gap: 4px;
             font-weight: 500;
             color: var(--color-text-alt);
+
+            svg {
+              margin-top: 3px;
+              width: 16px;
+              height: 16px;
+              fill: var(--color-text-alt);
+              cursor: pointer;
+            }
           }
         }
 

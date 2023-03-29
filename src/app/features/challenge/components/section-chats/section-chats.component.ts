@@ -154,8 +154,8 @@ export class SectionChatsComponent implements OnInit {
 
   getSenderAvatar(message: Message): string {
     const sender: Member = message.sender;
-    let avatarUrl = defaultProfile().avatarUrl;
-    if (sender && sender.profile) avatarUrl = sender.profile.avatarUrl;
+    let avatarUrl = defaultProfile().avatar;
+    if (sender && sender.profile) avatarUrl = sender.profile.avatar;
     return avatarUrl;
   }
 

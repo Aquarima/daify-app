@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {
   AlertHandlingService,
   AuthService,
@@ -28,7 +28,7 @@ import {RatingCriteriaService} from "../../../../core/services/challenge/rating-
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.scss']
 })
-export class ChallengeComponent implements OnInit {
+export class ChallengeComponent implements OnInit, OnDestroy {
 
   @ViewChild('sectionsNode') sectionsNode!: ElementRef;
   @ViewChild('messages_box') messagesBox!: ElementRef;
@@ -89,6 +89,10 @@ export class ChallengeComponent implements OnInit {
       }
       sub.unsubscribe();
     });
+  }
+
+  ngOnDestroy() {
+
   }
 
   private fetchChallengeData(challengeId: number, redirectTo: string) {
@@ -214,14 +218,14 @@ export class ChallengeComponent implements OnInit {
   }
 
   getIconUrl(): string {
-    return this.challenge.iconUrl || defaultChallenge().iconUrl;
+    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().icon);
   }
 
   getCoverUrl(): string {
-    return this.challenge.coverUrl || defaultChallenge().coverUrl;
+    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().cover);
   }
 
   getAuthorAvatarUrl(): string {
-    return this.challenge.author.avatarUrl || defaultProfile().avatarUrl;
+    return this.challenge.author.avatar || defaultProfile().avatar;
   }
 }

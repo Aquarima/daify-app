@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
 
   get profileAvatar(): string {
     if (!this.loggedUser || !this.loggedUser.profile) return '/assets/avatar_placeholder.svg';
-    return this.loggedUser.profile.avatarUrl;
+    return this.loggedUser.profile.avatar;
   }
 
   get currentLanguage(): { key: 'EN', full: 'English' } {

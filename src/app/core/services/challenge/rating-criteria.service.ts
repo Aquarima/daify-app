@@ -15,6 +15,10 @@ export class RatingCriteriaService {
     return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/criteria/add`, ratingCriteria);
   }
 
+  deleteRatingCriteria(ratingCriteria: RatingCriteria) {
+    return this.http.delete<any>(`${env.apiUrl}/challenge/criteria/${ratingCriteria.id}/delete`);
+  }
+
   getRatingCriteriaByChallenge(challenge: Challenge) {
     return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/criteria`);
   }

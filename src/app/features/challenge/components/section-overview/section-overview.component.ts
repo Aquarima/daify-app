@@ -50,7 +50,7 @@ export class SectionOverviewComponent implements OnInit {
   }
 
   getMemberAvatar(member: Member): string {
-    return member.profile.avatarUrl ? member.profile.avatarUrl : defaultProfile().avatarUrl;
+    return member.profile.avatar ? member.profile.avatar : defaultProfile().avatar;
   }
 
   isAuthor(member: Member): boolean {

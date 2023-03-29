@@ -1,6 +1,6 @@
-<div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ bannerUrl +')'}">
+<div class="challenge-preview-banner" [ngStyle]="{'background-image': 'url('+ getCoverUrl() +')'}">
   <div class="challenge-preview-icon">
-    <img [src]="iconUrl" alt="">
+    <img [src]="getIconUrl()" alt="">
   </div>
   <div class="challenge-access-access" *ngIf="challenge.config" tooltip="{{challenge.config.accessType}}">
     <svg width="32" height="32" viewBox="0 0 24 24" *ngIf="hasAccess('FREE')">

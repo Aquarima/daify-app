@@ -1,11 +1,5 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {
-  AccessType,
-  AuthService,
-  Challenge,
-  ChallengeConfig,
-  ChallengeService
-} from "../../../../core";
+import {AccessType, AuthService, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -61,6 +55,24 @@ export class ChallengeCreateComponent implements OnInit {
   onSubmit() {
     const challenge: Challenge = this.challengeInfoForm.value as Challenge;
     challenge.author = this.authService.user.profile;
+    if (this.selectedIconFile) {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(this.selectedIconFile);
+      reader.onload = () => {
+        if (reader.result && this.selectedIconFile) {
+          challenge.icon = new Blob([reader.result], {type: this.selectedIconFile.type});
+        }
+      }
+    }
+    if (this.selectedCoverFile) {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(this.selectedCoverFile);
+      reader.onload = () => {
+        if (reader.result && this.selectedCoverFile) {
+          challenge.cover = new Blob([reader.result], {type: this.selectedCoverFile.type});
+        }
+      }
+    }
     challenge.config = this.challengeConfigForm.value as ChallengeConfig;
     this.challengeService.createChallenge(challenge)
       .subscribe({

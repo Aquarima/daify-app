@@ -124,15 +124,28 @@ export class SectionSettingsComponent implements OnInit {
     this.popupService.createRatingCriteriaCreateModal((ratingCriteria: RatingCriteria) => {
       this.ratingCriteriaService.createRatingCriteria(ratingCriteria, this.challenge)
         .subscribe({
-          next: (ratingCriteria: RatingCriteria) => console.log(ratingCriteria),
-          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.error)
-        })
+          next: (ratingCriteria: RatingCriteria) => this.ratingCriteria.push(ratingCriteria),
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
+        });
     });
+  }
+
+  onDeleteRatingCriteria(ratingCriteria: RatingCriteria) {
+    this.popupService.createConfirmModal(
+      `Delete '${ratingCriteria.name}' rating criteria?`,
+      `Are you sure that you want to delete this rating criteria? This action cannot be undone.`,
+      () => {
+        this.ratingCriteriaService.deleteRatingCriteria(ratingCriteria)
+          .subscribe({
+            next: () => this.ratingCriteria = this.ratingCriteria.filter(rc => rc.id !== ratingCriteria.id),
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
+          });
+      });
   }
 
   onTransferOwnership(to: Member) {
     this.popupService.createConfirmModal(
-      `Transfer ownership to ${this.getMemberNickname(to)} ?`,
+      `Transfer ownership to ${this.getMemberNickname(to)}?`,
       `Are you sure that you want to transfer the challenge ownership to ${this.getMemberNickname(to)}? This action cannot be undone.`,
       () => {
         this.challengeService.transferChallengeOwnership(this.challenge, to)
@@ -142,7 +155,7 @@ export class SectionSettingsComponent implements OnInit {
               this.router.navigate(['../overview'], {relativeTo: this.route});
               this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', ``);
             },
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
           });
       });
   }
@@ -155,7 +168,7 @@ export class SectionSettingsComponent implements OnInit {
             this.members.splice(this.members.indexOf(member), 1);
             this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
           },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
         });
     });
   }
@@ -174,11 +187,11 @@ export class SectionSettingsComponent implements OnInit {
                     this.members = this.members.filter((m) => m !== member);
                     this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
                   },
-                  error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+                  error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
                 });
             }
           },
-          error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', ''),
+          error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
         });
     });
   }
@@ -191,7 +204,7 @@ export class SectionSettingsComponent implements OnInit {
         this.banishmentService.unban(ban)
           .subscribe({
             next: () => this.banishment.splice(this.banishment.indexOf(ban), 1),
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message),
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
       });
@@ -205,7 +218,7 @@ export class SectionSettingsComponent implements OnInit {
         this.blacklistService.remove(blacklistedMember)
           .subscribe({
             next: () => this.blacklist = this.blacklist.filter((bl) => bl.id !== blacklistedMember.id),
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message),
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error),
             complete: () => this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '')
           });
       });
@@ -232,7 +245,7 @@ export class SectionSettingsComponent implements OnInit {
           this.challenge = challenge;
           this.alertHandlingService.throwAlert(AlertType.SUCCESS, '', '');
         },
-        error: () => this.alertHandlingService.throwAlert(AlertType.ERROR, '', '')
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.error.status, err.error.error)
       });
   }
 
@@ -249,7 +262,7 @@ export class SectionSettingsComponent implements OnInit {
   }
 
   getMemberAvatar(member: Member): string {
-    return member.profile.avatarUrl ? member.profile.avatarUrl : 'assets/challenge_icon_placeholder.svg';
+    return member.profile.avatar ? member.profile.avatar : 'assets/challenge_icon_placeholder.svg';
   }
 
   isOnSection(section: string) {

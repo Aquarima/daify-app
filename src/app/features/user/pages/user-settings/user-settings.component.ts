@@ -90,11 +90,11 @@ export class UserSettingsComponent implements OnInit {
   }
 
   get banner(): string {
-    return this.user.profile?.bannerUrl || '/assets/user_banner_placeholder.svg';
+    return this.user.profile?.banner || '/assets/user_banner_placeholder.svg';
   }
 
   get avatar(): string {
-    return this.user.profile?.avatarUrl || '/assets/avatar_placeholder.svg';
+    return this.user.profile?.avatar || '/assets/avatar_placeholder.svg';
   }
 
   get allCountries(): { key: string, value: any }[] {

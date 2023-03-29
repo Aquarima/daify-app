@@ -66,7 +66,7 @@
       <li class="friends-list-cell" *ngFor="let friend of friends">
         <div>
           <div class="friends-list-cell-avatar">
-            <img src="{{friend.avatarUrl}}" alt="">
+            <img src="{{friend.avatar}}" alt="">
             <div class="friends-list-cell-status"
                  [ngClass]="friend.online ? 'friends-list-cell-status-online' : 'friends-list-cell-status-offline'">
               <span></span>

@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {Challenge} from 'src/app/core/models/challenge';
+import {Challenge, defaultChallenge} from 'src/app/core/models/challenge';
 import {ChallengeService} from "../../../../core";
 import {Router} from "@angular/router";
 
@@ -44,12 +44,12 @@ export class ChallengeCardComponent implements OnInit {
     return 'Unknown';
   }
 
-  get iconUrl(): string {
-    return this.challenge?.iconUrl || '/assets/challenge_icon_placeholder.svg';
+  getIconUrl(): string {
+    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().icon);
   }
 
-  get bannerUrl(): string {
-    return this.challenge?.coverUrl || '/assets/challenge_cover_placeholder.svg';
+  getCoverUrl(): string {
+    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().cover);
   }
 
   get themeColor() {

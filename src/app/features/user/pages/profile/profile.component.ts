@@ -109,11 +109,11 @@ export class ProfileComponent implements OnInit {
   }
 
   get banner(): string {
-    return this.profile?.bannerUrl || '/assets/user_banner_placeholder.svg';
+    return this.profile?.banner || '/assets/user_banner_placeholder.svg';
   }
 
   get avatar(): string {
-    return this.profile?.avatarUrl || '/assets/avatar_placeholder.svg';
+    return this.profile?.avatar || '/assets/avatar_placeholder.svg';
   }
 
   get languages(): string[] {

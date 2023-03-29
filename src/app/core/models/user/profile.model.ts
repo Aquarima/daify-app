@@ -3,8 +3,8 @@ export interface Profile {
   firstName: string;
   lastName: string;
   username: string;
-  avatarUrl: string;
-  bannerUrl: string;
+  avatar: string;
+  banner: string;
   country: string;
   languages: string[];
   birthdate: Date;
@@ -22,8 +22,8 @@ export function defaultProfile(): Profile {
     firstName: 'Deleted User',
     lastName: 'Deleted User',
     username: 'Deleted User',
-    avatarUrl: 'assets/avatar_placeholder.svg',
-    bannerUrl: 'user_banner_placeholder.svg',
+    avatar: 'assets/avatar_placeholder.svg',
+    banner: 'user_banner_placeholder.svg',
     country: '',
     languages: [],
     birthdate: new Date(),

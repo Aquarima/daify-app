@@ -109,7 +109,7 @@ export class InboxComponent implements OnInit {
 
   getAuthorAvatar(notification: Notification) {
     const author: Profile = notification.sender;
-    return author.avatarUrl ? author.avatarUrl : '/assets/avatar_placeholder.svg';
+    return author.avatar ? author.avatar : '/assets/avatar_placeholder.svg';
   }
 
   getTimeSince(notification: Notification): string {
