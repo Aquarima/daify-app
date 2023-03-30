@@ -1,8 +1,16 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {AccessType, AuthService, Challenge, ChallengeConfig, ChallengeService} from "../../../../core";
+import {
+  AccessType,
+  AlertHandlingService,
+  AuthService,
+  Challenge,
+  ChallengeConfig,
+  ChallengeService,
+} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'app-challenge-create',
@@ -37,8 +45,9 @@ export class ChallengeCreateComponent implements OnInit {
     private router: Router,
     private viewContainerRef: ViewContainerRef,
     private sanitizer: DomSanitizer,
+    private authService: AuthService,
     private challengeService: ChallengeService,
-    private authService: AuthService) {
+    private alertHandlingService: AlertHandlingService) {
   }
 
   ngOnInit(): void {
@@ -55,42 +64,43 @@ export class ChallengeCreateComponent implements OnInit {
   onSubmit() {
     const challenge: Challenge = this.challengeInfoForm.value as Challenge;
     challenge.author = this.authService.user.profile;
-    if (this.selectedIconFile) {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(this.selectedIconFile);
-      reader.onload = () => {
-        if (reader.result && this.selectedIconFile) {
-          challenge.icon = new Blob([reader.result], {type: this.selectedIconFile.type});
-        }
-      }
-    }
-    if (this.selectedCoverFile) {
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(this.selectedCoverFile);
-      reader.onload = () => {
-        if (reader.result && this.selectedCoverFile) {
-          challenge.cover = new Blob([reader.result], {type: this.selectedCoverFile.type});
-        }
-      }
-    }
     challenge.config = this.challengeConfigForm.value as ChallengeConfig;
     this.challengeService.createChallenge(challenge)
       .subscribe({
-        //next: (challenge: any) => this.showInviteFriendsPopup(challenge),
-        next: (challenge: Challenge) => this.router.navigate([`/app/challenge/${challenge.id}/overview`]),
+        next: (challenge: Challenge) => {
+          if (this.selectedIconFile) {
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(this.selectedIconFile);
+            reader.onload = () => {
+              if (reader.result && this.selectedIconFile) {
+                const blob: Blob = new Blob([reader.result], {type: this.selectedIconFile.type});
+                this.challengeService.uploadChallengeIcon(blob, challenge)
+                  .subscribe({
+                    next: (iconId) => challenge.icon = `${iconId}`,
+                    error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
+                  });
+              }
+            }
+          }
+          if (this.selectedCoverFile) {
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(this.selectedCoverFile);
+            reader.onload = () => {
+              if (reader.result && this.selectedCoverFile) {
+                const blob: Blob = new Blob([reader.result], {type: this.selectedCoverFile.type});
+                this.challengeService.uploadChallengeCover(blob, challenge)
+                  .subscribe({
+                    next: (coverId) => challenge.cover = `${coverId}`,
+                    error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
+                  });
+              }
+            }
+          }
+          this.router.navigate([`/app/challenge/${challenge.id}/overview`]);
+        },
         error: () => alert('Error')
       });
   }
-
-  /*private showInviteFriendsPopup(challenge: Challenge) {
-    const componentRef = this.viewContainerRef.createComponent(InviteFriendsComponent);
-    componentRef.instance.challenge = challenge;
-    componentRef.instance.closeEvent.subscribe(() => {
-      componentRef.destroy();
-      this.router.navigate([`/app/challenge/overview/`], {queryParams: {id: challenge.id}})
-    });
-    componentRef.changeDetectorRef.detectChanges();
-  }*/
 
   get defaultStart() {
     const date = new Date();

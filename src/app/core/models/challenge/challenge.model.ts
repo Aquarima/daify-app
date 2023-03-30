@@ -7,8 +7,8 @@ export interface Challenge {
   title: string;
   description: string;
   theme: string;
-  cover: Blob;
-  icon: Blob;
+  cover: string;
+  icon: string;
   invite: string;
   config: ChallengeConfig;
   createdAt: Date;
@@ -22,10 +22,8 @@ export function defaultChallenge(): Challenge {
     title: '',
     description: '',
     theme: '',
-    //cover: '/assets/user_banner_placeholder.svg',
-    cover: new Blob(),
-    //icon: '/assets/challenge_icon_placeholder.svg',
-    icon: new Blob(),
+    cover: '/assets/user_banner_placeholder.svg',
+    icon: '/assets/challenge_icon_placeholder.svg',
     invite: '',
     config: defaultChallengeConfig(),
     createdAt: new Date(),

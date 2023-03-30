@@ -11,6 +11,6 @@ export class ChannelService {
   constructor(private http: HttpClient) { }
 
   getChannelsByChallenge(challenge: Challenge) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/channel`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challenge.id}/channels`);
   }
 }

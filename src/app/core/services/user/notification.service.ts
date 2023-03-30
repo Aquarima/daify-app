@@ -12,15 +12,15 @@ export class NotificationService {
     }
 
     updateNotification(notification: Notification) {
-        return this.http.put<any>(`${env.apiUrl}/user/notification/${notification.id}/update`, notification);
+        return this.http.put<any>(`${env.apiUrl}/users/notifications/${notification.id}/update`, notification);
     }
 
     deleteNotification(notification: Notification) {
-        return this.http.delete<any>(`${env.apiUrl}/user/notification/${notification.id}/delete`);
+        return this.http.delete<any>(`${env.apiUrl}/users/notifications/${notification.id}/delete`);
     }
 
     getNotificationsByUser(user: User) {
-        return this.http.get<any>(`${env.apiUrl}/user/${user.id}/notification?order=desc`);
+        return this.http.get<any>(`${env.apiUrl}/users/${user.id}/notifications?order=desc`);
     }
 
     parse(notification: Notification): string {

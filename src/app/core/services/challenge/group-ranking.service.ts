@@ -11,6 +11,6 @@ export class GroupRankingService {
   constructor(private http: HttpClient) { }
 
   getGroupRankingsByChallenge(challenge: Challenge) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/groups/rankings`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challenge.id}/groups/rankings`);
   }
 }

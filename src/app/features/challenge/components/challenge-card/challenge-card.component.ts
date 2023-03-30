@@ -45,11 +45,11 @@ export class ChallengeCardComponent implements OnInit {
   }
 
   getIconUrl(): string {
-    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().icon);
+    return this.challenge.cover || defaultChallenge().icon;
   }
 
   getCoverUrl(): string {
-    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().cover);
+    return this.challenge.cover || defaultChallenge().cover;
   }
 
   get themeColor() {

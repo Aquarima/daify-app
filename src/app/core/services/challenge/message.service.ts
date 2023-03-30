@@ -11,14 +11,14 @@ export class MessageService {
   constructor(private http: HttpClient) { }
 
   sendMessage(channel: Channel, message: Message) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/channel/${channel.id}/message/send`, message);
+    return this.http.post<any>(`${env.apiUrl}/challenges/channels/${channel.id}/messages/send`, message);
   }
 
   deleteMessage(message: Message) {
-    return this.http.delete<any>(`${env.apiUrl}/challenge/channel/message/${message.id}/delete`);
+    return this.http.delete<any>(`${env.apiUrl}/challenges/channels/messages/${message.id}/delete`);
   }
 
   getMessagesByChannel(channelId: number, size: number = 100) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/channel/${channelId}/message?size=${size}`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/channels/${channelId}/message?size=${size}`);
   }
 }

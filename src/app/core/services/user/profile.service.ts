@@ -12,14 +12,14 @@ export class ProfileService {
   }
 
   updateProfile(profile: Profile) {
-    return this.http.put<any>(`${env.apiUrl}/user/profile/${profile.id}/update`, profile);
+    return this.http.put<any>(`${env.apiUrl}/users/profiles/${profile.id}/update`, profile);
   }
 
   getProfileById(profileId: number) {
-    return this.http.get<any>(`${env.apiUrl}/user/profile/${profileId}`);
+    return this.http.get<any>(`${env.apiUrl}/users/profiles/${profileId}`);
   }
 
   getProfileByUsername(username: string) {
-    return this.http.get<any>(`${env.apiUrl}/user/profile/username/${username}`);
+    return this.http.get<any>(`${env.apiUrl}/users/profiles/username/${username}`);
   }
 }

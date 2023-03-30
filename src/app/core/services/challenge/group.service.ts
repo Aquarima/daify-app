@@ -12,22 +12,22 @@ export class GroupService {
   }
 
   createGroup(group: Group, challenge: Challenge) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/group/create`, group);
+    return this.http.post<any>(`${env.apiUrl}/challenges/${challenge.id}/groups/create`, group);
   }
 
   joinGroup(group: Group) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/group/${group.id}/join`, {});
+    return this.http.post<any>(`${env.apiUrl}/challenges/groups/${group.id}/join`, {});
   }
 
   leaveGroup(group: Group) {
-    return this.http.delete<any>(`${env.apiUrl}/challenge/group/${group.id}/leave`, {});
+    return this.http.delete<any>(`${env.apiUrl}/challenges/groups/${group.id}/leave`, {});
   }
 
   removeGroupMember(member: Member) {
-    return this.http.delete<any>(`${env.apiUrl}/challenge/group/member/${member.id}/remove`);
+    return this.http.delete<any>(`${env.apiUrl}/challenges/groups/member/${member.id}/remove`);
   }
 
   getGroupsByChallenge(challenge: Challenge) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/group`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challenge.id}/groups`);
   }
 }

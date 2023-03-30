@@ -12,14 +12,14 @@ export class MemberService {
   }
 
   getMemberByProfileId(challengeId: number, profile: Profile) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member/profile/${profile.id}`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challengeId}/member/profile/${profile.id}`);
   }
 
   getMembersByChallenge(challengeId: number) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challengeId}/member`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challengeId}/members`);
   }
 
   kickMember(member: Member) {
-    return this.http.delete<any>(`${env.apiUrl}/challenge/member/${member.id}/kick`);
+    return this.http.delete<any>(`${env.apiUrl}/challenges/members/${member.id}/kick`);
   }
 }

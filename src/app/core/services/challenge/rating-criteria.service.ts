@@ -12,14 +12,14 @@ export class RatingCriteriaService {
   }
 
   createRatingCriteria(ratingCriteria: RatingCriteria, challenge: Challenge) {
-    return this.http.post<any>(`${env.apiUrl}/challenge/${challenge.id}/criteria/add`, ratingCriteria);
+    return this.http.post<any>(`${env.apiUrl}/challenges/${challenge.id}/criteria/add`, ratingCriteria);
   }
 
   deleteRatingCriteria(ratingCriteria: RatingCriteria) {
-    return this.http.delete<any>(`${env.apiUrl}/challenge/criteria/${ratingCriteria.id}/delete`);
+    return this.http.delete<any>(`${env.apiUrl}/challenges/criteria/${ratingCriteria.id}/delete`);
   }
 
   getRatingCriteriaByChallenge(challenge: Challenge) {
-    return this.http.get<any>(`${env.apiUrl}/challenge/${challenge.id}/criteria`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/${challenge.id}/criteria`);
   }
 }

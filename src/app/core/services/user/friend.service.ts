@@ -11,6 +11,6 @@ export class FriendService {
     }
 
     getFriendsByUserId(userId: number) {
-        return this.http.get<any>(`${env.apiUrl}/user/profile/${userId}/friend`);
+        return this.http.get<any>(`${env.apiUrl}/users/profiles/${userId}/friends`);
     }
 }

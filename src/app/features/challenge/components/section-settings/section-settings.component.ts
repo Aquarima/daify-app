@@ -10,7 +10,8 @@ import {
   ChallengeService,
   Member,
   MemberService,
-  PopupService, RatingCriteria
+  PopupService,
+  RatingCriteria
 } from "../../../../core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AlertType} from "../../../../core/models/system-alert";
@@ -175,7 +176,7 @@ export class SectionSettingsComponent implements OnInit {
 
   onBanishMember(member: Member) {
     this.popupService.createBanModal(member, (reason: string, blacklist: boolean) => {
-      this.banishmentService.ban(this.challenge, member, reason)
+      this.banishmentService.ban(member, reason, this.challenge)
         .subscribe({
           next: () => {
             this.members.splice(this.members.indexOf(member), 1);

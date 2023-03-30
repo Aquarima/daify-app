@@ -137,7 +137,7 @@ export class ChallengeComponent implements OnInit, OnDestroy {
         next: (member: Member) => location.reload(),
         error: (err) => {
           if (err.status === HttpStatusCode.Forbidden) {
-            this.banishmentService.getBanishmentByChallengeAndProfile(this.challenge, this.authService.user.profile)
+            this.banishmentService.getBanishmentByChallengeAndProfile(this.authService.user.profile, this.challenge)
               .subscribe((banishment: Banishment) => this.popupService.createBanishmentViewModal(this.challenge, banishment));
           }
         }
@@ -218,11 +218,11 @@ export class ChallengeComponent implements OnInit, OnDestroy {
   }
 
   getIconUrl(): string {
-    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().icon);
+    return this.challenge.cover ||defaultChallenge().icon;
   }
 
   getCoverUrl(): string {
-    return URL.createObjectURL(this.challenge.cover) || URL.createObjectURL(defaultChallenge().cover);
+    return this.challenge.cover || defaultChallenge().cover;
   }
 
   getAuthorAvatarUrl(): string {

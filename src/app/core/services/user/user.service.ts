@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment as env} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
@@ -7,9 +7,10 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUserById(userId: number) {
-    return this.http.get<any>(`${env.apiUrl}/user/${userId}`);
+    return this.http.get<any>(`${env.apiUrl}/users/${userId}`);
   }
 }
