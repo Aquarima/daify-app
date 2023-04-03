@@ -1,9 +1,9 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ChallengeGroupBy, Search} from 'src/app/core/models';
+import {ChallengeOrderBy, Search} from 'src/app/core/models';
 import {SearchService} from 'src/app/core/services/search.service';
 import {BehaviorSubject} from "rxjs";
+import {searchForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'dfy-challenge-search',
@@ -20,11 +20,7 @@ export class ChallengeSearchComponent implements OnInit {
   @ViewChild('search_history') searchHistoryNode!: ElementRef;
   @ViewChild('name') searchInputNode!: ElementRef;
 
-  searchForm = new FormGroup({
-    'orderBy': new FormControl(ChallengeGroupBy.ALPHABETICAL),
-    'title': new FormControl(''),
-  });
-
+  searchForm = searchForm;
   history = this.searchService.fetchHistory('challenges');
 
   constructor(
@@ -40,25 +36,18 @@ export class ChallengeSearchComponent implements OnInit {
       this.onSearch();
     });
     this.searchForm.controls.orderBy.statusChanges
-      .subscribe(orderBy => {
-        this.onSearch(false);
-      });
+      .subscribe(orderBy => this.onSearch(false));
   }
 
   onSearch(fetch = true) {
     this.searchEvent.emit({
       options: {fetch: fetch},
-      groupBy: this.searchForm.controls.orderBy.value || ChallengeGroupBy.ALPHABETICAL,
+      orderBy: this.searchForm.controls.orderBy.value || ChallengeOrderBy.ALPHABETICAL,
       title: `${this.searchForm.controls.title.value}`
     });
   }
 
-  get orderByTypes(): { key: string, value: ChallengeGroupBy }[] {
-    return [
-      {key: 'Alphabetical', value: ChallengeGroupBy.ALPHABETICAL},
-      {key: 'Duration', value: ChallengeGroupBy.DURATION},
-      {key: 'Starts At', value: ChallengeGroupBy.STARTS_AT},
-      {key: 'Ends At', value: ChallengeGroupBy.ENDS_AT},
-    ]
+  getOrderByTypes(): { key: string, value: ChallengeOrderBy }[] {
+    return Object.values(ChallengeOrderBy).map(value => ({key: value, value: value}));
   }
 }

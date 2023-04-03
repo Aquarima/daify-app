@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {ratingCriteriaForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-rating-criteria-create',
@@ -11,11 +11,7 @@ export class RatingCriteriaCreateComponent implements OnInit {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
   @Output() confirmEvent: EventEmitter<any> = new EventEmitter();
 
-  ratingCriteriaForm = new FormGroup({
-    name: new FormControl<string>(''),
-    description: new FormControl<string>(''),
-    weight: new FormControl<number>(1)
-  });
+  ratingCriteriaForm = ratingCriteriaForm;
 
   constructor() { }
 

@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {CookieService} from "ngx-cookie";
 import {Router} from "@angular/router";
+import {loginForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-login',
@@ -13,13 +13,8 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('login_error') errorMessageLabel!: ElementRef;
 
-  loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    remember: new FormControl<boolean>(false)
-  })
-
-  errorMessage: string = '';
+  error: string = '';
+  loginForm = loginForm;
 
   constructor(private router: Router, private cookies: CookieService, private authService: AuthService) {
   }
@@ -28,15 +23,27 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const identifier = this.loginForm.value.username;
-    const email = identifier?.includes('@') ? `${this.loginForm.value.username}` : undefined;
-    const username = email ? undefined : `${this.loginForm.value.username}`;
-    this.errorMessage = this.authService.login({email: email, username: username, password: `${this.loginForm.value.password}`})
+    const username = this.loginForm.get('username')?.value;
+    const password = this.loginForm.get('password')?.value;
+    if (username && password) {
+      this.doTryLogin({username, password});
+    }
+  }
+
+  onError() {
     this.errorMessageLabel.nativeElement.classList.add('login-error-shown');
-    this.router.navigate([this.authService.redirectPath]);
   }
 
   onHideError() {
     this.errorMessageLabel.nativeElement.classList.remove('login-error-shown');
+  }
+
+  doTryLogin(form: {username: string, password: string}) {
+    this.error = this.authService.login(form);
+    if (this.error) {
+      this.onError();
+    } else {
+      this.router.navigate([this.authService.redirectPath]);
+    }
   }
 }

@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-  <dfy-custom-select class="select-order-by" [label]="'Order By'" [control]="searchForm.controls.orderBy" [data]="orderByTypes"></dfy-custom-select>
+  <dfy-custom-select class="select-order-by" [label]="'Order By'" [control]="searchForm.controls.orderBy" [data]="getOrderByTypes()"></dfy-custom-select>
   <div class="display-modes">
     <button [class.display-mode-selected]="true">
       <svg width="32" height="32" viewBox="0 0 24 24">

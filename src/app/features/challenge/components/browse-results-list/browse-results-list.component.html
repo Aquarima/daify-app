@@ -7,7 +7,7 @@
   <div class="items display-grid">
     <dfy-challenge-card class="grid-cell"
                         [challenge]="challenge"
-                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:search.groupBy">
+                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:search.orderBy">
     </dfy-challenge-card>
   </div>
 </div>

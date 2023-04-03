@@ -1,7 +1,8 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Challenge, defaultChallenge} from 'src/app/core/models/challenge';
 import {ChallengeService} from "../../../../core";
 import {Router} from "@angular/router";
+import {TimeHelper} from "../../../../core/helpers";
 
 @Component({
   selector: 'dfy-challenge-card',
@@ -12,18 +13,13 @@ export class ChallengeCardComponent implements OnInit {
 
   @Input() challenge!: Challenge;
 
-  @ViewChild('tag_list') tagList!: ElementRef;
-
   constructor(
     private router: Router,
-    private challengeService: ChallengeService) {
+    private challengeService: ChallengeService,
+    private timeHelper: TimeHelper) {
   }
 
   ngOnInit(): void {
-  }
-
-  hasAccess(access: any) {
-    return this.challenge.config.accessType === access;
   }
 
   @HostListener('click', ['$event.target'])
@@ -31,17 +27,14 @@ export class ChallengeCardComponent implements OnInit {
     this.router.navigate([`/app/challenge/${this.challenge.id}/overview`]);
   }
 
-  get duration() {
-    let d1: Date = new Date(this.challenge.config.startsAt);
-    let d2: Date = new Date(this.challenge.config.endsAt);
-    const time = d2.getTime() - d1.getTime();
-    const days = time / (24 * 60 * 60 * 1000);
-    const hours = time / (1000 * 60 * 60);
-    const minutes = time / 1000 / 60;
-    if (days >= 1) return `${Math.round(days)}d`;
-    if (hours >= 1) return `${Math.round(hours)}h`;
-    if (minutes >= 1) return `${Math.round(minutes)}m`;
-    return 'Unknown';
+  hasAccess(access: any) {
+    return this.challenge.config.accessType === access;
+  }
+
+  getDuration() {
+    const d1: Date = new Date(this.challenge.config.startsAt);
+    const d2: Date = new Date(this.challenge.config.endsAt);
+    return this.timeHelper.getTimeSince(d2, d1);
   }
 
   getIconUrl(): string {
@@ -52,7 +45,7 @@ export class ChallengeCardComponent implements OnInit {
     return this.challenge.cover || defaultChallenge().cover;
   }
 
-  get themeColor() {
+  getThemeColor() {
     return this.challengeService.getColorByTag(this.challenge.theme);
   }
 }

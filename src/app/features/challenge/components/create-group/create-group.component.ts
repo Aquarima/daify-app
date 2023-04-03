@@ -10,9 +10,8 @@ import {
   Renderer2
 } from '@angular/core';
 import {DOCUMENT} from "@angular/common";
-import {DomSanitizer} from "@angular/platform-browser";
 import {Group, Member} from "../../../../core";
-import {FormControl, FormGroup} from "@angular/forms";
+import {groupForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-create-group',
@@ -26,20 +25,13 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
   @Output() closeEvent: EventEmitter<void> = new EventEmitter();
   @Output() groupCreateEvent: EventEmitter<Group> = new EventEmitter();
 
-  groupForm: FormGroup = new FormGroup({
-    name: new FormControl<string>(''),
-    join_type_option_free: new FormControl<boolean>(true),
-    join_type_option_ask: new FormControl<boolean>(false)
-  });
-
+  groupForm = groupForm;
   errorMessage: string | undefined;
   groups: Group[] = [];
-  selectedIconFile: File | undefined;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
-    private sanitizer: DomSanitizer) {
+    private renderer: Renderer2) {
   }
 
   ngOnInit(): void {
@@ -54,11 +46,8 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
   }
 
   isNameAlreadyInUse(): boolean {
-    return !!this.groups.find(g => g.name.toLowerCase() === this.groupForm.value.name.toLowerCase());
-  }
-
-  onGroupIconSelected(event: any) {
-    this.selectedIconFile = event.target.files[0];
+    if (!this.groupForm.value) return true;
+    return !!this.groups.find(g => g.name.toLowerCase() === this.groupForm.value.name);
   }
 
   onJoinTypeSelected() {
@@ -67,7 +56,7 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
   }
 
   onNameEdited() {
-    if (this.isNameAlreadyInUse()) {
+    if (this.isNameAlreadyInUse() && this.groupForm.value.name) {
       this.errorMessage = `Name '${this.groupForm.value.name.toLowerCase()}' is already used by another group`;
       return;
     }
@@ -84,13 +73,8 @@ export class CreateGroupComponent implements OnInit, AfterViewInit {
     this.groupCreateEvent.emit({
       id: 0,
       leader: this.selfMember,
-      name: this.groupForm.value.name,
+      name: this.groupForm.value.name || '',
       createdAt: new Date()
     });
-  }
-
-  get groupIcon() {
-    if (!this.selectedIconFile) return;
-    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedIconFile));
   }
 }

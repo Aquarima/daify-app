@@ -30,7 +30,7 @@ export class MemberKickComponent implements OnInit {
     this.cancelEvent.emit();
   }
 
-  get nickname(): string {
+  getNickname(): string {
     return this.member.nickname ? this.member.nickname : this.member.profile.username;
   }
 }

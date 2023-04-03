@@ -1,5 +1,5 @@
-export enum ChallengeGroupBy {
-    UNKNOW = 'Unknown',
+export enum ChallengeOrderBy {
+    UNKNOWN = 'Unknown',
     ALPHABETICAL = 'Alphabetical',
     DURATION = 'Duration',
     STARTS_AT = 'Starts At',

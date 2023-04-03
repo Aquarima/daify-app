@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Member} from "../../../../core";
-import {FormControl, FormGroup} from "@angular/forms";
+import {banishmentForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-member-banish',
@@ -14,11 +14,7 @@ export class MemberBanishComponent implements OnInit {
   @Output() cancelEvent: EventEmitter<any> = new EventEmitter();
   @Output() confirmEvent: EventEmitter<any> = new EventEmitter();
 
-  banishForm = new FormGroup({
-    reason: new FormControl<string>(''),
-    blacklist: new FormControl<boolean>(true)
-  });
-
+  banishForm = banishmentForm;
   constructor() {
   }
 
@@ -33,7 +29,7 @@ export class MemberBanishComponent implements OnInit {
     this.confirmEvent.emit(this.banishForm.value);
   }
 
-  get nickname(): string {
+  getNickname(): string {
     return this.member.nickname ? this.member.nickname : this.member.profile.username;
   }
 }

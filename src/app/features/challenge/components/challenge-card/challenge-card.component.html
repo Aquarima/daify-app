@@ -26,11 +26,11 @@
   <div class="challenge-short-description">
     <p class="challenge-short-description-title">{{challenge.title}}</p>
     <p class="challenge-short-description-text">{{challenge.description}}</p>
-    <span class="challenge-theme" [ngStyle]="{'background-color': themeColor}">{{challenge.theme}}</span>
+    <span class="challenge-theme" [ngStyle]="{'background-color': getThemeColor()}">{{challenge.theme}}</span>
   </div>
   <ul class="challenge-stats" *ngIf="challenge.config">
     <li>
-      <p class="value">{{duration}}</p>
+      <p class="value">{{getDuration()}}</p>
       <p class="name">Duration</p>
     </li>
     <li>

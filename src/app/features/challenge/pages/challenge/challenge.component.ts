@@ -171,7 +171,7 @@ export class ChallengeComponent implements OnInit, OnDestroy {
         this.challengeService.leaveChallenge(this.challenge)
           .subscribe({
             next: () => this.router.navigate(['/app/explore']),
-            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
+            error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
           });
       }
     );

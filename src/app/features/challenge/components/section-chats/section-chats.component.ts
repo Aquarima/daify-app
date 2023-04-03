@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, NgZone, OnInit, ViewChild, ViewContainerRef,} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {
   AlertHandlingService,
   AuthService,
@@ -11,9 +11,10 @@ import {
   MessageService,
   PopupService
 } from "../../../../core";
-import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
 import {tap, timer} from "rxjs";
+import {messageForm} from "../../../../core/helpers";
+import {AlertType} from "../../../../core/models/system-alert";
 
 @Component({
   selector: 'dfy-challenge-chats',
@@ -29,10 +30,7 @@ export class SectionChatsComponent implements OnInit {
 
   MESSAGE_TIMEOUT: number = 5;
 
-  messageForm = new FormGroup({
-    message: new FormControl(''),
-  });
-
+  messageForm = messageForm;
   channelCache: Channel[] = [];
   messageCache: Map<Channel, Message[]> = new Map();
   channel: Channel | undefined;
@@ -60,7 +58,8 @@ export class SectionChatsComponent implements OnInit {
           if (!this.channel && this.channelCache.length > 0) {
             this.onChannelSelected(this.channelCache[0]);
           }
-        }
+        },
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });
   }
 
@@ -93,10 +92,11 @@ export class SectionChatsComponent implements OnInit {
             this.messages.push(message);
             //setTimeout(() => this.scrollToNewestMessage(), 50);
           },
-          error: () => {
+          error: (err) => {
             messageToSend.isFailed = true;
             if (this.selfMember) messageToSend.sender = this.selfMember;
             this.messages.push(messageToSend);
+            this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
           }
         });
     }

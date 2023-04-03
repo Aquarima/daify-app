@@ -23,7 +23,7 @@ export class ChallengeCreateComponent implements OnInit {
     title: new FormControl<string | undefined>(''),
     description: new FormControl<string | undefined>(''),
     theme: new FormControl<string | undefined>(undefined),
-  })
+  });
 
   challengeConfigForm = new FormGroup({
     accessType: new FormControl<AccessType>(AccessType.FREE),
@@ -36,7 +36,7 @@ export class ChallengeCreateComponent implements OnInit {
     spectatorsAllowed: new FormControl<boolean>(true),
     votesStartsTime: new FormControl<Date>(new Date()),
     votesEndsTime: new FormControl<Date>(new Date()),
-  })
+  });
 
   selectedCoverFile: File | undefined;
   selectedIconFile: File | undefined;
@@ -102,14 +102,14 @@ export class ChallengeCreateComponent implements OnInit {
       });
   }
 
-  get defaultStart() {
-    const date = new Date();
-    date.setSeconds(0, 0);
-    return date;
+  getPreviewCover() {
+    if (!this.selectedCoverFile) return;
+    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedCoverFile));
   }
 
-  get defaultEnd() {
-    return new Date(this.defaultStart.getTime() + 24 * 60 * 60 * 1000);
+  getPreviewIcon() {
+    if (!this.selectedIconFile) return;
+    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedIconFile));
   }
 
   get accessTypes(): { key: string, value: AccessType }[] {
@@ -119,15 +119,5 @@ export class ChallengeCreateComponent implements OnInit {
       {key: 'Friends Only', value: AccessType.FRIENDS_ONLY},
       {key: 'Code', value: AccessType.CODE},
     ]
-  }
-
-  get previewCover() {
-    if (!this.selectedCoverFile) return;
-    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedCoverFile));
-  }
-
-  get previewIcon() {
-    if (!this.selectedIconFile) return;
-    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedIconFile));
   }
 }

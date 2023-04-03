@@ -1,8 +1,8 @@
-import {ChallengeGroupBy} from "./challenge-order-by";
+import {ChallengeOrderBy} from "./challenge-order-by";
 
 export interface Search {
     options: SearchOptions;
-    groupBy?: ChallengeGroupBy | ChallengeGroupBy.ALPHABETICAL;
+    orderBy?: ChallengeOrderBy | ChallengeOrderBy.ALPHABETICAL;
     title?: string;
 }
 

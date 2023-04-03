@@ -19,7 +19,7 @@
             </svg>
             <p>Click to choose a cover image that makes your challenge shine!</p>
           </div>
-          <img [src]="previewCover" alt="" *ngIf="selectedCoverFile">
+          <img [src]="getPreviewCover()" alt="" *ngIf="selectedCoverFile">
         </div>
         <div class="edit-zone">
           <form [formGroup]="challengeInfoForm">
@@ -29,7 +29,7 @@
               <div class="challenge-preview-icon">
                 <input type="file" class="file-upload" accept="image/png, image/jpeg"
                        (change)="onPreviewIconSelected($event)" [customFocus]="'user-input-active'">
-                <img [src]="previewIcon" alt="" *ngIf="selectedIconFile">
+                <img [src]="getPreviewIcon()" alt="" *ngIf="selectedIconFile">
                 <img src="assets/challenge_icon_placeholder.svg" alt="" *ngIf="!selectedIconFile">
               </div>
             </div>

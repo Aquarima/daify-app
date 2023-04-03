@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Challenge, ChallengeGroupBy} from 'src/app/core';
+import {Challenge, ChallengeOrderBy} from 'src/app/core';
 import {getDuration} from 'src/app/core/models/challenge/challenge.model';
 
 @Pipe({
@@ -7,16 +7,16 @@ import {getDuration} from 'src/app/core/models/challenge/challenge.model';
 })
 export class OrderByChallengePipe implements PipeTransform {
 
-    transform(challenges: any[], order = ChallengeGroupBy.ALPHABETICAL): any[] {
+    transform(challenges: any[], order = ChallengeOrderBy.ALPHABETICAL): any[] {
         if (!challenges || !order || challenges.length <= 1) return challenges;
         switch (order) {
-            case ChallengeGroupBy.ALPHABETICAL:
+            case ChallengeOrderBy.ALPHABETICAL:
                 return challenges.sort(this.compareByTitle);
-            case ChallengeGroupBy.DURATION:
+            case ChallengeOrderBy.DURATION:
                 return challenges.sort(this.compareByDuration);
-            case ChallengeGroupBy.STARTS_AT:
+            case ChallengeOrderBy.STARTS_AT:
                 return challenges.sort(this.compareByStart);
-            case ChallengeGroupBy.ENDS_AT:
+            case ChallengeOrderBy.ENDS_AT:
                 return challenges.sort(this.compareByEnd);
         }
         return challenges;
