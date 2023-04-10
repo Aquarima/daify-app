@@ -173,6 +173,84 @@
       align-items: center;
       gap: 32px;
 
+      .actions {
+        display: flex;
+        column-gap: 16px;
+
+        a {
+          padding: 0 16px;
+          height: 32px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: none;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+          border-radius: 4px;
+          font-weight: 500;
+          font-size: var(--preset-font-size-tiny);
+          color: #FFF;
+          cursor: pointer;
+
+          &:hover {
+            bottom: -1px;
+            filter: brightness(96%);
+          }
+        }
+
+        .create-challenge {
+          background-color: var(--color-tertiary);
+        }
+
+        .join-challenge {
+          position: relative;
+          display: flex;
+          column-gap: 4px;
+          align-items: center;
+
+          a {
+            background-color: var(--color-tertiary-2);
+          }
+
+          input {
+            padding: 0;
+            width: 0;
+            height: 30px;
+            transition: padding 1200ms, width 800ms;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            letter-spacing: 1px;
+          }
+
+          .join-challenge-input-clear {
+            position: absolute;
+            top: 8px;
+            right: 4px;
+            display: none;
+            border: none;
+            background-color: transparent;
+
+            svg {
+              width: 16px;
+              height: 16px;
+              fill: var(--color-text-alt-2);
+            }
+          }
+
+          .join-challenge-input-active {
+            padding: 0 8px;
+            width: 80px;
+            color: var(--color-text-alt);
+
+            & + .join-challenge-input-clear {
+              display: block;
+            }
+          }
+        }
+      }
+
       .tools {
         height: fit-content;
         display: flex;

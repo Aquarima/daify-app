@@ -6,6 +6,7 @@ import {
   MemberBanishComponent,
   MemberKickComponent, RatingCriteriaCreateComponent
 } from "../../../features/challenge/components";
+import {CookiesPreferencesComponent} from "../../../features/user";
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,21 @@ export class PopupService {
     });
     instance.confirmEvent.subscribe((ratingCriteria) => {
       confirmCallBack(ratingCriteria);
+      componentRef.destroy();
+    });
+    return;
+  }
+
+  createCookiesPreferencesModal(confirmCallBack: Function = () => {}, cancelCallback: Function = () => {}) {
+    if (!this.viewContainerRef) return;
+    const componentRef: ComponentRef<CookiesPreferencesComponent> = this.viewContainerRef.createComponent(CookiesPreferencesComponent);
+    const instance = componentRef.instance;
+    instance.closeEvent.subscribe(() => {
+      cancelCallback();
+      componentRef.destroy();
+    });
+    instance.confirmEvent.subscribe(() => {
+      confirmCallBack();
       componentRef.destroy();
     });
     return;

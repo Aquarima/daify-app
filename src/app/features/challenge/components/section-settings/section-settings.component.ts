@@ -18,6 +18,7 @@ import {AlertType} from "../../../../core/models/system-alert";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BlacklistService} from "../../../../core/services/challenge/blacklist.service";
 import {RatingCriteriaService} from "../../../../core/services/challenge/rating-criteria.service";
+import {challengeForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'dfy-challenge-settings',
@@ -43,23 +44,7 @@ export class SectionSettingsComponent implements OnInit {
   initialChallengeForm: any | undefined;
   banishment: Banishment[] = [];
   blacklist: BlacklistedMember[] = [];
-
-  challengeForm = new FormGroup({
-    title: new FormControl<string>(''),
-    description: new FormControl<string>(''),
-    theme: new FormControl<string>(''),
-    accessType: new FormControl<AccessType>(AccessType.FREE),
-    startsAt: new FormControl<Date>(new Date()),
-    endsAt: new FormControl<Date>(new Date()),
-    capacity: new FormControl<number>(2),
-    groupSize: new FormControl<number>(2),
-    leaderboardBeforeStart: new FormControl<boolean>(true),
-    spectatorsAllowed: new FormControl<boolean>(false),
-    votesStartsTime: new FormControl<Date>(new Date()),
-    votesEndsTime: new FormControl<Date>(new Date()),
-    depositsMin: new FormControl<number>(1),
-    depositsMax: new FormControl<number>(1)
-  });
+  challengeForm = challengeForm;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
@@ -103,12 +88,12 @@ export class SectionSettingsComponent implements OnInit {
     this.banishmentService.getBanishmentByChallenge(this.challenge)
       .subscribe({
         next: (banishment: any) => this.banishment = banishment.content,
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });
     this.blacklistService.getBlacklistedMembersByAuthor(this.authService.user.profile)
       .subscribe({
         next: (blacklist: any) => this.blacklist = blacklist.content,
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });
     this.onSection('banishment');
   }
@@ -256,10 +241,6 @@ export class SectionSettingsComponent implements OnInit {
 
   getMemberNickname(member: Member): string {
     return member.nickname ? member.nickname : member.profile.username;
-  }
-
-  getMemberRole(member: Member): string {
-    return member.role ? member.role : member.profile.profession;
   }
 
   getMemberAvatar(member: Member): string {

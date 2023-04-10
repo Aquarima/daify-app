@@ -22,7 +22,7 @@
           <img [src]="getPreviewCover()" alt="" *ngIf="selectedCoverFile">
         </div>
         <div class="edit-zone">
-          <form [formGroup]="challengeInfoForm">
+          <form [formGroup]="challengeForm">
             <div class="attr align-center">
               <p class="attr-key">Preview Icon</p>
               <p class="attr-description">The challenge's preview icon</p>
@@ -42,13 +42,13 @@
                   <input id="title" class="form-control" name="title" type="text" #text_input
                          formControlName="title"  [customFocus]="'user-input-active'">
                 </div>
-                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('required')">
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('required')">
                   Title is required</p>
-                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('minlength')">
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('minlength')">
                   Title must be 2 or more characters</p>
-                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('maxlength')">
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('maxlength')">
                   Title must be 24 or less characters</p>
-                <p class="user-input-error" *ngIf="challengeInfoForm.get('title')?.hasError('pattern')">
+                <p class="user-input-error" *ngIf="challengeForm.get('title')?.hasError('pattern')">
                   Please enter a valid title</p>
               </div>
             </div>
@@ -62,10 +62,10 @@
                             rows="5" cols="33" formControlName="description" [customFocus]="'user-input-active'"></textarea>
                 </div>
                 <p class="user-input-error"
-                   *ngIf="challengeInfoForm.get('description')?.hasError('maxlength')">Description must be
+                   *ngIf="challengeForm.get('description')?.hasError('maxlength')">Description must be
                   128 or less characters</p>
                 <p class="user-input-error"
-                   *ngIf="challengeInfoForm.get('description')?.hasError('pattern')">Please enter a valid
+                   *ngIf="challengeForm.get('description')?.hasError('pattern')">Please enter a valid
                   description</p>
               </div>
             </div>
@@ -78,16 +78,16 @@
                   <input id="theme" class="form-control" type="text" name="theme" #text_input
                          formControlName="theme" [customFocus]="'user-input-active'">
                 </div>
-                <p class="user-input-error" *ngIf="challengeInfoForm.get('theme')?.hasError('required')">
+                <p class="user-input-error" *ngIf="challengeForm.get('theme')?.hasError('required')">
                   Theme is required</p>
               </div>
             </div>
           </form>
-          <form [formGroup]="challengeConfigForm">
+          <form [formGroup]="challengeForm">
             <div class="attr">
               <p class="attr-key">Access Type</p>
               <p class="attr-description">The way users will be allowed to join your challenge</p>
-              <dfy-custom-select [control]="challengeConfigForm.controls.accessType" [data]="accessTypes"></dfy-custom-select>
+              <dfy-custom-select [control]="challengeForm.controls.accessType" [data]="getAccessTypes()"></dfy-custom-select>
             </div>
             <div class="attr">
               <p class="attr-key">Start date</p>
@@ -97,7 +97,7 @@
                   <label for="startsAt">Start date</label>
                   <input id="startsAt" class="form-control" name="startsAt" type="datetime-local" formControlName="startsAt" [customFocus]="'user-input-active'">
                 </div>
-                <p class="user-input-error" *ngIf="challengeConfigForm.get('start')?.hasError('required')">
+                <p class="user-input-error" *ngIf="challengeForm.get('start')?.hasError('required')">
                   Start date is required</p>
               </div>
             </div>
@@ -109,7 +109,7 @@
                   <label for="endsAt">End date</label>
                   <input id="endsAt" class="form-control" name="endsAt" type="datetime-local" formControlName="endsAt" [customFocus]="'user-input-active'">
                 </div>
-                <p class="user-input-error" *ngIf="challengeConfigForm.get('endAt')?.hasError('required')">End
+                <p class="user-input-error" *ngIf="challengeForm.get('endAt')?.hasError('required')">End
                   date is required</p>
               </div>
             </div>
@@ -132,17 +132,17 @@
             <div class="attr">
               <p class="attr-key">Members limit</p>
               <p class="attr-description">The challenge's maximum members count</p>
-              <dfy-custom-slider [control]="challengeConfigForm.controls.capacity" [min]="2" [max]="60"></dfy-custom-slider>
+              <dfy-custom-slider [control]="challengeForm.controls.capacity" [min]="2" [max]="60"></dfy-custom-slider>
             </div>
             <div class="attr">
               <p class="attr-key">Group size</p>
               <p class="attr-description">The challenge's maximum members in a group</p>
-              <dfy-custom-slider [control]="challengeConfigForm.controls.groupSize" [min]="1" [max]="10"></dfy-custom-slider>
+              <dfy-custom-slider [control]="challengeForm.controls.groupSize" [min]="1" [max]="10"></dfy-custom-slider>
             </div>
             <div class="attr">
               <p class="attr-key">Allow spectators</p>
               <p class="attr-description">
-                <dfy-custom-checkbox [control]="challengeConfigForm.controls.spectatorsAllowed" [label]="'Allow users to join as spectator'"></dfy-custom-checkbox>
+                <dfy-custom-checkbox [control]="challengeForm.controls.spectatorsAllowed" [label]="'Allow users to join as spectator'"></dfy-custom-checkbox>
               </p>
             </div>
           </form>

@@ -37,26 +37,26 @@ export class TimeHelper {
     return timeRemainingParts;
   }
 
-  getTimeSince(from: Date, to: Date, options: { full: boolean, last: boolean } = {full: false, last: false}) {
+  getTimeSince(from: Date, to: Date, options: { full: boolean, plural: boolean, last: boolean } = {full: false, plural: false, last: false}) {
     const seconds = Math.floor((from.getTime() - to.getTime()) / 1000);
 
     const intervals = [
-      {label: options.full ? "day" : "d", amount: 86400},
-      {label: options.full ? "hour" : "h", amount: 3600},
-      {label: options.full ? "minute" : "m", amount: 60},
-      {label: options.full ? "second" : "s", amount: 1}
+      {label: options.full ? 'day' : 'd', amount: 86400},
+      {label: options.full ? 'hour' : 'h', amount: 3600},
+      {label: options.full ? 'minute' : 'm', amount: 60},
+      {label: options.full ? 'second' : 's', amount: 1}
     ];
 
     for (let i = 0; i < intervals.length; i++) {
       const interval = Math.floor(seconds / intervals[i].amount);
       if (interval >= 1) {
-        const label = (interval === 1 && options.full && options.last) ? "last " + intervals[i].label : intervals[i].label;
-        const pluralLabel = interval > 1 ? label + "s" : label;
-        return interval + " " + pluralLabel;
+        const label = (interval === 1 && options.full && options.last) ? 'last ' + intervals[i].label : intervals[i].label;
+        const pluralLabel = interval > 1 && options.plural ? label + 's' : label;
+        return interval + (options.full ? ' ' : '') + pluralLabel;
       }
     }
 
-    return "just now";
+    return "0s";
   }
 }
 

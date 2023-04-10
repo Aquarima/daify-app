@@ -1,0 +1,112 @@
+:host {
+  position: relative;
+  overflow: hidden;
+
+  .popup {
+    padding: 32px;
+    width: 520px;
+    height: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background-color: #FFF;
+    overflow-x: auto;
+
+    .popup-head {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .popup-head-title {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+        font-weight: 600;
+        font-size: calc(var(--preset-font-size-normal) + 3px);
+        color: var(--color-text);
+
+        svg {
+          width: 20px;
+          height: 20px;
+          margin-bottom: 3px;
+          fill: var(--color-text);
+        }
+      }
+
+      .popup-head-description {
+        line-height: 20px;
+        font-size: var(--preset-font-size-normal);
+        color: var(--color-text-alt);
+      }
+    }
+
+    .popup-body {
+      display: flex;
+      flex-direction: column;
+      row-gap: 32px;
+
+      h2 {
+        font-size: var(--preset-font-size-small);
+        color: var(--color-text);
+      }
+
+      .preferences {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+
+        .preference-option {
+          padding: 8px 0;
+          min-height: 64px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid #F2F2F2;
+          color: var(--color-text-alt-2);
+        }
+      }
+    }
+
+    .popup-foot {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+
+      button {
+        width: 150px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      button:nth-child(1) {
+        background-color: var(--color-primary);
+        color: #FFF;
+
+        &:hover {
+          background-color: var(--color-primary-hover);
+        }
+      }
+    }
+  }
+
+  .user-input-active {
+
+    label {
+      padding: 0 4px;
+      top: 0;
+      left: 16px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+      font-size: .75em;
+    }
+  }
+}

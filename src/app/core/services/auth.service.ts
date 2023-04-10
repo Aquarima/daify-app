@@ -20,7 +20,6 @@ export const REFRESH_TOKEN_EXPIRY: string = 'refresh_token_expires_at';
 export class AuthService {
 
   user$: BehaviorSubject<User> = new BehaviorSubject({} as User);
-
   user!: User;
   onSuccessRedirectTo = "/";
 
@@ -89,11 +88,11 @@ export class AuthService {
   }
 
   isAccessTokenExpired(): boolean {
-    return Date.now() > this.accessTokenExpiry.getTime();
+    return Date.now() >= this.accessTokenExpiry.getTime();
   }
 
   isRefreshTokenExpired(): boolean {
-    return Date.now() > this.refreshTokenExpiry.getTime();
+    return Date.now() >= this.refreshTokenExpiry.getTime();
   }
 
   isSessionActive(): boolean {
@@ -125,10 +124,12 @@ export class AuthService {
   }
 
   get accessTokenExpiry(): Date {
-    return new Date(`${this.cookies.get(ACCESS_TOKEN_EXPIRY)}`);
+    const cookie = this.cookies.get(ACCESS_TOKEN_EXPIRY);
+    return cookie ? new Date(cookie) : new Date();
   }
 
   get refreshTokenExpiry(): Date {
-    return new Date(`${this.cookies.get(REFRESH_TOKEN_EXPIRY)}`);
+    const cookie = this.cookies.get(REFRESH_TOKEN_EXPIRY);
+    return cookie ? new Date(cookie) : new Date();
   }
 }

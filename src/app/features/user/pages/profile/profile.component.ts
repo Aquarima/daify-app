@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
 
   challenges: Challenge[] = [];
   searchSubject: BehaviorSubject<Search> = new BehaviorSubject({} as Search);
-
   profile: Profile | undefined;
   friends: Profile[] = [];
   section: number = 0;
@@ -61,7 +60,8 @@ export class ProfileComponent implements OnInit {
 
   onFriends() {
     this.section = 1;
-    this.friendService.getFriendsByUserId(this.profile?.id || 1).subscribe(data => {
+    this.friendService.getFriendsByUserId(this.profile?.id || 1)
+      .subscribe(data => {
       this.friends = data.content.map((friend: Friend) => friend.profile);
     });
   }
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
           this.challenges = challenges.content;
           this.cdr.detectChanges();
         },
-        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, 'Something wrong occurred!', err.error.message)
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });
   }
 
@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
 
   getTimeSince(date?: Date) {
     if (!date) return 'now';
-    return this.timeHelper.getTimeSince(new Date(), new Date(date), {full: false, last: true});
+    return this.timeHelper.getTimeSince(new Date(), new Date(date), {full: false, plural: true, last: true});
   }
 
   get banner(): string {

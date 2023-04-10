@@ -75,14 +75,21 @@
         margin: 16px auto 16px auto;
         width: fit-content;
         min-width: 40px;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
         border-radius: 4px;
         font-weight: 500;
         font-size: var(--preset-font-size-tiny);
         color: #FFF;
         cursor: pointer;
+
+        &:hover {
+          bottom: -1px;
+          filter: brightness(96%);
+        }
       }
     }
 

@@ -5,7 +5,7 @@ export interface Challenge {
   id: number;
   author: Profile;
   title: string;
-  description: string;
+  description: string | null | undefined;
   theme: string;
   cover: string;
   icon: string;

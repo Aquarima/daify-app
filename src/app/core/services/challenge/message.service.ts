@@ -19,6 +19,6 @@ export class MessageService {
   }
 
   getMessagesByChannel(channelId: number, size: number = 100) {
-    return this.http.get<any>(`${env.apiUrl}/challenges/channels/${channelId}/message?size=${size}`);
+    return this.http.get<any>(`${env.apiUrl}/challenges/channels/${channelId}/messages?size=${size}`);
   }
 }

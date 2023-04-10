@@ -60,6 +60,10 @@ export class BrowseResultsListComponent implements OnInit {
     this.filterTag = theme;
   }
 
+  onCardThemeSelected($event: any) {
+    this.onThemeSelected($event);
+  }
+
   @HostListener("window:scroll", [])
   onScroll(): void {
     if (this.scrollLoaderTimeout) return;

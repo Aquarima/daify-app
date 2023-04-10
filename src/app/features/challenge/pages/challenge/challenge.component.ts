@@ -218,11 +218,11 @@ export class ChallengeComponent implements OnInit, OnDestroy {
   }
 
   getIconUrl(): string {
-    return this.challenge.cover ||defaultChallenge().icon;
+    return this.challenge.icon || '/assets/challenge_icon_placeholder.svg';
   }
 
   getCoverUrl(): string {
-    return this.challenge.cover || defaultChallenge().cover;
+    return this.challenge.cover || '/assets/user_banner_placeholder.svg';
   }
 
   getAuthorAvatarUrl(): string {

@@ -1,16 +1,9 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {
-  AccessType,
-  AlertHandlingService,
-  AuthService,
-  Challenge,
-  ChallengeConfig,
-  ChallengeService,
-} from "../../../../core";
+import {AccessType, AlertHandlingService, AuthService, Challenge, ChallengeService,} from "../../../../core";
 import {DomSanitizer} from "@angular/platform-browser";
-import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AlertType} from "../../../../core/models/system-alert";
+import {challengeForm} from "../../../../core/helpers";
 
 @Component({
   selector: 'app-challenge-create',
@@ -19,25 +12,7 @@ import {AlertType} from "../../../../core/models/system-alert";
 })
 export class ChallengeCreateComponent implements OnInit {
 
-  challengeInfoForm = new FormGroup({
-    title: new FormControl<string | undefined>(''),
-    description: new FormControl<string | undefined>(''),
-    theme: new FormControl<string | undefined>(undefined),
-  });
-
-  challengeConfigForm = new FormGroup({
-    accessType: new FormControl<AccessType>(AccessType.FREE),
-    startsAt: new FormControl<Date>(new Date(new Date().toISOString().substring(0, new Date().toISOString().length - 1))),
-    endsAt: new FormControl<Date>(new Date()),
-    capacity: new FormControl<number>(2),
-    groupSize: new FormControl<number>(1),
-    minDeposits: new FormControl<number>(0),
-    maxDeposits: new FormControl<number>(0),
-    spectatorsAllowed: new FormControl<boolean>(true),
-    votesStartsTime: new FormControl<Date>(new Date()),
-    votesEndsTime: new FormControl<Date>(new Date()),
-  });
-
+  challengeForm = challengeForm;
   selectedCoverFile: File | undefined;
   selectedIconFile: File | undefined;
 
@@ -62,9 +37,7 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    const challenge: Challenge = this.challengeInfoForm.value as Challenge;
-    challenge.author = this.authService.user.profile;
-    challenge.config = this.challengeConfigForm.value as ChallengeConfig;
+    const challenge: Challenge = this.buildChallenge();
     this.challengeService.createChallenge(challenge)
       .subscribe({
         next: (challenge: Challenge) => {
@@ -73,10 +46,9 @@ export class ChallengeCreateComponent implements OnInit {
             reader.readAsArrayBuffer(this.selectedIconFile);
             reader.onload = () => {
               if (reader.result && this.selectedIconFile) {
-                const blob: Blob = new Blob([reader.result], {type: this.selectedIconFile.type});
-                this.challengeService.uploadChallengeIcon(blob, challenge)
+                this.challengeService.uploadChallengeIcon(new Blob([reader.result], {type: this.selectedIconFile.type}), challenge)
                   .subscribe({
-                    next: (iconId) => challenge.icon = `${iconId}`,
+                    next: (data: any) => challenge.cover = `${data.url}`,
                     error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
                   });
               }
@@ -87,10 +59,9 @@ export class ChallengeCreateComponent implements OnInit {
             reader.readAsArrayBuffer(this.selectedCoverFile);
             reader.onload = () => {
               if (reader.result && this.selectedCoverFile) {
-                const blob: Blob = new Blob([reader.result], {type: this.selectedCoverFile.type});
-                this.challengeService.uploadChallengeCover(blob, challenge)
+                this.challengeService.uploadChallengeCover(new Blob([reader.result], {type: this.selectedCoverFile.type}), challenge)
                   .subscribe({
-                    next: (coverId) => challenge.cover = `${coverId}`,
+                    next: (data: any) => challenge.cover = `${data.url}`,
                     error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
                   });
               }
@@ -98,8 +69,30 @@ export class ChallengeCreateComponent implements OnInit {
           }
           this.router.navigate([`/app/challenge/${challenge.id}/overview`]);
         },
-        error: () => alert('Error')
+        error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });
+  }
+
+  private buildChallenge(): Challenge {
+    const values = challengeForm.value;
+    return {
+      title: values.title!,
+      description: values.description,
+      theme: values.theme!,
+      config: {
+        accessType: values.accessType!,
+        startsAt: values.startsAt!,
+        endsAt: values.endsAt!,
+        capacity: values.capacity!,
+        groupSize: values.groupSize!,
+        depositsMin: values.depositsMin!,
+        depositsMax: values.depositsMax!,
+        leaderboardBeforeStart: false,
+        spectatorsAllowed: false,
+        votesStartsTime: values.votesStartsTime!,
+        votesEndsTime: values.votesEndsTime!
+      }
+    } as Challenge;
   }
 
   getPreviewCover() {
@@ -112,7 +105,7 @@ export class ChallengeCreateComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.selectedIconFile));
   }
 
-  get accessTypes(): { key: string, value: AccessType }[] {
+  getAccessTypes(): { key: string, value: AccessType }[] {
     return [
       {key: 'Free', value: AccessType.FREE},
       {key: 'On Request', value: AccessType.ON_REQUEST},

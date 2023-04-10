@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {User} from 'src/app/core/models';
 import {AuthService} from 'src/app/core/services/auth.service';
@@ -13,14 +13,10 @@ import {FormControl} from "@angular/forms";
 
 export class HeaderComponent implements OnInit {
 
-  loggedUser: User | undefined;
+  @ViewChild ('inviteLinkInputNode') inviteLinkInputNode!: ElementRef;
 
+  loggedUser: User | undefined;
   displayLanguageList: boolean = false;
-  availableLanguages: { key: string, full: string }[] = [
-    {key: 'EN', full: 'English'},
-    {key: 'ES', full: 'Español'},
-    {key: 'FR', full: 'Français'},
-  ];
   darkMode = new FormControl(false);
 
   constructor(
@@ -33,6 +29,15 @@ export class HeaderComponent implements OnInit {
     this.authService.user$.subscribe(user => this.loggedUser = user);
     this.darkMode.setValue(JSON.parse(localStorage.getItem('darkMode') || 'false'))
     this.darkMode.registerOnChange((value: boolean) => localStorage.setItem('darkMode', `${value}`));
+  }
+
+  onJoin() {
+    this.inviteLinkInputNode.nativeElement.classList.toggle('join-challenge-input-active');
+  }
+
+  onClearJoinInvite() {
+    this.inviteLinkInputNode.nativeElement.value = '';
+    this.onJoin();
   }
 
   onInbox() {
@@ -57,18 +62,26 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
 
-  get profileUsername(): string {
+  getProfileUsername(): string {
     if (!this.loggedUser || !this.loggedUser.profile) return '...';
     return this.loggedUser.profile.username;
   }
 
-  get profileAvatar(): string {
+  getProfileAvatar(): string {
     if (!this.loggedUser || !this.loggedUser.profile) return '/assets/avatar_placeholder.svg';
     return this.loggedUser.profile.avatar;
   }
 
-  get currentLanguage(): { key: 'EN', full: 'English' } {
+  getCurrentLanguage(): { key: 'EN', full: 'English' } {
     const lang = this.cookies.get('lang');
     return lang ? JSON.parse(lang) : {key: 'EN', full: 'English'};
+  }
+
+  getAvailableLanguages(): { key: string, full: string }[] {
+    return [
+      {key: 'EN', full: 'English'},
+      {key: 'ES', full: 'Español'},
+      {key: 'FR', full: 'Français'},
+    ];
   }
 }

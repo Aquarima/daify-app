@@ -11,6 +11,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "../../core/core.module";
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { CookiesPreferencesComponent } from './components/cookies-preferences/cookies-preferences.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
     UserCardComponent,
     UserListComponent,
     UserReportComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    CookiesPreferencesComponent
   ],
     imports: [
         CommonModule,

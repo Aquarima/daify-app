@@ -1,0 +1,33 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<div class="popup">
+  <div class="popup-head">
+    <h1 class="popup-head-title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <path
+          d="M12 2c.714 0 1.419.075 2.106.222a.75.75 0 0 1 .374 1.263a2.501 2.501 0 0 0 1.206 4.201a.75.75 0 0 1 .577.811a2.5 2.5 0 0 0 4.36 1.908a.75.75 0 0 1 1.307.409c.047.39.07.787.07 1.186c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm3 14a1 1 0 1 0 0 2a1 1 0 0 0 0-2Zm-7-1a1 1 0 1 0 0 2a1 1 0 0 0 0-2Zm4-4a1 1 0 1 0 0 2a1 1 0 0 0 0-2ZM7 8a1 1 0 1 0 0 2a1 1 0 0 0 0-2Z"/>
+      </svg>
+      Cookies Preferences
+    </h1>
+    <p class="popup-head-description">Manage your cookie preferences.</p>
+  </div>
+  <form class="popup-body">
+    <h2>Manage Consent Preferences</h2>
+    <div class="preferences">
+      <div class="preference-option">
+        <p>Strictly Necessary Cookies</p>
+        <dfy-custom-checkbox [control]="cookiesPreferencesForm.controls.necessary" [disabled]="true"></dfy-custom-checkbox>
+      </div>
+      <div class="preference-option">
+        <p>Functional Cookies</p>
+        <dfy-custom-checkbox [control]="cookiesPreferencesForm.controls.functional"></dfy-custom-checkbox>
+      </div>
+      <div class="preference-option">
+        <p>Performance Cookies</p>
+        <dfy-custom-checkbox [control]="cookiesPreferencesForm.controls.performance"></dfy-custom-checkbox>
+      </div>
+    </div>
+  </form>
+  <div class="popup-foot">
+    <button (click)="onCreate()">Save</button>
+  </div>
+</div>

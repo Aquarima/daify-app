@@ -1,15 +1,21 @@
 import {Component, Inject, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
-import {AuthService, SystemAlert, Theme, User} from './core';
-import {ProfileService} from './core/services/user/profile.service';
-import {AlertHandlingService} from "./core/services/system/alert-handling.service";
+import {
+  AlertHandlingService,
+  AuthService,
+  ProfileService,
+  SystemAlert,
+  Theme,
+  ThemeService,
+  User,
+  UserService
+} from './core';
 import {AlertBoxComponent} from "./shared";
 import {Subscription} from "rxjs";
 import {EMPTY_SUBSCRIPTION} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
-import {UserService} from "./core/services/user/user.service";
 import {AlertType} from "./core/models/system-alert";
-import {ThemeService} from "./core/services/system/theme.service";
 import {DOCUMENT} from "@angular/common";
+import {CookieService} from "ngx-cookie";
 
 @Component({
   selector: 'app-root',
@@ -20,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   alertSubscription: Subscription = EMPTY_SUBSCRIPTION;
   isAlertDisplayed: boolean = false;
+  showAcceptCookies: boolean = false;
   showSplashScreen: boolean = true;
 
   constructor(
@@ -30,10 +37,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private userService: UserService,
     private profileService: ProfileService,
+    private cookies: CookieService,
     @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit(): void {
+    this.showAcceptCookies = !this.cookies.get('cookies_preferences');
     this.themeService.change.subscribe((theme) => {
       if (theme === Theme.DARK) this.document.body.classList.add('theme-dark');
       else this.document.body.classList.remove('theme-dark');
@@ -78,5 +87,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.authService.setOnlineStatus(true);
     this.alertSubscription.unsubscribe();
+  }
+
+  onCloseAcceptCookies() {
+    this.showAcceptCookies = false;
   }
 }

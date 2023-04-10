@@ -7,7 +7,7 @@
   <div class="items display-grid">
     <dfy-challenge-card class="grid-cell"
                         [challenge]="challenge"
-                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:search.orderBy">
+                        *ngFor="let challenge of challenges | challengeFilter:filterTag | orderByChallenge:search.orderBy" (themeSelectEvent)="onCardThemeSelected($event)">
     </dfy-challenge-card>
   </div>
 </div>
