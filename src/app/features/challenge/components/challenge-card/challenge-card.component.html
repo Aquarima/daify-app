@@ -26,7 +26,7 @@
   <div class="challenge-short-description">
     <p class="challenge-short-description-title">{{challenge.title}}</p>
     <p class="challenge-short-description-text">{{challenge.description}}</p>
-    <span class="challenge-theme" [ngStyle]="{'background-color': getThemeColor()}" (click)="onThemeSelected($event)">{{challenge.theme}}</span>
+    <span class="challenge-theme" [ngStyle]="{'background-color': getThemeColor()}" (click)="onThemeSelected($event)" *ngIf="hasTheme()">{{challenge.theme}}</span>
   </div>
   <ul class="challenge-stats" *ngIf="challenge.config">
     <li>
@@ -34,7 +34,7 @@
       <p class="name">Duration</p>
     </li>
     <li>
-      <p class="value">25/{{challenge.config.capacity}}</p>
+      <p class="value">{{countMembers()}}/{{challenge.config.capacity}}</p>
       <p class="name">Members</p>
     </li>
     <li>

@@ -1,5 +1,6 @@
 import {defaultProfile, Profile} from "../user";
 import {ChallengeConfig, defaultChallengeConfig} from "./challenge-config.model";
+import {Member} from "./member.model";
 
 export interface Challenge {
   id: number;
@@ -10,6 +11,7 @@ export interface Challenge {
   cover: string;
   icon: string;
   invite: string;
+  members: Member[];
   config: ChallengeConfig;
   createdAt: Date;
   updatedAt: Date;
@@ -25,6 +27,7 @@ export function defaultChallenge(): Challenge {
     cover: '/assets/user_banner_placeholder.svg',
     icon: '/assets/challenge_icon_placeholder.svg',
     invite: '',
+    members: [],
     config: defaultChallengeConfig(),
     createdAt: new Date(),
     updatedAt: new Date()

@@ -15,6 +15,7 @@ export class ChallengeCreateComponent implements OnInit {
   challengeForm = challengeForm;
   selectedCoverFile: File | undefined;
   selectedIconFile: File | undefined;
+  showSplashScreen: boolean = false;
 
   constructor(
     private router: Router,
@@ -37,6 +38,7 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showSplashScreen = true;
     const challenge: Challenge = this.buildChallenge();
     this.challengeService.createChallenge(challenge)
       .subscribe({
@@ -67,7 +69,9 @@ export class ChallengeCreateComponent implements OnInit {
               }
             }
           }
-          this.router.navigate([`/app/challenge/${challenge.id}/overview`]);
+          setTimeout(() => {
+            this.showSplashScreen = false;
+          }, 3000);
         },
         error: (err) => this.alertHandlingService.throwAlert(AlertType.ERROR, err.status, err.error.error)
       });

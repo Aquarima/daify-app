@@ -8,7 +8,7 @@
 }
 
 :host {
-  padding: 8px 32px;
+  padding: 16px 32px;
   width: 100%;
   min-height: 72px;
   position: fixed;
@@ -26,6 +26,7 @@
   p {
     max-width: 50%;
     line-height: 24px;
+    font-size: var(--preset-font-size-small);
     color: #FFF;
   }
 

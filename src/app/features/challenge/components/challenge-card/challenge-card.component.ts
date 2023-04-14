@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
-import {Challenge} from 'src/app/core/models/challenge';
+import {Challenge, defaultGroup, Group, Member} from 'src/app/core/models/challenge';
 import {ChallengeService} from "../../../../core";
 import {Router} from "@angular/router";
 import {TimeHelper} from "../../../../core/helpers";
@@ -38,6 +38,10 @@ export class ChallengeCardComponent implements OnInit {
     return this.challenge.config.accessType === access;
   }
 
+  hasTheme(): boolean {
+    return !!this.challenge.theme;
+  }
+
   getIconUrl(): string {
     return this.challenge.icon || '/assets/challenge_icon_placeholder.svg';
   }
@@ -54,5 +58,9 @@ export class ChallengeCardComponent implements OnInit {
     const d1: Date = new Date(this.challenge.config.startsAt);
     const d2: Date = new Date(this.challenge.config.endsAt);
     return this.timeHelper.getTimeSince(d2, d1);
+  }
+
+  countMembers(): number {
+    return this.challenge.members ? this.challenge.members.length : 0;
   }
 }

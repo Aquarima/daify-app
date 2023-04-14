@@ -9,7 +9,11 @@ export class ChallengeThemesCollectorPipe implements PipeTransform {
 
   transform(challenges: Challenge[]): Set<string> {
     const themes: Set<string> = new Set();
-    challenges.forEach(c => themes.add(c.theme));
+    challenges.forEach(c => {
+      if (c.theme) {
+        themes.add(c.theme);
+      }
+    });
     return themes;
   }
 }
