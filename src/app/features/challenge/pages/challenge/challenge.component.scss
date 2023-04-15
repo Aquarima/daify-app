@@ -16,12 +16,12 @@
       gap: 16px;
 
       button {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: rgba(149, 157, 165, .1) 0 8px 24px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px -3px 0px inset;
         border: none;
         border-radius: 50%;
         background-color: #FFF;
@@ -36,8 +36,8 @@
         }
 
         svg {
-          width: 50%;
-          height: 50%;
+          width: 45%;
+          height: 45%;
           fill: var(--color-text);
         }
       }

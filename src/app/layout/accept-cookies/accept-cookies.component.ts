@@ -35,6 +35,7 @@ export class AcceptCookiesComponent implements OnInit {
   }
 
   onClose() {
-    this.closeEvent.emit();
+    this.viewContainerRef.element.nativeElement.classList.add('hide');
+    setTimeout(() => this.closeEvent.emit(), 2000);
   }
 }

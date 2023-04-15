@@ -28,6 +28,22 @@
           height: 24px;
           fill: var(--color-text);
         }
+
+        .social-twitter:hover {
+          fill: #1da1f2;
+        }
+
+        .social-facebook:hover {
+          fill: #1877f2;
+        }
+
+        .social-instagram:hover {
+          fill: #c32aa3;
+        }
+
+        .social-discord:hover {
+          fill: #5865f2;
+        }
       }
     }
   }

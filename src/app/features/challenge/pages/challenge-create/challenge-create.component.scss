@@ -54,11 +54,11 @@
 
 
       .create-challenge-btn {
-        background-color: var(--color-secondary);
+        background-color: var(--color-tertiary);
       }
 
       .cancel-challenge-btn {
-        background-color: var(--color-tertiary);
+        background-color: var(--color-secondary);
       }
     }
 
@@ -203,29 +203,23 @@
         justify-content: center;
         align-items: center;
         text-decoration: none;
-
-        &:hover {
-          background-color: var(--color-tertiary-hover);
-        }
-      }
-
-      input[type=submit] {
-
-        &:hover {
-          background-color: var(--color-secondary-hover);
-        }
       }
 
       a, input[type=submit] {
         padding: 0 16px;
         min-width: 120px;
         height: 40px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
         border: none;
         border-radius: 8px;
         font-weight: 600;
         font-size: var(--preset-font-size-small);
         color: #FFF;
         cursor: pointer;
+
+        &:hover {
+          filter: brightness(96%);
+        }
       }
     }
   }

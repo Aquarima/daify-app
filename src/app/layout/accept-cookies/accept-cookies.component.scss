@@ -1,27 +1,44 @@
-@keyframes show {
+@keyframes show-anim {
   from {
     bottom: -100%;
   }
   to {
-    bottom: 0;
+    bottom: 32px;
+  }
+}
+
+@keyframes hide-anim {
+  from {
+    bottom: 32px;
+  }
+  to {
+    bottom: -100%;
   }
 }
 
 :host {
   padding: 16px 32px;
-  width: 100%;
-  min-height: 72px;
+  width: 80%;
+  min-height: 96px;
   position: fixed;
-  bottom: 0;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 4%;
   row-gap: 8px;
-  animation: show 2s;
+  animation: show-anim 2s;
   box-shadow: rgba(#000000, 0.1) 0 1px 3px 0, rgba(#000000, 0.06) 0 1px 2px 0;
   box-sizing: border-box;
+  border-radius: 16px;
   background-color: var(--color-secondary);
+
+  .cookie {
+    min-width: 64px;
+    min-height: 64px;
+  }
 
   p {
     max-width: 50%;
@@ -30,15 +47,15 @@
     color: #FFF;
   }
 
-  .cookies-action {
+  .cookies-actions {
     display: flex;
-    column-gap: 16px;
+    gap: 16px;
 
     button {
       padding: 0 16px;
       min-height: 40px;
       position: relative;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px -3px 0px inset;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
       border: none;
       border-radius: 8px;
       background-color: var(--color-tertiary);
@@ -52,6 +69,15 @@
     }
   }
 
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(90deg);
+    }
+  }
+
   .close {
     border: none;
     background-color: transparent;
@@ -60,6 +86,33 @@
       width: 20px;
       height: 20px;
       fill: #FFF;
+    }
+
+    &:hover svg {
+      animation: spin 800ms linear;
+    }
+  }
+}
+
+:host(.hide) {
+  animation: hide-anim 2s;
+}
+
+@media all and (max-width: 768px) {
+
+  :host {
+
+    .cookie {
+      display: none;
+    }
+
+    p {
+      line-height: 18px;
+      font-size: var(--preset-font-size-tiny);
+    }
+
+    .cookies-actions {
+      flex-direction: column;
     }
   }
 }
